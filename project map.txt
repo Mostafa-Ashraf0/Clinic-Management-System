@@ -1,0 +1,26 @@
+src/
+ ├─ app/                  <-- اختياري: تحط هنا store أو config عام
+ │    └─ store.js
+ ├─ features/             <-- كل Slice/Feature ليها فولدر خاص
+ │    ├─ auth/
+ │    │    ├─ authSlice.js
+ │    │    └─ authAPI.js  (اختياري للـ async calls)
+ │    ├─ doctors/
+ │    │    ├─ doctorsSlice.js
+ │    │    └─ doctorsAPI.js
+ │    ├─ clients/
+ │    │    ├─ clientsSlice.js
+ │    │    └─ clientsAPI.js
+ │    └─ appointments/
+ │         ├─ appointmentsSlice.js
+ │         └─ appointmentsAPI.js
+ ├─ components/
+ │    ├─ Header.jsx
+ │    ├─ Footer.jsx
+ │    └─ ...
+ ├─ pages/
+ │    ├─ Login.jsx
+ │    ├─ DoctorsPage.jsx
+ │    ├─ ClientsPage.jsx
+ │    └─ AppointmentsPage.jsx
+ └─ main.jsx
