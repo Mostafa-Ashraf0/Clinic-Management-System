@@ -17,7 +17,7 @@ const LoginForm = ()=>{
     }
     useEffect(()=>{
         if(user){
-            navigate("/home");
+            navigate("/Dashboard");
         }
     },[user,navigate]) //rule of all variables used in useeffect must be written in dependancies
     
