@@ -1,0 +1,38 @@
+.table{
+    width: 538px !important;
+    height: 228px;
+    text-align: start;
+}
+
+.t-body{
+    width: 100%;
+    border: solid 1px #D2D5DB;
+    border-top: none;
+    border-collapse:unset
+}
+
+.table .head{
+    width: 100%;
+    height: 38px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    background-color: #F9FAFC;
+    border: solid 1px #D2D5DB;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+th,td{
+    padding: 10px 20px;
+}
+
+th{
+    color: #66748C;
+    font-weight: normal;
+}
+
+td{
+    color: #384152;
+    font-weight: 500;
+}
