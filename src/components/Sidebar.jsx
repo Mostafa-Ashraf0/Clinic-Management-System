@@ -24,13 +24,28 @@ const Sidebar = ()=>{
                 </li>
                 <li className={page==="doctors"?"light":"dark"}>
                     <Link to={"/doctors"}>
-                        <img src={page==="doctors"?icons.doctor.light:icons.doctor.dark} alt="dash-icon" />
+                        <img src={page==="doctors"?icons.doctor.light:icons.doctor.dark} alt="doc-icon" />
                         <span>Doctors</span>
                     </Link>
                 </li>
-                <li><img alt=" " /><span>Receptionists</span></li>
-                <li><img alt=" " /><span>Patients</span></li>
-                <li><img alt=" " /><span>Make Appointment</span></li>
+                <li className={page==="receptionists"?"light":"dark"}>
+                    <Link to={"/receptionists"}>
+                        <img src={page==="receptionists"?icons.nurse.light:icons.nurse.dark} alt="rec-icon" />
+                        <span>Receptionists</span>
+                    </Link>
+                </li>
+                <li className={page==="patients"?"light":"dark"}>
+                    <Link to={"/patients"}>
+                        <img src={page==="patients"?icons.patients.light:icons.patients.dark} alt="pat-icon" />
+                        <span>Patients</span>
+                    </Link>
+                </li>
+                <li className={page==="appointments"?"light":"dark"}>
+                    <Link to={"/appointments"}>
+                        <img src={page==="appointments"?icons.appointments.light:icons.appointments.dark} alt="app-icon" />
+                        <span>Appointments</span>
+                    </Link>
+                </li>
             </ul>
         </div>
     )

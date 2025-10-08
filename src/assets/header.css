@@ -1,0 +1,40 @@
+header{
+    width: calc(100% - 274px);
+    height: 70px;
+    padding: 14px 30px 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 30px;
+    border-bottom: solid 1px #D2D5DB;
+}
+
+.drop-down{
+    width: 300px;
+    height: 100%;
+    padding: 11.5px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: solid 1px #D2D5DB;
+    border-radius: 5px;
+    color: #66748C;
+    background-color: #F2F5F9;
+}
+
+.user{
+    width: 149px;
+    height: 100%;
+    padding: 6.5px 0 6.5px 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-left: solid 1px #D2D5DB;
+    color: #66748C;
+}
+
+.user .userImg{
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+}

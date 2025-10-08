@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
 import { useDispatch } from "react-redux";
 import { addLight } from "../features/dashboard/sidebarSlice";
 const Dashboard = ()=>{
@@ -9,6 +10,7 @@ const Dashboard = ()=>{
     },[])
     return(
         <>
+            <Header/>
             <Sidebar/>
         </>
     )
