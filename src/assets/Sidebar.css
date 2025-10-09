@@ -2,6 +2,9 @@
     width:274px;
     background-color: white;
     border-right: solid 1px #D2D5DB;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 .sidebar .title{

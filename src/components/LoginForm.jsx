@@ -22,7 +22,7 @@ const LoginForm = ()=>{
     },[user,navigate]) //rule of all variables used in useeffect must be written in dependancies
     
     return(
-        <Card style={{ width: "380px", padding: "20px" }} className="">
+        <Card style={{ width: "380px", padding: "20px" }}>
             <Card.Body>
                 <Card.Title className='fs-3 mb-3'>Log In</Card.Title>
                 <Form onSubmit={handleSubmit}>

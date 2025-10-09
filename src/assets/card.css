@@ -1,10 +1,10 @@
-.card{
+.info-card{
     width: 256px;
     height: 110px !important;
     padding: 15px 20px;
 }
 
-.card-body{
+.info-card-body{
     height: 80px;
     width: 58px;
     gap: 10px;
