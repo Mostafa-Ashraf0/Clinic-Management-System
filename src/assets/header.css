@@ -1,4 +1,5 @@
 header{
+    position: fixed;
     width: calc(100% - 274px);
     height: 70px;
     padding: 14px 30px 14px 20px;
@@ -7,7 +8,10 @@ header{
     justify-content: end;
     gap: 30px;
     border-bottom: solid 1px #D2D5DB;
-    margin-left: 274px;
+    top: 0;
+    left: 274px;
+    z-index: 1000;
+    background-color: white;
 }
 
 .drop-down{
@@ -32,6 +36,7 @@ header{
     gap: 15px;
     border-left: solid 1px #D2D5DB;
     color: #66748C;
+    cursor: pointer;
 }
 
 .user .userImg{

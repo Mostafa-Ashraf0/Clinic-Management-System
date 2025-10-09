@@ -2,6 +2,7 @@
     width: 256px;
     height: 110px !important;
     padding: 15px 20px;
+    background-color: white;
 }
 
 .info-card-body{

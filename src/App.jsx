@@ -5,6 +5,7 @@ import Doctors from './pages/Doctors';
 import Receptionists from './pages/Receptionists';
 import Patients from './pages/Patients';
 import Appointments from './pages/Appointments';
+import PrivateRoute from './components/PrivateRoute';
 import { Route,BrowserRouter,Routes } from 'react-router-dom';
 function App() {
 
@@ -12,11 +13,31 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LoginPage/>}/>
-          <Route path='/dashboard' element={<Dashboard/>}/>
-          <Route path='/doctors' element={<Doctors/>}/>
-          <Route path='/receptionists' element={<Receptionists/>}/>
-          <Route path='/patients' element={<Patients/>}/>
-          <Route path='/appointments' element={<Appointments/>}/>
+          <Route path='/dashboard' element={
+            <PrivateRoute>
+              <Dashboard/>
+            </PrivateRoute>
+          }/>
+          <Route path='/doctors' element={
+            <PrivateRoute>
+              <Doctors/>
+            </PrivateRoute>
+          }/>
+          <Route path='/receptionists' element={
+            <PrivateRoute>
+              <Receptionists/>
+            </PrivateRoute>
+          }/>
+          <Route path='/patients' element={
+            <PrivateRoute>
+              <Patients/>
+            </PrivateRoute>
+          }/>
+          <Route path='/appointments' element={
+            <PrivateRoute>
+              <Appointments/>
+            </PrivateRoute>
+          }/>
         </Routes>
       </BrowserRouter>
   )

@@ -1,10 +1,10 @@
-.table{
-    width: 538px !important;
+.app-table{
+    width: 100% !important;
     height: 228px;
     text-align: start;
 }
 
-.t-body{
+.app-t-body{
     width: 100%;
     border: solid 1px #D2D5DB;
     border-top: none;
@@ -12,7 +12,7 @@
     background-color: white;
 }
 
-.table .head{
+.app-table .app-head{
     width: 100%;
     height: 38px;
     padding: 10px 20px;
