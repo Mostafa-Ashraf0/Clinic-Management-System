@@ -16,9 +16,7 @@ const Dashboard = ()=>{
     },[])
     return(
         <>
-            <Header>
-                <UserDropdown/>
-            </Header>
+            <Header/>
             <Sidebar/>
             <MainContent>
                 <div className="info-card-list">

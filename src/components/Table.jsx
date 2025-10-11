@@ -4,7 +4,8 @@ const Table = ()=>{
     return(
         <div className="table d-flex flex-column">
             <div className="head">Doctors on duty</div>
-            <table className='t-body'>
+            <div className="t-body">
+                <table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -18,8 +19,34 @@ const Table = ()=>{
                         <td>Doctor</td>
                         <td>Dentist</td>
                     </tr>
+                    <tr>
+                        <td>Mostafa</td>
+                        <td>Doctor</td>
+                        <td>Dentist</td>
+                    </tr>
+                    <tr>
+                        <td>Mostafa</td>
+                        <td>Doctor</td>
+                        <td>Dentist</td>
+                    </tr>
+                    <tr>
+                        <td>Mostafa</td>
+                        <td>Doctor</td>
+                        <td>Dentist</td>
+                    </tr>
+                    <tr>
+                        <td>Mostafa</td>
+                        <td>Doctor</td>
+                        <td>Dentist</td>
+                    </tr>
+                    <tr>
+                        <td>Mostafa</td>
+                        <td>Doctor</td>
+                        <td>Dentist</td>
+                    </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     )
 }

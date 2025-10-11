@@ -1,8 +1,9 @@
 import '../assets/header.css';
 import { icons } from '../assets/icons';
 import { useSelector,useDispatch } from 'react-redux';
-import {setDropdown} from "../features/dashboard/headerSlice"
-const Header = ({children})=>{
+import {setDropdown} from "../features/dashboard/headerSlice";
+import UserDropdown from './UserDropdown';
+const Header = ()=>{
     const dispatch = useDispatch();
     const { dropdownViewd } = useSelector((state)=>state.header);
     const handleClick = ()=>{
@@ -14,7 +15,6 @@ const Header = ({children})=>{
     }
     return(
         <>
-        {children}
         <header>
             <div className="drop-down">
                 <span>Select Departement</span>
@@ -25,6 +25,7 @@ const Header = ({children})=>{
                 <span>Admin</span>
                 <img className="dropdownIcon" src={icons.header.dropdown} alt="user" />
             </div>
+            {dropdownViewd && <UserDropdown/>}
         </header>
         </>
     )
