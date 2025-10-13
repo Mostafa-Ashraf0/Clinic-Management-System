@@ -2,7 +2,9 @@ import './App.css';
 import LoginPage from './pages/loginPage';
 import Dashboard from './pages/Dashboard';
 import Doctors from './pages/Doctors';
+import AddDoctor from './pages/AddDoctor';
 import Receptionists from './pages/Receptionists';
+import AddReciptionist from './pages/AddReciptionist'
 import Patients from './pages/Patients';
 import Appointments from './pages/Appointments';
 import PrivateRoute from './components/PrivateRoute';
@@ -45,7 +47,18 @@ function App() {
               <Appointments/>
             </PrivateRoute>
           }/>
+          <Route path='/doctors/addDoctor' element={
+            <PrivateRoute>
+              <AddDoctor/>
+            </PrivateRoute>
+          }/>
+          <Route path='/receptionists/addreceptionists' element={
+            <PrivateRoute>
+              <AddReciptionist/>
+            </PrivateRoute>
+          }/>
         </Routes>
+        
       </BrowserRouter>
   )
 }

@@ -1,15 +1,15 @@
 import { icons } from "../assets/icons";
-import '../assets/doctorsControl.css';
+import "../assets/reciptionistControl.css";
 import { useNavigate } from "react-router-dom";
-const DoctorsControl = ()=>{
+const ReciptionistControl = ()=>{
     const navigate = useNavigate();
     const handleClick = ()=>{
-        navigate("/doctors/addDoctor");
+        navigate("/receptionists/addreceptionists")
     }
     return(
         <div className="control">
             <div className="info">
-                <span className="title">Doctors</span>
+                <span className="title">Reciptionist</span>
                 <span className="quantity">Show 4 of 4</span>
             </div>
             <div className="operations">
@@ -25,16 +25,12 @@ const DoctorsControl = ()=>{
                             <img className="role-dropdownIcon" src={icons.header.dropdown} alt="icon" />
                         </div>
                     </div>
-                    <div className="speciality-drop-down">
-                        <span>speciality</span>
-                        <img className="spe-dropdownIcon" src={icons.header.dropdown} alt="icon" />
-                    </div>
                 </div>
-                <button className="add-doctor" onClick={handleClick}><img src={icons.control.add} alt="add" /><span>Add Doctor</span></button>
+                <button onClick={handleClick} className="add-rec"><img src={icons.control.add} alt="add" /><span>Add Reciptionist</span></button>
             </div>
         </div>
     )
 }
 
 
-export default DoctorsControl;
+export default ReciptionistControl;

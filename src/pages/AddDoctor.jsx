@@ -4,21 +4,21 @@ import { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import MainContent from "../components/MainContent";
-import ReciptionistControl from "../components/ReciptionistControl";
-const Receptionists = ()=>{
+import DoctorForm from "../components/DoctorForm";
+const AddDoctor = ()=>{
     const dispatch = useDispatch();
         useEffect(()=>{
-            dispatch(addLight("receptionists"));
+            dispatch(addLight("doctors"));
         },[])
     return(
         <>
             <Header/>
             <Sidebar/>
             <MainContent>
-                <ReciptionistControl/>
+                <DoctorForm/>
             </MainContent>
         </>
     )
 }
 
-export default Receptionists;
+export default AddDoctor;

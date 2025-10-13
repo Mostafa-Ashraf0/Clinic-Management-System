@@ -12,13 +12,11 @@ const Doctors = ()=>{
         },[])
     return(
         <>
-            <>
             <Header/>
             <Sidebar/>
             <MainContent>
                 <DoctorsControl/>
             </MainContent>
-        </>
         </>
     )
 }

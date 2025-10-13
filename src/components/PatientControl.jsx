@@ -1,15 +1,10 @@
 import { icons } from "../assets/icons";
-import '../assets/doctorsControl.css';
-import { useNavigate } from "react-router-dom";
-const DoctorsControl = ()=>{
-    const navigate = useNavigate();
-    const handleClick = ()=>{
-        navigate("/doctors/addDoctor");
-    }
+import "../assets/patientControl.css";
+const PatientControl = ()=>{
     return(
         <div className="control">
             <div className="info">
-                <span className="title">Doctors</span>
+                <span className="title">Patients</span>
                 <span className="quantity">Show 4 of 4</span>
             </div>
             <div className="operations">
@@ -20,21 +15,21 @@ const DoctorsControl = ()=>{
                     </div>
                     <div className="filter">
                         <label htmlFor="filter">Filter</label>
-                        <div className="role-drop-down">
-                            <span>Role</span>
+                        <div className="id-drop-down">
+                            <span>ID</span>
                             <img className="role-dropdownIcon" src={icons.header.dropdown} alt="icon" />
                         </div>
                     </div>
-                    <div className="speciality-drop-down">
-                        <span>speciality</span>
+                    <div className="gender-drop-down">
+                        <span>Gender</span>
                         <img className="spe-dropdownIcon" src={icons.header.dropdown} alt="icon" />
                     </div>
                 </div>
-                <button className="add-doctor" onClick={handleClick}><img src={icons.control.add} alt="add" /><span>Add Doctor</span></button>
+                <button className="add-patient"><img src={icons.control.add} alt="add" /><span>Add Patient</span></button>
             </div>
         </div>
     )
 }
 
 
-export default DoctorsControl;
+export default PatientControl;
