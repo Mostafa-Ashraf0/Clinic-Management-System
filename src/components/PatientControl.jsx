@@ -1,6 +1,11 @@
 import { icons } from "../assets/icons";
 import "../assets/patientControl.css";
+import { useNavigate } from "react-router-dom";
 const PatientControl = ()=>{
+    const navigate = useNavigate();
+    const handleClick = ()=>{
+        navigate("/patients/addpatient")
+    }
     return(
         <div className="control">
             <div className="info">
@@ -25,7 +30,7 @@ const PatientControl = ()=>{
                         <img className="spe-dropdownIcon" src={icons.header.dropdown} alt="icon" />
                     </div>
                 </div>
-                <button className="add-patient"><img src={icons.control.add} alt="add" /><span>Add Patient</span></button>
+                <button onClick={handleClick} className="add-patient"><img src={icons.control.add} alt="add" /><span>Add Patient</span></button>
             </div>
         </div>
     )

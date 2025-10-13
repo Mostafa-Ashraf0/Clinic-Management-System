@@ -4,18 +4,18 @@ import { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import MainContent from "../components/MainContent";
-import ReciptionistForm from "../components/ReciptionistForm";
+import PatientForm from "../components/PatientForm";
 const AddReciptionist = ()=>{
     const dispatch = useDispatch();
         useEffect(()=>{
-            dispatch(addLight("receptionists"));
+            dispatch(addLight("patients"));
         },[])
     return(
         <>
             <Header/>
             <Sidebar/>
             <MainContent>
-                <ReciptionistForm/>
+                <PatientForm/>
             </MainContent>
         </>
     )

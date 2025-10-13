@@ -6,6 +6,7 @@ import AddDoctor from './pages/AddDoctor';
 import Receptionists from './pages/Receptionists';
 import AddReciptionist from './pages/AddReciptionist'
 import Patients from './pages/Patients';
+import AddPatient from './pages/AddPatient'
 import Appointments from './pages/Appointments';
 import PrivateRoute from './components/PrivateRoute';
 import { Route,BrowserRouter,Routes } from 'react-router-dom';
@@ -55,6 +56,11 @@ function App() {
           <Route path='/receptionists/addreceptionists' element={
             <PrivateRoute>
               <AddReciptionist/>
+            </PrivateRoute>
+          }/>
+          <Route path='/patients/addpatient' element={
+            <PrivateRoute>
+              <AddPatient/>
             </PrivateRoute>
           }/>
         </Routes>
