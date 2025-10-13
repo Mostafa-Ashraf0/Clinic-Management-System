@@ -5,16 +5,23 @@ import { loginUser } from "./authThunk";
 const initialState = { 
     loading: false,
     user: null,
-    error: null
+    error: null,
+    initialized: false
  }
 
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
+        addUser(state,action){
+            state.user = action.payload;
+            state.error = null;
+            state.initialized = true;
+        },
         removeUser(state){
             state.user = null;
             state.error = null;
+            state.initialized = true;
         }
     },
     extraReducers: (builder) => {
@@ -34,5 +41,5 @@ const authSlice = createSlice({
     }
 });
 
-export const {removeUser} = authSlice.actions;
+export const {removeUser, addUser} = authSlice.actions;
 export default authSlice.reducer;

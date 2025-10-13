@@ -25,4 +25,8 @@
     padding: 13px 15px;
     border-radius: 5px;
     background-color: #2F9CCA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+

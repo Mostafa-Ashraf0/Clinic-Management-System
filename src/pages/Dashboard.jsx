@@ -9,6 +9,7 @@ import AppointmentsTable from "../components/AppointmentsTable";
 import '../assets/dashboard.css';
 import { useDispatch } from "react-redux";
 import { addLight } from "../features/dashboard/sidebarSlice";
+import { icons } from "../assets/icons";
 const Dashboard = ()=>{
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -20,10 +21,10 @@ const Dashboard = ()=>{
             <Sidebar/>
             <MainContent>
                 <div className="info-card-list">
-                    <InfoCard/>
-                    <InfoCard/>
-                    <InfoCard/>
-                    <InfoCard/>
+                    <InfoCard name = "Doctor" icon = {icons.doctor.light}/>
+                    <InfoCard name = "Receptionist" icon = {icons.nurse.light}/>
+                    <InfoCard name = "Patients" icon = {icons.patients.light}/>
+                    <InfoCard name = "Appointments" icon = {icons.appointments.light}/>
                 </div>
                 <div className="table-list">
                     <Table/>

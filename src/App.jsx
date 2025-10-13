@@ -7,8 +7,15 @@ import Patients from './pages/Patients';
 import Appointments from './pages/Appointments';
 import PrivateRoute from './components/PrivateRoute';
 import { Route,BrowserRouter,Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addUser } from './features/auth/authSlice';
 function App() {
-
+  const dispatch = useDispatch();
+  useEffect(()=>{
+          const storedUser = localStorage.getItem("user");
+          dispatch(addUser(JSON.parse(storedUser)));
+      },[])
   return (
       <BrowserRouter>
         <Routes>

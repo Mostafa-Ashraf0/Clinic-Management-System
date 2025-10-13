@@ -2,24 +2,31 @@ import {Card, Form, Button} from 'react-bootstrap';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../features/auth/authThunk';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 const LoginForm = ()=>{
     const dispatch = useDispatch();
     const emailRef = useRef();
     const passwordRef = useRef();
     const {loading, error,user} = useSelector((state)=>state.auth);
     const navigate = useNavigate();
+    const location = useLocation();
     const handleSubmit = (e)=>{
-        e.preventDefault();
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
-        dispatch(loginUser({email,pass: password}));
-    }
-    useEffect(()=>{
-        if(user){
-            navigate("/Dashboard");
+        const userData = {
+        email: emailRef.current.value,
+        password: passwordRef.current.value
         }
-    },[user,navigate]) //rule of all variables used in useeffect must be written in dependancies
+        e.preventDefault();
+        dispatch(loginUser({email:userData.email,pass: userData.password}));
+    }
+    
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem("user", JSON.stringify(user));
+            if (location.pathname === "/") {
+                navigate("/Dashboard");
+            }
+            }
+    }, [user, navigate]); //rule of all variables used in useeffect must be written in dependancies
     
     return(
         <Card style={{ width: "380px", padding: "20px" }}>

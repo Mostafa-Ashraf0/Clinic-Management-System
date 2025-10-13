@@ -9,7 +9,9 @@ import patIcon from './patientsLight.svg';
 import patIconDark from './patientsDark.svg'
 import admin from "./user.jpg";
 import AppIcon from './appointLight.svg';
-import AppIconDark from './appointDark.svg'
+import AppIconDark from './appointDark.svg';
+import Search from './searchIcon.svg';
+import addIcon from './addIcon.svg'
 export const icons = {
     dashboard: {
         light: dashIcon,
@@ -17,7 +19,7 @@ export const icons = {
     },
     doctor:{
         light: docIcon,
-        dark: docIconDark
+        dark: docIconDark,
     },
     nurse:{
         light: nurseIcon,
@@ -34,5 +36,9 @@ export const icons = {
     header:{
         dropdown: selectDropDown,
         admin: admin
+    },
+    control:{
+        searchIcon: Search,
+        add: addIcon
     }
 }
