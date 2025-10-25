@@ -30,7 +30,7 @@ const AppointmentControl = ()=>{
                         <img className="spe-dropdownIcon" src={icons.header.dropdown} alt="icon" />
                     </div>
                 </div>
-                <button className="add-appointment" onClick={handleClick}><img src={icons.control.add} alt="add" /><span>Add Doctor</span></button>
+                <button className="add-appointment" onClick={handleClick}><img src={icons.control.add} alt="add" /><span>Create Appointment</span></button>
             </div>
         </div>
     )
