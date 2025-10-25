@@ -8,6 +8,7 @@ import AddReciptionist from './pages/AddReciptionist'
 import Patients from './pages/Patients';
 import AddPatient from './pages/AddPatient'
 import Appointments from './pages/Appointments';
+import AddAppointment from './pages/AddAppointment';
 import PrivateRoute from './components/PrivateRoute';
 import { Route,BrowserRouter,Routes } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -46,6 +47,11 @@ function App() {
           <Route path='/appointments' element={
             <PrivateRoute>
               <Appointments/>
+            </PrivateRoute>
+          }/>
+          <Route path='/appointments/addAppointment' element={
+            <PrivateRoute>
+              <AddAppointment/>
             </PrivateRoute>
           }/>
           <Route path='/doctors/addDoctor' element={

@@ -35,7 +35,7 @@ const PatientForm = ()=>{
         <Card>
             <Card.Body className='d-flex flex-column align-items-center' style={{height:"450px",padding:"30px"}}>
                 <Form onSubmit={handleSubmit} className='d-flex flex-column align-items-start' style={{gap:"20px",width:"560px",color:"#384152"}}>
-                    <h4 className='m-0 p-0'>Add Receptionist</h4>
+                    <h4 className='m-0 p-0'>Add Patient</h4>
                     <Form.Group className='d-flex align-items-center justify-content-center' style={{width:"560px", gap:"10px"}}>
                         {/*First Name */}
                         <Form.Group className='d-flex flex-column align-items-start w-50' style={{height:"64px"}}>
