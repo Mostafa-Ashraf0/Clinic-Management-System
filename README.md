@@ -1,16 +1,64 @@
-# React + Vite
+# 🏥 Clinic System — Full-Stack (React.js, Supabase, PostgreSQL) 🚧 *In Progress*
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 **Solo Project**  
+🔗 **Live Demo:** [clinic-system.vercel.app](https://clinic-m-system.vercel.app/)  
+💻 **Tech Stack:** React.js · Supabase · PostgreSQL · Redux  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🩺 Overview
+A full-stack **clinic management web app** built with **React.js** and **Supabase**, designed to help clinics efficiently manage **doctors, receptionists, patients, and appointments** — all in one platform.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚙️ Features
 
-## Expanding the ESLint configuration
+- 🔐 **Role-Based Authentication & Authorization**  
+  Admin can create and manage accounts for **doctors** and **receptionists** securely through Supabase Auth.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 👩‍⚕️ **Admin Dashboard**  
+  Manage all system entities — **patients, doctors, and receptionists** — with full **CRUD** operations (Add · Edit · Delete · View).
+
+- 📅 **Smart Appointment Scheduling**  
+  Built with custom logic that **prevents overlapping or double-booked appointments**.
+
+- 🗃️ **Database Design**  
+  Designed and implemented a **normalized PostgreSQL database schema** to efficiently handle all entities and relations.
+
+- 🖥️ **Responsive Modern UI**  
+  Developed using React.js to ensure a smooth and clean user experience across all devices.
+
+
+
+---
+
+## 🧩 Tech Stack
+
+| Frontend | Backend | Database | Hosting |
+|-----------|----------|-----------|----------|
+| React.js | Supabase | PostgreSQL | Vercel |
+
+---
+
+
+## 🖼️ Preview
+
+<div align="center">
+  <img src="/src//assets//images//WhatsApp Image 2025-10-16 at 12.19.09 PM (1).jpeg" width="30%" alt="Screenshot 1" />
+  <img src="/src//assets//images/WhatsApp Image 2025-10-16 at 12.19.09 PM (2).jpeg" width="30%" alt="Screenshot 2" />
+  <img src="/src//assets//images/WhatsApp Image 2025-10-16 at 12.19.09 PM.jpeg" width="30%" alt="Screenshot 3" />
+  <br/><br/>
+  <img src="/src//assets//images/WhatsApp Image 2025-10-16 at 12.19.10 PM (1).jpeg" width="30%" alt="Screenshot 4" />
+  <img src="/src//assets//images/WhatsApp Image 2025-10-16 at 12.19.10 PM.jpeg" width="30%" alt="Screenshot 5" />
+  
+</div>
+
+---
+
+## 🧠 Key Learnings
+
+- Gained hands-on experience designing and implementing **PostgreSQL schemas**. 
+- Learned how to handle **role-based logic and real-time updates** using Supabase.  
+- Improved knowledge of **React state management** and **data flow between frontend and backend**.
+
+---
