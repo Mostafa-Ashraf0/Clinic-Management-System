@@ -7,7 +7,7 @@ import AppointmentSearch from './AppointmentSearch';
 const AppointmentForm = () => {
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
-  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [selectedPatient, setSelectedPatient] = useState([]);
   const [formData, setFormData] = useState({
     doctor: '',
     patient: '',
@@ -59,20 +59,25 @@ const AppointmentForm = () => {
     <Card>
       <Card.Body
         className="d-flex flex-column align-items-center"
-        style={{ height: '520px', padding: '30px' }}
+        style={{ height: '600px', padding: '30px' }}
       >
-        <AppointmentSearch 
-          setFormData={setFormData} 
-          formData={formData} 
-          setSelectedPatient={setSelectedPatient} 
-          selectedPatient={selectedPatient} 
-        />
+        <div 
+        className="d-flex flex-column align-items-start"
+        style={{ gap: '20px', width: '560px', color: '#384152',marginBottom:"20px" }}
+        >
+          <h4 className="m-0 p-0">Create Appointment</h4>
+          <AppointmentSearch 
+            setFormData={setFormData} 
+            formData={formData} 
+            setSelectedPatient={setSelectedPatient} 
+            selectedPatient={selectedPatient} 
+          />
+        </div>
         <Form
           onSubmit={handleSubmit}
           className="d-flex flex-column align-items-start"
           style={{ gap: '20px', width: '560px', color: '#384152' }}
         >
-          <h4 className="m-0 p-0">Create Appointment</h4>
           <Form.Group
             className="d-flex align-items-center justify-content-center"
             style={{ width: '560px', gap: '10px',marginBottom:"20px" }}

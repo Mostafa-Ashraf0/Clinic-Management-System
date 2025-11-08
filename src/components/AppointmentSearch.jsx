@@ -1,30 +1,32 @@
 import { fetchPatients } from '../features/appointments/fetchPatients';
 import { useEffect, useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import SearchResults from './SearchResults';
+import { useSelector,useDispatch } from 'react-redux';
+import { setDropdown } from '../features/appointments/appointmentSlice';
 
-
-const AppointmentSearch = ({setFormData,formData,setSelectedPatient,selectedPatient})=>{
+const AppointmentSearch = ({setFormData,setSelectedPatient,selectedPatient})=>{
+    const dispatch = useDispatch();
+    const { dropdownViewd } = useSelector((state)=>state.appointment);
     const [patients, setPatients] = useState([]);
-    const [searchValue, setSearchValue] = useState(null);
+    const [phone, setPhone] = useState("");
+    const [finalPatient, setFinalPatient] = useState({});
 
     const handleChange = (e)=>{
-        setSearchValue(e.target.value.trim());
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const foundPatient = patients.find((p) => p.phone === searchValue);
-        if (foundPatient) {
-        console.log(foundPatient)
+        const value = e.target.value.trim();
+        console.log(value);
+        {(value.length === 0)?dispatch(setDropdown(false)):dispatch(setDropdown(true))}
+        setPhone(value);
+        const foundPatient = patients.filter((p) => p.phone.startsWith(value));
+        if (foundPatient.length>0) {
+        console.log(foundPatient>0)
         setSelectedPatient(foundPatient);
-        setFormData((prev) => ({
-            ...prev,
-            patient: foundPatient.id || '',
-        }));
         } else {
-        setSelectedPatient(null);
         console.log("not found")
         }
-    };
+    }
+
+
     useEffect(() => {
         const loadPatients = async () => {
             const data = await fetchPatients();
@@ -33,24 +35,47 @@ const AppointmentSearch = ({setFormData,formData,setSelectedPatient,selectedPati
         loadPatients();
         }, []);
     return(
-        <div className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}> 
+        <div className="d-flex flex-column align-items-start w-50 position-relative"> 
             {/* Patient (Search by phone) */}
-                <form onSubmit={handleSubmit}>
-                    <label>Patient (by phone)*</label>
-                    <input
-                    type="text"
-                    name="patient"
-                    placeholder="Enter patient phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    />
-                    <button type='submit'>submit</button>
-                </form>
-                {selectedPatient && (
-                <div className="mt-1 text-muted">
-                    <small>Found: {selectedPatient.name}</small>
-                </div>
-                )}
+                <Form className="d-flex flex-column align-items-start"
+                        style={{ width: '560px', color: '#384152' }}>
+                    <Form.Group className="d-flex align-items-center"
+                                style={{ width: '560px', gap: '10px',marginBottom:"20px" }}>
+                        <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
+                            <Form.Label>Patient (by phone)*</Form.Label>
+                            <Form.Control
+                            type="text"
+                            name="patient"
+                            placeholder="Enter patient phone"
+                            value={phone}
+                            onChange={handleChange}
+                            autoComplete="off"
+                            />
+                        </Form.Group>
+                        <Form.Group className={`${finalPatient.name?'d-flex':'d-none'} flex-column align-items-start w-50`} style={{ height: '64px'}}>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control type='text' value={finalPatient.name} readOnly/>
+                        </Form.Group>
+                    </Form.Group>
+                    <Form.Group className="d-flex align-items-center"
+                                style={{ width: '560px', gap: '10px',marginBottom:"20px" }}>
+                        <Form.Group className={`${finalPatient.age?'d-flex':'d-none'} flex-column align-items-start w-50`} style={{ height: '64px' }}>
+                            <Form.Label>Age</Form.Label>
+                            <Form.Control type='text' value={finalPatient.age} readOnly/>
+                        </Form.Group>
+                        <Form.Group className={`${finalPatient.email?'d-flex':'d-none'} flex-column align-items-start w-50`} style={{ height: '64px' }}>
+                            <Form.Label>Email</Form.Label>
+                            <Form.Control type='text' value={finalPatient.email} readOnly/>
+                        </Form.Group>
+                    </Form.Group>
+                </Form>
+
+                {selectedPatient.length>0 && dropdownViewd?<SearchResults
+                 selectedPatients={selectedPatient}
+                 setFormData={setFormData}
+                 setPhone={setPhone}
+                 setFinalPatient={setFinalPatient}
+                 />:""}
         </div>
     )
 };
