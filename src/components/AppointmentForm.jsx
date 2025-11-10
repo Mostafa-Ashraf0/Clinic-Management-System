@@ -24,7 +24,7 @@ const AppointmentForm = () => {
         date: '',
         time: '',
       });
-      setSelectedPatient(null);
+      setSelectedPatient([]);
       setSubmited(false);
     }
   }, [submited]);
@@ -33,12 +33,14 @@ const AppointmentForm = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value.trim(),
+      [name]: name==='doctor'?parseInt(value.trim()):value.trim(),
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(formData);
+    console.log(selectedPatient);
     AddAppointment(formData, setSubmited);
   };
 
@@ -98,17 +100,6 @@ const AppointmentForm = () => {
                   </option>
                 ))}
               </Form.Select>
-            </Form.Group>
-
-            {/* name */}
-            <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
-              <Form.Label>name</Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
             </Form.Group>
           </Form.Group>
 

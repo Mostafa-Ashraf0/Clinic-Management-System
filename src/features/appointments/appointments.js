@@ -8,7 +8,7 @@ const AddAppointment = async(formData, setSubmited)=>{
                 patient_id: formData.patient,
                 appointment_date: formData.date,
                 appointment_time: formData.time,
-                status: "upcom"
+                status: "pending",
             }
         ])
         if(appointmentError) throw appointmentError;
