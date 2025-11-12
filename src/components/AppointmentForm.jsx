@@ -7,6 +7,7 @@ import AppointmentSearch from './AppointmentSearch';
 const AppointmentForm = () => {
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
+  const [phone, setPhone] = useState("");
   const [selectedPatient, setSelectedPatient] = useState([]);
   const [formData, setFormData] = useState({
     doctor: '',
@@ -14,6 +15,11 @@ const AppointmentForm = () => {
     date: '',
     time: '',
   });
+  const [finalPatient, setFinalPatient] = useState({
+        name:'',
+        age:'',
+        email:''
+    });
 
   // Reset form after submit
   useEffect(() => {
@@ -42,6 +48,12 @@ const AppointmentForm = () => {
     console.log(formData);
     console.log(selectedPatient);
     AddAppointment(formData, setSubmited);
+    setPhone("");
+    setFinalPatient({
+      name:'',
+      age:'',
+      email:''
+    })
   };
 
   
@@ -65,7 +77,7 @@ const AppointmentForm = () => {
       >
         <div 
         className="d-flex flex-column align-items-start"
-        style={{ gap: '20px', width: '560px', color: '#384152',marginBottom:"20px" }}
+        style={{ gap: '20px', width: '560px', color: '#384152',marginBottom:"20px"}}
         >
           <h4 className="m-0 p-0">Create Appointment</h4>
           <AppointmentSearch 
@@ -73,6 +85,10 @@ const AppointmentForm = () => {
             formData={formData} 
             setSelectedPatient={setSelectedPatient} 
             selectedPatient={selectedPatient} 
+            phone={phone}
+            setPhone={setPhone}
+            finalPatient={finalPatient}
+            setFinalPatient={setFinalPatient}
           />
         </div>
         <Form
@@ -85,7 +101,7 @@ const AppointmentForm = () => {
             style={{ width: '560px', gap: '10px',marginBottom:"20px" }}
           >
             {/* Doctor */}
-            <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
+            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
               <Form.Label>Doctor*</Form.Label>
               <Form.Select
                 value={formData.doctor}

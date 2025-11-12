@@ -14,6 +14,9 @@ import { Route,BrowserRouter,Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { addUser } from './features/auth/authSlice';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   const dispatch = useDispatch();
   useEffect(()=>{
@@ -21,6 +24,16 @@ function App() {
           dispatch(addUser(JSON.parse(storedUser)));
       },[])
   return (
+      <>
+      <ToastContainer 
+        position="top-right"
+        autoClose={3000}      
+        hideProgressBar={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="light"
+      />
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LoginPage/>}/>
@@ -72,6 +85,7 @@ function App() {
         </Routes>
         
       </BrowserRouter>
+      </>
   )
 }
 

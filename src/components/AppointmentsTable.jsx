@@ -7,20 +7,22 @@ const AppointmentsTable = ()=>{
             <table className='app-t-body'>
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Patient Name</th>
-                        <th>Type</th>
+                        <th>Doctor</th>
                         <th>Time</th>
-                        <th>Number</th>
+                        <th>Phone</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Mostafa</td>
-                        <td>Clinic visit</td>
+                        <td>1</td>
+                        <td>Mostafa Ashraf</td>
+                        <td>Osman Mohamed</td>
                         <td>8.30am - 9.00am</td>
                         <td>01028129241</td>
-                        <td>Accepted</td>
+                        <td>Pending</td>
                     </tr>
                 </tbody>
             </table>

@@ -5,12 +5,11 @@ import SearchResults from './SearchResults';
 import { useSelector,useDispatch } from 'react-redux';
 import { setDropdown } from '../features/appointments/appointmentSlice';
 
-const AppointmentSearch = ({setFormData,setSelectedPatient,selectedPatient})=>{
+const AppointmentSearch = ({setFormData,setSelectedPatient,selectedPatient,phone,setPhone,finalPatient,setFinalPatient})=>{
     const dispatch = useDispatch();
     const { dropdownViewd } = useSelector((state)=>state.appointment);
     const [patients, setPatients] = useState([]);
-    const [phone, setPhone] = useState("");
-    const [finalPatient, setFinalPatient] = useState({});
+    
 
     const handleChange = (e)=>{
         const value = e.target.value.trim();
@@ -52,20 +51,20 @@ const AppointmentSearch = ({setFormData,setSelectedPatient,selectedPatient})=>{
                             autoComplete="off"
                             />
                         </Form.Group>
-                        <Form.Group className={`${finalPatient.name?'d-flex':'d-none'} flex-column align-items-start w-50`} style={{ height: '64px'}}>
+                        <Form.Group className={`d-flex flex-column align-items-start w-50`} style={{ height: '64px'}}>
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type='text' value={finalPatient.name} readOnly/>
+                            <Form.Control type='text' value={finalPatient.name || ''} readOnly/>
                         </Form.Group>
                     </Form.Group>
                     <Form.Group className="d-flex align-items-center"
                                 style={{ width: '560px', gap: '10px',marginBottom:"20px" }}>
-                        <Form.Group className={`${finalPatient.age?'d-flex':'d-none'} flex-column align-items-start w-50`} style={{ height: '64px' }}>
+                        <Form.Group className={`d-flex flex-column align-items-start w-50`} style={{ height: '64px' }}>
                             <Form.Label>Age</Form.Label>
-                            <Form.Control type='text' value={finalPatient.age} readOnly/>
+                            <Form.Control type='text' value={finalPatient.age || ''} readOnly/>
                         </Form.Group>
-                        <Form.Group className={`${finalPatient.email?'d-flex':'d-none'} flex-column align-items-start w-50`} style={{ height: '64px' }}>
+                        <Form.Group className={`d-flex flex-column align-items-start w-50`} style={{ height: '64px' }}>
                             <Form.Label>Email</Form.Label>
-                            <Form.Control type='text' value={finalPatient.email} readOnly/>
+                            <Form.Control type='text' value={finalPatient.email || ''} readOnly/>
                         </Form.Group>
                     </Form.Group>
                 </Form>

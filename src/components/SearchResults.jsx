@@ -6,8 +6,12 @@ const SearchResults = ({selectedPatients,setFormData,setPhone,setFinalPatient})=
     const dispatch = useDispatch();
     const { dropdownViewd } = useSelector((state)=>state.appointment);
     const handleClick = (p)=>{
-        setFinalPatient(p);
-        setPhone(p.phone);
+        setFinalPatient({
+            name:p.name || '',
+            phone:p.phone || '',
+            email:p.email || ''
+        });
+        setPhone(p.phone || '');
         setFormData((prev) => ({
             ...prev,
             patient: p.id || '',
