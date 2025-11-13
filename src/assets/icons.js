@@ -7,7 +7,6 @@ import nurseIconDark from './nurseDark.svg';
 import selectDropDown from './selectDropdownIcon.svg';
 import patIcon from './patientsLight.svg';
 import patIconDark from './patientsDark.svg'
-import admin from "./user.jpg";
 import AppIcon from './appointLight.svg';
 import AppIconDark from './appointDark.svg';
 import Search from './searchIcon.svg';
@@ -35,7 +34,7 @@ export const icons = {
     },
     header:{
         dropdown: selectDropDown,
-        admin: admin
+        admin: '',
     },
     control:{
         searchIcon: Search,

@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import SearchResults from './SearchResults';
 import { useSelector,useDispatch } from 'react-redux';
 import { setDropdown } from '../features/appointments/appointmentSlice';
+import { icons } from "../assets/icons";
 
 const AppointmentSearch = ({setFormData,setSelectedPatient,selectedPatient,phone,setPhone,finalPatient,setFinalPatient})=>{
     const dispatch = useDispatch();
@@ -42,14 +43,17 @@ const AppointmentSearch = ({setFormData,setSelectedPatient,selectedPatient,phone
                                 style={{ width: '560px', gap: '10px',marginBottom:"20px" }}>
                         <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
                             <Form.Label>Patient (by phone)*</Form.Label>
-                            <Form.Control
-                            type="text"
-                            name="patient"
-                            placeholder="Enter patient phone"
-                            value={phone}
-                            onChange={handleChange}
-                            autoComplete="off"
-                            />
+                            <Form.Group className='d-flex align-items-center w-100'>
+                                <Form.Control
+                                type="text"
+                                name="patient"
+                                placeholder="Enter patient phone"
+                                value={phone}
+                                onChange={handleChange}
+                                autoComplete="off"
+                                />
+                                <img src={icons.control.searchIcon} alt="search" style={{marginLeft:"-30px"}}/>
+                            </Form.Group>
                         </Form.Group>
                         <Form.Group className={`d-flex flex-column align-items-start w-50`} style={{ height: '64px'}}>
                             <Form.Label>Name</Form.Label>
