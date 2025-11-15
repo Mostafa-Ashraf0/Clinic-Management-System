@@ -1,6 +1,7 @@
 .table{
-    width: 538px !important;
+    width: 50% !important;
     text-align: start;
+    overflow: auto;
 }
 
 .t-body{

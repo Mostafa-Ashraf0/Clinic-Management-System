@@ -16,7 +16,6 @@ import { useDispatch } from 'react-redux';
 import { addUser } from './features/auth/authSlice';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { CardTitle } from 'react-bootstrap';
 
 function App() {
   const dispatch = useDispatch();

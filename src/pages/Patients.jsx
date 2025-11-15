@@ -1,14 +1,22 @@
 import { useDispatch } from "react-redux";
 import { addLight } from "../features/dashboard/sidebarSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
+import Table from "../components/Table";
 import MainContent from "../components/MainContent";
-import PatientControl from "../components/PatientControl"
+import PatientControl from "../components/PatientControl";
+import { fetchPatients } from "../features/appointments/fetchPatients";
 const Patients = ()=>{
+    const [patients, setPatients] = useState([]);
     const dispatch = useDispatch();
         useEffect(()=>{
             dispatch(addLight("patients"));
+            const loadPatients = async()=>{
+            const data = await fetchPatients();
+            setPatients(data);
+            }
+        loadPatients();
         },[])
     return(
         <>
@@ -16,6 +24,7 @@ const Patients = ()=>{
             <Sidebar/>
             <MainContent>
                 <PatientControl/>
+                <Table title="Patients" data={patients} role="patient"/>
             </MainContent>
         </>
     )

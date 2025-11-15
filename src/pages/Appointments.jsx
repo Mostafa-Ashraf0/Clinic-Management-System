@@ -5,6 +5,7 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import MainContent from "../components/MainContent";
 import AppointmentControl from "../components/AppointmentControl";
+import AppointmentsTable from "../components/AppointmentsTable";
 const Appointments = ()=>{
     const dispatch = useDispatch();
         useEffect(()=>{
@@ -16,6 +17,7 @@ const Appointments = ()=>{
             <Sidebar/>
             <MainContent>
                 <AppointmentControl/>
+                <AppointmentsTable/>
             </MainContent>
         </>
     )

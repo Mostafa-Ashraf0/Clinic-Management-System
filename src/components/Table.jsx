@@ -1,49 +1,64 @@
 import '../assets/table.css'
 
-const Table = ()=>{
+const Table = ({title,data,role})=>{
     return(
         <div className="table d-flex flex-column">
-            <div className="head">Doctors on duty</div>
+            <div className="head">{title}</div>
             <div className="t-body">
                 <table>
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Role</th>
-                        <th>Speciality</th>
-                    </tr>
+                    {role==="doctor" &&(
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Specialization</th>
+                        </tr>
+                    )}
+                    {role==="receptionist" && (
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                        </tr>
+                    )}
+                    {role==="patient" && (
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                        </tr>
+                    )}
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Mostafa</td>
-                        <td>Doctor</td>
-                        <td>Dentist</td>
-                    </tr>
-                    <tr>
-                        <td>Mostafa</td>
-                        <td>Doctor</td>
-                        <td>Dentist</td>
-                    </tr>
-                    <tr>
-                        <td>Mostafa</td>
-                        <td>Doctor</td>
-                        <td>Dentist</td>
-                    </tr>
-                    <tr>
-                        <td>Mostafa</td>
-                        <td>Doctor</td>
-                        <td>Dentist</td>
-                    </tr>
-                    <tr>
-                        <td>Mostafa</td>
-                        <td>Doctor</td>
-                        <td>Dentist</td>
-                    </tr>
-                    <tr>
-                        <td>Mostafa</td>
-                        <td>Doctor</td>
-                        <td>Dentist</td>
-                    </tr>
+                    {role==="doctor" &&(
+                        data.map(d=>(
+                            <tr>
+                                <td>{d.name}</td>
+                                <td>{d.phone}</td>
+                                <td>{d.email}</td>
+                                <td>{d.specialization}</td>
+                            </tr>
+                        ))
+                    )}
+                    {role==="receptionist" &&(
+                        data.map(d=>(
+                            <tr>
+                                <td>{d.name}</td>
+                                <td>{d.phone}</td>
+                                <td>{d.email}</td>
+                            </tr>
+                        ))
+                    )}
+                    {role==="patient" &&(
+                        data.map(d=>(
+                            <tr>
+                                <td>{d.name}</td>
+                                <td>{d.phone}</td>
+                                <td>{d.email || "null"}</td>
+                            </tr>
+                        ))
+                    )}
                 </tbody>
             </table>
             </div>
