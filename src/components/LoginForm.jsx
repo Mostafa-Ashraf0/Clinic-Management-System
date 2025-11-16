@@ -3,11 +3,12 @@ import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../features/auth/authThunk';
 import { useNavigate,useLocation } from 'react-router-dom';
+
 const LoginForm = ()=>{
     const dispatch = useDispatch();
     const emailRef = useRef();
     const passwordRef = useRef();
-    const {loading, error,user} = useSelector((state)=>state.auth);
+    const {loading, session} = useSelector((state)=>state.auth);
     const navigate = useNavigate();
     const location = useLocation();
     const handleSubmit = (e)=>{
@@ -18,15 +19,14 @@ const LoginForm = ()=>{
         e.preventDefault();
         dispatch(loginUser({email:userData.email,pass: userData.password}));
     }
+
     
     useEffect(() => {
-        if (user) {
-            localStorage.setItem("user", JSON.stringify(user));
-            if (location.pathname === "/") {
-                navigate("/Dashboard");
-            }
-            }
-    }, [user, navigate]); //rule of all variables used in useeffect must be written in dependancies
+        if (session && location.pathname === "/") {
+            navigate("/Dashboard");
+        }
+    }, [session, navigate, location.pathname]);
+     //rule of all variables used in useeffect must be written in dependancies
     
     return(
         <Card style={{ width: "380px", padding: "20px" }}>
@@ -44,7 +44,6 @@ const LoginForm = ()=>{
                     <Button variant="primary" type="submit" className='w-100'>{loading?"Logging in..":"Log in"}</Button>
                 </Form>
             </Card.Body>
-            {error && alert(error)}
         </Card>
     )
 };

@@ -13,16 +13,33 @@ import PrivateRoute from './components/PrivateRoute';
 import { Route,BrowserRouter,Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { addUser } from './features/auth/authSlice';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import supabase from './utils/supabase';
+import { addUser, removeUser } from './features/auth/authSlice';
 
 function App() {
   const dispatch = useDispatch();
+  useEffect(() => {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session) dispatch(addUser(session));
+      })
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange((_event, session) => {
+        if(session){
+          dispatch(addUser(session));
+      }else{
+        dispatch(removeUser());
+      }
+      });
+      return () => subscription.unsubscribe()
+    }, [])
+  /*const dispatch = useDispatch();
   useEffect(()=>{
           const storedUser = localStorage.getItem("user");
           dispatch(addUser(JSON.parse(storedUser)));
-      },[])
+      },[])*/
   return (
       <>
       <ToastContainer 

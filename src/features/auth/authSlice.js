@@ -4,9 +4,9 @@ import { loginUser } from "./authThunk";
 
 const initialState = { 
     loading: false,
-    user: null,
+    session: null,
     error: null,
-    initialized: false
+    initialized: false,
  }
 
 const authSlice = createSlice({
@@ -14,15 +14,16 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         addUser(state,action){
-            state.user = action.payload;
+            state.session = action.payload;
             state.error = null;
             state.initialized = true;
         },
         removeUser(state){
-            state.user = null;
+            state.session = null;
             state.error = null;
             state.initialized = true;
-        }
+        },
+
     },
     extraReducers: (builder) => {
     builder
