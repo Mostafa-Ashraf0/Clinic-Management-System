@@ -1,14 +1,23 @@
 import supabase from "../../utils/supabase";
+import {checkDuplicateD} from "./checkDuplicateD";
 
 const AddDoctor = async (formData,setSubmited)=>{
+    
     try{
+        //check duplicate
+        const duplicated = await checkDuplicateD(formData);
+        if(duplicated){
+            return;
+        }
         // create new doctor credentials
         const { data, error } = await supabase.auth.signUp({
             email: formData.loginEmail,
             password: formData.password,
         });
 
-        if(error) throw error;
+        if(error){
+            alert(error);
+        };
         const { user } = data;
 
         // create new record for doctor in profile table
