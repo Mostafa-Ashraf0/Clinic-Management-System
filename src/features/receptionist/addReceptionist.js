@@ -1,5 +1,6 @@
 import supabase from "../../utils/supabase";
 import { checkDuplicate } from '../checkDuplicate';
+import { toast } from "react-toastify";
 
 const AddRecip = async (formData,setSubmited)=>{
     try{
@@ -15,7 +16,9 @@ const AddRecip = async (formData,setSubmited)=>{
             password: formData.password,
         });
 
-        if(error) throw error;
+        if(error){
+            toast.error("duplicated auth");
+        }
         const { user } = data;
 
         // create new record for receptionist in profile table

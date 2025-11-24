@@ -1,5 +1,6 @@
 import supabase from "../../utils/supabase";
 import { checkDuplicate } from '../checkDuplicate';
+import { toast } from "react-toastify";
 
 const AddDoctor = async (formData,setSubmited)=>{
     try{
@@ -15,7 +16,7 @@ const AddDoctor = async (formData,setSubmited)=>{
         });
 
         if(error){
-            alert(error);
+            toast.error(error);
         };
         const { user } = data;
 
