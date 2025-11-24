@@ -1,11 +1,10 @@
 import supabase from "../../utils/supabase";
-import {checkDuplicateD} from "./checkDuplicateD";
+import { checkDuplicate } from '../checkDuplicate';
 
 const AddDoctor = async (formData,setSubmited)=>{
-    
     try{
         //check duplicate
-        const duplicated = await checkDuplicateD(formData);
+        const duplicated = await checkDuplicate(formData,'doctors');
         if(duplicated){
             return;
         }

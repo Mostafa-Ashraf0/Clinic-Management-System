@@ -1,6 +1,6 @@
 import {Card, Form, Button, FormGroup} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
-import { AddRecip } from '../features/receptionist/receptionist';
+import { AddRecip } from '../features/receptionist/addReceptionist';
 const ReciptionistForm = ()=>{
         const [submited, setSubmited] = useState(false);
         const [formData, setFormData] = useState({

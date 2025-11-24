@@ -1,7 +1,7 @@
-import supabase from "../../utils/supabase";
-
-const checkDuplicateD = async(formData)=>{
-    const { data, error } = await supabase.from('doctors').select('*');
+import supabase from "../utils/supabase";
+const checkDuplicate = async(formData,tableName)=>{
+    const { data, error } = await supabase.from(tableName).select('*');
+    console.log(data);
     const samePhone = data.find(d=>d.phone === formData.phone);
     const sameEmail = data.find(d=>d.email === formData.email);
     if(sameEmail){
@@ -16,4 +16,4 @@ const checkDuplicateD = async(formData)=>{
 }
 
 
-export { checkDuplicateD };
+export { checkDuplicate };

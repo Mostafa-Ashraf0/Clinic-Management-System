@@ -1,6 +1,14 @@
 import supabase from "../../utils/supabase";
+import { checkDuplicate } from '../checkDuplicate';
+
 const AddRecip = async (formData,setSubmited)=>{
     try{
+        //checkDuplicates
+        const duplicated = await checkDuplicate(formData, 'receptionist');
+        if(duplicated){
+            return;
+        }
+
         // create new receptionist credentials
         const { data, error } = await supabase.auth.signUp({
             email: formData.loginEmail,
@@ -33,7 +41,8 @@ const AddRecip = async (formData,setSubmited)=>{
         ]);
         if(recipError) throw recipError;
         setSubmited(true);
-        alert("Receptionist added successfuly")
+        alert("Receptionist added successfuly");
+        
     }catch(err){
         console.log(err);
     }
