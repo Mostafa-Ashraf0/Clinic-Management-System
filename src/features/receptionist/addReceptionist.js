@@ -44,7 +44,7 @@ const AddRecip = async (formData,setSubmited)=>{
         ]);
         if(recipError) throw recipError;
         setSubmited(true);
-        alert("Receptionist added successfuly");
+        toast.success("Receptionist added successfuly");
         
     }catch(err){
         console.log(err);

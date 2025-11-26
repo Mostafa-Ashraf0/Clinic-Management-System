@@ -16,7 +16,7 @@ const AddDoctor = async (formData,setSubmited)=>{
         });
 
         if(error){
-            toast.error(error);
+            toast.error("duplicated auth");
         };
         const { user } = data;
 
@@ -44,7 +44,7 @@ const AddDoctor = async (formData,setSubmited)=>{
         ]);
         if(doctorError) throw doctorError;
         setSubmited(true);
-        alert("Doctor added successfuly")
+        toast.success("Doctor added successfuly")
     }catch(err){
         console.log(err);
     }

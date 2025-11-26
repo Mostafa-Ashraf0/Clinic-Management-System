@@ -1,4 +1,5 @@
 import supabase from "../../utils/supabase";
+import { toast } from "react-toastify";
 const AddPatient = async (formData,setSubmited)=>{
     try{
         //add new record in patinet table
@@ -12,7 +13,7 @@ const AddPatient = async (formData,setSubmited)=>{
         ]);
         if(patientError) throw patientError;
         setSubmited(true);
-        alert("patient added successfuly")
+        toast.success("patient added successfuly")
     }catch(err){
         console.log(err);
     }
