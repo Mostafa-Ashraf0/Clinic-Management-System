@@ -1,15 +1,20 @@
 import {Card, Form, Button, FormGroup} from 'react-bootstrap';
 import { AddDoctor } from '../features/doctors/addNewDoctor';
 import { useEffect, useState } from 'react';
+import { getSepcialization } from '../features/doctors/getSpecialization';
+import { getClinic } from '../features/getClinic';
 const DoctorForm = ()=>{
+    const [spec, setSpec] = useState([]);
+    const [clinic, setClinic] = useState([]);
     const [submited, setSubmited] = useState(false);
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
+        clinic_id:"",
         email: "",
         phone: "",
-        gender: "",
-        speciality: "",
+        sex: "",
+        speciality_id: "",
         loginEmail: "",
         password: ""
     })
@@ -17,10 +22,11 @@ const DoctorForm = ()=>{
         setFormData({
             firstName: "",
             lastName: "",
+            clinic_id:"",
             email: "",
             phone: "",
-            gender: "",
-            speciality: "",
+            sex: "",
+            speciality_id: "",
             loginEmail: "",
             password: ""
         });
@@ -37,6 +43,15 @@ const DoctorForm = ()=>{
         e.preventDefault();
         AddDoctor(formData,setSubmited);
     }
+    useEffect(()=>{
+        const displaySpec_Clinic = async()=>{
+            const specData = await getSepcialization();
+            setSpec(specData);
+            const clinicData = await getClinic();
+            setClinic(clinicData);
+        }
+        displaySpec_Clinic();
+    },[])
     return(
         <Card>
             <Card.Body className='d-flex flex-column align-items-center' style={{height:"520px",padding:"30px"}}>
@@ -69,26 +84,32 @@ const DoctorForm = ()=>{
                         </Form.Group>
 
                     </Form.Group>
-                    <Form.Group className='d-flex align-items-center justify-content-center' style={{width:"560px", gap:"10px"}}>
+                    <Form.Group className='d-flex align-items-center justify-content-between' style={{width:"560px", gap:"10px"}}>
                         {/*Gender */}
-                        <Form.Group className='d-flex flex-column align-items-start w-50' style={{height:"64px"}}>
-                            <Form.Label>Gender*</Form.Label>
-                            <Form.Select aria-label="Default select example" name='gender' value={formData.gender} onChange={handleChange} required>
+                        <Form.Group className='d-flex flex-column align-items-start w-33' style={{height:"64px"}}>
+                            <Form.Label>Sex*</Form.Label>
+                            <Form.Select aria-label="Default select example" name='sex' value={formData.gender} onChange={handleChange} required>
                                 <option value="">Select an option</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </Form.Select>
                         </Form.Group>
                         {/*Speciality */}
-                        <Form.Group className='d-flex flex-column align-items-start w-50' style={{height:"64px"}}>
+                        <Form.Group className='d-flex flex-column align-items-start w-33' style={{height:"64px"}}>
                             <Form.Label>Speciality*</Form.Label>
-                            <Form.Select aria-label="Default select example" name='speciality' value={formData.speciality} onChange={handleChange} required>
-                                <option value="">Select an option</option>
-                                <option value="option1">Option 1</option>
-                                <option value="option2">Option 2</option>
+                            <Form.Select aria-label="Default select example" name='speciality_id' value={formData.speciality} onChange={handleChange} required>
+                                <option value="">Select a specialization</option>
+                                {spec.map(s=><option value={s.id} key={s.id}>{s.name}</option>)}
                             </Form.Select>
                         </Form.Group>
-    
+                        {/*Speciality */}
+                        <Form.Group className='d-flex flex-column align-items-start w-33' style={{height:"64px"}}>
+                            <Form.Label>Clinic*</Form.Label>
+                            <Form.Select aria-label="Default select example" name='clinic_id' value={formData.clinic_id} onChange={handleChange} required>
+                                <option value="">Select an option</option>
+                                {clinic.map(c=><option value={c.id} key={c.id}>{c.name}</option>)}
+                            </Form.Select>
+                        </Form.Group>
                     </Form.Group>
                         {/*Credentials */}
                     <Form.Group className='d-flex align-items-center justify-content-center' style={{width:"560px", gap:"10px"}}>

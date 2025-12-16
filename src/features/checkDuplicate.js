@@ -1,8 +1,13 @@
 import supabase from "../utils/supabase";
 import { toast } from "react-toastify";
 
-const checkDuplicate = async(formData,tableName)=>{
-    const { data, error } = await supabase.from(tableName).select('*');
+const checkDuplicate = async(formData,tableName,role)=>{
+    const { data, error } = await supabase
+    .from(tableName)
+    .select('email, phone')
+    .eq('role',role)
+    .eq('clinic_id',formData.clinic_id);
+    if(error) throw error;
     const samePhone = data.find(d=>d.phone === formData.phone);
     const sameEmail = data.find(d=>d.email === formData.email);
     if(sameEmail){
@@ -12,9 +17,7 @@ const checkDuplicate = async(formData,tableName)=>{
         toast.error("Phone duplicated");
         return true;
     }
-    if(error) throw error;
     return false;
 }
-
 
 export { checkDuplicate };

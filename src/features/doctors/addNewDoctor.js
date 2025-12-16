@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const AddDoctor = async (formData,setSubmited)=>{
     try{
         //check duplicate
-        const duplicated = await checkDuplicate(formData,'doctors');
+        const duplicated = await checkDuplicate(formData,'profile','doctor');
         if(duplicated){
             return;
         }
@@ -21,28 +21,28 @@ const AddDoctor = async (formData,setSubmited)=>{
         const { user } = data;
 
         // create new record for doctor in profile table
-        const { data: profileData, error: profileError } = await supabase.from("profile").insert([
+        const { error: profileError } = await supabase.from("profile").insert([
             {
                 id: user.id,
-                role: "doctor"
-            }
-        ])
-        .select()
-        .single();
-        if(profileError) throw profileError;
-
-        //add new record in doctors table
-        const { error: doctorError } = await supabase.from("doctors").insert([
-            {
-                profile_id: profileData.id,
+                role: "doctor",
+                clinic_id: formData.clinic_id,
                 name: formData.firstName + " " + formData.lastName,
                 phone: formData.phone,
                 email: formData.email,
-                gender: formData.gender,
-                specialization: formData.speciality
+                sex: formData.sex,
+            }
+        ])
+
+        if(profileError) throw profileError;
+
+        //add new record in doctor_extra table
+        const { error: doctorExtraError } = await supabase.from("doctor_extra").insert([
+            {
+                id: user.id,
+                specialization_id: formData.speciality_id
             }
         ]);
-        if(doctorError) throw doctorError;
+        if(doctorExtraError) throw doctorExtraError;
         setSubmited(true);
         toast.success("Doctor added successfuly")
     }catch(err){
