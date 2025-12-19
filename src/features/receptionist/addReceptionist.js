@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const AddRecip = async (formData,setSubmited)=>{
     try{
         //checkDuplicates
-        const duplicated = await checkDuplicate(formData, 'receptionist');
+        const duplicated = await checkDuplicate(formData, 'profile','receptionist');
         if(duplicated){
             return;
         }
@@ -22,27 +22,20 @@ const AddRecip = async (formData,setSubmited)=>{
         const { user } = data;
 
         // create new record for receptionist in profile table
-        const { data: profileData, error: profileError } = await supabase.from("profile").insert([
+        const { error: profileError } = await supabase.from("profile").insert([
             {
                 id: user.id,
-                role: "receptionist"
-            }
-        ])
-        .select()
-        .single();
-        if(profileError) throw profileError;
-
-        //add new record in receptionist table
-        const { error: recipError } = await supabase.from("receptionist").insert([
-            {
-                profile_id: profileData.id,
+                role: "receptionist",
+                clinic_id: formData.clinic_id,
                 name: formData.firstName + " " + formData.lastName,
                 phone: formData.phone,
                 email: formData.email,
-                gender: formData.gender,
+                sex: formData.sex
             }
-        ]);
-        if(recipError) throw recipError;
+        ])
+
+        if(profileError) throw profileError;
+
         setSubmited(true);
         toast.success("Receptionist added successfuly");
         

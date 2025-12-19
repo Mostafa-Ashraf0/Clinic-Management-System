@@ -8,7 +8,8 @@ const AddPatient = async (formData,setSubmited)=>{
                 name: formData.firstName + " " + formData.lastName,
                 phone: formData.phone,
                 email: formData.email,
-                gender: formData.gender,
+                gender: formData.sex,
+                clinic_id: formData.clinic_id
             }
         ]);
         if(patientError) throw patientError;

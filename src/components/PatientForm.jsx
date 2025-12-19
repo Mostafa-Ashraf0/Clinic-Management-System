@@ -1,14 +1,17 @@
 import {Card, Form, Button, FormGroup} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { AddPatient } from '../features/patient/patinet';
+import { getClinic } from '../features/getClinic';
 const PatientForm = ()=>{
+            const [clinic, setClinic] = useState([]);
             const [submited, setSubmited] = useState(false);
             const [formData, setFormData] = useState({
                 firstName: "",
                 lastName: "",
                 email: "",
                 phone: "",
-                gender: ""
+                sex: "",
+                clinic_id: ""
             })
             useEffect(()=>{
                 setFormData({
@@ -16,7 +19,8 @@ const PatientForm = ()=>{
                     lastName: "",
                     email: "",
                     phone: "",
-                    gender: ""
+                    sex: "",
+                    clinic_id: ""
                 });
                 setSubmited(false);
             },[submited])
@@ -31,6 +35,13 @@ const PatientForm = ()=>{
                 e.preventDefault();
                 AddPatient(formData,setSubmited);
             }
+            useEffect(()=>{
+                        const displayClinic = async()=>{
+                            const clinicData = await getClinic();
+                            setClinic(clinicData);
+                        };
+                        displayClinic();
+                    },[])
     return(
         <Card>
             <Card.Body className='d-flex flex-column align-items-center' style={{height:"450px",padding:"30px"}}>
@@ -66,11 +77,19 @@ const PatientForm = ()=>{
                     <Form.Group className='d-flex align-items-center justify-content-center' style={{width:"560px", gap:"10px"}}>
                         {/*Gender */}
                         <Form.Group className='d-flex flex-column align-items-start w-100' style={{height:"64px"}}>
-                            <Form.Label>Gender*</Form.Label>
-                            <Form.Select aria-label="Default select example" name='gender' value={formData.gender} onChange={handleChange} required>
-                                <option value="">Select an option</option>
+                            <Form.Label>Sex*</Form.Label>
+                            <Form.Select aria-label="Default select example" name='sex' value={formData.sex} onChange={handleChange} required>
+                                <option value="">Select Sex</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
+                            </Form.Select>
+                        </Form.Group>
+                        {/*Clinic */}
+                        <Form.Group className='d-flex flex-column align-items-start w-100' style={{height:"64px"}}>
+                            <Form.Label>Clinic*</Form.Label>
+                            <Form.Select aria-label="Default select example" name='clinic_id' value={formData.clinic_id} onChange={handleChange} required>
+                                <option value="">Select Clinic</option>
+                                {clinic.map(c=><option value={c.id} key={c.id}>{c.name}</option>)}
                             </Form.Select>
                         </Form.Group>
     
