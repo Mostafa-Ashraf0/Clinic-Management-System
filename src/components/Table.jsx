@@ -41,11 +41,11 @@ const Table = ({title,data,role})=>{
                 <tbody>
                     {role==="doctor" &&(
                         data.map(d=>(
-                            <tr>
+                            <tr key={d.id}>
                                 <td>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
-                                <td>{d.specialization}</td>
+                                <td>{d.doctor_extra.specialization.name}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
                                     <span>.</span><span>.</span><span>.</span>
                                     <ActionsList actionsList={openRow === d.id}/>
@@ -55,7 +55,7 @@ const Table = ({title,data,role})=>{
                     )}
                     {role==="receptionist" &&(
                         data.map(d=>(
-                            <tr>
+                            <tr key={d.id}>
                                 <td>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
@@ -68,7 +68,7 @@ const Table = ({title,data,role})=>{
                     )}
                     {role==="patient" &&(
                         data.map(d=>(
-                            <tr>
+                            <tr key={d.id}>
                                 <td>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email || "null"}</td>

@@ -21,12 +21,12 @@ const AppointmentControl = ()=>{
                     <div className="filter">
                         <label htmlFor="filter">Filter</label>
                         <div className="role-drop-down">
-                            <span>Role</span>
+                            <span>Status</span>
                             <img className="role-dropdownIcon" src={icons.header.dropdown} alt="icon" />
                         </div>
                     </div>
                     <div className="speciality-drop-down">
-                        <span>speciality</span>
+                        <span>Clinic</span>
                         <img className="spe-dropdownIcon" src={icons.header.dropdown} alt="icon" />
                     </div>
                 </div>

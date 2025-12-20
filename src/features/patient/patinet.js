@@ -12,7 +12,13 @@ const AddPatient = async (formData,setSubmited)=>{
                 clinic_id: formData.clinic_id
             }
         ]);
-        if(patientError) throw patientError;
+        if(patientError){
+            if(patientError.code === '23505'){
+                toast.error("patient already exists");
+                return;
+            }
+            throw patientError;
+        }
         setSubmited(true);
         toast.success("patient added successfuly")
     }catch(err){

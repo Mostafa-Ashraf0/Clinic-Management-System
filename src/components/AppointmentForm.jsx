@@ -2,11 +2,13 @@ import { Card, Form, Button } from 'react-bootstrap';
 import { AddAppointment } from '../features/appointments/appointments';
 import { useEffect, useState } from 'react';
 import { fetchDoctors } from '../features/appointments/fetchDoctors';
+import { getClinic } from '../features/getClinic';
 import AppointmentSearch from './AppointmentSearch';
 
 const AppointmentForm = () => {
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
+  const [clinic, setClinic] = useState([]);
   const [phone, setPhone] = useState("");
   const [selectedPatient, setSelectedPatient] = useState([]);
   const [formData, setFormData] = useState({
@@ -14,11 +16,12 @@ const AppointmentForm = () => {
     patient: '',
     date: '',
     time: '',
+    clinic_id: ''
   });
   const [finalPatient, setFinalPatient] = useState({
         name:'',
         age:'',
-        email:''
+        email:'',
     });
 
   // Reset form after submit
@@ -29,6 +32,7 @@ const AppointmentForm = () => {
         patient: '',
         date: '',
         time: '',
+        clinic_id:''
       });
       setSelectedPatient([]);
       setSubmited(false);
@@ -39,7 +43,7 @@ const AppointmentForm = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name==='doctor'?parseInt(value.trim()):value.trim(),
+      [name]: value.trim(),
     }));
   };
 
@@ -58,13 +62,15 @@ const AppointmentForm = () => {
 
   
 
-  // Fetch doctors
+  // Fetch doctors and clinics
   useEffect(() => {
-    const loadDoctors = async () => {
-      const data = await fetchDoctors();
-      setDoctors(data);
+    const loadDoctors_clinics = async () => {
+      const doctorsData = await fetchDoctors();
+      setDoctors(doctorsData);
+      const clinicData = await getClinic();
+      setClinic(clinicData);
     };
-    loadDoctors();
+    loadDoctors_clinics();
   }, []);
 
   
@@ -113,6 +119,23 @@ const AppointmentForm = () => {
                 {doctors.map((d) => (
                   <option key={d.id} value={d.id}>
                     {d.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            {/* Clinic */}
+            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
+              <Form.Label>Clinic*</Form.Label>
+              <Form.Select
+                value={formData.clinic_id}
+                name="clinic_id"
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select clinic</option>
+                {clinic.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
                   </option>
                 ))}
               </Form.Select>

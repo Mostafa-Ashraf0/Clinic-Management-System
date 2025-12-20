@@ -8,6 +8,7 @@ const AddAppointment = async (formData, setSubmited) => {
       p_patient_id: formData.patient,
       p_date: formData.date,
       p_time: formData.time,
+      p_clinic_id: formData.clinic_id
     });
 
     if (error) throw error;
