@@ -1,10 +1,16 @@
 import { useState } from 'react';
 import tableStyle from '../assets/table.module.css';
 import ActionsList from './ActionsList';
+import { useNavigate } from 'react-router-dom';
 const Table = ({title,data,role})=>{
+    const navigate = useNavigate();
     const [openRow, setOpenRow] = useState(null);
     const handleClick = (id)=>{
         setOpenRow(openRow === id ? null : id);
+    }
+
+    const handleProfileOpen = ()=>{
+
     }
     return(
         <div className={`${tableStyle.table} d-flex flex-column`}>
@@ -42,7 +48,7 @@ const Table = ({title,data,role})=>{
                     {role==="doctor" &&(
                         data.map(d=>(
                             <tr key={d.id}>
-                                <td>{d.name}</td>
+                                <td onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
                                 <td>{d.doctor_extra.specialization.name}</td>
@@ -56,7 +62,7 @@ const Table = ({title,data,role})=>{
                     {role==="receptionist" &&(
                         data.map(d=>(
                             <tr key={d.id}>
-                                <td>{d.name}</td>
+                                <td onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
@@ -69,7 +75,7 @@ const Table = ({title,data,role})=>{
                     {role==="patient" &&(
                         data.map(d=>(
                             <tr key={d.id}>
-                                <td>{d.name}</td>
+                                <td onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email || "null"}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
