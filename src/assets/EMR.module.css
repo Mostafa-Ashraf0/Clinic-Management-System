@@ -1,0 +1,121 @@
+.emr{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 80vh;
+    gap: 20px;
+}
+
+.emr .info{
+    display: flex;
+    gap: 10px;
+}
+
+.emr .general_info,
+.emr .medical_info{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    width: 500px;
+    background-color: white;
+    border: solid 1px #D2D5DB;
+    border-radius: 5px;
+    height: 220px;
+    padding: 10px 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.general_info .meta_data{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.general_info .title,
+.medical_info .title,
+.last_appointment .appo_title{
+    color: rgb(102, 116, 140);
+}
+
+.medical_info .title{
+    margin-bottom: 10px;
+}
+
+.general_info .name{
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+.general_info .sex_age,
+.general_info .contact{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+
+.value{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.value .label{
+    color: rgb(102, 116, 140);
+    margin-right: 5px;
+}
+
+.medical_info .info_cards{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.info_cards .info_card{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    border: solid 1px #D2D5DB;
+    border-radius: 5px;
+}
+
+.info_card .card_label{
+    font-size: 16px;
+}
+
+.info_card .card_value{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.complaint_tags .tags_box{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.tags_box .tag{
+    padding: 2px 10px;
+    background-color: #AEDFF7;
+    color: #0A3D62;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.last_appointment{
+    display: flex;
+    width: 100%;
+    background-color: white;
+    border: solid 1px #D2D5DB;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
