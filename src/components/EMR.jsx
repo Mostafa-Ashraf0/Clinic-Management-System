@@ -1,41 +1,61 @@
 import style from '../assets/EMR.module.css';
-
+import { useEffect, useState } from 'react';
+import { getSinglePatient } from '../features/patient/getSinglePatient';
+import { useParams } from 'react-router-dom';
 
 const EMR = ()=>{
+    const {patientId} = useParams();
+    const [patientData, setPatientData] = useState({
+        name:'-',
+        phone:'-',
+        phone_2:'-',
+        email:'-',
+        gender:'-',
+        age:'-',
+        session:'-'
+    });
+    useEffect(()=>{
+        const getPData = async()=>{
+            const PData = await getSinglePatient(Number(patientId));
+            setPatientData((prev)=>({...prev,...PData}));
+            console.log(PData)
+        };
+        getPData();
+    },[patientId])
     return(
         <div className={style.emr}>
             <div className={style.info}>
             <div className={style.general_info}>
                 <span className={style.title}>General Information</span>
-                <span className={style.name}>Mostafa Ashraf</span>
+                <span className={style.name}>{patientData.name}</span>
                 <div className={style.meta_data}>
                     <div className={style.sex_age}>
                         <span className={style.value}>
                             <span className={style.label}>Sex:</span>
-                            Male
+                            {patientData.gender}
                         </span>
                         <span className={style.value}>
                             <span className={style.label}>Age:</span>
-                            25
+                            {patientData.age}
                         </span>
                         <span className={style.value}>
                             <span className={style.label}>Sessions:</span>
-                            20
+                            {patientData.session}
                         </span>
                         
                     </div>
                     <div className={style.contact}>
                         <span className={style.value}>
                             <span className={style.label}>Email:</span> 
-                            mostafaashrof158@gmail.com
+                            {patientData.email}
                         </span>
                         <span className={style.value}>
                             <span className={style.label}>Phone</span>
-                            : 01225220568
+                            : {patientData.phone}
                         </span>
                         <span className={style.value}>
                             <span className={style.label}>Phone_2</span>
-                            : 01225220568
+                            : {patientData.phone_2}
                         </span>
                     </div>
                 </div>

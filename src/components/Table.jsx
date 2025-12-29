@@ -9,8 +9,10 @@ const Table = ({title,data,role})=>{
         setOpenRow(openRow === id ? null : id);
     }
 
-    const handleProfileOpen = ()=>{
-
+    const handleProfileOpen = (id)=>{
+        if(role === "patient"){
+            navigate(`/patients/${id}`)
+        }
     }
     return(
         <div className={`${tableStyle.table} d-flex flex-column`}>
