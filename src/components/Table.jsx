@@ -50,7 +50,7 @@ const Table = ({title,data,role})=>{
                     {role==="doctor" &&(
                         data.map(d=>(
                             <tr key={d.id}>
-                                <td onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
+                                <td className={tableStyle.name} onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
                                 <td>{d.doctor_extra.specialization.name}</td>
@@ -64,7 +64,7 @@ const Table = ({title,data,role})=>{
                     {role==="receptionist" &&(
                         data.map(d=>(
                             <tr key={d.id}>
-                                <td onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
+                                <td className={tableStyle.name} onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
@@ -77,7 +77,7 @@ const Table = ({title,data,role})=>{
                     {role==="patient" &&(
                         data.map(d=>(
                             <tr key={d.id}>
-                                <td onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
+                                <td className={tableStyle.name} onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email || "null"}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>

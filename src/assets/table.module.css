@@ -39,12 +39,21 @@ th{
     font-weight: normal;
 }
 
+.name{
+    transition: 0.5s ease;
+    cursor: pointer;
+}
+
+.name:hover{
+    color: rgb(255, 255, 255);
+    background-color: #66748C;
+}
+
 
 td{
     color: #384152;
     font-weight: 500;
     position: relative;
-    cursor: pointer;
 }
 
 

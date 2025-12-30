@@ -1,0 +1,27 @@
+.medical_info{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    width: 500px;
+    background-color: white;
+    border: solid 1px #D2D5DB;
+    border-radius: 5px;
+    height: 220px;
+    padding: 10px 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.medical_info .title{
+    color: rgb(102, 116, 140);
+    margin-bottom: 10px;
+}
+
+.medical_info .info_cards{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 10px;
+    gap: 10px;
+}
