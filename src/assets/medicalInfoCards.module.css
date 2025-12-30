@@ -8,15 +8,28 @@
     border-radius: 5px;
 }
 
+.header{
+    width: 100%;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .icon{
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+
 .info_card .card_title{
     font-size: 20px;
     font-weight: 500;
-    margin-bottom: 10px;
 }
 
 .info_card .card_items{
     width: 100%;
-    display: flex;
+    display: none;
     justify-content: space-around;
 }
 
@@ -34,9 +47,10 @@
 
 .info_card .card_list{
     width: 100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 5px;
+    padding: 0 12px;
 }
 
 .card_list .card_listItem{

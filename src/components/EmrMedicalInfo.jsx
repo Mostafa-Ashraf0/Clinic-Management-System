@@ -1,6 +1,8 @@
 import style from '../assets/emrMedicalInfo.module.css';
 import VitaminDCard from './VitaminDCard';
 import TSScoreCard from './TSScoreCard';
+import CalPhoCard from './CalPhoCard';
+import InflammatoryMarkersCard from './InflaMarkersCard';
 const EmrMedicalInfo = ()=>{
     return(
         <div className={style.medical_info}>
@@ -8,6 +10,8 @@ const EmrMedicalInfo = ()=>{
             <div className={style.info_cards}>
                 <TSScoreCard/>
                 <VitaminDCard/>
+                <CalPhoCard/>
+                <InflammatoryMarkersCard/>
             </div>
         </div>
     )
