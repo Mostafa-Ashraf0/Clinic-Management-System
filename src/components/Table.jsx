@@ -11,7 +11,7 @@ const Table = ({title,data,role})=>{
 
     const handleProfileOpen = (id)=>{
         if(role === "patient"){
-            navigate(`/patients/${id}`)
+            navigate(`/patients/${id}/general`)
         }
     }
     return(

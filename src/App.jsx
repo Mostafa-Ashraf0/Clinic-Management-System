@@ -10,7 +10,8 @@ import AddPatient from './pages/AddPatient'
 import Appointments from './pages/Appointments';
 import AddAppointment from './pages/AddAppointment';
 import Profile from './components/Profile';
-import PatientDetails from './pages/PatientDetails';
+import PatientEmrGeneral from './pages/PatientEmrGeneral';
+import PatientEmrMedical from './pages/PatientEmrMedical';
 import PrivateRoute from './components/PrivateRoute';
 import { Route,BrowserRouter,Routes } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -76,9 +77,14 @@ function App() {
               <Patients/>
             </PrivateRoute>
           }/>
-          <Route path='/patients/:patientId' element={
+          <Route path='/patients/:patientId/general' element={
             <PrivateRoute>
-              <PatientDetails/>
+              <PatientEmrGeneral/>
+            </PrivateRoute>
+          }/>
+          <Route path='/patients/:patientId/medical' element={
+            <PrivateRoute>
+              <PatientEmrMedical/>
             </PrivateRoute>
           }/>
           <Route path='/appointments' element={

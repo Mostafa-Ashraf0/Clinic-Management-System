@@ -4,8 +4,9 @@ import { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import MainContent from "../components/MainContent";
-import EMR from "../components/EMR";
-const PatientDetails = ()=>{
+import EMRNavigationBar from "../components/EMRNavigationBar";
+import EmrMedicalInfo from "../components/EmrMedicalInfo";
+const PatientEmrMedical = ()=>{
     const dispatch = useDispatch();
         useEffect(()=>{
             dispatch(addLight("patients"));
@@ -15,10 +16,11 @@ const PatientDetails = ()=>{
             <Header/>
             <Sidebar/>
             <MainContent>
-                <EMR/>
+                <EMRNavigationBar/>
+                <EmrMedicalInfo/>
             </MainContent>
         </>
     )
 }
 
-export default PatientDetails;
+export default PatientEmrMedical;

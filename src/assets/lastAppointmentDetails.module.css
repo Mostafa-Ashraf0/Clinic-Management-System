@@ -1,0 +1,82 @@
+.last_appointment{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    background-color: white;
+    border: solid 1px #D2D5DB;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+.last_appointment .appo_title{
+    margin-bottom: 10px;
+    color: rgb(102, 116, 140);
+}
+
+.info{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+
+.value{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.value .label{
+    margin-right: 5px;
+}
+
+.value .date,
+.value .type,
+.value .status{
+    padding: 2px 10px;
+    border-radius: 10px;
+}
+
+.value .date{
+    background: #F3F4F6;
+    color: #374151;
+}
+
+.value .type{
+    background: #E8F0FE;   
+    color: #1A56DB;        
+}
+
+.value .status{
+    background: #E6F4EA;   
+    color: #1E7F4D;        
+}
+
+.last_appointment .complaint{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.complaint p{
+    margin: 0;
+    text-align: start;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: #EEF2FF;   
+    color: #1E1B4B;         
+    border-radius: 8px; 
+}
+
+.complaint .title{
+    font-size: 16px;
+    font-weight: 600;
+    color: #1F2937;
+}

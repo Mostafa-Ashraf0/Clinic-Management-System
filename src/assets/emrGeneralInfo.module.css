@@ -2,11 +2,10 @@
     display: flex;
     flex-direction: column;
     align-items:flex-start;
-    width: 500px;
+    width: 50%;
     background-color: white;
     border: solid 1px #D2D5DB;
     border-radius: 5px;
-    height: 220px;
     padding: 10px 20px;
     overflow-y: auto;
     overflow-x: hidden;

@@ -9,11 +9,32 @@
 .emr .info{
     display: flex;
     gap: 10px;
+    height: 220px;
+    width: 100%;
 }
 
 
 
-.complaint_tags .tags_box{
+.tags{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    width: 50%;
+    background-color: white;
+    border: solid 1px #D2D5DB;
+    border-radius: 5px;
+    padding: 10px 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.tags .title{
+    color: rgb(102, 116, 140);
+    margin-bottom: 20px;
+}
+
+
+.tags .tags_box{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -28,11 +49,3 @@
     font-weight: 500;
 }
 
-.last_appointment{
-    display: flex;
-    width: 100%;
-    background-color: white;
-    border: solid 1px #D2D5DB;
-    border-radius: 5px;
-    padding: 10px 20px;
-}
