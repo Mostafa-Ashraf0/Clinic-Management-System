@@ -5,7 +5,7 @@
 💻 **Tech Stack:** React.js · Supabase · PostgreSQL · Redux  
 
 ---
-
+  
 ## 🩺 Overview
 A full-stack **clinic management web app** built with **React.js** and **Supabase**, designed to help clinics efficiently manage **doctors, receptionists, patients, and appointments** — all in one platform.
 
