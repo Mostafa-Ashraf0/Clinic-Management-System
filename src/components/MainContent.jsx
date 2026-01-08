@@ -8,6 +8,6 @@ const MainContent = ({ children })=>{
         </div>
     )
 }
-  
+
 
 export default MainContent;

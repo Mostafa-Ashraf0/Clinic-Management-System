@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import MainContent from "../components/MainContent";
 import EMRGeneral from "../components/EMRGeneral";
 import EMRNavigationBar from "../components/EMRNavigationBar";
+import TagsForm from "../components/TagsForm";
 const PatientEmrGeneral = ()=>{
     const dispatch = useDispatch();
         useEffect(()=>{
@@ -18,6 +19,7 @@ const PatientEmrGeneral = ()=>{
             <MainContent>
                 <EMRNavigationBar/>
                 <EMRGeneral/>
+                <TagsForm/>
             </MainContent>
         </>
     )
