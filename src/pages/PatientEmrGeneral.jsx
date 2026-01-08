@@ -19,8 +19,8 @@ const PatientEmrGeneral = ()=>{
             <MainContent>
                 <EMRNavigationBar/>
                 <EMRGeneral/>
-                <TagsForm/>
             </MainContent>
+            <TagsForm/>
         </>
     )
 }

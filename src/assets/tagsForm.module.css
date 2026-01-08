@@ -1,3 +1,17 @@
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: #0a3d623d;
+    z-index: 1000;
+}
+
+
 .card{
     width: 500px;
 }
@@ -20,7 +34,22 @@
     color: #0A3D62;
 }
 
-.button{
-    background-color: #0A3D62;
+.btns{
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.btns .addBtn,
+.btns .cancelBtn{
     border: none;
+    width: 50%;
+}
+
+.btns .addBtn{
+    background-color: #0A3D62;
+}
+
+.btns .cancelBtn{
+    background-color: rgb(150, 54, 54);
 }

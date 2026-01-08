@@ -2,8 +2,14 @@ import { Card, Form, Button } from 'react-bootstrap';
 import style from '../assets/tagsForm.module.css';
 
 const TagsForm = ()=>{
+    const priority ={
+        high: 'high priority',
+        low: 'low priority',
+        medium: 'medium priority'
+    }
     return(
-        <Card className={style.card} style={{display:'none'}}>
+        <div className={style.container} style={{display:'none'}}>
+        <Card className={style.card}>
             <Card.Body>
                 <Form className={style.form}>
                     <Form.Group className={style.group}>
@@ -18,15 +24,21 @@ const TagsForm = ()=>{
                         <Form.Select
                         name="priority">
                             <option value="">Select Priority</option>
-                            <option>high</option>
-                            <option>medium</option>
-                            <option>low</option>
+                            {Object.entries(priority).map(([key, value])=>
+                                <option key={key} value={key}>
+                                    {value}
+                                </option>
+                            )}
                         </Form.Select>
                     </Form.Group>
-                    <Button className={style.button}>Add Tag</Button>
+                    <Form.Group className={style.btns}>
+                        <Button className={style.cancelBtn}>Cancel</Button>
+                        <Button className={style.addBtn}>Add Tag</Button>
+                    </Form.Group>
                 </Form>
             </Card.Body>
         </Card>
+        </div>
     )
 };
 
