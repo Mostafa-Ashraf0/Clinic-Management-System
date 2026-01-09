@@ -1,14 +1,19 @@
 import { Card, Form, Button } from 'react-bootstrap';
 import style from '../assets/tagsForm.module.css';
+//import { setIsVisible } from '../features/emr/tagsFormSlice';
+import { useSelector } from 'react-redux';
 
 const TagsForm = ()=>{
+    //const dispatch = useDispatch();
+    const { isVisible } = useSelector((state)=>state.tagsForm)
     const priority ={
         high: 'high priority',
         low: 'low priority',
         medium: 'medium priority'
     }
+
     return(
-        <div className={style.container} style={{display:'none'}}>
+        <div className={style.container} style={isVisible?{display:'flex'}:{display:'none'}}>
         <Card className={style.card}>
             <Card.Body>
                 <Form className={style.form}>
