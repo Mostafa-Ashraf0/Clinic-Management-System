@@ -4,6 +4,7 @@ import sidebarSlice from "../features/dashboard/sidebarSlice";
 import headerSlice from "../features/dashboard/headerSlice";
 import appointmentSlice from '../features/appointments/appointmentSlice';
 import tagsFormSlice from '../features/emr/tagsFormSlice';
+import patientEmrSlice from '../features/emr/patientEmrSlice';
 //import all slices
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
         sidebar: sidebarSlice,
         header: headerSlice,
         appointment: appointmentSlice,
-        tagsForm: tagsFormSlice
+        tagsForm: tagsFormSlice,
+        patientEmr: patientEmrSlice
     }
 });
