@@ -1,4 +1,5 @@
 import style from '../assets/EMR.module.css';
+import { icons } from '../assets/icons';
 import EmrGeneralInfo from './EmrGeneralInfo';
 import LastAppointmentDetails from './LastAppointmentDetails';
 import TagsForm from './TagsForm';
@@ -10,6 +11,8 @@ import { useParams } from 'react-router-dom';
 
 const EMRGeneral = ()=>{
     const {patientId} = useParams();
+    const [action, setAction] = useState("add");
+    const [tagData, setTagData] = useState({})
     const [response, setResponse] = useState([]);
     const fetchTags = async()=>{
             const data = await getTags(patientId);
@@ -19,6 +22,7 @@ const EMRGeneral = ()=>{
     const dispatch = useDispatch();
     const handleClick = ()=>{
         dispatch(setIsVisible(true));
+        setAction("add");
     }
     useEffect(()=>{
         fetchTags();
@@ -26,17 +30,23 @@ const EMRGeneral = ()=>{
 
     const pColor = {
         high: {
-            bg: '#e22b1aff',
-            color: 'white'
+            bg: '#E5533D',
+            color: '#FFFFFF'
         },
         medium: {
-            bg: '#eea514ff',
-            color: 'white'
+            bg: '#F59E0B',
+            color: '#FFFFFF'
         },
         low: {
-            bg:'#AEDFF7',
-            color: '#0A3D62 '
+            bg: '#22C55E',
+            color: '#FFFFFF'
         }
+    }
+    
+    const handleTagClick = (res)=>{
+        dispatch(setIsVisible(true));
+        setAction("edit");
+        setTagData(res);
     }
 
     return(
@@ -51,11 +61,13 @@ const EMRGeneral = ()=>{
                     <div className={style.tags_box}>
                         {response && (response.map((res)=>
                         <span 
+                        onClick={()=>handleTagClick(res)}
                         key={res.id} 
                         className={style.tag}
                         style={{backgroundColor:pColor[res.priority].bg,
                             color: pColor[res.priority].color
                         }}>
+                            <img src={icons.tags.tagIcon} alt="I" className={style.icon} />
                             {res.tag}
                         </span>
                         ))}
@@ -63,7 +75,11 @@ const EMRGeneral = ()=>{
                 </div>
             </div>
             <LastAppointmentDetails/>
-            <TagsForm onTagAdded = {fetchTags}/>
+            <TagsForm 
+            onTagAdded = {fetchTags} 
+            formAction = {action}
+            data = {tagData}
+            />
         </div>
     )
 };

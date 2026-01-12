@@ -10,7 +10,9 @@ import patIconDark from './patientsDark.svg'
 import AppIcon from './appointLight.svg';
 import AppIconDark from './appointDark.svg';
 import Search from './searchIcon.svg';
-import addIcon from './addIcon.svg'
+import addIcon from './addIcon.svg';
+import tagIcon from './tagIcon.png';
+import deleteIcon from './deleteIcon.png';
 export const icons = {
     dashboard: {
         light: dashIcon,
@@ -39,5 +41,9 @@ export const icons = {
     control:{
         searchIcon: Search,
         add: addIcon
+    },
+    tags:{
+        tagIcon: tagIcon,
+        delete: deleteIcon
     }
 }

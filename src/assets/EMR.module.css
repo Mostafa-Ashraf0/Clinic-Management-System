@@ -49,8 +49,18 @@
 }
 
 .tags_box .tag{
-    padding: 2px 10px;
-    border-radius: 10px;
+    padding: 5px 10px;
+    border-radius: 2px;
     font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
 }
 
+
+.tags_box .tag .icon{
+    width: 15px;
+    height: 15px;
+}

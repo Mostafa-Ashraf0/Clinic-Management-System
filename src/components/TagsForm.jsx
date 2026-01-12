@@ -5,14 +5,29 @@ import { useSelector,useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { addNewTag } from '../features/emr/addNewTag';
+import { editTag } from '../features/emr/editTag';
+import { deleteTag } from '../features/emr/deleteTag';
+import { Icons } from 'react-toastify';
+import { icons } from '../assets/icons';
 
-const TagsForm = ({onTagAdded})=>{
+const TagsForm = ({onTagAdded, formAction, data})=>{
     const {patientId} = useParams();
     const [tagData, setTagData] = useState({
         patient_id: null,
         tag: '',
         priority: ''
     });
+
+    useEffect(()=>{
+        if(formAction === "edit" && data){
+            setTagData({
+                patient_id: Number(patientId),
+                tag: data.tag,
+                priority: data.priority,
+                id: data.id
+            })
+        }
+    },[formAction, data, patientId])
 
     useEffect(() => {
     if (patientId) {
@@ -42,14 +57,38 @@ const TagsForm = ({onTagAdded})=>{
     const handleSubmit = async(e)=>{
         e.preventDefault();
         if(!tagData.patient_id) return;
-        await addNewTag(tagData);
+        if(formAction === "edit"){
+            await editTag(tagData);
+        }else{
+            await addNewTag(tagData);
+        }
+        setTagData({
+            patient_id: Number(patientId),
+            tag: '',
+            priority: ''
+        })
+        onTagAdded();
+        dispatch(setIsVisible(false));
+    }
+
+    const handleDelete = async()=>{
+        await deleteTag(tagData);
+        dispatch(setIsVisible(false));
+        setTagData(prev=>({
+            ...prev,
+            tag: '',
+            priority: ''
+        }));
+        onTagAdded();
+    }
+
+    const handleCancel = ()=>{
+        dispatch(setIsVisible(false));
         setTagData(prev=>({
             ...prev,
             tag: '',
             priority: ''
         }))
-        onTagAdded();
-        dispatch(setIsVisible(false));
     }
 
     return(
@@ -62,6 +101,7 @@ const TagsForm = ({onTagAdded})=>{
                         <Form.Control
                         type="text"
                         name="tag"
+                        value={tagData.tag}
                         maxLength={30}
                         onChange={handleChange}
                         required
@@ -72,6 +112,7 @@ const TagsForm = ({onTagAdded})=>{
                         <Form.Select
                         name="priority"
                         onChange={handleChange}
+                        value={tagData.priority}
                         required>
                             <option value="">Select Priority</option>
                             {Object.entries(priority).map(([key, value])=>
@@ -84,8 +125,15 @@ const TagsForm = ({onTagAdded})=>{
                         </Form.Select>
                     </Form.Group>
                     <Form.Group className={style.btns}>
-                        <Button className={style.cancelBtn}>Cancel</Button>
-                        <Button type='submit' className={style.addBtn}>Add Tag</Button>
+                        <Button className={style.cancelBtn} onClick={handleCancel}>Cancel</Button>
+                        <Button type='submit' className={style.addBtn}>
+                            {formAction==="add"?"Add Tag":"Edit"}
+                        </Button>
+                        <Button className={style.deleteBtn}
+                        onClick={handleDelete}
+                        style={formAction === "add"? {display:'none'}:{display:'flex'}}>
+                            <img src={icons.tags.delete} alt="D" />
+                        </Button>
                     </Form.Group>
                 </Form>
             </Card.Body>

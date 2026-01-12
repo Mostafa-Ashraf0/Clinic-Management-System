@@ -36,19 +36,39 @@
 .btns{
     display: flex;
     width: 100%;
-    gap: 20px;
+    gap: 10px;
 }
 
 .btns .addBtn,
-.btns .cancelBtn{
+.btns .cancelBtn
+{
     border: none;
     width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.btns .deleteBtn{
+    border: none;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .btns .addBtn{
     background-color: #0A3D62;
 }
 
 .btns .cancelBtn{
     background-color: rgb(150, 54, 54);
+}
+
+.btns .deleteBtn{
+    background-color: rgb(163, 8, 8);
+}
+
+.btns .deleteBtn img{
+    width: 20px;
+    height: 20px;
 }
