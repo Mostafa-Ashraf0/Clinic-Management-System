@@ -38,11 +38,7 @@ function App() {
       });
       return () => subscription.unsubscribe()
     }, [])
-  /*const dispatch = useDispatch();
-  useEffect(()=>{
-          const storedUser = localStorage.getItem("user");
-          dispatch(addUser(JSON.parse(storedUser)));
-      },[])*/
+
   return (
       <>
       <ToastContainer 
