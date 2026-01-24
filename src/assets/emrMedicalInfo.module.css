@@ -11,7 +11,14 @@
     overflow-x: hidden;
 }
 
-.medical_info .title{
+.medical_info .head{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.medical_info .head .title{
     color: rgb(102, 116, 140);
     margin-bottom: 10px;
 }
