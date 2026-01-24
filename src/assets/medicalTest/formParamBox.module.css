@@ -1,0 +1,35 @@
+.main{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #F9FAFC;
+    border: solid 1px #D2D5DB;
+    border-radius: 5px;
+}
+
+.value,
+.unit,
+.type,
+.max,
+.min{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+
+.value{
+    width: 30%;
+}
+
+.unit, 
+.type{
+    width: 20%;
+}
+
+.max, 
+.min{
+    width: 15%;
+}

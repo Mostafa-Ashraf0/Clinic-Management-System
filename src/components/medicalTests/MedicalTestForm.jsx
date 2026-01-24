@@ -28,7 +28,15 @@ const MedicalTestForm = ()=>{
                     </Form.Group>
                     <div className={style.param}>
                         <h1>Parameters</h1>
+                    </div>
+                    <div className={style.paramsArea}>
                         <FormParamBox/>
+                    </div>
+                    <div className={style.newParam}>
+                        <Button>Add Parameter</Button>
+                    </div>
+                    <div className={style.submitBox}>
+                        <Button>Create Test</Button>
                     </div>
                 </Form>
             </Card.Body>
