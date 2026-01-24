@@ -69,6 +69,11 @@ span{
     color: inherit;
 }
 
+.sidebar .links li img{
+    width: 20px;
+    height: 20px;
+}
+
 .sidebar .links .dark{
     color: #384152;
 }

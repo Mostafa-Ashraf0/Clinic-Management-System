@@ -46,6 +46,12 @@ const Sidebar = ()=>{
                         <span>Appointments</span>
                     </Link>
                 </li>
+                <li className={page==="medicalTests"?"light":"dark"}>
+                    <Link to={"/medicalTests"}>
+                        <img src={page==="medicalTests"?icons.medicalTests.light:icons.medicalTests.dark} alt="app-icon" />
+                        <span>Medical Tests</span>
+                    </Link>
+                </li>
             </ul>
         </div>
     )

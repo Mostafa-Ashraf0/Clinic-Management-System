@@ -1,35 +1,39 @@
-.medical_info{
+.main{
+    width: 100%;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     align-items:flex-start;
-    width: 100%;
     background-color: white;
     border: solid 1px #D2D5DB;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 20px;
     overflow-y: auto;
     overflow-x: hidden;
 }
 
-.medical_info .head{
+.main .head{
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.medical_info .head .title{
+.head .title{
     color: rgb(102, 116, 140);
-    margin-bottom: 10px;
+    font-size: 20px;
 }
 
-
-
-.medical_info .info_cards{
+.head .add{
+    border: none;
+    background-color: #2F9CCA;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
     display: flex;
     align-items: center;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 10px;
+    justify-content: center;
     gap: 10px;
+    font-size: 17px;
 }
+

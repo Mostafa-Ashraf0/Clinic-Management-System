@@ -13,6 +13,8 @@ import Search from './searchIcon.svg';
 import addIcon from './addIcon.svg';
 import tagIcon from './tagIcon.png';
 import deleteIcon from './deleteIcon.png';
+import test from './medicalTest.svg';
+import testDark from './medicalTestDark.svg';
 export const icons = {
     dashboard: {
         light: dashIcon,
@@ -33,6 +35,10 @@ export const icons = {
     appointments: {
         light: AppIcon,
         dark: AppIconDark
+    },
+    medicalTests:{
+        light: test, 
+        dark: testDark
     },
     header:{
         dropdown: selectDropDown,
