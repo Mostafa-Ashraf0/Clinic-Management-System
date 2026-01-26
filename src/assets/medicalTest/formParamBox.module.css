@@ -46,7 +46,16 @@
     gap: 5px;
 }
 
-.bin{
+
+.iconButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+
+.iconButton .bin{
     width: 20px;
     height: 20px;
     cursor: pointer;

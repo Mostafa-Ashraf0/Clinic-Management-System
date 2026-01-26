@@ -11,7 +11,15 @@ const MedicalTestForm = ()=>{
             testName: '',
             clinic_id: '',
             category_id: '',
-            parameters: []
+            parameters: [
+                { 
+                    value:'',
+                    unit:'',
+                    type:'',
+                    min:'',
+                    max:''
+                }
+            ]
 
         })
     const handleChange = (e)=>{
@@ -21,6 +29,26 @@ const MedicalTestForm = ()=>{
             [name]: value
         }));
     };
+
+    // Add new param
+    const addParameter = () => {
+        setFormData(prev => ({
+            ...prev,
+            parameters: [
+            ...prev.parameters,
+            { value:'', unit:'', type:'', min:'', max:'' }
+            ]
+        }));
+    };
+
+    //delete param
+    const deleteParameter = (index) => {
+        setFormData(prev => ({
+            ...prev,
+            parameters: prev.parameters.filter((_, i) => i !== index)
+        }));
+    };
+
     useEffect(()=>{
             const displayClinic = async()=>{
                 const clinicData = await getClinic();
@@ -79,10 +107,25 @@ const MedicalTestForm = ()=>{
                         <h1>Parameters</h1>
                     </div>
                     <div className={style.paramsArea}>
-                        <FormParamBox/>
+                        {formData.parameters.map((param,index)=>(
+                            <FormParamBox
+                                key={index}
+                                index={index}
+                                clinicId={formData.clinic_id}
+                                paramData={param}
+                                setParam={(updatedParam) => {
+                                setFormData(prev => {
+                                    const newParams = [...prev.parameters];
+                                    newParams[index] = updatedParam;
+                                    return { ...prev, parameters: newParams };
+                                });
+                                }}
+                                removeParam = {()=>deleteParameter(index)}
+                            />
+                        ))}
                     </div>
                     <div className={style.newParam}>
-                        <Button>Add Parameter</Button>
+                        <Button onClick={addParameter}>Add Parameter</Button>
                     </div>
                     <div className={style.submitBox}>
                         <Button>Create Test</Button>
