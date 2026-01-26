@@ -35,9 +35,9 @@ const FormParamBox = ({paramData, setParam, removeParam, clinicId})=>{
             <Form.Label >Unit:</Form.Label>
             <Form.Select
             aria-label="Default select example"
-            name="unit"
+            name="unit_id"
             onChange={handleChange}
-            value={paramData.unit}
+            value={paramData.unit_id}
             required
             >
               <option value="">Select Unit</option>

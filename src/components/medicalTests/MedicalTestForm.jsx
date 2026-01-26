@@ -7,6 +7,7 @@ import { getCategories } from '../../features/medicalTests/getCategories';
 const MedicalTestForm = ()=>{
     const [clinic, setClinic] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [submited, setSubmited] = useState(false);
     const [formData, setFormData] = useState({
             testName: '',
             clinic_id: '',
@@ -14,7 +15,7 @@ const MedicalTestForm = ()=>{
             parameters: [
                 { 
                     value:'',
-                    unit:'',
+                    unit_id:'',
                     type:'',
                     min:'',
                     max:''
@@ -22,6 +23,26 @@ const MedicalTestForm = ()=>{
             ]
 
         })
+    useEffect(()=>{
+        setFormData({
+        testName: '',
+        clinic_id: '',
+        category_id: '',
+        parameters: [{ 
+            value:'',
+            unit_id:'',
+            type:'',
+            min:'',
+            max:''
+            }]
+        });
+        setSubmited(false);
+        },[submited])
+
+    const handleSubmit = (e)=>{
+            e.preventDefault();
+            console.log(formData);
+        }
     const handleChange = (e)=>{
         const { name, value } = e.target;
         setFormData((prev)=>({
@@ -69,7 +90,7 @@ const MedicalTestForm = ()=>{
                 <div className={style.head}>
                     <h1>Create New Medical Test</h1>
                 </div>
-                <Form className={style.form}>
+                <Form className={style.form} onSubmit={handleSubmit}>
                     <Form.Group className={style.group}>
                         <Form.Label>Test Name *</Form.Label>
                         <Form.Control
@@ -128,7 +149,7 @@ const MedicalTestForm = ()=>{
                         <Button onClick={addParameter}>Add Parameter</Button>
                     </div>
                     <div className={style.submitBox}>
-                        <Button>Create Test</Button>
+                        <Button type='submit'>Create Test</Button>
                     </div>
                 </Form>
             </Card.Body>
