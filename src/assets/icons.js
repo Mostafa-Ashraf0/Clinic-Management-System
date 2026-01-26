@@ -15,6 +15,7 @@ import tagIcon from './tagIcon.png';
 import deleteIcon from './deleteIcon.png';
 import test from './medicalTest.svg';
 import testDark from './medicalTestDark.svg';
+import binIcon from './bin.png';
 export const icons = {
     dashboard: {
         light: dashIcon,
@@ -38,7 +39,8 @@ export const icons = {
     },
     medicalTests:{
         light: test, 
-        dark: testDark
+        dark: testDark,
+        bin: binIcon
     },
     header:{
         dropdown: selectDropDown,
