@@ -22,12 +22,12 @@ const FormParamBox = ({paramData, setParam, removeParam, clinicId})=>{
       return(
         <div className={style.main}>
           <Form.Group  className={style.value}>
-            <Form.Label>Value:</Form.Label>
+            <Form.Label>Name:</Form.Label>
             <Form.Control
-            name="value"
+            name="name"
             type="text"
             onChange={handleChange}
-            value={paramData.value}
+            value={paramData.name}
             required
             />
           </Form.Group>

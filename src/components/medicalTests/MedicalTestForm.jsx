@@ -4,17 +4,18 @@ import FormParamBox from './FormParamBox';
 import { useEffect,useState } from 'react';
 import { getClinic } from '../../features/getClinic';
 import { getCategories } from '../../features/medicalTests/getCategories';
+import { addNewTestParams } from '../../features/medicalTests/addNewTest_params';
 const MedicalTestForm = ()=>{
     const [clinic, setClinic] = useState([]);
     const [categories, setCategories] = useState([]);
     const [submited, setSubmited] = useState(false);
     const [formData, setFormData] = useState({
-            testName: '',
+            test_name: '',
             clinic_id: '',
             category_id: '',
             parameters: [
                 { 
-                    value:'',
+                    name:'',
                     unit_id:'',
                     type:'',
                     min:'',
@@ -25,11 +26,11 @@ const MedicalTestForm = ()=>{
         })
     useEffect(()=>{
         setFormData({
-        testName: '',
+        test_name: '',
         clinic_id: '',
         category_id: '',
         parameters: [{ 
-            value:'',
+            name:'',
             unit_id:'',
             type:'',
             min:'',
@@ -41,6 +42,7 @@ const MedicalTestForm = ()=>{
 
     const handleSubmit = (e)=>{
             e.preventDefault();
+            addNewTestParams(formData,setSubmited)
             console.log(formData);
         }
     const handleChange = (e)=>{
@@ -57,7 +59,7 @@ const MedicalTestForm = ()=>{
             ...prev,
             parameters: [
             ...prev.parameters,
-            { value:'', unit:'', type:'', min:'', max:'' }
+            { name:'', unit:'', type:'', min:'', max:'' }
             ]
         }));
     };
@@ -94,8 +96,8 @@ const MedicalTestForm = ()=>{
                     <Form.Group className={style.group}>
                         <Form.Label>Test Name *</Form.Label>
                         <Form.Control
-                        name='testName'
-                        value={formData.testName}
+                        name='test_name'
+                        value={formData.test_name}
                         onChange={handleChange}
                         type='text'
                         required/>
