@@ -1,0 +1,84 @@
+:root {
+  --main-color: #384152;
+  --secound-color: #1f304e3a;
+}
+
+
+.card{
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+}
+
+.cardBody{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 20px;
+    min-height: 300px;
+    width: 700px;
+}
+
+.cardBody .head{
+    width: 100%;
+    display: flex;
+    align-items: start;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    border-bottom: solid 2px var(--secound-color);
+}
+
+.cardBody .head h1
+{
+    font-size: 20px;
+    color: var(--main-color);
+}
+
+.form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+
+.form .testInfo{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.testInfo .testName,
+.testInfo .testCategory{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+.testName .label,
+.testInfo .label{
+    width: 50%;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.paramGroup,
+.paramHead{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.paramGroup span,
+.paramGroup .value,
+.paramHead span{
+    width: 25%;
+    display: flex;
+    align-items: start;
+}
+
+.paramGroup .value input{
+    width: 100px;
+}

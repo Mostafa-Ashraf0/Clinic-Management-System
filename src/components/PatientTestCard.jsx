@@ -2,7 +2,7 @@ import style from '../assets/medicalInfoCards.module.css';
 import { icons } from '../assets/icons';
 import { useState } from 'react';
 
-const CalPhoCard = ()=>{
+const PatientTestCard = ()=>{
     const [isOpen, setIsOpen] = useState(false);
     const handleToggle = ()=>{
         setIsOpen(!isOpen);
@@ -27,4 +27,4 @@ const CalPhoCard = ()=>{
     )
 };
 
-export default CalPhoCard;
+export default PatientTestCard;

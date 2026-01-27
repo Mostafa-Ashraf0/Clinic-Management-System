@@ -1,5 +1,6 @@
 import style from '../assets/emrMedicalInfo.module.css';
-import CalPhoCard from './CalPhoCard';
+import PatientTestCard from './PatientTestCard';
+import MedicalTestRecordForm from './medicalTests/MedicalTestRecordForm';
 const EmrMedicalInfo = ()=>{
     return(
         <div className={style.medical_info}>
@@ -8,7 +9,8 @@ const EmrMedicalInfo = ()=>{
                 <button>Add New Test</button>
             </div>
             <div className={style.info_cards}>
-                <CalPhoCard/>
+                <PatientTestCard/>
+                <MedicalTestRecordForm/>
             </div>
         </div>
     )

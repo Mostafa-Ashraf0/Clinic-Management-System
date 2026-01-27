@@ -87,7 +87,7 @@ const MedicalTestForm = ()=>{
         displayCategories();
     },[formData.clinic_id])
     return(
-        <Card className={style.card} style={{border:'none'}}>
+        <Card className={style.card} style={{border:'none',display:'none'}}>
             <Card.Body className={style.cardBody}>
                 <div className={style.head}>
                     <h1>Create New Medical Test</h1>
