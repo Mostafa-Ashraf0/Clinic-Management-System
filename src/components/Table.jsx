@@ -50,7 +50,9 @@ const Table = ({title,data,role})=>{
                     {role==="doctor" && data &&(
                         data.map(d=>(
                             <tr key={d.id}>
-                                <td className={tableStyle.name} onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
+                                <td className={tableStyle.name}>
+                                    <span onClick={()=>handleProfileOpen(d.id)}>{d.name}</span>
+                                </td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
                                 <td>{d.doctor_extra.specialization.name}</td>
@@ -64,7 +66,9 @@ const Table = ({title,data,role})=>{
                     {role==="receptionist" && data &&(
                         data.map(d=>(
                             <tr key={d.id}>
-                                <td className={tableStyle.name} onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
+                                <td className={tableStyle.name}>
+                                    <span onClick={()=>handleProfileOpen(d.id)}>{d.name}</span>
+                                </td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
@@ -77,7 +81,13 @@ const Table = ({title,data,role})=>{
                     {role==="patient" && data &&(
                         data.map(d=>(
                             <tr key={d.id}>
-                                <td className={tableStyle.name} onClick={()=>handleProfileOpen(d.id)}>{d.name}</td>
+                                <td>
+                                    <span 
+                                    onClick={()=>handleProfileOpen(d.id)}
+                                    className={tableStyle.name}>
+                                        {d.name}
+                                    </span>
+                                </td>
                                 <td>{d.phone}</td>
                                 <td>{d.email || "null"}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>

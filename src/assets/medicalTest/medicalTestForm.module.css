@@ -29,6 +29,7 @@
 .cardBody .head h1
 {
     font-size: 20px;
+    font-weight: 600;
     color: var(--main-color);
 }
 
@@ -60,6 +61,8 @@
 
 .param h1{
     font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
     color: var(--main-color);
     margin: 0;
 }
@@ -79,6 +82,16 @@
     max-height: 150px;
     overflow-y: auto;
 }
+
+.paramsArea::-webkit-scrollbar {
+  width: 4px;
+}
+
+.paramsArea::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 3px;
+}
+
 
 
 .newParam{
