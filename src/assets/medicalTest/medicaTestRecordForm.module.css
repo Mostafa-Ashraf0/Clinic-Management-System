@@ -5,6 +5,18 @@
   --text-muted: #6c757d;
 }
 
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0a3d623d;
+    z-index: 1000;
+}
+
 .card {
   border-radius: 10px;
   border: 1px solid var(--border-color);
@@ -16,7 +28,20 @@
   flex-direction: column;
   padding: 24px;
   width: 720px;
+  height: 95vh;
+  overflow-y: auto;
   background-color: #fff;
+}
+
+.cardBody::-webkit-scrollbar
+{
+  width: 4px;
+}
+
+
+.cardBody::-webkit-scrollbar-thumb {
+  background-color: #797c80;
+  border-radius: 3px;
 }
 
 .head {
@@ -35,7 +60,7 @@
 .testDetails{
     display: flex;
     padding: 10px;
-    background-color: var(--text-muted);
+    background-color: #277aa3;
     border-radius: 6px;
     margin-bottom: 20px;
 }

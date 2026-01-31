@@ -3,6 +3,18 @@
   --secound-color: #1f304e3a;
 }
 
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0a3d623d;
+    z-index: 1000;
+}
+
 
 .card{
     box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
@@ -13,8 +25,19 @@
     flex-direction: column;
     align-items: start;
     padding: 30px;
-    min-height: 600px;
+    height: 95vh;
+    overflow-y: auto;
     width: 600px;
+}
+
+.cardBody::-webkit-scrollbar
+{
+  width: 4px;
+}
+
+.cardBody::-webkit-scrollbar-thumb {
+  background-color: #797c80;
+  border-radius: 3px;
 }
 
 .cardBody .head{
@@ -83,14 +106,7 @@
     overflow-y: auto;
 }
 
-.paramsArea::-webkit-scrollbar {
-  width: 4px;
-}
 
-.paramsArea::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
-  border-radius: 3px;
-}
 
 
 
@@ -114,7 +130,12 @@
 .submitBox{
     width: 100%;
     display: flex;
-    justify-content:end;
+    justify-content:space-between;
     padding: 10px 0;
     border-top: solid 2px var(--secound-color);
+}
+
+.submitBox .cancel{
+    background-color: rgb(150, 54, 54);
+    border: none;
 }

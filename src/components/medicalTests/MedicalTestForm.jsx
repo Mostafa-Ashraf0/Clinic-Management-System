@@ -5,10 +5,14 @@ import { useEffect,useState } from 'react';
 import { getClinic } from '../../features/getClinic';
 import { getCategories } from '../../features/medicalTests/getCategories';
 import { addNewTestParams } from '../../features/medicalTests/addNewTest_params';
+import { useSelector,useDispatch } from 'react-redux';
+import { setIsVisible } from '../../features/medicalTests/medicalTestFormSlice';
+
 const MedicalTestForm = ()=>{
+    const dispatch = useDispatch();
+    const { isVisible } = useSelector((state)=>state.medicalTestForm)
     const [clinic, setClinic] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [submited, setSubmited] = useState(false);
     const [formData, setFormData] = useState({
             test_name: '',
             clinic_id: '',
@@ -24,7 +28,30 @@ const MedicalTestForm = ()=>{
             ]
 
         })
-    useEffect(()=>{
+
+
+    const handleSubmit = async(e)=>{
+            e.preventDefault();
+            const success = await addNewTestParams(formData)
+            console.log(formData);
+            if(success){
+                dispatch(setIsVisible(false));
+                setFormData({
+                    test_name: '',
+                    clinic_id: '',
+                    category_id: '',
+                    parameters: [{ 
+                        name:'',
+                        unit_id:'',
+                        type:'',
+                        min:'',
+                        max:''
+                        }]
+                    });
+            }
+        }
+    const handleCancel = ()=>{
+        dispatch(setIsVisible(false));
         setFormData({
         test_name: '',
         clinic_id: '',
@@ -37,14 +64,7 @@ const MedicalTestForm = ()=>{
             max:''
             }]
         });
-        setSubmited(false);
-        },[submited])
-
-    const handleSubmit = (e)=>{
-            e.preventDefault();
-            addNewTestParams(formData,setSubmited)
-            console.log(formData);
-        }
+    }
     const handleChange = (e)=>{
         const { name, value } = e.target;
         setFormData((prev)=>({
@@ -87,6 +107,7 @@ const MedicalTestForm = ()=>{
         displayCategories();
     },[formData.clinic_id])
     return(
+        <div className={style.container} style={isVisible?{display:'flex'}:{display:'none'}}>
         <Card className={style.card} style={{border:'none',display:'flex'}}>
             <Card.Body className={style.cardBody}>
                 <div className={style.head}>
@@ -151,11 +172,13 @@ const MedicalTestForm = ()=>{
                         <Button onClick={addParameter}>Add Parameter</Button>
                     </div>
                     <div className={style.submitBox}>
+                        <Button onClick={handleCancel} className={style.cancel}>Cancel</Button>
                         <Button type='submit'>Create Test</Button>
                     </div>
                 </Form>
             </Card.Body>
         </Card>
+        </div>
     )
 };
 

@@ -1,7 +1,7 @@
 import supabase from "../../utils/supabase";
 import { toast } from "react-toastify";
 
-const addNewTestParams = async (formData, setSubmited) => {
+const addNewTestParams = async (formData) => {
   try {
     const { error } = await supabase.rpc(
       "insert_medical_test_with_params",
@@ -16,12 +16,10 @@ const addNewTestParams = async (formData, setSubmited) => {
     if (error) throw error;
 
     toast.success("Medical test created successfully");
-    setSubmited(true);
     return true;
 
   } catch (err) {
     toast.error(err.message || "Something went wrong");
-    setSubmited(false);
     return false;
   }
 };

@@ -5,6 +5,8 @@ import headerSlice from "../features/dashboard/headerSlice";
 import appointmentSlice from '../features/appointments/appointmentSlice';
 import tagsFormSlice from '../features/emr/tagsFormSlice';
 import patientEmrSlice from '../features/emr/patientEmrSlice';
+import testRecordFromSlice from '../features/emr/testRecordFormSlice';
+import medicalTestFormSlice from '../features/medicalTests/medicalTestFormSlice'
 //import all slices
 
 export const store = configureStore({
@@ -14,6 +16,8 @@ export const store = configureStore({
         header: headerSlice,
         appointment: appointmentSlice,
         tagsForm: tagsFormSlice,
-        patientEmr: patientEmrSlice
+        patientEmr: patientEmrSlice,
+        testRecordForm: testRecordFromSlice,
+        medicalTestForm: medicalTestFormSlice
     }
 });

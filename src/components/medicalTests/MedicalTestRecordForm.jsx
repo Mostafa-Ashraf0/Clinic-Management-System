@@ -3,25 +3,24 @@ import style from '../../assets/medicalTest/medicaTestRecordForm.module.css';
 import { useEffect, useState } from 'react';
 import { getTestsByCategory } from '../../features/emr/getTestsByCategory';
 import { getTestParams } from '../../features/emr/getTestParams';
+import { useParams } from 'react-router-dom';
 import { addTestResult } from '../../features/emr/addTestResult';
+import { useSelector,useDispatch } from 'react-redux';
+import { setIsVisible } from '../../features/emr/testRecordFormSlice';
 
 const MedicalTestRecordForm = ()=>{
+    const dispatch = useDispatch();
+    const { isVisible } = useSelector((state)=>state.testRecordForm)
+    const {patientId} = useParams();
     const [testsData, setTestsData] = useState([]);
     const [params, setParams] = useState([]);
     const [currentTest, setCurrentTest] = useState(null);
-    const [submitted, setSubmitted] = useState(false);
     const [formData, setFormData] = useState({
                 test_id: '',
                 patient_id: '',
                 date: '',
                 notes: '',
-                parameters: [
-                    { 
-                        param_id:'',
-                        data_type:''
-                    }
-                ]
-    
+                parameters: []
             });
 
     const handleChange = (e)=>{
@@ -32,19 +31,16 @@ const MedicalTestRecordForm = ()=>{
         }));
     };
 
-    const handleParamChange = (e)=>{
-        const { name, value, type } = e.target;
-        setFormData((prev)=>({
+    const handleParamChange = (paramId, value) => {
+        setFormData(prev => ({
             ...prev,
-            parameters:[
-                ...prev,
-                {
-                    [name]:value,
-                    data_type: type
-                }
-            ]
+            parameters: prev.parameters.map(p =>
+            p.param_id === paramId
+                ? { ...p, value }
+                : p
+            )
         }));
-    }
+    };
 
 
     useEffect(()=>{
@@ -77,22 +73,66 @@ const MedicalTestRecordForm = ()=>{
         }
 
         setCurrentTest(selectedTest);
-        setFormData((prev)=>({
-            ...prev, 
-            'test_id':selectedId
-        }))
-
+        
         const data = await fetchParams(selectedTest.id);
+        const preparedParams = data.map(p => ({
+            param_id: p.id,
+            value: '',
+            data_type: p.type
+        }));
+        setFormData(prev => ({
+            ...prev,
+            test_id: selectedId,
+            parameters: preparedParams
+        }));
+
         setParams(data);
     }
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault();
-        //addTestResult(formData, setSubmitted);
-        console.log(formData)
+        const success = await addTestResult(formData);
+        if (success) {
+            setFormData({
+            test_id: '',
+            patient_id: Number(patientId),
+            date: '',
+            notes: '',
+            parameters: []
+        });
+            setCurrentTest(null);
+            setParams([]);
+        }
+        console.log(formData);
     }
 
+    const handleCancel = ()=>{
+        dispatch(setIsVisible(false));
+        setFormData({
+            test_id: '',
+            patient_id: Number(patientId),
+            date: '',
+            notes: '',
+            parameters: []
+        });
+        setCurrentTest(null);
+        setParams([]);
+    }
+
+    useEffect(() => {
+        setFormData({
+            test_id: '',
+            patient_id: Number(patientId),
+            date: '',
+            notes: '',
+            parameters: []
+        });
+        setCurrentTest(null);
+        setParams([]);
+        }, [patientId]);
+
     return(
+        <div className={style.container} style={isVisible?{display:'flex'}:{display:'none'}}>
         <Card className={style.card}>
             <Card.Body className={style.cardBody}>
                 <div className={style.head}>
@@ -108,6 +148,7 @@ const MedicalTestRecordForm = ()=>{
                             <Form.Select
                             style={{height:'35px'}}
                             name='test_id'
+                            value={formData.test_id}
                             onChange={handleTestChange}>
                                 <option value="">select</option>
                                 {testsData.map(d=>(
@@ -140,7 +181,10 @@ const MedicalTestRecordForm = ()=>{
                                     <Form.Control
                                     type={p.type==='Numeric'?'number':'text'}
                                     name='param_id'
-                                    onChange={handleParamChange}
+                                    value={
+                                        formData.parameters.find(f=>f.param_id === p.id)?.value || ''
+                                    }
+                                    onChange={(e)=>handleParamChange(p.id, e.target.value)}
                                     style={{height:'35px'}}
                                     required/>
                                 </Form.Group>
@@ -159,6 +203,7 @@ const MedicalTestRecordForm = ()=>{
                             onChange={handleChange}
                             name='date'
                             type='date'
+                            value={formData.date}
                             required/>
                         </Form.Group>
                         <Form.Group className={style.note}>
@@ -167,17 +212,19 @@ const MedicalTestRecordForm = ()=>{
                             className={style.noteIn}
                             name='notes'
                             onChange={handleChange}
+                            value={formData.notes}
                             as="textarea" 
                             rows={3}/>
                         </Form.Group>
                     </Form.Group>
                     <Form.Group className={style.btns}>
-                        <Button className={style.cancel}>Cancel</Button>
+                        <Button className={style.cancel} onClick={handleCancel}>Cancel</Button>
                         <Button type='submit'>Add Record</Button>
                     </Form.Group>
                 </Form>
             </Card.Body>
         </Card>
+        </div>
     )
 };
 
