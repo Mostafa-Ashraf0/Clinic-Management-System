@@ -56,7 +56,10 @@ const EMRGeneral = ()=>{
                 <div className={style.tags}>
                     <div className={style.head}>
                         <span className={style.title}>Important Tags</span>
-                        <button onClick={handleClick}>open</button>
+                        <button onClick={handleClick} className={style.addBtn}>
+                            <img src={icons.control.add} alt="" />
+                            Add Tag
+                            </button>
                     </div>
                     <div className={style.tags_box}>
                         {response && (response.map((res)=>

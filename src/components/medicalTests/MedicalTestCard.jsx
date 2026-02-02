@@ -8,7 +8,7 @@ const MedicalTestCard = ({data})=>{
     return(
         <div className={style.main}>
             <div className={style.card}>
-                <div className={style.head}>TestName Test Details</div>
+                <div className={style.head}>{data?.test.name} Test Details</div>
                 <div className={style.body}>
                     <div className={style.section}>
                         <div className={style.item}>

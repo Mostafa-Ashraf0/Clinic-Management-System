@@ -29,7 +29,7 @@ const MedicalTestTable = ({data, setTest})=>{
                         <tbody>
                             {data && data.map(t=>(
                                 <tr key={t.id}>
-                                    <td onClick={()=>handleClick(t.id)}>{t.name}</td>
+                                    <td onClick={()=>handleClick(t.id)} className={style.name}>{t.name}</td>
                                     <td>{t.category?.name}</td>
                                     <td>{t.medical_test_params[0].count}</td>
                                     <td>{t.clinic?.name}</td>
