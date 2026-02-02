@@ -1,20 +1,25 @@
 import style from '../../assets/medicalTest/medicalTestsView.module.css';
 import { icons } from '../../assets/icons';
 import MedicalTestForm from './MedicalTestForm';
+import MedicalTestCard from './MedicalTestCard';
 import { useDispatch } from 'react-redux';
 import { setIsVisible } from '../../features/medicalTests/medicalTestFormSlice';
 import MedicalTestTable from './MedicalTestTable';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchMedicalTest } from '../../features/medicalTests/fetchMedicalTests';
 
 const MedicalTestsView = ()=>{
     const [tests, setTests] = useState([]);
+    const [selectedTest, setSelectedTest] = useState(null);
     const getMedicalTests = async()=>{
             const data = await fetchMedicalTest();
             if(data){
                 setTests(data);
             }
         };
+    useEffect(()=>{
+        getMedicalTests();
+    },[])
     const dispatch = useDispatch();
         const handleClick = ()=>{
             dispatch(setIsVisible(true));
@@ -31,7 +36,10 @@ const MedicalTestsView = ()=>{
             <MedicalTestTable
             data = {tests}
             getTests = {getMedicalTests}
+            setTest = {setSelectedTest}
             />
+            <MedicalTestCard
+            data = {selectedTest}/>
             <MedicalTestForm
             onTestAdded = {getMedicalTests}
             />

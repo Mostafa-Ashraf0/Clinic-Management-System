@@ -1,14 +1,17 @@
-import { useEffect } from 'react';
 import style from '../../assets/medicalTest/medicalTestTable.module.css';
-const MedicalTestTable = ({data, getTests})=>{
+import { getParams } from '../../features/medicalTests/getParams';
 
-    useEffect(()=>{
-        getTests();
-    },[])
-
-    useEffect(()=>{
-        console.log(data);
-    },[data])
+const MedicalTestTable = ({data, setTest})=>{
+    const handleClick = async(id)=>{
+        const params = await getParams(id);
+        const selectedTest = data.find(d => d.id === id);
+        if(selectedTest) setTest(
+            {
+                test:selectedTest,
+                params: params
+            }
+        );
+    }
     return(
         <div className={`${style.table} d-flex flex-column`}>
                     <div className={`${style.head}`}>Medical Tests</div>
@@ -26,7 +29,7 @@ const MedicalTestTable = ({data, getTests})=>{
                         <tbody>
                             {data && data.map(t=>(
                                 <tr key={t.id}>
-                                    <td>{t.name}</td>
+                                    <td onClick={()=>handleClick(t.id)}>{t.name}</td>
                                     <td>{t.category?.name}</td>
                                     <td>{t.medical_test_params[0].count}</td>
                                     <td>{t.clinic?.name}</td>

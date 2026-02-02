@@ -1,0 +1,101 @@
+.main{
+    width: 100%;
+    padding: 20px;
+}
+
+
+
+.card{
+    width: 100%;
+    border: 1px solid #e5e7eb;
+}
+
+
+.card .head{
+    height: 42px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    color: #384152;
+    background-color: #f5f7fb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.card .body{
+    width: 100%;
+    display: flex;
+}
+
+.body .section{
+    width: 50%;
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+    font-weight: 600;
+    color: #384152;
+}
+
+.body .section:last-child{
+    border-left: 1px solid #e5e7eb;
+}
+
+.section .item{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.section .item .value{
+    display: flex;
+    width: 50%;
+}
+
+.section ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    list-style-type: circle;
+}
+
+.section .list{
+    display: flex;
+    gap: 20px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.list .type{
+    background-color: #384152;
+    color: white;
+    padding: 0 5px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+}
+
+.list .min,
+.list .max{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border-radius: 50%;
+}
+
+.list .min{
+    background-color: green;
+}
+
+.list .max{
+    background-color: red;
+}
