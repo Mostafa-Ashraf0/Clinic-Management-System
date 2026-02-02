@@ -10,7 +10,7 @@ const getTestParams = async(testId)=>{
         unit:medical_units(
         name)`).eq('test_id',testId)
     if(error){
-        toast.error(error);
+        toast.error(error.message);
     }
     return data;
 }

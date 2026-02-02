@@ -8,7 +8,7 @@ import { addNewTestParams } from '../../features/medicalTests/addNewTest_params'
 import { useSelector,useDispatch } from 'react-redux';
 import { setIsVisible } from '../../features/medicalTests/medicalTestFormSlice';
 
-const MedicalTestForm = ()=>{
+const MedicalTestForm = ({onTestAdded})=>{
     const dispatch = useDispatch();
     const { isVisible } = useSelector((state)=>state.medicalTestForm)
     const [clinic, setClinic] = useState([]);
@@ -48,6 +48,7 @@ const MedicalTestForm = ()=>{
                         max:''
                         }]
                     });
+                onTestAdded();
             }
         }
     const handleCancel = ()=>{

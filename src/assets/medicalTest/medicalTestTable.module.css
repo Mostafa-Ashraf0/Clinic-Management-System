@@ -1,0 +1,112 @@
+.table {
+  width: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  
+}
+
+.table .head {
+  height: 42px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  color: #384152;
+  background-color: #f5f7fb;
+}
+
+.t-body {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none;
+}
+
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+  z-index: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: #66748c;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 12px 20px;
+  text-align: left;
+
+}
+
+tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: #f9fbfd;
+}
+
+.name {
+  cursor: pointer;
+  font-weight: 500;
+  color: #2563eb;
+}
+
+.name:hover {
+  text-decoration: underline;
+  background-color: transparent;
+  color: #1e40af;
+}
+
+td {
+  color: #384152;
+  font-size: 15px;
+}
+
+.t-dots {
+  width: 40px;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.t-dots span {
+  display: inline-block;
+  font-size: 20px;
+  line-height: 6px;
+  color: #66748c;
+}
+
+.t-dots:hover span {
+  color: #2563eb;
+}
+
+.t-body::-webkit-scrollbar {
+  width: 4px;
+}
+
+.t-body::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 3px;
+}
+
+
+tbody tr:nth-child(even) {
+  background-color: #e8eef66c;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+tbody tr:hover {
+  background-color: #EAF4FA;
+}
