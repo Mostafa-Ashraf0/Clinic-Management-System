@@ -31,8 +31,15 @@ const EmrMedicalInfo = ()=>{
                 <button onClick={handleClick}>Add New Record</button>
             </div>
             <div className={style.info_cards}>
-                <PatientTestCard/>
-                <MedicalTestRecordForm/>
+                {tests.length>0 && tests.map(t=>(
+                    <PatientTestCard 
+                    key={t.test_id}
+                    data={t}
+                    />
+                ))}
+                <MedicalTestRecordForm
+                onRecordAdd={()=>getTestData()}
+                />
             </div>
         </div>
     )

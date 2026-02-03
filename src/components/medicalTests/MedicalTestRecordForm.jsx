@@ -8,7 +8,7 @@ import { addTestResult } from '../../features/emr/addTestResult';
 import { useSelector,useDispatch } from 'react-redux';
 import { setIsVisible } from '../../features/emr/testRecordFormSlice';
 
-const MedicalTestRecordForm = ()=>{
+const MedicalTestRecordForm = ({onRecordAdd})=>{
     const dispatch = useDispatch();
     const { isVisible } = useSelector((state)=>state.testRecordForm)
     const {patientId} = useParams();
@@ -102,6 +102,8 @@ const MedicalTestRecordForm = ()=>{
         });
             setCurrentTest(null);
             setParams([]);
+            dispatch(setIsVisible(false));
+            onRecordAdd();
         }
         console.log(formData);
     }
