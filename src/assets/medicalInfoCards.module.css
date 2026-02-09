@@ -77,3 +77,20 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.card_list button{
+    width: 150px;
+    border: none;
+    background-color: #0A3D62;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px 10px;
+}
+
+.card_list button:hover{
+    background-color: #0a3d62af;
+}

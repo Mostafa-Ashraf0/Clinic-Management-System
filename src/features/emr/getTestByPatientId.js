@@ -1,11 +1,12 @@
 import supabase from "../../utils/supabase";
 import { toast } from "react-toastify";
 
-const getTestsByPatientId = async (id) => {
+const getTestByPatientId = async (id, test_id) => {
   try {
     const { data, error } = await supabase
-      .rpc('get_latest_tests_with_values', {
-        p_patient_id: id
+      .rpc('get_test_with_values', {
+        p_patient_id: id,
+        p_test_id: test_id
       });
 
     if (error) throw error;
@@ -17,4 +18,4 @@ const getTestsByPatientId = async (id) => {
 };
 
 
-export {getTestsByPatientId};
+export {getTestByPatientId};
