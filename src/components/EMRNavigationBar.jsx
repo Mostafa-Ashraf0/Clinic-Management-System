@@ -12,12 +12,15 @@ const EMRNavigationBar = ()=>{
     const handleNavMedical = ()=>{
         navigate(`/patients/${patientId}/medical`);
     }
+    const handleNavFiles = ()=>{
+        navigate(`/patients/${patientId}/files`);
+    }
     return(
         <nav>
             <div className={style.navBtns}>
                 <span className={style.btn} onClick={handleNavHome}>Home</span>
                 <span className={style.btn} onClick={handleNavMedical}>Medical Information</span>
-                <span className={style.btn}>Files</span>
+                <span className={style.btn} onClick={handleNavFiles}>Files</span>
             </div>
         </nav>
     )

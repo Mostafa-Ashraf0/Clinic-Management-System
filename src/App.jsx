@@ -12,6 +12,7 @@ import AddAppointment from './pages/AddAppointment';
 import Profile from './components/Profile';
 import PatientEmrGeneral from './pages/PatientEmrGeneral';
 import PatientEmrMedical from './pages/PatientEmrMedical';
+import PatientEmrFiles from './pages/PatientEmrFiles';
 import MedicalTests from './pages/MedicalTests';
 import PrivateRoute from './components/PrivateRoute';
 import { Route,BrowserRouter,Routes } from 'react-router-dom';
@@ -87,6 +88,11 @@ function App() {
           <Route path='/patients/:patientId/medical' element={
             <PrivateRoute>
               <PatientEmrMedical/>
+            </PrivateRoute>
+          }/>
+          <Route path='/patients/:patientId/files' element={
+            <PrivateRoute>
+              <PatientEmrFiles/>
             </PrivateRoute>
           }/>
           <Route path='/appointments' element={
