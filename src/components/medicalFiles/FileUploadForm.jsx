@@ -3,8 +3,12 @@ import {Form, Button, Card} from 'react-bootstrap';
 import style from '../../assets/medicalFiles/fileUpload.module.css';
 import { useParams } from 'react-router-dom';
 import { uploadFile } from '../../features/medicalFiles/uploadFile';
+import { useSelector,useDispatch } from 'react-redux';
+import { setIsVisible } from '../../features/emr/filesFormSlice';
 
 const FileUploadForm = ()=>{
+    const dispatch = useDispatch();
+    const { isVisible } = useSelector((state)=>state.filesForm)
     const {patientId} = useParams();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
@@ -36,6 +40,7 @@ const FileUploadForm = ()=>{
         setLoading(true);
         const success = await uploadFile(formData, patientId);
         if(success){
+            dispatch(setIsVisible(false));
             setFormData({
             file: '',
             notes: ''
@@ -45,9 +50,18 @@ const FileUploadForm = ()=>{
         }
     }
 
+    const handleCancel = ()=>{
+        dispatch(setIsVisible(false));
+        setFormData({
+            file: '',
+            notes: ''
+        })
+    }
+
     return(
+        <div className={style.container} style={isVisible?{display:'flex'}:{display:'none'}}>
         <Card>
-            <Card.Body>
+            <Card.Body className={style.cardBody}>
                 <Form className={style.form} onSubmit={handleSubmit}>
                     <Form.Group className={style.group}>
                         <Form.Label>Upload File</Form.Label>
@@ -69,12 +83,18 @@ const FileUploadForm = ()=>{
                         onChange={handleChange}
                         />
                     </Form.Group>
-                    <Button type='submit' disabled={loading}>
-                        {loading?'Uploading...':'Submit'}
+                    <div className={style.btns}>
+                        <Button onClick={handleCancel} disabled={loading} className={style.cancel}>
+                            Cancel
                         </Button>
+                        <Button type='submit' disabled={loading}>
+                            {loading?'Uploading...':'Submit'}
+                        </Button>
+                    </div>
                 </Form>
             </Card.Body>
         </Card>
+        </div>
     )
 };
 
