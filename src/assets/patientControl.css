@@ -11,6 +11,8 @@
     border-radius: 5px;
 }
 
+
+
 .control .info{
     display: flex;
     flex-direction: column;
@@ -35,12 +37,14 @@
     justify-content: space-between;
 }
 
-.operations .left{
+.control .operations .left{
     height: 100%;
     display: flex;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: center;
+    gap: 10px;
 }
+
+
 
 .left .search{
     height: 100%;

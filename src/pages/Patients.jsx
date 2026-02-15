@@ -9,13 +9,13 @@ import PatientControl from "../components/PatientControl";
 import { fetchPatients } from "../features/appointments/fetchPatients";
 const Patients = ()=>{
     const [patients, setPatients] = useState([]);
-    const dispatch = useDispatch();
-        useEffect(()=>{
-            dispatch(addLight("patients"));
-            const loadPatients = async()=>{
+    const loadPatients = async()=>{
             const data = await fetchPatients();
             setPatients(data);
             }
+    const dispatch = useDispatch();
+        useEffect(()=>{
+            dispatch(addLight("patients"));
         loadPatients();
         },[])
     return(
@@ -23,7 +23,11 @@ const Patients = ()=>{
             <Header/>
             <Sidebar/>
             <MainContent>
-                <PatientControl/>
+                <PatientControl
+                setSearch = {setPatients}
+                reset = {loadPatients}
+                data = {patients}
+                />
                 <Table title="Patients" data={patients} role="patient"/>
             </MainContent>
         </>
