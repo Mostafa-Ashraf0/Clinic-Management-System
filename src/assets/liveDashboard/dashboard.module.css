@@ -14,7 +14,8 @@
     width: 100%;
 }
 
-.slot {
+.slot,
+.slotHead {
   background-color: #f4f6f8;
   padding: 15px;
   display: flex;
@@ -22,12 +23,57 @@
   align-items: center;
   transition: 0.3s;
 }
+
+.slotHead{
+  margin-bottom: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.slotHead .type,
+.slotHead .status{
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.slotHead .patient{
+  color: black;
+}
+
 .slot:not(:last-child){
-    border-bottom: 1px solid black;
+    border-bottom: .5px solid rgba(0, 0, 0, 0.122);
 }
 
 .slot:hover {
-  background-color: #e8f0fe;
+  transform: scale(1.01);
+  background-color: #dbe7fc;
+  border:   none;
+}
+
+.main{
+  display: flex;
+  align-items: center;
+}
+
+.main .info{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.slot .main .info .patient{
+  cursor: pointer;
+  color: blue;
+}
+
+.slot .main .info .patient:hover{
+  color: rgb(4, 4, 131);
+} 
+
+.timeContainer{
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
 }
 
 .time {
@@ -35,11 +81,27 @@
   font-size: 14px;
 }
 
-.status {
+.tags{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.slot .status,
+.slot .type {
   padding: 5px 10px;
   border-radius: 20px;
   font-size: 12px;
+}
+
+.slot .status{
   background-color: #d4edda;
   color: #155724;
 }
+
+.slot .type{
+  background-color: #d4e8ed;
+}
+
+
 
