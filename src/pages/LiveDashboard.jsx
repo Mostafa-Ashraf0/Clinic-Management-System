@@ -5,6 +5,7 @@ import { addLight } from "../features/dashboard/sidebarSlice";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import MainContent from "../components/MainContent";
+import Dashboard from "../components/LiveDashboard/Dashboard";
 
 
 const LiveDashboard = () => {
@@ -17,8 +18,10 @@ const LiveDashboard = () => {
         <>
             <Header/>
             <Sidebar/>
-            <MainContent>
-                <h1>livedashboard</h1>
+            <MainContent
+                CusPadding={10}
+             >
+                <Dashboard/>
             </MainContent>
         </>
     );

@@ -1,0 +1,45 @@
+.dashboard {
+  font-family: Arial, sans-serif;
+  width: 100%;
+}
+
+.dashboardTitle {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.slotsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.slot {
+  background-color: #f4f6f8;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+.slot:not(:last-child){
+    border-bottom: 1px solid black;
+}
+
+.slot:hover {
+  background-color: #e8f0fe;
+}
+
+.time {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  background-color: #d4edda;
+  color: #155724;
+}
+
