@@ -16,7 +16,13 @@ import deleteIcon from './deleteIcon.png';
 import test from './medicalTest.svg';
 import testDark from './medicalTestDark.svg';
 import binIcon from './bin.png';
+import live from './live-light.svg';
+import liveDark from './live-dark.svg';
 export const icons = {
+    live: {
+        light: live,
+        dark: liveDark
+    },
     dashboard: {
         light: dashIcon,
         dark: dashIconDark

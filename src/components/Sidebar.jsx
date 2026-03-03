@@ -16,6 +16,12 @@ const Sidebar = ()=>{
                 </div>
             </div>
             <ul className='links d-flex flex-column align-items-center'>
+                <li className={page==="liveDashboard"?"light":"dark"}>
+                    <Link to={"/liveDashboard"}>
+                        <img src={page==="liveDashboard"?icons.live.light:icons.live.dark} alt="dash-icon"/>
+                        <span>Live Dashboard</span>
+                    </Link>
+                </li>
                 <li className={page==="dashboard"?"light":"dark"}>
                     <Link to={"/dashboard"}>
                         <img src={page==="dashboard"?icons.dashboard.light:icons.dashboard.dark} alt="dash-icon"/>

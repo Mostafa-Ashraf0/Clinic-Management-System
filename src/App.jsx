@@ -1,5 +1,6 @@
 import './App.css';
 import LoginPage from './pages/loginPage';
+import LiveDashboard from './pages/LiveDashboard';
 import Dashboard from './pages/Dashboard';
 import Doctors from './pages/Doctors';
 import AddDoctor from './pages/AddDoctor';
@@ -55,6 +56,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LoginPage/>}/>
+          <Route path='/liveDashboard' element={
+            <PrivateRoute>
+              <LiveDashboard/>
+            </PrivateRoute>
+          }/>
           <Route path='/dashboard' element={
             <PrivateRoute>
               <Dashboard/>
