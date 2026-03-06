@@ -14,6 +14,7 @@ const LiveDashboard = () => {
         dispatch(addLight("liveDashboard"));
     },[])
 
+    
     return (
         <>
             <Header/>

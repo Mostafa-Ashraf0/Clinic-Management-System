@@ -18,6 +18,8 @@ const generateSlot = ()=>{
 }
 
 const Dashboard = ()=>{
+    //put navigation button to appointment details that navigates to appointment details page with dynamic appointment id
+    //onclick on the patient name navigate to the patient EMR page
     const timeSlots = generateSlot();
     return (
         <div className={style.dashboard}>

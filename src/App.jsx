@@ -1,6 +1,7 @@
 import './App.css';
 import LoginPage from './pages/loginPage';
 import LiveDashboard from './pages/LiveDashboard';
+import LiveAppointment from './pages/LiveAppointment';
 import Dashboard from './pages/Dashboard';
 import Doctors from './pages/Doctors';
 import AddDoctor from './pages/AddDoctor';
@@ -99,6 +100,11 @@ function App() {
           <Route path='/patients/:patientId/files' element={
             <PrivateRoute>
               <PatientEmrFiles/>
+            </PrivateRoute>
+          }/>
+          <Route path='liveDashboard/liveAppointment/:appointmentId' element={
+            <PrivateRoute>
+              <LiveAppointment/>
             </PrivateRoute>
           }/>
           <Route path='/appointments' element={
