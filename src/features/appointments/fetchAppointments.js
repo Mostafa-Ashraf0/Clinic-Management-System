@@ -8,7 +8,7 @@ const fetchAppointments = async()=>{
         appointment_date,
         appointment_time,
         clinic(name),
-        status(name)
+        status
         `);
     if(error) return error;
     console.log(data);

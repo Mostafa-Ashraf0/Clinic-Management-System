@@ -30,7 +30,7 @@ const AppointmentsTable = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    {Appoint.map((A,index)=>(
+                    {Appoint?.map((A,index)=>(
                         <tr key={A.id}>
                             <td>{index +1}</td>
                             <td>{A.patient.name}</td>
