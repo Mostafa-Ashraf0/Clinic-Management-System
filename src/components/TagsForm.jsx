@@ -12,6 +12,7 @@ import { icons } from '../assets/icons';
 
 const TagsForm = ({onTagAdded, formAction, data})=>{
     const {patientId} = useParams();
+    const globalPatientId = useSelector((state) => state.appointment.patientId);
     const [tagData, setTagData] = useState({
         patient_id: null,
         tag: '',
@@ -21,22 +22,22 @@ const TagsForm = ({onTagAdded, formAction, data})=>{
     useEffect(()=>{
         if(formAction === "edit" && data){
             setTagData({
-                patient_id: Number(patientId),
+                patient_id: Number(patientId || globalPatientId),
                 tag: data.tag,
                 priority: data.priority,
                 id: data.id
             })
         }
-    },[formAction, data, patientId])
+    },[formAction, data, patientId || globalPatientId])
 
     useEffect(() => {
-    if (patientId) {
+    if (patientId || globalPatientId) {
         setTagData(prev =>({
         ...prev,
-        patient_id: Number(patientId)
+        patient_id: Number(patientId || globalPatientId)
         }));
     }
-    }, [patientId]);
+    }, [patientId || globalPatientId]);
 
     const dispatch = useDispatch();
     const { isVisible } = useSelector((state)=>state.tagsForm)
@@ -63,7 +64,7 @@ const TagsForm = ({onTagAdded, formAction, data})=>{
             await addNewTag(tagData);
         }
         setTagData({
-            patient_id: Number(patientId),
+            patient_id: Number(patientId || globalPatientId),
             tag: '',
             priority: ''
         })

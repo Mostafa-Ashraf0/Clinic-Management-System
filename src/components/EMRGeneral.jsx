@@ -5,28 +5,31 @@ import LastAppointmentDetails from './LastAppointmentDetails';
 import TagsForm from './TagsForm';
 import { setIsVisible } from '../features/emr/tagsFormSlice';
 import { getTags } from '../features/emr/getTags';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const EMRGeneral = ()=>{
+    const dispatch = useDispatch();
     const {patientId} = useParams();
+    const globalPatientId = useSelector((state) => state.appointment.patientId);
     const [action, setAction] = useState("add");
     const [tagData, setTagData] = useState({})
     const [response, setResponse] = useState([]);
     const fetchTags = async()=>{
-            const data = await getTags(patientId);
+            const data = await getTags(patientId || globalPatientId);
             setResponse(data);
             console.log(data)
         };
-    const dispatch = useDispatch();
+
     const handleClick = ()=>{
         dispatch(setIsVisible(true));
         setAction("add");
     }
-    useEffect(()=>{
+    useEffect(() => {
+        if(!globalPatientId) return;
         fetchTags();
-    },[patientId])
+    }, [patientId|| globalPatientId]);
 
     const pColor = {
         high: {

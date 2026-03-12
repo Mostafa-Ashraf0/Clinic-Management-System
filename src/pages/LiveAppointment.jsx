@@ -5,9 +5,17 @@ import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import MainContent from "../components/MainContent";
 import EMRGeneral from "../components/EMRGeneral";
-import EMRNavigationBar from "../components/EMRNavigationBar";
+import { useParams } from "react-router-dom";
+import { setPatientId } from "../features/appointments/appointmentSlice";
+
 const LiveAppointment = ()=>{
+    const {appointmentId} = useParams('appointmentId');
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(setPatientId(3));
+    },[appointmentId, dispatch])
+
         useEffect(()=>{
             dispatch(addLight("liveDashboard"));
         },[])
@@ -17,6 +25,7 @@ const LiveAppointment = ()=>{
             <Sidebar/>
             <MainContent>
                 <h1>Live Appointment</h1>
+                <EMRGeneral/>
             </MainContent>
         </>
     )

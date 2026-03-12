@@ -1,9 +1,12 @@
 import style from '../assets/emrGeneralInfo.module.css';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { getSinglePatient } from '../features/patient/getSinglePatient';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 const EmrGeneralInfo = ()=>{
     const {patientId} = useParams();
+    const globalPatientId = useSelector((state) => state.appointment.patientId);
     const [patientData, setPatientData] = useState({
         name:'-',
         phone:'-',
@@ -13,14 +16,19 @@ const EmrGeneralInfo = ()=>{
         age:'-',
         session:'-'
     });
+
+
+
     useEffect(()=>{
+        if(!globalPatientId) return;
         const getPData = async()=>{
-            const PData = await getSinglePatient(Number(patientId));
-            setPatientData((prev)=>({...prev,...PData}));
+            const PData = await getSinglePatient(Number(patientId || globalPatientId));
+            setPatientData(PData);
             console.log(PData)
         };
         getPData();
-    },[patientId])
+    },[patientId || globalPatientId]);
+
     return(
         <div className={style.general_info}>
                         <span className={style.title}>General Information</span>
