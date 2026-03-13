@@ -21,9 +21,7 @@ const EmrMedicalInfo = ()=>{
     useEffect(()=>{
         getTestData();
     },[]);
-    useEffect(()=>{
-        console.log(tests);
-    },[tests])
+
     return(
         <div className={style.medical_info}>
             <div className={style.head}>

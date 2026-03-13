@@ -18,7 +18,8 @@ const uploadFile = async(data, patientId)=>{
         const { error: insertError} = await supabase.from('patient_files_history').insert([{
             patient_id: Number(patientId),
             url: filePath,
-            notes: data.notes
+            notes: data.notes,
+            category_id: Number(data.category_id)
         }]);
         if(insertError){
             await supabase.storage.from('imageFiles').remove([filePath]);

@@ -5,20 +5,34 @@ import { useParams } from 'react-router-dom';
 import { uploadFile } from '../../features/medicalFiles/uploadFile';
 import { useSelector,useDispatch } from 'react-redux';
 import { setIsVisible } from '../../features/emr/filesFormSlice';
+import { getFileCategories } from '../../features/medicalFiles/getFileCategories';
 
 const FileUploadForm = ()=>{
+    const [categories, setCategories] = useState([]);
     const dispatch = useDispatch();
     const { isVisible } = useSelector((state)=>state.filesForm)
     const {patientId} = useParams();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         file: '',
-        notes: ''
+        notes: '',
+        category_id: ''
     });
 
+    const fetchCategories = async()=>{
+        const data = await getFileCategories();
+        if(data){
+            setCategories(data);
+        }
+    }
+
     useEffect(()=>{
-        console.log(formData)
-    },[formData])
+        fetchCategories();
+    },[])
+
+    useEffect(()=>{
+        console.log(formData);
+    },[formData]);
 
     const handleChange = (e)=>{
         const { name, value, files } = e.target;
@@ -43,7 +57,8 @@ const FileUploadForm = ()=>{
             dispatch(setIsVisible(false));
             setFormData({
             file: '',
-            notes: ''
+            notes: '',
+            category_id: ''
             })
             setLoading(false);
             document.querySelector('input[name="file"]').value = null;
@@ -54,7 +69,8 @@ const FileUploadForm = ()=>{
         dispatch(setIsVisible(false));
         setFormData({
             file: '',
-            notes: ''
+            notes: '',
+            category_id: ''
         })
     }
 
@@ -73,6 +89,18 @@ const FileUploadForm = ()=>{
                         required
                         />
                     </Form.Group>
+                        
+                    <Form.Group className={style.group}>
+                        <Form.Label>Category</Form.Label>
+                        <Form.Select
+                        name='category_id'
+                        onChange={handleChange}
+                        required>
+                            <option value="">Select category</option>
+                            {categories.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}
+                        </Form.Select>
+                    </Form.Group>
+
                     <Form.Group className={style.group}>
                         <Form.Label>Notes</Form.Label>
                         <Form.Control 
