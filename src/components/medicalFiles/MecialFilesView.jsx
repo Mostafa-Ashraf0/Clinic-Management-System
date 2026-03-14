@@ -37,6 +37,7 @@ const MedicalFilesView = ()=>{
                     <FileCard
                     key={f.id}
                     data = {f}
+                    appointView = {false}
                     />
                 ))}
             </div>

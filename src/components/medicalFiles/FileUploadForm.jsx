@@ -10,7 +10,8 @@ import { getFileCategories } from '../../features/medicalFiles/getFileCategories
 const FileUploadForm = ()=>{
     const [categories, setCategories] = useState([]);
     const dispatch = useDispatch();
-    const { isVisible } = useSelector((state)=>state.filesForm)
+    const { isVisible } = useSelector((state)=>state.filesForm);
+    const globalPatientId = useSelector((state) => state.appointment.patientId);
     const {patientId} = useParams();
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
@@ -50,9 +51,10 @@ const FileUploadForm = ()=>{
     }
 
     const handleSubmit = async(e)=>{
+        if(!globalPatientId) return;
         e.preventDefault()
         setLoading(true);
-        const success = await uploadFile(formData, patientId);
+        const success = await uploadFile(formData, patientId||globalPatientId);
         if(success){
             dispatch(setIsVisible(false));
             setFormData({
@@ -62,6 +64,8 @@ const FileUploadForm = ()=>{
             })
             setLoading(false);
             document.querySelector('input[name="file"]').value = null;
+        }else{
+            setLoading(false);
         }
     }
 

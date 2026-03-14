@@ -5,14 +5,23 @@
     padding: 10px;
 }
 
-.main img{
+.liveAppointView{
+    width: calc(50% - 5px);
+    border: .5px solid rgba(0, 0, 0, 0.192);
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.main img,
+.liveAppointView img{
     width: 100%;
     height: 200px;
     object-fit: contain;
     margin-bottom: 10px;
 }
 
-.main .body{
+.main .body
+.liveAppointView .body{
     display: flex;
     flex-direction: column;
     align-items: start;

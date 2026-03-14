@@ -1,9 +1,9 @@
 import style from '../../assets/medicalFiles/fileCard.module.css';
 
-const FileCard = ({data})=>{
+const FileCard = ({data, appointView})=>{
     const supabaseUrl = 'https://mfszjvpkrzlhftegkfow.supabase.co/storage/v1/object/public/imageFiles/'
     return(
-        <div className={style.main}>
+        <div className={`${style.main} ${appointView ? style.liveAppointView : ''}`}>
             <img src={`${supabaseUrl}${data.url}`} alt='file'/>
             <div className={style.body}>
                 <p>Notes: {data.notes}</p>

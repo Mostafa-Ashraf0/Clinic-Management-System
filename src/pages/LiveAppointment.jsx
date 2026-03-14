@@ -8,6 +8,7 @@ import EMRGeneral from "../components/EMRGeneral";
 import { useParams } from "react-router-dom";
 import { setPatientId } from "../features/appointments/appointmentSlice";
 import TestSection from "../components/LiveAppointment/TestSection";
+import FilesSection from "../components/LiveAppointment/FilesSection";
 
 const LiveAppointment = ()=>{
     const {appointmentId} = useParams('appointmentId');
@@ -27,8 +28,9 @@ const LiveAppointment = ()=>{
             <MainContent>
                 <h1>Live Appointment</h1>
                 <EMRGeneral/>
-                <div style={{display:'flex'}}>
+                <div style={{display:'flex', gap:'10px'}}>
                     <TestSection/>
+                    <FilesSection/>
                 </div>
             </MainContent>
         </>
