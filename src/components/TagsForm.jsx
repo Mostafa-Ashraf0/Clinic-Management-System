@@ -28,7 +28,7 @@ const TagsForm = ({onTagAdded, formAction, data})=>{
                 id: data.id
             })
         }
-    },[formAction, data, patientId || globalPatientId])
+    },[formAction, data, patientId , globalPatientId])
 
     useEffect(() => {
     if (patientId || globalPatientId) {
@@ -37,7 +37,7 @@ const TagsForm = ({onTagAdded, formAction, data})=>{
         patient_id: Number(patientId || globalPatientId)
         }));
     }
-    }, [patientId || globalPatientId]);
+    }, [patientId , globalPatientId]);
 
     const dispatch = useDispatch();
     const { isVisible } = useSelector((state)=>state.tagsForm)

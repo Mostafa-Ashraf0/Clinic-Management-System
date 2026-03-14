@@ -27,9 +27,9 @@ const EMRGeneral = ()=>{
         setAction("add");
     }
     useEffect(() => {
-        if(!globalPatientId) return;
+        if(!(patientId || globalPatientId)) return;
         fetchTags();
-    }, [patientId|| globalPatientId]);
+    }, [patientId , globalPatientId]);
 
     const pColor = {
         high: {

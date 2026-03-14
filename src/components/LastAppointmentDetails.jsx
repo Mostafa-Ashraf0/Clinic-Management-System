@@ -1,6 +1,29 @@
+import { useParams } from 'react-router-dom';
 import style from '../assets/lastAppointmentDetails.module.css'
+import { fetchLastAppointment } from '../features/appointments/fetchLastAppointment';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const LastAppointmentDetails = ()=>{
+    const globalPatientId = useSelector((state) => state.appointment.patientId);
+    const {patientId} = useParams();
+    const {appointmentId} = useParams();
+    const [appData, setAppData] = useState(null);
+    const fetchData = async()=>{
+        const data = await fetchLastAppointment(patientId || globalPatientId, appointmentId);
+        if(data){
+            setAppData(data);
+        }
+    }
+
+    useEffect(()=>{
+        console.log("fetched");
+    },[appData])
+
+    useEffect(()=>{
+        if(!(patientId || globalPatientId)) return;
+        fetchData();
+    },[patientId , globalPatientId , appointmentId])
     return(
         <div className={style.last_appointment}>
             <span className={style.appo_title}>Latest Appointment Details</span>

@@ -20,7 +20,7 @@ const EmrGeneralInfo = ()=>{
 
 
     useEffect(()=>{
-        if(!globalPatientId) return;
+        if(!(patientId || globalPatientId)) return;
         const getPData = async()=>{
             const PData = await getSinglePatient(Number(patientId || globalPatientId));
             setPatientData(PData);

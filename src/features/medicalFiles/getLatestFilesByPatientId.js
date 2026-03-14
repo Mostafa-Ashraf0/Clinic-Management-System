@@ -13,7 +13,7 @@ const getLastFilesByPatientId = async (id) => {
       `)
       .eq("patient_id", id)
       .order("created_at", { ascending: false }) 
-      .limit(3); 
+      .limit(2); 
 
     if (error) throw error;
     return data;
