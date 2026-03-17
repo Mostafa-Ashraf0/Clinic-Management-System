@@ -4,8 +4,26 @@ import { useEffect, useState } from 'react';
 import { fetchDoctors } from '../features/appointments/fetchDoctors';
 import { getClinic } from '../features/getClinic';
 import AppointmentSearch from './AppointmentSearch';
+import { useSelector, useDispatch } from 'react-redux';
+import { getWorkingTime } from '../features/liveDashboard/getWorkingTime';
+import { setSlots } from '../features/appointments/appointmentSlice';
 
 const AppointmentForm = () => {
+      const types = ["consultation","follow_up","emergency","checkup"];
+      const dispatch = useDispatch();
+      const timeSlots = useSelector((state)=>state.appointment.timeSlots);
+      const fetchTime = async()=>{
+          const data = await getWorkingTime();
+          if(data){
+              dispatch(setSlots(data));
+              console.log(data);
+          }
+      }
+  
+      useEffect(() => {
+          fetchTime();
+      }, []); 
+
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [clinic, setClinic] = useState([]);
@@ -16,7 +34,8 @@ const AppointmentForm = () => {
     patient: '',
     date: '',
     time: '',
-    clinic_id: ''
+    clinic_id: '',
+    type:''
   });
   const [finalPatient, setFinalPatient] = useState({
         name:'',
@@ -32,7 +51,8 @@ const AppointmentForm = () => {
         patient: '',
         date: '',
         time: '',
-        clinic_id:''
+        clinic_id:'',
+        type:''
       });
       setSelectedPatient([]);
       setSubmited(false);
@@ -57,7 +77,15 @@ const AppointmentForm = () => {
       name:'',
       age:'',
       email:''
-    })
+    });
+    setFormData({
+        doctor: '',
+        patient: '',
+        date: '',
+        time: '',
+        clinic_id:'',
+        type:''
+      });
   };
 
   
@@ -140,6 +168,22 @@ const AppointmentForm = () => {
                 ))}
               </Form.Select>
             </Form.Group>
+            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
+              <Form.Label>Type*</Form.Label>
+              <Form.Select
+                value={formData.type}
+                name="type"
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select type</option>
+                {types.map((t,index) => (
+                  <option key={index} value={t}>
+                    {t}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
           </Form.Group>
 
 
@@ -149,22 +193,25 @@ const AppointmentForm = () => {
             style={{ width: '560px', gap: '10px' }}
           >
             <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
+              <Form.Label>Time*</Form.Label>
+              <Form.Select
+                type="time"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
+                required
+              >
+                <option>select time</option>
+                {timeSlots?.map((s,index)=><option key={index}>{s}</option>)}
+              </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
               <Form.Label>Date*</Form.Label>
               <Form.Control
                 type="date"
                 name="date"
                 value={formData.date}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-
-            <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
-              <Form.Label>Time*</Form.Label>
-              <Form.Control
-                type="time"
-                name="time"
-                value={formData.time}
                 onChange={handleChange}
                 required
               />

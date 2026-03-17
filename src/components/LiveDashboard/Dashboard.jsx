@@ -1,16 +1,18 @@
 import style from '../../assets/liveDashboard/dashboard.module.css';
 import { getWorkingTime } from '../../features/liveDashboard/getWorkingTime';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSlots } from '../../features/appointments/appointmentSlice';
 
 const Dashboard = ()=>{
+    const dispatch = useDispatch();
     //put navigation button to appointment details that navigates to appointment details page with dynamic appointment id
     //onclick on the patient name navigate to the patient EMR page
-    const [timeSlots, setTimeSlots] = useState([]);
-
+    const timeSlots = useSelector((state)=>state.appointment.timeSlots);
     const fetchTime = async()=>{
         const data = await getWorkingTime();
         if(data){
-            setTimeSlots(data);
+            dispatch(setSlots(data));
             console.log(data);
         }
     }
