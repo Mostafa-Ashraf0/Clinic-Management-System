@@ -7,7 +7,7 @@ const AddAppointment = async (formData, setSubmited) => {
       p_doctor_id: formData.doctor,
       p_patient_id: formData.patient,
       p_date: formData.date,
-      p_time: formData.time,
+      p_status: formData.status,
       p_clinic_id: formData.clinic_id
     });
 
