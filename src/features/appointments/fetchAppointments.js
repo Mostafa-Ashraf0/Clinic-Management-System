@@ -1,18 +1,14 @@
 import supabase from "../../utils/supabase";
 
 const fetchAppointments = async()=>{
-    const {data, error} = await supabase.from('appointment').select(`
-        id,
-        patient(name),
-        profile(name),
-        appointment_date,
-        appointment_time,
-        clinic(name),
-        status
-        `);
-    if(error) return error;
-    console.log(data);
+    //get last date
+    try{
+    const { data, error } = await supabase.rpc('get_today_appointments');
+    if (error) throw error;
     return data;
+  } catch (err) {
+    console.log(err.message);
+    }
 };
 
 export {fetchAppointments};

@@ -22,7 +22,6 @@ const AppointmentsTable = ()=>{
                     <tr>
                         <th>Id</th>
                         <th>Patient</th>
-                        <th>Doctor</th>
                         <th>Date</th>
                         <th>Time</th>
                         <th>Clinic</th>
@@ -34,7 +33,6 @@ const AppointmentsTable = ()=>{
                         <tr key={A.id}>
                             <td>{index +1}</td>
                             <td>{A.patient.name}</td>
-                            <td>{A.profile.name}</td>
                             <td>{A.appointment_date}</td>
                             <td>{A.appointment_time}</td>
                             <td>{A.clinic.name}</td>

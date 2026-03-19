@@ -1,11 +1,13 @@
 import style from '../../assets/liveDashboard/dashboard.module.css';
 import { getWorkingTime } from '../../features/liveDashboard/getWorkingTime';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSlots } from '../../features/appointments/appointmentSlice';
+import { fetchAppointments } from '../../features/appointments/fetchAppointments';
 
 const Dashboard = ()=>{
     const dispatch = useDispatch();
+    const [data, setData] = useState([]);
     //put navigation button to appointment details that navigates to appointment details page with dynamic appointment id
     //onclick on the patient name navigate to the patient EMR page
     const timeSlots = useSelector((state)=>state.appointment.timeSlots);
@@ -17,8 +19,17 @@ const Dashboard = ()=>{
         }
     }
 
+    const getAppointment = async()=>{
+        const data = await fetchAppointments();
+        if(data){
+            setData(data);
+            console.log(data);
+        }
+    }
+
     useEffect(() => {
         fetchTime();
+        getAppointment();
     }, []); 
 
     return (
@@ -46,15 +57,20 @@ const Dashboard = ()=>{
                     <div className={style.timeContainer}>
                         <span className={style.time}>{time}</span>
                     </div>
+                </div>
+                {data?.filter(d=>d.appointment_time.slice(0,5) === time).map(f=>(
+                    <div key={f.id}>
                     <div className={style.info}>
-                        <span className={style.patient}>Mostafa Ashraf</span>
+                            <span className={style.patient}>{f.patient_name}</span>
                     </div>
-                </div>
-                <div className={style.tags}>
-                    <span className={style.type}>Checkup</span>
-                    <span className={style.status}>Available</span>
-                </div>
+                    <div className={style.tags}>
+                        <span className={style.type}>{f.type}</span>
+                        <span className={style.status}>{f.status}</span>
+                    </div>
+                    </div>
+                ))}
             </div>
+
             ))}
         </div>
         </div>
