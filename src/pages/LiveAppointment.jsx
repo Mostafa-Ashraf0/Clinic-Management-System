@@ -9,7 +9,7 @@ import { useParams } from "react-router-dom";
 import { setPatientId } from "../features/appointments/appointmentSlice";
 import TestSection from "../components/LiveAppointment/TestSection";
 import FilesSection from "../components/LiveAppointment/FilesSection";
-import InputDetails from "../components/LiveAppointment/inputDetails";
+import InputDetails from "../components/LiveAppointment/InputDetails";
 
 const LiveAppointment = ()=>{
     const {appointmentId} = useParams('appointmentId');
