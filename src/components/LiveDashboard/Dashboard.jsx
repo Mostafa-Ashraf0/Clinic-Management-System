@@ -8,7 +8,7 @@ import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayA
 const Dashboard = ()=>{
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
-    //put navigation button to appointment details that navigates to appointment details page with dynamic appointment id
+    //put navigation button to appointment details that navigates to appointment details page with dynamic appointment 
     //onclick on the patient name navigate to the patient EMR page
     const timeSlots = useSelector((state)=>state.appointment.timeSlots);
     const fetchTime = async()=>{
