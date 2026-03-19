@@ -1,14 +1,28 @@
 import supabase from "../../utils/supabase";
+import { toast } from "react-toastify";
+
 
 const fetchAppointments = async()=>{
-    //get last date
     try{
-    const { data, error } = await supabase.rpc('get_today_appointments');
-    if (error) throw error;
-    return data;
-  } catch (err) {
-    console.log(err.message);
+        const { data, error } = await supabase
+        .from('appointment')
+        .select(`
+            id,
+            patient(name),
+            appointment_time,
+            appointment_date,
+            clinic(name),
+            type,
+            status
+        `)
+
+        if (error) throw error;
+        return data;
+    }catch(error){
+        toast.error(error.message);
     }
 };
+
+
 
 export {fetchAppointments};

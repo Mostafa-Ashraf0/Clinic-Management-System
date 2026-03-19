@@ -3,7 +3,7 @@ import { getWorkingTime } from '../../features/liveDashboard/getWorkingTime';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSlots } from '../../features/appointments/appointmentSlice';
-import { fetchAppointments } from '../../features/appointments/fetchAppointments';
+import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayAppointments';
 
 const Dashboard = ()=>{
     const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const Dashboard = ()=>{
     }
 
     const getAppointment = async()=>{
-        const data = await fetchAppointments();
+        const data = await fetchTodayAppointments();
         if(data){
             setData(data);
             console.log(data);

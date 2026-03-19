@@ -1,6 +1,6 @@
 import "../assets/appointmentsTable.css";
-import { fetchAppointments } from "../features/appointments/fetchAppointments";
 import { useEffect, useState } from "react";
+import { fetchAppointments } from "../features/appointments/fetchAppointments";
 
 const AppointmentsTable = ()=>{
     const [Appoint, setAppoint] = useState([]);
@@ -26,6 +26,7 @@ const AppointmentsTable = ()=>{
                         <th>Time</th>
                         <th>Clinic</th>
                         <th>Status</th>
+                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,7 +37,8 @@ const AppointmentsTable = ()=>{
                             <td>{A.appointment_date}</td>
                             <td>{A.appointment_time}</td>
                             <td>{A.clinic.name}</td>
-                            <td>{A.status.name}</td>
+                            <td>{A.status}</td>
+                            <td>{A.type}</td>
                             <td className="dots"><span>.</span><span>.</span><span>.</span></td>
                         </tr>
                         
