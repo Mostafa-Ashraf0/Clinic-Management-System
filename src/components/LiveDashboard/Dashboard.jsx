@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSlots } from '../../features/appointments/appointmentSlice';
 import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayAppointments';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = ()=>{
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     //put navigation button to appointment details that navigates to appointment details page with dynamic appointment 
@@ -31,6 +33,13 @@ const Dashboard = ()=>{
         fetchTime();
         getAppointment();
     }, []); 
+
+
+    const handleClick = (data)=>{
+        if(data){
+            navigate(`/liveDashboard/liveAppointment/${data.id}`);
+        }
+    }
 
     return (
         <div className={style.dashboard}>
@@ -61,7 +70,7 @@ const Dashboard = ()=>{
                 {data?.filter(d=>d.appointment_time.slice(0,5) === time).map(f=>(
                     <div key={f.id}>
                     <div className={style.info}>
-                            <span className={style.patient}>{f.patient_name}</span>
+                            <span className={style.patient} onClick={()=>handleClick(f)}>{f.patient_name}</span>
                     </div>
                     <div className={style.tags}>
                         <span className={style.type}>{f.type}</span>

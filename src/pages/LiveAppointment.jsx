@@ -10,18 +10,26 @@ import { setPatientId } from "../features/appointments/appointmentSlice";
 import TestSection from "../components/LiveAppointment/TestSection";
 import FilesSection from "../components/LiveAppointment/FilesSection";
 import InputDetails from "../components/LiveAppointment/InputDetails";
+import { fetchAppointmentById } from "../features/appointments/fetchAppointmentById";
 
 const LiveAppointment = ()=>{
-    const {appointmentId} = useParams('appointmentId');
+    const {appointmentId} = useParams();
     const dispatch = useDispatch();
 
+
     useEffect(()=>{
-        dispatch(setPatientId(3));
+        const getAppointment = async()=>{
+            dispatch(setPatientId(null));
+            const data = await fetchAppointmentById(appointmentId);
+            if(data){
+                dispatch(setPatientId(data.patient_id));
+            }
+        }
+        getAppointment();
+        dispatch(addLight("liveDashboard"));
     },[appointmentId, dispatch])
 
-        useEffect(()=>{
-            dispatch(addLight("liveDashboard"));
-        },[])
+
     return(
         <>
             <Header/>
