@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSlots } from '../../features/appointments/appointmentSlice';
 import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayAppointments';
 import { useNavigate } from 'react-router-dom';
+import ActionsList from './actionsList';
 
 const Dashboard = ()=>{
     const navigate = useNavigate();
@@ -58,6 +59,7 @@ const Dashboard = ()=>{
                 <div className={style.tags}>
                     <span className={style.type}>Session type</span>
                     <span className={style.status}>Status</span>
+                    <span>Actions</span>
                 </div>
             </div>
             {timeSlots.map((time, index) => (
@@ -75,6 +77,9 @@ const Dashboard = ()=>{
                     <div className={style.tags}>
                         <span className={style.type}>{f.type}</span>
                         <span className={style.status}>{f.status}</span>
+                        <span className={style.action} style={{position:"relative"}}>...
+                            <ActionsList display={false}/>
+                        </span>
                     </div>
                     </div>
                 ))}

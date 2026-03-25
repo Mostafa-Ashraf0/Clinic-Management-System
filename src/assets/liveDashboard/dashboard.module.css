@@ -44,9 +44,7 @@
 }
 
 .slot:hover {
-  transform: scale(1.01);
   background-color: #dbe7fc;
-  border:   none;
 }
 
 .main{
@@ -101,6 +99,10 @@
 
 .slot .type{
   background-color: #d4e8ed;
+}
+
+.slot .action{
+  cursor: pointer;
 }
 
 
