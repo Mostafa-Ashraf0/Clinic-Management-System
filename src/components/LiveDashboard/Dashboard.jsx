@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSlots } from '../../features/appointments/appointmentSlice';
 import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayAppointments';
 import { useNavigate } from 'react-router-dom';
-import ActionsList from './actionsList';
+import ActionsList from './ActionsList';
 
 const Dashboard = ()=>{
     const navigate = useNavigate();
