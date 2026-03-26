@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     dropdownViewd: false,
     patientId: null,
-    timeSlots: []
+    timeSlots: [],
+    actionsList: false
 };
 
 
@@ -19,9 +20,12 @@ const appointmentSlice = createSlice({
         },
         setSlots(state, action){
             state.timeSlots = action.payload;
+        },
+        setActionsList(state,action){
+            state.actionsList = action.payload;
         }
     }
 })
 
 export default appointmentSlice.reducer;
-export const {setDropdown, setPatientId, setSlots} = appointmentSlice.actions;
+export const {setDropdown, setPatientId, setSlots, setActionsList} = appointmentSlice.actions;

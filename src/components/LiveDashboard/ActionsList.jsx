@@ -1,11 +1,17 @@
 import style from "../../assets/liveDashboard/actionsList.module.css";
 import { changeStatus } from "../../features/liveDashboard/changeStatus";
+import { useDispatch } from "react-redux";
+import { setActionsList } from "../../features/appointments/appointmentSlice";
 
 const ActionsList = ({display, appointId})=>{
+    const dispatch = useDispatch();
     const status = ["scheduled","completed","cancelled"];
 
-    const handleClick = (status)=>{
-        changeStatus(appointId, status);
+    const handleClick = async(status)=>{
+        const res = changeStatus(appointId, status);
+        if(res){
+            dispatch(setActionsList(false));
+        }
     }
 
 

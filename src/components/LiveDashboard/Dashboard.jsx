@@ -2,7 +2,7 @@ import style from '../../assets/liveDashboard/dashboard.module.css';
 import { getWorkingTime } from '../../features/liveDashboard/getWorkingTime';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSlots } from '../../features/appointments/appointmentSlice';
+import { setSlots, setActionsList } from '../../features/appointments/appointmentSlice';
 import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayAppointments';
 import { useNavigate } from 'react-router-dom';
 import ActionsList from './ActionsList';
@@ -11,15 +11,21 @@ const Dashboard = ()=>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
-    //put navigation button to appointment details that navigates to appointment details page with dynamic appointment 
-    //onclick on the patient name navigate to the patient EMR page
+   
     const timeSlots = useSelector((state)=>state.appointment.timeSlots);
+    //actions list visiability
+    const ActionsListView = useSelector((state)=>state.appointment.actionsList);
+
     const fetchTime = async()=>{
         const data = await getWorkingTime();
         if(data){
             dispatch(setSlots(data));
             console.log(data);
         }
+    }
+
+    const handleActionsList = ()=>{
+        dispatch(setActionsList(!ActionsListView));
     }
 
     const getAppointment = async()=>{
@@ -77,8 +83,11 @@ const Dashboard = ()=>{
                     <div className={style.tags}>
                         <span className={style.type}>{f.type}</span>
                         <span className={style.status}>{f.status}</span>
-                        <span className={style.action} style={{position:"relative"}}>...
-                            <ActionsList display={false} appointId={f.id}/>
+                        <span className={style.action} 
+                        onClick={handleActionsList}
+                        style={{position:"relative"}}>
+                            ...
+                            <ActionsList display={ActionsListView} appointId={f.id}/>
                         </span>
                     </div>
                     </div>
