@@ -78,7 +78,7 @@ const Dashboard = ()=>{
                         <span className={style.type}>{f.type}</span>
                         <span className={style.status}>{f.status}</span>
                         <span className={style.action} style={{position:"relative"}}>...
-                            <ActionsList display={false}/>
+                            <ActionsList display={false} appointId={f.id}/>
                         </span>
                     </div>
                     </div>

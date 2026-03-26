@@ -1,11 +1,18 @@
 import style from "../../assets/liveDashboard/actionsList.module.css";
+import { changeStatus } from "../../features/liveDashboard/changeStatus";
 
-const ActionsList = ({display})=>{
+const ActionsList = ({display, appointId})=>{
     const status = ["scheduled","completed","cancelled"];
+
+    const handleClick = (status)=>{
+        changeStatus(appointId, status);
+    }
+
+
     return(
         <div className={style.main} style={display?{display:"flex"}:{display:"none"}}>
-            {status?.map((s,index)=>
-                <span key={index}>{s}</span>
+            {status?.map((s)=>
+                <span key={s} onClick={()=>handleClick(s)}>{s}</span>
             )}
         </div>
     )
