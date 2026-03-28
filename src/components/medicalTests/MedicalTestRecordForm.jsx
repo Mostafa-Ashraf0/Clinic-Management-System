@@ -11,10 +11,15 @@ import { setIsVisible } from '../../features/emr/testRecordFormSlice';
 const MedicalTestRecordForm = ({onRecordAdd})=>{
     const dispatch = useDispatch();
     const { isVisible } = useSelector((state)=>state.testRecordForm)
+    const globalPatientId = useSelector((state) => state.appointment.patientId);
     const {patientId} = useParams();
     const [testsData, setTestsData] = useState([]);
     const [params, setParams] = useState([]);
     const [currentTest, setCurrentTest] = useState(null);
+    //final used id 
+    const resolvedId = patientId ?? globalPatientId;
+    const numericPatientId = resolvedId ? Number(resolvedId) : null;
+
     const [formData, setFormData] = useState({
                 test_id: '',
                 patient_id: '',
@@ -95,7 +100,7 @@ const MedicalTestRecordForm = ({onRecordAdd})=>{
         if (success) {
             setFormData({
             test_id: '',
-            patient_id: Number(patientId),
+            patient_id: numericPatientId,
             date: '',
             notes: '',
             parameters: []
@@ -112,7 +117,7 @@ const MedicalTestRecordForm = ({onRecordAdd})=>{
         dispatch(setIsVisible(false));
         setFormData({
             test_id: '',
-            patient_id: Number(patientId),
+            patient_id: numericPatientId,
             date: '',
             notes: '',
             parameters: []
@@ -124,14 +129,14 @@ const MedicalTestRecordForm = ({onRecordAdd})=>{
     useEffect(() => {
         setFormData({
             test_id: '',
-            patient_id: Number(patientId),
+            patient_id: numericPatientId,
             date: '',
             notes: '',
             parameters: []
         });
         setCurrentTest(null);
         setParams([]);
-        }, [patientId]);
+        }, [numericPatientId]);
 
     return(
         <div className={style.container} style={isVisible?{display:'flex'}:{display:'none'}}>
