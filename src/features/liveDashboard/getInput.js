@@ -2,20 +2,18 @@ import supabase from "../../utils/supabase";
 import { toast } from "react-toastify";
 
 
-const updateInput = async(appointId, column, inputData)=>{
+const getInput = async(appointId, column)=>{
     try{
         const {data, error} = await supabase
         .from('appointment')
-        .update({ [column]: inputData })
+        .select(column)
         .eq('id',appointId);
         if(error) throw error;
-        toast.success(`${column} updated`)
-        return data;
-        
+        return data?.[0]?.[column] || '';
 
     }catch(error){
         toast.error(error.message);
     }
 };
 
-export {updateInput};
+export {getInput};
