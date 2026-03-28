@@ -4,7 +4,7 @@ const initialState = {
     dropdownViewd: false,
     patientId: null,
     timeSlots: [],
-    actionsList: false
+    actionsList: {view:false, id:null}
 };
 
 

@@ -8,9 +8,9 @@ const ActionsList = ({display, appointId})=>{
     const status = ["scheduled","completed","cancelled"];
 
     const handleClick = async(status)=>{
-        const res = changeStatus(appointId, status);
+        const res = await changeStatus(appointId, status);
         if(res){
-            dispatch(setActionsList(false));
+            dispatch(setActionsList({view:false, id:null}));
         }
     }
 

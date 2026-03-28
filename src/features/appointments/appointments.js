@@ -1,16 +1,21 @@
 import supabase from "../../utils/supabase";
 import { toast } from "react-toastify";
 
+
 const AddAppointment = async (formData, setSubmited) => {
   try {
-    const { error } = await supabase.rpc("add_appointment", {
-      p_doctor_id: formData.doctor,
-      p_patient_id: formData.patient,
-      p_date: formData.date,
-      p_time: formData.time,
-      p_clinic_id: formData.clinic_id,
-      p_type: formData.type
-    });
+    const { error } = await supabase
+      .from("appointment")
+      .insert([
+        {
+          doctor_id: formData.doctor,
+          patient_id: formData.patient,
+          appointment_date: formData.date,
+          appointment_time: formData.time,
+          clinic_id: formData.clinic_id,
+          type: formData.type,
+        }
+      ]);
 
     if (error) throw error;
 

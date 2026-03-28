@@ -24,8 +24,18 @@ const Dashboard = ()=>{
         }
     }
 
-    const handleActionsList = ()=>{
-        dispatch(setActionsList(!ActionsListView));
+    const handleActionsList = (appointId)=>{
+        if (ActionsListView.id === appointId) {
+            dispatch(setActionsList({
+                view: !ActionsListView.view,
+                id: appointId
+            }));
+        } else {
+            dispatch(setActionsList({
+                view: true,
+                id: appointId
+            }));
+        }
     }
 
     const getAppointment = async()=>{
@@ -84,10 +94,12 @@ const Dashboard = ()=>{
                         <span className={style.type}>{f.type}</span>
                         <span className={style.status}>{f.status}</span>
                         <span className={style.action} 
-                        onClick={handleActionsList}
+                        onClick={() => handleActionsList(f.id)}
                         style={{position:"relative"}}>
                             ...
-                            <ActionsList display={ActionsListView} appointId={f.id}/>
+                            <ActionsList 
+                            display={ActionsListView.view && ActionsListView.id === f.id} 
+                            appointId={f.id}/>
                         </span>
                     </div>
                     </div>
