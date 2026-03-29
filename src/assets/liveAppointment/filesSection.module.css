@@ -6,19 +6,16 @@
     background-color: white;
     border: solid 1px #D2D5DB;
     border-radius: 5px;
-    padding: 10px 20px;
-    overflow-y: auto;
-    overflow-x: hidden;
 }
 
 
 
 .main .head{
+    padding: 20px 20px 0;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
 }
 
 .main .head .title{
@@ -47,4 +44,18 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    height: 400px;
+    overflow-y: auto;
+    padding: 10px 20px;
+}
+
+
+.cardsBox::-webkit-scrollbar
+{
+  width: 8px;
+}
+
+.cardsBox::-webkit-scrollbar-thumb {
+  background-color: #797c80;
+  border-radius: 3px;
 }

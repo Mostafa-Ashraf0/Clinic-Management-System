@@ -41,8 +41,10 @@ const LiveAppointment = ()=>{
                     <TestSection/>
                     <FilesSection/>
                 </div>
-                <InputDetails inputType={"chief_complaint"}/>
-                <InputDetails inputType={"doctor_notes"}/>
+                <div style={{display:'flex', width:'100%', gap:'10px'}}>
+                    <InputDetails inputType={"chief_complaint"}/>
+                    <InputDetails inputType={"doctor_notes"}/>
+                </div>
             </MainContent>
         </>
     )

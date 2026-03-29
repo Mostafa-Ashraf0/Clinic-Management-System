@@ -29,8 +29,8 @@ const TestSection = ()=>{
     return(
         <div className={style.main}>
             <div className={style.head}>
-                <span className={style.title}>Medical Files</span>
-                <button className={style.addBtn} onClick={handleClick}>Add New File</button>
+                <span className={style.title}>Medical Records</span>
+                <button className={style.addBtn} onClick={handleClick}>Add New Record</button>
             </div>
             <div className={style.container}>
                 {tests?.map(t=>(

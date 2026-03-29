@@ -18,6 +18,17 @@
     gap: 10px;
 }
 
+
+.container::-webkit-scrollbar
+{
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #797c80;
+  border-radius: 3px;
+}
+
 .main .test{
     width: 100%;
     padding: 10px;

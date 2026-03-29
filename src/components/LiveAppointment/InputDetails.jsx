@@ -31,9 +31,9 @@ const InputDetails = ({ inputType }) => {
     };
 
     return (
-        <Card style={{ marginBottom: '30px' }}>
+        <Card style={{ marginBottom: '30px',width:'50%' }}>
             <Card.Body className="d-flex flex-column align-items-center">
-                <Form className='w-100 d-flex align-items-start gap-5' onSubmit={handleSubmit}>
+                <Form className='w-100 d-flex flex-column gap-2' onSubmit={handleSubmit}>
                     <Form.Group
                         className='w-100 d-flex flex-column align-items-start'
                         style={{ color: 'rgb(102, 116, 140)' }}
@@ -49,12 +49,12 @@ const InputDetails = ({ inputType }) => {
                             value={inputData}
                             className='w-100'
                             as="textarea"
-                            rows={3}
+                            rows={6}
                             name='notes'
                         />
                     </Form.Group>
 
-                    <Button className='align-self-end' type='submit'>
+                    <Button className='align-self-start' type='submit'>
                         Save
                     </Button>
                 </Form>
