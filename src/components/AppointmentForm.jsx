@@ -7,8 +7,11 @@ import AppointmentSearch from './AppointmentSearch';
 import { useSelector, useDispatch } from 'react-redux';
 import { getWorkingTime } from '../features/liveDashboard/getWorkingTime';
 import { setSlots } from '../features/appointments/appointmentSlice';
+import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
 
-const AppointmentForm = () => {
+const AppointmentForm = ({date}) => {
+      const today = new Date().toISOString().split("T")[0];
+      const initialDate = date || today;
       const types = ["consultation","follow_up","emergency","checkup"];
       const dispatch = useDispatch();
       const timeSlots = useSelector((state)=>state.appointment.timeSlots);
@@ -32,7 +35,7 @@ const AppointmentForm = () => {
   const [formData, setFormData] = useState({
     doctor: '',
     patient: '',
-    date: '',
+    date: initialDate,
     time: '',
     clinic_id: '',
     type:''
@@ -49,7 +52,7 @@ const AppointmentForm = () => {
       setFormData({
         doctor: '',
         patient: '',
-        date: '',
+        date: initialDate,
         time: '',
         clinic_id:'',
         type:''
@@ -57,7 +60,7 @@ const AppointmentForm = () => {
       setSelectedPatient([]);
       setSubmited(false);
     }
-  }, [submited]);
+  }, [submited,initialDate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -81,11 +84,12 @@ const AppointmentForm = () => {
     setFormData({
         doctor: '',
         patient: '',
-        date: '',
+        date: initialDate,
         time: '',
         clinic_id:'',
         type:''
       });
+      dispatch(setLiveFormVisible(false));
   };
 
   
@@ -208,13 +212,14 @@ const AppointmentForm = () => {
 
             <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
               <Form.Label>Date*</Form.Label>
-              <Form.Control
-                type="date"
-                name="date"
-                value={formData.date}
-                onChange={handleChange}
-                required
-              />
+                <Form.Control
+                  type={date?"text":"date"}
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  required
+                  disabled={!!date}
+                />
             </Form.Group>
           </Form.Group>
 

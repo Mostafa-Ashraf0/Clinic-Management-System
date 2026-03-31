@@ -6,15 +6,20 @@ import { setSlots, setActionsList } from '../../features/appointments/appointmen
 import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayAppointments';
 import { useNavigate } from 'react-router-dom';
 import ActionsList from './ActionsList';
+import { icons } from '../../assets/icons';
+import AddAppointmentView from './AddAppointmentView';
+import { setLiveFormVisible } from '../../features/liveAppointment/fullViewSlice';
 
 const Dashboard = ()=>{
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
+    const addIcon = icons.live.add;
    
     const timeSlots = useSelector((state)=>state.appointment.timeSlots);
-    //actions list visiability
+    //visiability
     const ActionsListView = useSelector((state)=>state.appointment.actionsList);
+    const liveFormVisible = useSelector((state)=>state.fullView.liveFormVisible);
 
     const fetchTime = async()=>{
         const data = await getWorkingTime();
@@ -52,6 +57,11 @@ const Dashboard = ()=>{
     }, []); 
 
 
+    const handleAddBtn = ()=>{
+        dispatch(setLiveFormVisible(true));
+    }
+
+
     const handleClick = (data)=>{
         if(data){
             navigate(`/liveDashboard/liveAppointment/${data.id}`);
@@ -60,8 +70,13 @@ const Dashboard = ()=>{
 
     return (
         <div className={style.dashboard}>
-        <h2 className={style.dashboardTitle}>Today's Appointments</h2>
-
+        <div className={style.head}>
+            <h2 className={style.dashboardTitle}>Today's Appointments</h2>
+            <button className={style.addBtn} onClick={handleAddBtn}>
+                <img src={addIcon} alt=''/>
+                Create
+            </button>
+        </div>
         <div className={style.slotsContainer}>
             <div className={style.slotHead}>
                 <div className={style.main}>
@@ -108,6 +123,7 @@ const Dashboard = ()=>{
 
             ))}
         </div>
+        {liveFormVisible &&  <AddAppointmentView/>}
         </div>
     );
 }

@@ -21,6 +21,7 @@ import liveDark from './live-dark.svg';
 import editLogo from './edit-3-svgrepo-com.svg';
 import viewIcon from './eye-svgrepo-com.svg';
 import closeIcon from './close-ellipse-svgrepo-com.svg';
+import addAppoint from './add-square-svgrepo-com.svg';
 
 export const icons = {
     public: {
@@ -30,7 +31,8 @@ export const icons = {
     live: {
         light: live,
         dark: liveDark,
-        view: viewIcon
+        view: viewIcon,
+        add: addAppoint
     },
     dashboard: {
         light: dashIcon,

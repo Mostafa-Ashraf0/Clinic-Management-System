@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     testsVisible: false,
-    filesVisible: false
+    filesVisible: false,
+    liveFormVisible:false
 };
 
 
@@ -15,9 +16,12 @@ const fullViewSlice = createSlice({
         },
         setFilesVisible(state,action){
             state.filesVisible = action.payload;
+        },
+        setLiveFormVisible(state,action){
+            state.liveFormVisible = action.payload;
         }
     }
 })
 
 export default fullViewSlice.reducer;
-export const {setTestVisible, setFilesVisible} = fullViewSlice.actions;
+export const {setTestVisible, setFilesVisible, setLiveFormVisible} = fullViewSlice.actions;

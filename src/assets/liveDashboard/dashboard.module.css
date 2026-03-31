@@ -3,6 +3,40 @@
   width: 100%;
 }
 
+.dashboard .head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+.head .addBtn{
+    border: none;
+    background-color: #0A3D62;
+    color: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px 10px;
+}
+
+.head .addBtn:hover{
+    background-color: #0a3d62af;
+}
+
+.head .addBtn img{
+  width: 25px;
+  height: 25px;
+}
+
+.head h2{
+  font-size: 20px;
+  color: rgb(102, 116, 140);
+  margin: 0;
+}
+
 .dashboardTitle {
   text-align: center;
   margin-bottom: 20px;
