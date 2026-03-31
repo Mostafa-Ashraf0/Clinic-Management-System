@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const AddAppointment = async (formData, setSubmited) => {
   try {
+    
     const { error } = await supabase
       .from("appointment")
       .insert([
