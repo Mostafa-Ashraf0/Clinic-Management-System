@@ -6,19 +6,21 @@ import { getFilesByPatientId } from '../../features/medicalFiles/getFilesByPatie
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import FileCard from './FileCard';
+import { useSelector } from 'react-redux';
 
 const MedicalFilesView = ()=>{
+    const globalPatientId = useSelector((state) => state.appointment.patientId);
     const {patientId} = useParams();
     const [files, setFiles] = useState([]);
     useEffect(()=>{
         const fetchFiles = async()=>{
-            const res = await getFilesByPatientId(patientId);
+            const res = await getFilesByPatientId(patientId || globalPatientId );
             if(res){
                 setFiles(res);
             }
         }
         fetchFiles();
-    },[patientId])
+    },[patientId, globalPatientId])
     useEffect(()=>{
         console.log(files)
     },[files])

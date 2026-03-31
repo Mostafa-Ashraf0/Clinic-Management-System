@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import style from '../../assets/liveAppointment/testSection.module.css';
 import MedicalTestRecordForm from "../medicalTests/MedicalTestRecordForm";
 import { setIsVisible } from "../../features/emr/testRecordFormSlice";
+import { icons } from "../../assets/icons";
+import { setTestVisible } from "../../features/liveAppointment/fullViewSlice";
 
 const TestSection = ()=>{
     const patientId = useSelector((state) => state.appointment.patientId);
@@ -22,15 +24,26 @@ const TestSection = ()=>{
     },[patientId])
 
 
-        const handleClick = ()=>{
-            dispatch(setIsVisible(true));
-        }
+    const handleFullView = ()=>{
+        dispatch(setTestVisible(true))
+    }
 
+    const handleClick = ()=>{
+        dispatch(setIsVisible(true));
+    }
+
+
+    const viewIcon = icons.live.view;
     return(
         <div className={style.main}>
             <div className={style.head}>
                 <span className={style.title}>Medical Records</span>
-                <button className={style.addBtn} onClick={handleClick}>Add New Record</button>
+                <div className={style.btns}>
+                    <span className={style.edit} onClick={handleFullView}>
+                        <img src={viewIcon} alt="edit" />
+                    </span>
+                    <button className={style.addBtn} onClick={handleClick}>Add New Record</button>
+                </div>
             </div>
             <div className={style.container}>
                 {tests?.map(t=>(

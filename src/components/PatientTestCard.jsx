@@ -4,9 +4,11 @@ import { useState, useEffect } from 'react';
 import PatientTestHistory from './PatientTestHistory';
 import { getTestByPatientId } from '../features/emr/getTestByPatientId';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const PatientTestCard = ({data})=>{
     const [testHistory, setTestHistory] = useState([]);
+    const globalPatientId = useSelector((state) => state.appointment.patientId);
     const {patientId} = useParams();
     const [isOpen, setIsOpen] = useState(false);
     const handleToggle = ()=>{
@@ -14,7 +16,7 @@ const PatientTestCard = ({data})=>{
         setTestHistory([])
     }
     const getTestHistory = async()=>{
-        const tests = await getTestByPatientId(patientId, data.test_id);
+        const tests = await getTestByPatientId(patientId || globalPatientId, data.test_id);
         if(tests) setTestHistory(tests);
     }
     const handleClick = ()=>{

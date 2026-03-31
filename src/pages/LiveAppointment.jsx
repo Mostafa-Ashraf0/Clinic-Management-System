@@ -11,8 +11,12 @@ import TestSection from "../components/LiveAppointment/TestSection";
 import FilesSection from "../components/LiveAppointment/FilesSection";
 import InputDetails from "../components/LiveAppointment/InputDetails";
 import { fetchAppointmentById } from "../features/appointments/fetchAppointmentById";
+import AllTestsView from "../components/LiveAppointment/AllTestsView";
+import AllFilesView from "../components/LiveAppointment/AllFilesView";
+import { useSelector } from "react-redux";
 
 const LiveAppointment = ()=>{
+    const {testsVisible, filesVisible} = useSelector((state)=>state.fullView);
     const {appointmentId} = useParams();
     const dispatch = useDispatch();
 
@@ -45,6 +49,8 @@ const LiveAppointment = ()=>{
                     <InputDetails inputType={"chief_complaint"}/>
                     <InputDetails inputType={"doctor_notes"}/>
                 </div>
+                {testsVisible && <AllTestsView/>}
+                {filesVisible && <AllFilesView/>}
             </MainContent>
         </>
     )

@@ -18,10 +18,19 @@ import testDark from './medicalTestDark.svg';
 import binIcon from './bin.png';
 import live from './live-light.svg';
 import liveDark from './live-dark.svg';
+import editLogo from './edit-3-svgrepo-com.svg';
+import viewIcon from './eye-svgrepo-com.svg';
+import closeIcon from './close-ellipse-svgrepo-com.svg';
+
 export const icons = {
+    public: {
+        edit: editLogo,
+        close: closeIcon
+    },
     live: {
         light: live,
-        dark: liveDark
+        dark: liveDark,
+        view: viewIcon
     },
     dashboard: {
         light: dashIcon,

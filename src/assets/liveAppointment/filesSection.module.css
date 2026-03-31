@@ -23,7 +23,7 @@
     margin-bottom: 10px;
 }
 
-.head .addBtn{
+.head .btns .addBtn{
     width: 150px;
     border: none;
     background-color: #0A3D62;
@@ -36,8 +36,37 @@
     padding: 5px 10px;
 }
 
-.head .addBtn:hover{
+.head .btns .addBtn:hover{
     background-color: #0a3d62af;
+}
+
+.head .btns{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.btns .edit{
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+}
+
+.btns .edit img{
+    width: 25px;
+    height: 25px;
+}
+
+
+
+.btns .edit:hover{
+    background-color: #66748c3a;
+    color: white;
+    cursor: pointer;
 }
 
 .main .cardsBox{
