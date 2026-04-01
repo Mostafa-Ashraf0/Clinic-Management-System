@@ -66,11 +66,13 @@ const Dashboard = ()=>{
             },
             (payload) => {
                 console.log("Change received!", payload);
-                
+
                 getAppointment();
             }
             )
-            .subscribe();
+            .subscribe((status) => {
+      console.log("Subscription status:", status);
+    });
 
         return () => {
             supabase.removeChannel(channel);
