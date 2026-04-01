@@ -88,7 +88,8 @@ const FileUploadForm = ()=>{
                         <Form.Control 
                         type='file'
                         name='file'
-                        accept=".jpg,.jpeg,.png"
+                        accept=".jpg,.jpeg,.png,image/*"
+                        capture="environment"
                         onChange={handleChange}
                         required
                         />
