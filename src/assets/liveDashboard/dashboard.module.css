@@ -81,6 +81,14 @@
   background-color: #dbe7fc;
 }
 
+.slot .appoint{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
 .main{
   display: flex;
   align-items: center;
@@ -123,12 +131,11 @@
 .slot .type {
   padding: 5px 10px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .slot .status{
-  background-color: #d4edda;
-  color: #155724;
+  color: white;
 }
 
 .slot .type{

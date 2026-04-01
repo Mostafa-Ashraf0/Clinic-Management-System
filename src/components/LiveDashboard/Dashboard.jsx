@@ -22,6 +22,13 @@ const Dashboard = ()=>{
     const ActionsListView = useSelector((state)=>state.appointment.actionsList);
     const liveFormVisible = useSelector((state)=>state.fullView.liveFormVisible);
 
+    //Coloring
+    const statusColor = {
+        scheduled: { bg: "#e0e0e0", color: "#333" },
+        completed: { bg: "#d4edda", color: "#155724" },
+        cancelled: { bg: "#f8d7da", color: "#721c24" } 
+    };
+
     const fetchTime = async()=>{
         const data = await getWorkingTime();
         if(data){
@@ -71,8 +78,8 @@ const Dashboard = ()=>{
             }
             )
             .subscribe((status) => {
-      console.log("Subscription status:", status);
-    });
+                console.log("Subscription status:", status);
+            });
 
         return () => {
             supabase.removeChannel(channel);
@@ -112,14 +119,16 @@ const Dashboard = ()=>{
                     <div className={style.timeContainer}>
                         <span className={style.time}>Time</span>
                     </div>
+
                     <div className={style.info}>
                         <span className={style.patient}>Patient Name</span>
                     </div>
                 </div>
+
                 <div className={style.tags}>
                     <span className={style.type}>Session type</span>
                     <span className={style.status}>Status</span>
-                    <span>Actions</span>
+                    <span className={style.action}>Actions</span>
                 </div>
             </div>
             {timeSlots.map((time, index) => (
@@ -130,13 +139,17 @@ const Dashboard = ()=>{
                     </div>
                 </div>
                 {data?.filter(d=>d.appointment_time.slice(0,5) === time).map(f=>(
-                    <div key={f.id}>
+                    <div key={f.id} className={style.appoint}>
                     <div className={style.info}>
-                            <span className={style.patient} onClick={()=>handleClick(f)}>{f.patient_name}</span>
+                        <span className={style.patient} onClick={()=>handleClick(f)}>{f.patient_name}</span>
                     </div>
                     <div className={style.tags}>
                         <span className={style.type}>{f.type}</span>
-                        <span className={style.status}>{f.status}</span>
+                        <span 
+                        className={style.status} 
+                        style={{backgroundColor:statusColor[f.status]?.bg, color:statusColor[f.status]?.color}}>
+                            {f.status}
+                        </span>
                         <span className={style.action} 
                         onClick={() => handleActionsList(f.id)}
                         style={{position:"relative"}}>
