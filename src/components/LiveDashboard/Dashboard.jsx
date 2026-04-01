@@ -9,6 +9,7 @@ import ActionsList from './ActionsList';
 import { icons } from '../../assets/icons';
 import AddAppointmentView from './AddAppointmentView';
 import { setLiveFormVisible } from '../../features/liveAppointment/fullViewSlice';
+import supabase from '../../utils/supabase';
 
 const Dashboard = ()=>{
     const navigate = useNavigate();
@@ -50,6 +51,32 @@ const Dashboard = ()=>{
             console.log(data);
         }
     }
+
+
+
+    useEffect(() => {
+        const channel = supabase
+            .channel("appointments-channel")
+            .on(
+            "postgres_changes",
+            {
+                event: "*",
+                schema: "public",
+                table: "appointment",
+            },
+            (payload) => {
+                console.log("Change received!", payload);
+                
+                getAppointment();
+            }
+            )
+            .subscribe();
+
+        return () => {
+            supabase.removeChannel(channel);
+        };
+    }, []);
+
 
     useEffect(() => {
         fetchTime();
