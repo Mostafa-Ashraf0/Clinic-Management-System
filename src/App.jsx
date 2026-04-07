@@ -16,6 +16,8 @@ import PatientEmrGeneral from './pages/PatientEmrGeneral';
 import PatientEmrMedical from './pages/PatientEmrMedical';
 import PatientEmrFiles from './pages/PatientEmrFiles';
 import MedicalTests from './pages/MedicalTests';
+import MedicalOperations from './pages/MedicalOperations';
+import Settings from './pages/Settings';
 import PrivateRoute from './components/PrivateRoute';
 import { Route,BrowserRouter,Routes } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -85,6 +87,16 @@ function App() {
           <Route path='/medicalTests' element={
             <PrivateRoute>
               <MedicalTests/>
+            </PrivateRoute>
+          }/>
+          <Route path='/operations' element={
+            <PrivateRoute>
+              <MedicalOperations/>
+            </PrivateRoute>
+          }/>
+          <Route path='/settings' element={
+            <PrivateRoute>
+              <Settings/>
             </PrivateRoute>
           }/>
           <Route path='/patients/:patientId/general' element={

@@ -22,6 +22,10 @@ import editLogo from './edit-3-svgrepo-com.svg';
 import viewIcon from './eye-svgrepo-com.svg';
 import closeIcon from './close-ellipse-svgrepo-com.svg';
 import addAppoint from './add-square-svgrepo-com.svg';
+import opsLight from './medical-operation-light.svg';
+import opsDark from './medical-operation-dark.svg';
+import setLight from './settings-light.svg';
+import setDark from './settings-dark.svg';
 
 export const icons = {
     public: {
@@ -58,6 +62,14 @@ export const icons = {
         light: test, 
         dark: testDark,
         bin: binIcon
+    },
+    operations:{
+        light: opsLight,
+        dark: opsDark
+    },
+    settings:{
+        light: setLight,
+        dark: setDark
     },
     header:{
         dropdown: selectDropDown,

@@ -58,6 +58,18 @@ const Sidebar = ()=>{
                         <span>Medical Tests</span>
                     </Link>
                 </li>
+                <li className={page==="operations"?"light":"dark"}>
+                    <Link to={"/operations"}>
+                        <img src={page==="operations"?icons.operations.light:icons.operations.dark} alt="app-icon" />
+                        <span>Medical Operations</span>
+                    </Link>
+                </li>
+                <li className={page==="settings"?"light":"dark"}>
+                    <Link to={"/settings"}>
+                        <img src={page==="settings"?icons.settings.light:icons.settings.dark} alt="app-icon" />
+                        <span>Settings</span>
+                    </Link>
+                </li>
             </ul>
         </div>
     )
