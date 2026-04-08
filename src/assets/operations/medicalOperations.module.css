@@ -1,0 +1,41 @@
+.main{
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    background-color: white;
+    border: solid 1px #D2D5DB;
+    border-radius: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.main .head{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    border-bottom: solid 1px #D2D5DB;
+    margin-bottom: 20px;
+}
+
+.head .title{
+    color: rgb(102, 116, 140);
+    font-size: 20px;
+}
+
+.head .add{
+    border: none;
+    background-color: #2F9CCA;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 17px;
+}
+
