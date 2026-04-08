@@ -7,7 +7,7 @@ import { getClinic } from '../../features/getClinic';
 import {addNewOperation} from '../../features/operations/addNewOperation';
 import { getOpsCategories } from '../../features/operations/getOpsCategory';
 
-const AddOperationsForm = ()=>{
+const AddOperationsForm = ({onTestAdded})=>{
     const dispatch = useDispatch();
     const [clinic, setClinic] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -30,7 +30,7 @@ const AddOperationsForm = ()=>{
                 clinic_id: '',
                 category_id: '',
                 });
-            //onTestAdded();
+            onTestAdded();
         }
     }
 
@@ -80,7 +80,7 @@ const AddOperationsForm = ()=>{
                         <Form.Label>Operation Name *</Form.Label>
                         <Form.Control
                         name='name'
-                        value={formData.test_name}
+                        value={formData.name}
                         onChange={handleChange}
                         type='text'
                         required/>
