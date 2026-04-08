@@ -4,7 +4,7 @@ const OperationsTable = ({data})=>{
     
     return(
         <div className={`${style.table} d-flex flex-column`}>
-                    <div className={`${style.head}`}>Medical Tests</div>
+                    <div className={`${style.head}`}>Medical Operations</div>
                     <div className={`${style["t-body"]}`}>
                         <table>
                         <thead>

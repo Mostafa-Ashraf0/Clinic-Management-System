@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getWorkingTime } from '../features/liveDashboard/getWorkingTime';
 import { setSlots } from '../features/appointments/appointmentSlice';
 import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
+import { setFinalPatient,setPhone,setSelectedPatient } from '../features/appointments/patientSearchSlice';
 
 const AppointmentForm = ({date}) => {
       const today = new Date().toISOString().split("T")[0];
@@ -30,8 +31,8 @@ const AppointmentForm = ({date}) => {
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [clinic, setClinic] = useState([]);
-  const [phone, setPhone] = useState("");
-  const [selectedPatient, setSelectedPatient] = useState([]);
+  /*const [phone, setPhone] = useState("");
+  const [selectedPatient, setSelectedPatient] = useState([]);*/
   const [formData, setFormData] = useState({
     doctor: '',
     patient: '',
@@ -40,11 +41,11 @@ const AppointmentForm = ({date}) => {
     clinic_id: '',
     type:''
   });
-  const [finalPatient, setFinalPatient] = useState({
+  /*const [finalPatient, setFinalPatient] = useState({
         name:'',
         age:'',
         email:'',
-    });
+    });*/
 
   // Reset form after submit
   useEffect(() => {
@@ -57,7 +58,7 @@ const AppointmentForm = ({date}) => {
         clinic_id:'',
         type:''
       });
-      setSelectedPatient([]);
+      dispatch(setSelectedPatient([]));
       setSubmited(false);
     }
   }, [submited,initialDate]);
@@ -72,15 +73,15 @@ const AppointmentForm = ({date}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    console.log(selectedPatient);
+    /*console.log(formData);
+    console.log(selectedPatient);*/
     AddAppointment(formData, setSubmited);
-    setPhone("");
-    setFinalPatient({
+    dispatch(setPhone(""));
+    dispatch(setFinalPatient({
       name:'',
       age:'',
       email:''
-    });
+    }));
     setFormData({
         doctor: '',
         patient: '',
@@ -121,12 +122,6 @@ const AppointmentForm = ({date}) => {
           <AppointmentSearch 
             setFormData={setFormData} 
             formData={formData} 
-            setSelectedPatient={setSelectedPatient} 
-            selectedPatient={selectedPatient} 
-            phone={phone}
-            setPhone={setPhone}
-            finalPatient={finalPatient}
-            setFinalPatient={setFinalPatient}
           />
         </div>
         <Form

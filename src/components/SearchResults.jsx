@@ -1,17 +1,19 @@
 import '../assets/searchDropdown.css';
 import { useSelector,useDispatch } from 'react-redux';
 import { setDropdown } from '../features/appointments/appointmentSlice';
+import { setFinalPatient, setPhone } from '../features/appointments/patientSearchSlice';
 
-const SearchResults = ({selectedPatients,setFormData,setPhone,setFinalPatient})=>{
+const SearchResults = ({setFormData})=>{
     const dispatch = useDispatch();
+    const {selectedPatient} = useSelector((state)=> state.patientSearch)
     const { dropdownViewd } = useSelector((state)=>state.appointment);
     const handleClick = (p)=>{
-        setFinalPatient({
+        dispatch(setFinalPatient({
             name:p.name || '',
             phone:p.phone || '',
             email:p.email || ''
-        });
-        setPhone(p.phone || '');
+        }));
+        dispatch(setPhone(p.phone || ''));
         setFormData((prev) => ({
             ...prev,
             patient: p.id || '',
@@ -20,7 +22,7 @@ const SearchResults = ({selectedPatients,setFormData,setPhone,setFinalPatient})=
     }
     return(
         <div className="search-drop-down" style={dropdownViewd?{display:"flex"}:{display:"none"}}>
-            {selectedPatients.map(p=>(
+            {selectedPatient.map(p=>(
                 <span key={p.id} onClick={()=>handleClick(p)}>{p.phone}</span>
             ))}
         </div>

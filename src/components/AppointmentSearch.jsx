@@ -5,22 +5,21 @@ import SearchResults from './SearchResults';
 import { useSelector,useDispatch } from 'react-redux';
 import { setDropdown } from '../features/appointments/appointmentSlice';
 import { icons } from "../assets/icons";
+import { setSelectedPatient, setPhone } from '../features/appointments/patientSearchSlice';
 
-const AppointmentSearch = ({setFormData,setSelectedPatient,selectedPatient,phone,setPhone,finalPatient,setFinalPatient})=>{
+const AppointmentSearch = ({setFormData})=>{
     const dispatch = useDispatch();
     const { dropdownViewd } = useSelector((state)=>state.appointment);
     const [patients, setPatients] = useState([]);
-    
+    const {phone, selectedPatient,finalPatient} = useSelector((state)=>state.patientSearch);
 
     const handleChange = (e)=>{
         const value = e.target.value.trim();
-        console.log(value);
         {(value.length === 0)?dispatch(setDropdown(false)):dispatch(setDropdown(true))}
-        setPhone(value);
+        dispatch(setPhone(value));
         const foundPatient = patients.filter((p) => p.phone.startsWith(value));
         if (foundPatient.length>0) {
-        console.log(foundPatient>0)
-        setSelectedPatient(foundPatient);
+        dispatch(setSelectedPatient(foundPatient));
         } else {
         console.log("not found")
         }
@@ -74,10 +73,7 @@ const AppointmentSearch = ({setFormData,setSelectedPatient,selectedPatient,phone
                 </Form>
 
                 {selectedPatient.length>0 && dropdownViewd?<SearchResults
-                 selectedPatients={selectedPatient}
                  setFormData={setFormData}
-                 setPhone={setPhone}
-                 setFinalPatient={setFinalPatient}
                  />:""}
         </div>
     )
