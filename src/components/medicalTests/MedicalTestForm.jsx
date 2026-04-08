@@ -32,7 +32,7 @@ const MedicalTestForm = ({onTestAdded})=>{
 
     const handleSubmit = async(e)=>{
             e.preventDefault();
-            const success = await addNewTestParams(formData)
+            const success = await addNewTestParams(formData);
             console.log(formData);
             if(success){
                 dispatch(setIsVisible(false));

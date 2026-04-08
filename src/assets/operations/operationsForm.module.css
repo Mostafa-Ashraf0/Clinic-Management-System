@@ -1,0 +1,87 @@
+:root {
+  --main-color: #384152;
+  --secound-color: #1f304e3a;
+}
+
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0a3d623d;
+    z-index: 1000;
+}
+
+
+.card{
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
+}
+
+.cardBody{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 30px;
+    overflow-y: auto;
+    width: 600px;
+}
+
+.cardBody::-webkit-scrollbar
+{
+  width: 4px;
+}
+
+.cardBody::-webkit-scrollbar-thumb {
+  background-color: #797c80;
+  border-radius: 3px;
+}
+
+.cardBody .head{
+    width: 100%;
+    display: flex;
+    align-items: start;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    border-bottom: solid 2px var(--secound-color);
+}
+
+.cardBody .head h1
+{
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--main-color);
+}
+
+
+.cardBody .form{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+    gap: 10px;
+    color: var(--main-color);
+}
+
+.cardBody .form .group{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: start;
+    gap: 5px;
+}
+
+
+.submitBox{
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    padding: 10px 0;
+}
+
+.submitBox .cancel{
+    background-color: rgb(150, 54, 54);
+    border: none;
+}

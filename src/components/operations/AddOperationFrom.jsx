@@ -1,57 +1,48 @@
 import { Card, Form, Button } from 'react-bootstrap';
-import style from '../../assets/medicalTest/medicalTestForm.module.css';
+import style from '../../assets/operations/operationsForm.module.css';
 import {useState, useEffect} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { setIsVisible } from '../../features/operations/operationsFormSlice';
 import { getClinic } from '../../features/getClinic';
-
+import {addNewOperation} from '../../features/operations/addNewOperation';
+import { getOpsCategories } from '../../features/operations/getOpsCategory';
 
 const AddOperationsForm = ()=>{
     const dispatch = useDispatch();
     const [clinic, setClinic] = useState([]);
+    const [categories, setCategories] = useState([]);
     const { isVisible } = useSelector((state)=>state.operationsForm)
     const [formData, setFormData] = useState({
-            name: '',
-            clinic_id: '',
-            category_id: '',
-        })
+        name: '',
+        clinic_id: '',
+        category_id: '',
+    })
 
 
     const handleSubmit = async(e)=>{
-            e.preventDefault();
-            console.log(formData);
-            /*if(success){
-                dispatch(setIsVisible(false));
-                setFormData({
-                    test_name: '',
-                    clinic_id: '',
-                    category_id: '',
-                    parameters: [{ 
-                        name:'',
-                        unit_id:'',
-                        type:'',
-                        min:'',
-                        max:''
-                        }]
-                    });
-                onTestAdded();
-            }*/
+        e.preventDefault();
+        const success = await addNewOperation(formData)
+        console.log(formData);
+        if(success){
+            dispatch(setIsVisible(false));
+            setFormData({
+                name: '',
+                clinic_id: '',
+                category_id: '',
+                });
+            //onTestAdded();
         }
+    }
+
     const handleCancel = ()=>{
         dispatch(setIsVisible(false));
         setFormData({
-        test_name: '',
+        name: '',
         clinic_id: '',
         category_id: '',
-        parameters: [{ 
-            name:'',
-            unit_id:'',
-            type:'',
-            min:'',
-            max:''
-            }]
         });
     }
+
     const handleChange = (e)=>{
         const { name, value } = e.target;
         setFormData((prev)=>({
@@ -68,6 +59,13 @@ const AddOperationsForm = ()=>{
         displayClinic();
     },[])
 
+    useEffect(()=>{
+        const displayCategories = async()=>{
+            const categoriesData = await getOpsCategories(formData.clinic_id || 0);
+            setCategories(categoriesData);
+        }
+        displayCategories();
+    },[formData.clinic_id])
 
     
     return(
@@ -81,7 +79,7 @@ const AddOperationsForm = ()=>{
                     <Form.Group className={style.group}>
                         <Form.Label>Operation Name *</Form.Label>
                         <Form.Control
-                        name='test_name'
+                        name='name'
                         value={formData.test_name}
                         onChange={handleChange}
                         type='text'
@@ -108,6 +106,7 @@ const AddOperationsForm = ()=>{
                         onChange={handleChange}
                         required>
                             <option value="">Select an option</option>
+                            {categories.map(c=><option value={c.id} key={c.id}>{c.name}</option>)}
                         </Form.Select>
                     </Form.Group>
                     <div className={style.submitBox}>
