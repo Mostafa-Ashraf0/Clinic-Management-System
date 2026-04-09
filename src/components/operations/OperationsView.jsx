@@ -7,23 +7,37 @@ import { fetchOperations } from '../../features/operations/getOperations';
 import { useState, useEffect } from 'react';
 import OperationsTable from './OperationsTable';
 import ScheduleOperationForm from './ScheduleOperationForm';
+import { fetchScheduleOps } from '../../features/operations/getScheduleOps';
+import ScheduleOpsTable from './ScheduleOpsTable';
 
 
 const OperationsView = ()=>{
-    const [tests, setTests] = useState([]);
+    const [operations, setOperations] = useState([]);
+    const [scheduleOps, setScheduleOps] = useState([]);
     const dispatch = useDispatch();
 
 
     const getOperations = async()=>{
-        const data = await fetchOperations();
-        if(data){
-            console.log(data);
-            setTests(data);
+    const data = await fetchOperations();
+    
+    if(data){
+        setOperations(data);
+    }
+    
+    };
+
+    const getScheduleOps = async()=>{
+        const ScheduleData = await fetchScheduleOps();
+        if(ScheduleData){
+            console.log(ScheduleData)
+            setScheduleOps(ScheduleData);
         }
-        };
-        useEffect(()=>{
-            getOperations();
-        },[])
+    }
+    
+    useEffect(()=>{
+        getOperations();
+        getScheduleOps();
+    },[])
 
     const handleClick = ()=>{
         dispatch(setIsVisible(true));
@@ -44,9 +58,10 @@ const OperationsView = ()=>{
                     <span className={style.text} onClick={handleScheduleClick}>Schedule Operation</span>
                 </button>
             </div>
-            <OperationsTable data={tests}/>
+            <OperationsTable data={operations}/>
             <AddOperationsForm onTestAdded = {getOperations}/>
-            <ScheduleOperationForm/>
+            <ScheduleOperationForm onTestAdded = {getScheduleOps}/>
+            <ScheduleOpsTable data={scheduleOps}/>
         </div>
     )
 };

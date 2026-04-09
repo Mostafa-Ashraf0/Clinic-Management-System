@@ -11,9 +11,9 @@ import style from '../../assets/operations/scheduleForm.module.css';
 import { setIsScheduleVisible } from '../../features/operations/operationsFormSlice';
 
 
-const ScheduleOperationForm = ({date}) => {
+const ScheduleOperationForm = ({onTestAdded,date}) => {
         const today = new Date().toISOString().split("T")[0];
-        const initialDate = date || today;
+        const initialDate = date||today;
         const dispatch = useDispatch();
         const { isScheduleVisible } = useSelector((state)=>state.operationsForm);
 
@@ -53,9 +53,9 @@ const ScheduleOperationForm = ({date}) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    scheduleOperation(formData, setSubmited);
+    await scheduleOperation(formData, setSubmited);
     dispatch(setPhone(""));
     dispatch(setFinalPatient({
       name:'',
@@ -71,6 +71,7 @@ const ScheduleOperationForm = ({date}) => {
         date: initialDate
       });
       dispatch(setIsScheduleVisible(false));
+      await onTestAdded();
   };
 
   
