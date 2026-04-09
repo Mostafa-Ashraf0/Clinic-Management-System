@@ -31,8 +31,7 @@ const AppointmentForm = ({date}) => {
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [clinic, setClinic] = useState([]);
-  /*const [phone, setPhone] = useState("");
-  const [selectedPatient, setSelectedPatient] = useState([]);*/
+
   const [formData, setFormData] = useState({
     doctor: '',
     patient: '',
@@ -41,13 +40,7 @@ const AppointmentForm = ({date}) => {
     clinic_id: '',
     type:''
   });
-  /*const [finalPatient, setFinalPatient] = useState({
-        name:'',
-        age:'',
-        email:'',
-    });*/
 
-  // Reset form after submit
   useEffect(() => {
     if (submited) {
       setFormData({
@@ -73,8 +66,6 @@ const AppointmentForm = ({date}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    /*console.log(formData);
-    console.log(selectedPatient);*/
     AddAppointment(formData, setSubmited);
     dispatch(setPhone(""));
     dispatch(setFinalPatient({

@@ -1,124 +1,213 @@
 import { Card, Form, Button } from 'react-bootstrap';
-import style from '../../assets/operations/operationsForm.module.css';
-import {useState, useEffect} from 'react';
-import { useSelector,useDispatch } from 'react-redux';
-import { setIsVisible } from '../../features/operations/operationsFormSlice';
+import { AddAppointment } from '../../features/appointments/appointments';
+import { useEffect, useState } from 'react';
+import { fetchDoctors } from '../../features/appointments/fetchDoctors';
 import { getClinic } from '../../features/getClinic';
-import {addNewOperation} from '../../features/operations/addNewOperation';
-import { getOpsCategories } from '../../features/operations/getOpsCategory';
+import AppointmentSearch from '../AppointmentSearch';
+import { useDispatch } from 'react-redux';
+import { fetchOpsByClinicId } from '../../features/operations/getOperationByClinicId';
+import { setLiveFormVisible } from '../../features/liveAppointment/fullViewSlice';
+import { setFinalPatient,setPhone,setSelectedPatient } from '../../features/appointments/patientSearchSlice';
+import { scheduleOperation } from '../../features/operations/scheduleOperation';
 
-const ScheduleOperationForm = ({onTestAdded})=>{
-    const dispatch = useDispatch();
-    const [clinic, setClinic] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const { isVisible } = useSelector((state)=>state.operationsForm)
-    const [formData, setFormData] = useState({
-        name: '',
+const ScheduleOperationForm = ({date}) => {
+      const today = new Date().toISOString().split("T")[0];
+      const initialDate = date || today;
+      const dispatch = useDispatch();
+
+  const [submited, setSubmited] = useState(false);
+  const [doctors, setDoctors] = useState([]);
+  const [clinic, setClinic] = useState([]);
+  const [operation, setOperation] = useState([]);
+
+  const [formData, setFormData] = useState({
+    doctor: '',
+    patient: '',
+    schedule_at: today,
+    clinic_id: '',
+    operation_id:'',
+    date: initialDate
+  });
+
+  useEffect(() => {
+    if (submited) {
+      setFormData({
+        doctor: '',
+        patient: '',
+        schedule_at: today,
         clinic_id: '',
-        category_id: '',
-    })
-
-
-    const handleSubmit = async(e)=>{
-        e.preventDefault();
-        const success = await addNewOperation(formData)
-        console.log(formData);
-        if(success){
-            dispatch(setIsVisible(false));
-            setFormData({
-                name: '',
-                clinic_id: '',
-                category_id: '',
-                });
-            onTestAdded();
-        }
+        operation_id:'',
+        date: initialDate
+      });
+      dispatch(setSelectedPatient([]));
+      setSubmited(false);
     }
+  }, [submited,initialDate]);
 
-    const handleCancel = ()=>{
-        dispatch(setIsVisible(false));
-        setFormData({
-        name: '',
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value.trim(),
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    scheduleOperation(formData, setSubmited);
+    dispatch(setPhone(""));
+    dispatch(setFinalPatient({
+      name:'',
+      age:'',
+      email:''
+    }));
+    setFormData({
+        doctor: '',
+        patient: '',
+        schedule_at: today,
         clinic_id: '',
-        category_id: '',
-        });
-    }
+        operation_id:'',
+        date: initialDate
+      });
+      dispatch(setLiveFormVisible(false));
+  };
 
-    const handleChange = (e)=>{
-        const { name, value } = e.target;
-        setFormData((prev)=>({
-            ...prev,
-            [name]: value
-        }));
+  
+
+  // Fetch doctors and clinics
+  useEffect(() => {
+    const loadDoctors_clinics = async () => {
+      const doctorsData = await fetchDoctors();
+      setDoctors(doctorsData);
+      const clinicData = await getClinic();
+      setClinic(clinicData);
     };
+    loadDoctors_clinics();
+  }, []);
 
-    useEffect(()=>{
-        const displayClinic = async()=>{
-            const clinicData = await getClinic();
-            setClinic(clinicData);
-        }
-        displayClinic();
-    },[])
+  //fetch Operations by clinicId
+  useEffect(()=>{
+    if (!formData.clinic_id) return;
+    const loadOps = async()=>{
+        const opsData = await fetchOpsByClinicId(formData.clinic_id);
+        setOperation(opsData);
+    }
+    loadOps();
+  },[formData.clinic_id])
+  
 
-    useEffect(()=>{
-        const displayCategories = async()=>{
-            const categoriesData = await getOpsCategories(formData.clinic_id || 0);
-            setCategories(categoriesData);
-        }
-        displayCategories();
-    },[formData.clinic_id])
-
-    
-    return(
-        <div className={style.container} style={isVisible?{display:'flex'}:{display:'none'}}>
-        <Card className={style.card} style={{border:'none',display:'flex'}}>
-            <Card.Body className={style.cardBody}>
-                <div className={style.head}>
-                    <h1>Create New Operation</h1>
-                </div>
-                <Form className={style.form} onSubmit={handleSubmit}>
-                    <Form.Group className={style.group}>
-                        <Form.Label>Operation Name *</Form.Label>
-                        <Form.Control
-                        name='name'
-                        value={formData.name}
-                        onChange={handleChange}
-                        type='text'
-                        required/>
-                    </Form.Group>
-                    <Form.Group className={style.group}>
-                        <Form.Label>Clinic *</Form.Label>
-                        <Form.Select
-                        aria-label="Default select example"
-                        name='clinic_id'
-                        value={formData.clinic_id}
-                        onChange={handleChange}
-                        required>
-                            <option value="">Select an option</option>
-                            {clinic.map(c=><option value={c.id} key={c.id}>{c.name}</option>)}
-                        </Form.Select>    
-                    </Form.Group>
-                    <Form.Group className={style.group}>
-                        <Form.Label>Category *</Form.Label>
-                        <Form.Select
-                        aria-label="Default select example"
-                        name='category_id'
-                        value={formData.category_id}
-                        onChange={handleChange}
-                        required>
-                            <option value="">Select an option</option>
-                            {categories.map(c=><option value={c.id} key={c.id}>{c.name}</option>)}
-                        </Form.Select>
-                    </Form.Group>
-                    <div className={style.submitBox}>
-                        <Button onClick={handleCancel} className={style.cancel}>Cancel</Button>
-                        <Button type='submit'>Create</Button>
-                    </div>
-                </Form>
-            </Card.Body>
-        </Card>
+  return (
+    <Card>
+      <Card.Body
+        className="d-flex flex-column align-items-center"
+        style={{ height: '600px', padding: '30px' }}
+      >
+        <div 
+        className="d-flex flex-column align-items-start"
+        style={{ gap: '20px', width: '560px', color: '#384152',marginBottom:"20px"}}
+        >
+          <h4 className="m-0 p-0">Schedule Operation</h4>
+          <AppointmentSearch 
+            setFormData={setFormData} 
+            formData={formData} 
+          />
         </div>
-    )
-};
+        <Form
+          onSubmit={handleSubmit}
+          className="d-flex flex-column align-items-start"
+          style={{ gap: '20px', width: '560px', color: '#384152' }}
+        >
+          <Form.Group
+            className="d-flex align-items-center justify-content-center"
+            style={{ width: '560px', gap: '10px',marginBottom:"20px" }}
+          >
+            {/* Doctor */}
+            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
+              <Form.Label>Doctor*</Form.Label>
+              <Form.Select
+                value={formData.doctor}
+                name="doctor"
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select doctor</option>
+                {doctors.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+            {/* Clinic */}
+            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
+              <Form.Label>Clinic*</Form.Label>
+              <Form.Select
+                value={formData.clinic_id}
+                name="clinic_id"
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select clinic</option>
+                {clinic.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+          </Form.Group>
 
+
+          {/* Date & Time */}
+          <Form.Group
+            className="d-flex align-items-center justify-content-center"
+            style={{ width: '560px', gap: '10px' }}
+          >
+            <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
+              <Form.Label>Date*</Form.Label>
+                <Form.Control
+                  type={date?"text":"date"}
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  required
+                  disabled={!!date}
+                />
+            </Form.Group>
+            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
+              <Form.Label>Operation*</Form.Label>
+              <Form.Select
+                value={formData.operation_id}
+                name="operation_id"
+                onChange={handleChange}
+                required
+              >
+                <option value="">Select clinic</option>
+                {operation?.map((o) => (
+                  <option key={o.id} value={o.id}>
+                    {o.name}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
+          </Form.Group>
+
+          <Button
+            type="submit"
+            className="d-flex align-items-center justify-content-center"
+            style={{
+              width: '97px',
+              height: '45px',
+              backgroundColor: '#2F9CCA',
+              border: 'none',
+            }}
+          >
+            Save
+          </Button>
+        </Form>
+      </Card.Body>
+    </Card>
+  );
+};
 
 export default ScheduleOperationForm;

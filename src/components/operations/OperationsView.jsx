@@ -6,6 +6,7 @@ import AddOperationsForm from './AddOperationFrom';
 import { fetchOperations } from '../../features/operations/getOperations';
 import { useState, useEffect } from 'react';
 import OperationsTable from './OperationsTable';
+import ScheduleOperationForm from './ScheduleOperationForm';
 
 
 const OperationsView = ()=>{
@@ -38,6 +39,7 @@ const OperationsView = ()=>{
             </div>
             <OperationsTable data={tests}/>
             <AddOperationsForm onTestAdded = {getOperations}/>
+            <ScheduleOperationForm/>
         </div>
     )
 };
