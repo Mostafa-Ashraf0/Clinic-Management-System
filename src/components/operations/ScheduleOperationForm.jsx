@@ -1,25 +1,26 @@
 import { Card, Form, Button } from 'react-bootstrap';
-import { AddAppointment } from '../../features/appointments/appointments';
 import { useEffect, useState } from 'react';
 import { fetchDoctors } from '../../features/appointments/fetchDoctors';
 import { getClinic } from '../../features/getClinic';
 import AppointmentSearch from '../AppointmentSearch';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchOpsByClinicId } from '../../features/operations/getOperationByClinicId';
-import { setLiveFormVisible } from '../../features/liveAppointment/fullViewSlice';
 import { setFinalPatient,setPhone,setSelectedPatient } from '../../features/appointments/patientSearchSlice';
 import { scheduleOperation } from '../../features/operations/scheduleOperation';
+import style from '../../assets/operations/scheduleForm.module.css';
+import { setIsScheduleVisible } from '../../features/operations/operationsFormSlice';
+
 
 const ScheduleOperationForm = ({date}) => {
-      const today = new Date().toISOString().split("T")[0];
-      const initialDate = date || today;
-      const dispatch = useDispatch();
+        const today = new Date().toISOString().split("T")[0];
+        const initialDate = date || today;
+        const dispatch = useDispatch();
+        const { isScheduleVisible } = useSelector((state)=>state.operationsForm);
 
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [clinic, setClinic] = useState([]);
   const [operation, setOperation] = useState([]);
-
   const [formData, setFormData] = useState({
     doctor: '',
     patient: '',
@@ -69,7 +70,7 @@ const ScheduleOperationForm = ({date}) => {
         operation_id:'',
         date: initialDate
       });
-      dispatch(setLiveFormVisible(false));
+      dispatch(setIsScheduleVisible(false));
   };
 
   
@@ -97,7 +98,8 @@ const ScheduleOperationForm = ({date}) => {
   
 
   return (
-    <Card>
+    <div className={style.container} style={isScheduleVisible?{display:'flex'}:{display:'none'}}>
+    <Card className={style.card} style={{border:'none',display:'flex'}}>
       <Card.Body
         className="d-flex flex-column align-items-center"
         style={{ height: '600px', padding: '30px' }}
@@ -207,6 +209,7 @@ const ScheduleOperationForm = ({date}) => {
         </Form>
       </Card.Body>
     </Card>
+    </div>
   );
 };
 

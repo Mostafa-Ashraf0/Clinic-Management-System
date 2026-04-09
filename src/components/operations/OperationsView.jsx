@@ -1,7 +1,7 @@
 import style from '../../assets/operations/medicalOperations.module.css';
 import { icons } from '../../assets/icons';
 import { useDispatch } from 'react-redux';
-import { setIsVisible } from '../../features/operations/operationsFormSlice';
+import { setIsVisible, setIsScheduleVisible } from '../../features/operations/operationsFormSlice';
 import AddOperationsForm from './AddOperationFrom';
 import { fetchOperations } from '../../features/operations/getOperations';
 import { useState, useEffect } from 'react';
@@ -28,6 +28,9 @@ const OperationsView = ()=>{
     const handleClick = ()=>{
         dispatch(setIsVisible(true));
     }
+    const handleScheduleClick = ()=>{
+        dispatch(setIsScheduleVisible(true));
+    }
     return(
         <div className={style.main}>
             <div className={style.head}>
@@ -35,6 +38,10 @@ const OperationsView = ()=>{
                 <button className={style.add}>
                     <img src={icons.control.add} alt="add" />
                     <span className={style.text} onClick={handleClick}>Create New Operation</span>
+                </button>
+                <button className={style.add}>
+                    <img src={icons.control.add} alt="add" />
+                    <span className={style.text} onClick={handleScheduleClick}>Schedule Operation</span>
                 </button>
             </div>
             <OperationsTable data={tests}/>

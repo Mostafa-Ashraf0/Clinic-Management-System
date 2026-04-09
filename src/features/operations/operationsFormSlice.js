@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isVisible: false
+    isVisible: false,
+    isScheduleVisible:false
 };
 
 
@@ -11,9 +12,12 @@ const operationsForm = createSlice({
     reducers:{
         setIsVisible(state,action){
             state.isVisible = action.payload;
+        },
+        setIsScheduleVisible(state,action){
+            state.isScheduleVisible = action.payload;
         }
     }
 })
 
 export default operationsForm.reducer;
-export const {setIsVisible} = operationsForm.actions;
+export const {setIsVisible, setIsScheduleVisible} = operationsForm.actions;
