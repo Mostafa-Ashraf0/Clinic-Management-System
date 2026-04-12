@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import MainContent from "../components/MainContent";
+import SettingsForm from "../components/settings/settingForm";
+
 const Settings = ()=>{
     const dispatch = useDispatch();
         useEffect(()=>{
@@ -15,6 +17,7 @@ const Settings = ()=>{
             <Sidebar/>
             <MainContent>
                 <div>settings</div>
+                <SettingsForm/>
             </MainContent>
         </>
     )

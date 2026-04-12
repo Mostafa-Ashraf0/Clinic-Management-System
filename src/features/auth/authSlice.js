@@ -6,6 +6,7 @@ const initialState = {
     loading: false,
     session: null,
     error: null,
+    clinic_id: null,
     initialized: false,
  }
 
@@ -23,6 +24,9 @@ const authSlice = createSlice({
             state.error = null;
             state.initialized = true;
         },
+        setClinicId(state, action) {
+            state.clinic_id = action.payload;
+        }
 
     },
     extraReducers: (builder) => {
@@ -42,5 +46,5 @@ const authSlice = createSlice({
     }
 });
 
-export const {removeUser, addUser} = authSlice.actions;
+export const {removeUser, addUser, setClinicId} = authSlice.actions;
 export default authSlice.reducer;

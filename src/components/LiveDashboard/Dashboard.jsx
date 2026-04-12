@@ -11,7 +11,9 @@ import AddAppointmentView from './AddAppointmentView';
 import { setLiveFormVisible } from '../../features/liveAppointment/fullViewSlice';
 import supabase from '../../utils/supabase';
 
+
 const Dashboard = ()=>{
+    const clinicId = useSelector((state) => state.auth.clinic_id);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
@@ -30,7 +32,7 @@ const Dashboard = ()=>{
     };
 
     const fetchTime = async()=>{
-        const data = await getWorkingTime();
+        const data = await getWorkingTime(clinicId);
         if(data){
             dispatch(setSlots(data));
             console.log(data);
@@ -88,9 +90,10 @@ const Dashboard = ()=>{
 
 
     useEffect(() => {
+        if(!clinicId) return;
         fetchTime();
         getAppointment();
-    }, []); 
+    }, [clinicId]); 
 
 
     const handleAddBtn = ()=>{

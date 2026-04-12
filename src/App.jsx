@@ -25,13 +25,25 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import supabase from './utils/supabase';
-import { addUser, removeUser } from './features/auth/authSlice';
+import { addUser, removeUser,setClinicId } from './features/auth/authSlice';
+import { getClinicByUId } from './features/getClinicByUserId';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
       supabase.auth.getSession().then(({ data: { session } }) => {
-        if (session) dispatch(addUser(session));
+        if (session){
+          console.log(session.user.id)
+          dispatch(addUser(session));
+          const setClinic = async()=>{
+            const data = await getClinicByUId(session.user.id);
+            if (data?.clinic_id) {
+              dispatch(setClinicId(data.clinic_id));
+              console.log(data.clinic_id);
+            }
+          }
+          if(session.user.id) setClinic();
+        }
       })
       const {
         data: { subscription },
