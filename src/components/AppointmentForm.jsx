@@ -11,13 +11,14 @@ import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
 import { setFinalPatient,setPhone,setSelectedPatient } from '../features/appointments/patientSearchSlice';
 
 const AppointmentForm = ({date}) => {
+      const clinicId = useSelector((state) => state.auth.clinic_id);
       const today = new Date().toISOString().split("T")[0];
       const initialDate = date || today;
       const types = ["consultation","follow_up","emergency","checkup"];
       const dispatch = useDispatch();
       const timeSlots = useSelector((state)=>state.appointment.timeSlots);
       const fetchTime = async()=>{
-          const data = await getWorkingTime();
+          const data = await getWorkingTime(clinicId);
           if(data){
               dispatch(setSlots(data));
               console.log(data);
@@ -25,8 +26,9 @@ const AppointmentForm = ({date}) => {
       }
   
       useEffect(() => {
+        if(!clinicId) return;
           fetchTime();
-      }, []); 
+      }, [clinicId]); 
 
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
