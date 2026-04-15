@@ -87,7 +87,7 @@ const Dashboard = ()=>{
             </button>
         </div>
         <div className={style.slotsContainer}>
-            <div className={style.slotHead}>
+            {/*<div className={style.slotHead}>
                 <div className={style.main}>
                     <div className={style.timeContainer}>
                         <span className={style.time}>Time</span>
@@ -103,7 +103,7 @@ const Dashboard = ()=>{
                     <span className={style.status}>Status</span>
                     <span className={style.action}>Actions</span>
                 </div>
-            </div>
+            </div>*/}
             {timeSlots.map((time, index) => (
                 <TimeSlot key={index} time={time} data={data}/>
             ))}

@@ -12,7 +12,7 @@
 
 .head .addBtn{
     border: none;
-    background-color: #0A3D62;
+    background-color: #4a90e2;
     color: white;
     border-radius: 5px;
     display: flex;
@@ -23,7 +23,7 @@
 }
 
 .head .addBtn:hover{
-    background-color: #0a3d62af;
+    background-color:#4a91e290;
 }
 
 .head .addBtn img{
@@ -42,10 +42,13 @@
   margin-bottom: 20px;
 }
 
-.slotsContainer {
+.slotsContainer{
     display: flex;
     flex-direction: column;
     width: 100%;
+   background-color: #f4f6f8;
+    border-radius: 20px;
+    padding: 10px;
 }
 
 .slot,
@@ -73,6 +76,12 @@
   color: black;
 }
 
+.slot{
+  gap: 10px;
+  justify-content: start;
+  height: 100px;
+}
+
 .slot:not(:last-child){
     border-bottom: .5px solid rgba(0, 0, 0, 0.122);
 }
@@ -81,10 +90,17 @@
   background-color: #dbe7fc;
 }
 
+
+/*appointment*/
 .slot .appoint{
-  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #eaf2ff, #ffffff);
+  border-left: 4px solid #4a90e2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: start;
   justify-content: space-between;
 
 }
@@ -94,19 +110,21 @@
   align-items: center;
 }
 
-.main .info{
+.appoint .info{
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
+  margin-bottom: 10px;
 }
 
-.slot .main .info .patient{
+.slot .appoint .info .patient{
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
-  color: blue;
 }
 
-.slot .main .info .patient:hover{
-  color: rgb(4, 4, 131);
+.slot .appoint .info .patient:hover{
+  color: rgba(0, 0, 0, 0.575);
 } 
 
 .timeContainer{
@@ -125,13 +143,14 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  font-weight: 600;
 }
 
 .slot .status,
 .slot .type {
   padding: 5px 10px;
   border-radius: 20px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .slot .status{
@@ -146,5 +165,20 @@
   cursor: pointer;
 }
 
+.slotAddBox{
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 1px dashed rgba(0, 0, 0, 0.245);
+  border-radius: 20px;
+  color: rgba(0, 0, 0, 0.245);
+}
 
+.slotAddBox:hover{
+  border-color: black;
+  color: black;
+}
 
