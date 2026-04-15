@@ -2,54 +2,30 @@ import style from '../../assets/liveDashboard/dashboard.module.css';
 import { getWorkingTime } from '../../features/liveDashboard/getWorkingTime';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSlots, setActionsList } from '../../features/appointments/appointmentSlice';
+import { setSlots } from '../../features/appointments/appointmentSlice';
 import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayAppointments';
-import { useNavigate } from 'react-router-dom';
-import ActionsList from './ActionsList';
 import { icons } from '../../assets/icons';
 import AddAppointmentView from './AddAppointmentView';
 import { setLiveFormVisible } from '../../features/liveAppointment/fullViewSlice';
 import supabase from '../../utils/supabase';
+import TimeSlot from './TimeSlot';
 
 
 const Dashboard = ()=>{
     const clinicId = useSelector((state) => state.auth.clinic_id);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [data, setData] = useState([]);
     const addIcon = icons.live.add;
    
     const timeSlots = useSelector((state)=>state.appointment.timeSlots);
-    //visiability
-    const ActionsListView = useSelector((state)=>state.appointment.actionsList);
     const liveFormVisible = useSelector((state)=>state.fullView.liveFormVisible);
 
-    //Coloring
-    const statusColor = {
-        scheduled: { bg: "#e0e0e0", color: "#333" },
-        completed: { bg: "#d4edda", color: "#155724" },
-        cancelled: { bg: "#f8d7da", color: "#721c24" } 
-    };
 
     const fetchTime = async()=>{
         const data = await getWorkingTime(clinicId);
         if(data){
             dispatch(setSlots(data));
             console.log(data);
-        }
-    }
-
-    const handleActionsList = (appointId)=>{
-        if (ActionsListView.id === appointId) {
-            dispatch(setActionsList({
-                view: !ActionsListView.view,
-                id: appointId
-            }));
-        } else {
-            dispatch(setActionsList({
-                view: true,
-                id: appointId
-            }));
         }
     }
 
@@ -101,12 +77,6 @@ const Dashboard = ()=>{
     }
 
 
-    const handleClick = (data)=>{
-        if(data){
-            navigate(`/liveDashboard/liveAppointment/${data.id}`);
-        }
-    }
-
     return (
         <div className={style.dashboard}>
         <div className={style.head}>
@@ -135,37 +105,7 @@ const Dashboard = ()=>{
                 </div>
             </div>
             {timeSlots.map((time, index) => (
-            <div key={index} className={style.slot}>
-                <div className={style.main}>
-                    <div className={style.timeContainer}>
-                        <span className={style.time}>{time}</span>
-                    </div>
-                </div>
-                {data?.filter(d=>d.appointment_time.slice(0,5) === time).map(f=>(
-                    <div key={f.id} className={style.appoint}>
-                    <div className={style.info}>
-                        <span className={style.patient} onClick={()=>handleClick(f)}>{f.patient_name}</span>
-                    </div>
-                    <div className={style.tags}>
-                        <span className={style.type}>{f.type}</span>
-                        <span 
-                        className={style.status} 
-                        style={{backgroundColor:statusColor[f.status]?.bg, color:statusColor[f.status]?.color}}>
-                            {f.status}
-                        </span>
-                        <span className={style.action} 
-                        onClick={() => handleActionsList(f.id)}
-                        style={{position:"relative"}}>
-                            ...
-                            <ActionsList 
-                            display={ActionsListView.view && ActionsListView.id === f.id} 
-                            appointId={f.id}/>
-                        </span>
-                    </div>
-                    </div>
-                ))}
-            </div>
-
+                <TimeSlot key={index} time={time} data={data}/>
             ))}
         </div>
         {liveFormVisible &&  <AddAppointmentView/>}

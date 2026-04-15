@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getSettings } from "../../features/settings/getSettings";
 import { upsertSettings } from "../../features/settings/upsertSettings";
 import { useSelector } from "react-redux";
+import style from '../../assets/settings/settingsForm.module.css';
 
 export default function SettingsForm() {
     const clinicId = useSelector((state) => state.auth.clinic_id);
@@ -58,12 +59,11 @@ export default function SettingsForm() {
   }
 
   return (
-    <div className="p-4 max-w-md border rounded-lg space-y-4">
-      <h2 className="text-xl font-bold">Clinic Settings</h2>
-
+    <div className={style.main}>
+      <h2>Clinic Settings</h2>
       {/* Start Time */}
       <div>
-        <label className="block mb-1">Start Time</label>
+        <label>Start Time</label>
 
         {isEditing ? (
           <input
@@ -71,7 +71,6 @@ export default function SettingsForm() {
             name="start_time"
             value={form.start_time}
             onChange={handleChange}
-            className="border p-2 w-full"
           />
         ) : (
           <p>{form.start_time || "Not set"}</p>
@@ -80,7 +79,7 @@ export default function SettingsForm() {
 
       {/* End Time */}
       <div>
-        <label className="block mb-1">End Time</label>
+        <label>End Time</label>
 
         {isEditing ? (
           <input
@@ -88,7 +87,6 @@ export default function SettingsForm() {
             name="end_time"
             value={form.end_time}
             onChange={handleChange}
-            className="border p-2 w-full"
           />
         ) : (
           <p>{form.end_time || "Not set"}</p>
@@ -97,7 +95,7 @@ export default function SettingsForm() {
 
       {/* Session Duration */}
       <div>
-        <label className="block mb-1">Session Duration (minutes)</label>
+        <label>Session Duration (minutes)</label>
 
         {isEditing ? (
           <input
@@ -105,7 +103,6 @@ export default function SettingsForm() {
             name="session_duration"
             value={form.session_duration}
             onChange={handleChange}
-            className="border p-2 w-full"
           />
         ) : (
           <p>{form.session_duration || "Not set"}</p>
@@ -113,11 +110,10 @@ export default function SettingsForm() {
       </div>
 
       {/* Buttons */}
-      <div className="flex gap-2">
+      <div>
         {!isEditing ? (
           <button
             onClick={() => setIsEditing(true)}
-            className="bg-blue-500 text-white px-4 py-2"
           >
             Edit
           </button>
@@ -125,14 +121,12 @@ export default function SettingsForm() {
           <>
             <button
               onClick={handleSave}
-              className="bg-green-500 text-white px-4 py-2"
             >
               Save
             </button>
 
             <button
               onClick={() => setIsEditing(false)}
-              className="bg-gray-400 text-white px-4 py-2"
             >
               Cancel
             </button>
