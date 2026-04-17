@@ -1,3 +1,4 @@
+
 .table{
     width: 100% !important;
     text-align: start;
@@ -5,41 +6,31 @@
 
 .t-body{
     width: 100%;
-    height: 228px ;
     overflow-y: auto;  
 }
 
 table{
     width: 100%;
     border: solid 1px #D2D5DB;
-    border-top: none;
     border-collapse:unset;
     background-color: white;
 }
-.table .head{
-    width: 100%;
-    height: 38px;
-    padding: 10px 20px;
-    display: flex;
-    align-items: center;
-    background-color: #F9FAFC;
-    border: solid 1px #D2D5DB;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-}
+
 
 th,td{
     padding: 10px 20px;
 }
 
-th{
+tr th{
     color: #66748C;
-    font-weight: normal;
+    font-weight: 500;
+    font-size: 14px;
 }
 
-td{
+tr td{
     color: #384152;
     font-weight: 500;
+    border-bottom: solid 1px #D2D5DB;
 }
 
 

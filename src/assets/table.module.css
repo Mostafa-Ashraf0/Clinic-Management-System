@@ -100,7 +100,7 @@ td {
 
 
 tbody tr:nth-child(even) {
-  background-color: #e8eef66c;
+  background-color: white;
 }
 
 tbody tr:nth-child(odd) {

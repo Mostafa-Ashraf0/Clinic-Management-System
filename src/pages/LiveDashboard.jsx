@@ -19,9 +19,7 @@ const LiveDashboard = () => {
         <>
             <Header/>
             <Sidebar/>
-            <MainContent
-                CusPadding={10}
-             >
+            <MainContent>
                 <Dashboard/>
             </MainContent>
         </>

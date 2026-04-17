@@ -1,9 +1,9 @@
 import '../assets/mainContent.css';
 
 
-const MainContent = ({ children,CusPadding })=>{
+const MainContent = ({ children })=>{
     return(
-        <div className='main-content' style={CusPadding && {padding:`${CusPadding}px`}}>
+        <div className='main-content'>
             {children}
         </div>
     )
