@@ -12,7 +12,6 @@ const AddReciptionist = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <PatientForm/>

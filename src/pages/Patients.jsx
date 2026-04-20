@@ -23,7 +23,6 @@ const Patients = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <AppointmentControl/>

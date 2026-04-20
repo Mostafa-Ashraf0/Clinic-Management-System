@@ -17,7 +17,6 @@ const LiveDashboard = () => {
     
     return (
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <Dashboard/>

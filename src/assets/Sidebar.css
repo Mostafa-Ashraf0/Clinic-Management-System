@@ -1,7 +1,6 @@
 .sidebar{
-    width:274px;
-    background-color: white;
-    border-right: solid 1px #D2D5DB;
+    width:250px;
+    background-color: #F9FAFB;
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +11,6 @@
     padding: 20px 10px 20px;
     gap: 10px;
     font-Size: 14px;
-    border-bottom: solid 1px #D2D5DB;
     margin-bottom: 20px;
 }
 
@@ -46,14 +44,13 @@ span{
     padding: 0 12px;
     width: 100%;
     list-style-type: none;
-    gap: 5px;
+    gap: 2px;
 }
 
 .sidebar .links li{
     width: 100%;
     height: 44px;
-    padding: 12px 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -63,10 +60,12 @@ span{
     width: 100%;
     height: 100%;
     display: flex;
+    padding: 5px 15px;
     align-items: center;
     gap: 10px;
     text-decoration: none;
     color: inherit;
+    font-weight: 500;
 }
 
 .sidebar .links li img{
@@ -79,6 +78,8 @@ span{
 }
 
 .sidebar .links .light{
-    color: white;
-    background-color:#2F9CCA;
+    border: solid 1px #D2D5DB;
+    color: #384152;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
 }

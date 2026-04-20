@@ -12,7 +12,6 @@ const AddAppointment = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <AppointmentForm/>

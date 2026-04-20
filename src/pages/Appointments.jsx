@@ -15,7 +15,6 @@ const Appointments = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <AppointmentControl/>

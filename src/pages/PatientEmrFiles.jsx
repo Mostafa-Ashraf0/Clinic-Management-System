@@ -13,7 +13,6 @@ const PatientEmrFiles = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <EMRNavigationBar/>

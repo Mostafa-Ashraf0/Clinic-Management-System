@@ -12,7 +12,6 @@ const MedicalTests = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <MedicalTestsView/>

@@ -13,7 +13,6 @@ const PatientEmrMedical = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <EMRNavigationBar/>

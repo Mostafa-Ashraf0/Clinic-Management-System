@@ -36,7 +36,6 @@ const LiveAppointment = ()=>{
 
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <h1>Live Appointment</h1>

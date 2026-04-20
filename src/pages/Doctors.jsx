@@ -23,7 +23,6 @@ const Doctors = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <AppointmentControl/>

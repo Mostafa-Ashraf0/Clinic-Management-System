@@ -1,5 +1,16 @@
 .main-content{
-    margin-left: 274px;
-    margin-top: 70px;
+    margin-left: 250px;
     padding: 20px;
+    background-color: #F9FAFB;
+    overflow: hidden;
+}
+
+.main-content .in-container{
+    background-color: white;
+    min-height: 100vh;
+    padding: 20px;
+    border-radius: 20px;
+    border: solid 1px #D2D5DB;
+    overflow: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
 }

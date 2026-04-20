@@ -12,7 +12,6 @@ const MedicalOperations = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <OperationsView/>

@@ -13,7 +13,6 @@ const Settings = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <div>settings</div>

@@ -48,7 +48,6 @@ const Dashboard = ()=>{
 
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <div className="info-card-list">

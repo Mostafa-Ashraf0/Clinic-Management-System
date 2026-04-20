@@ -12,7 +12,6 @@ const AddDoctor = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <DoctorForm/>

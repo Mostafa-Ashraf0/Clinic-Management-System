@@ -23,7 +23,6 @@ const Receptionists = ()=>{
         },[])
     return(
         <>
-            <Header/>
             <Sidebar/>
             <MainContent>
                 <AppointmentControl/>
