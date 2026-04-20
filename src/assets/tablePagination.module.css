@@ -1,0 +1,41 @@
+.main{
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 10px;
+    background-color: white;
+    border: solid 1px #D2D5DB;
+    border-top: none;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.right{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.right span {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #D2D5DB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 10px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.right span img{
+    width: 14px;
+    height: 14px;
+}

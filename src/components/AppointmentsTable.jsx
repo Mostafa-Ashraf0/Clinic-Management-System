@@ -1,4 +1,4 @@
-import "../assets/appointmentsTable.css";
+import style from '../assets/table.module.css';
 import { useEffect, useState } from "react";
 import { fetchAppointments } from "../features/appointments/fetchAppointments";
 
@@ -20,8 +20,8 @@ const AppointmentsTable = ()=>{
         loadAppointments();
     },[])
     return(
-        <div className="table d-flex flex-column">
-            <div className="t-body">
+        <div className={style.table}>
+            <div className={`${style["t-body"]}`}>
             <table className='app-t-body'>
                 <thead>
                     <tr>

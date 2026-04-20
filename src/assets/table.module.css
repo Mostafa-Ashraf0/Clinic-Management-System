@@ -1,112 +1,43 @@
-.table {
-  width: 100%;
-  background-color: #fff;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid #d2d5db;
+
+.table{
+    width: 100%;
+    text-align: start;
 }
 
-.table .head {
-  height: 42px;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  color: #384152;
-  background-color: #f5f7fb;
-  border-bottom: 1px solid #d2d5db;
+.t-body{
+    width: 100%;
+    overflow-y: auto;  
 }
 
-.t-body {
-  max-height: 250px;
-  overflow-y: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
+table{
+    width: 100%;
+    border: solid 1px #D2D5DB;
+    border-collapse:unset;
+    background-color: white;
 }
 
 
-thead th {
-  position: sticky;
-  top: 0;
-  background-color: #ffffff;
-  z-index: 1;
-  font-size: 15px;
-  font-weight: 600;
-  color: #66748c;
-  border-bottom: 1px solid #e5e7eb;
-  text-align: left;
+th,td{
+    padding: 10px 20px;
 }
 
-th,
-td {
-  padding: 12px 20px;
-  text-align: left;
+tr th{
+    color: #66748C;
+    font-weight: 500;
+    font-size: 14px;
 }
 
-tbody tr {
-  transition: background-color 0.2s ease;
-}
-
-tbody tr:hover {
-  background-color: #f9fbfd;
-}
-
-.name {
-  cursor: pointer;
-  font-weight: 500;
-  color: #2563eb;
-}
-
-.name:hover {
-  text-decoration: underline;
-  background-color: transparent;
-  color: #1e40af;
-}
-
-td {
-  color: #384152;
-  font-size: 15px;
-}
-
-.t-dots {
-  width: 40px;
-  text-align: center;
-  cursor: pointer;
-  position: relative;
-}
-
-.t-dots span {
-  display: inline-block;
-  font-size: 20px;
-  line-height: 6px;
-  color: #66748c;
-}
-
-.t-dots:hover span {
-  color: #2563eb;
-}
-
-.t-body::-webkit-scrollbar {
-  width: 4px;
-}
-
-.t-body::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
-  border-radius: 3px;
+tr td{
+    color: #384152;
+    font-weight: 500;
+    border-bottom: solid 1px #D2D5DB;
 }
 
 
-tbody tr:nth-child(even) {
-  background-color: white;
-}
-
-tbody tr:nth-child(odd) {
-  background-color: #ffffff;
-}
-
-tbody tr:hover {
-  background-color: #EAF4FA;
+tbody tr .dots span{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
 }

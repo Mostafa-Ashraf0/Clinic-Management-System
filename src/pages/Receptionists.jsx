@@ -7,6 +7,9 @@ import Table from "../components/Table";
 import MainContent from "../components/MainContent";
 import ReciptionistControl from "../components/ReciptionistControl";
 import { fetchReciptionists } from "../features/receptionist/fetchReciptionist";
+import AppointmentControl from '../components/AppointmentControl';
+import TablePagination from '../components/TablePagination';
+
 const Receptionists = ()=>{
     const [recipt,setRecipt] = useState([]);
     const dispatch = useDispatch();
@@ -23,8 +26,9 @@ const Receptionists = ()=>{
             <Header/>
             <Sidebar/>
             <MainContent>
-                <ReciptionistControl/>
+                <AppointmentControl/>
                 <Table title="Receptionists on duty" data={recipt} role="receptionist"/>
+                <TablePagination/>
             </MainContent>
         </>
     )

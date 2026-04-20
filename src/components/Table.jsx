@@ -2,7 +2,7 @@ import { useState } from 'react';
 import tableStyle from '../assets/table.module.css';
 import ActionsList from './ActionsList';
 import { useNavigate } from 'react-router-dom';
-const Table = ({title,data,role})=>{
+const Table = ({data,role})=>{
     const navigate = useNavigate();
     const [openRow, setOpenRow] = useState(null);
     const handleClick = (id)=>{
@@ -15,8 +15,7 @@ const Table = ({title,data,role})=>{
         }
     }
     return(
-        <div className={`${tableStyle.table} d-flex flex-column`}>
-            <div className={`${tableStyle.head}`}>{title}</div>
+        <div className={`${tableStyle.table}`}>
             <div className={`${tableStyle["t-body"]}`}>
                 <table>
                 <thead>
@@ -33,6 +32,7 @@ const Table = ({title,data,role})=>{
                         <tr>
                             <th>Name</th>
                             <th>Phone</th>
+                            <th>Age</th>
                             <th>Email</th>
                             <th>action</th>
                         </tr>
@@ -41,6 +41,8 @@ const Table = ({title,data,role})=>{
                         <tr>
                             <th>Name</th>
                             <th>Phone</th>
+                            <th>Age</th>
+                            <th>Sessions</th>
                             <th>Email</th>
                             <th>action</th>
                         </tr>
@@ -51,7 +53,10 @@ const Table = ({title,data,role})=>{
                         data.map(d=>(
                             <tr key={d.id}>
                                 <td className={tableStyle.name}>
-                                    <span onClick={()=>handleProfileOpen(d.id)}>{d.name}</span>
+                                    <span onClick={()=>handleProfileOpen(d.id)}>
+                                        {d.name}<br/>
+                                        code
+                                    </span>
                                 </td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
@@ -67,8 +72,12 @@ const Table = ({title,data,role})=>{
                         data.map(d=>(
                             <tr key={d.id}>
                                 <td className={tableStyle.name}>
-                                    <span onClick={()=>handleProfileOpen(d.id)}>{d.name}</span>
+                                    <span onClick={()=>handleProfileOpen(d.id)}>
+                                        {d.name}<br/>
+                                        code
+                                    </span>
                                 </td>
+                                <td>null</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
@@ -85,10 +94,13 @@ const Table = ({title,data,role})=>{
                                     <span 
                                     onClick={()=>handleProfileOpen(d.id)}
                                     className={tableStyle.name}>
-                                        {d.name}
+                                        {d.name}<br/>
+                                        code
                                     </span>
                                 </td>
                                 <td>{d.phone}</td>
+                                <td>null</td>
+                                <td>null</td>
                                 <td>{d.email || "null"}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
                                     <span>.</span><span>.</span><span>.</span>

@@ -7,6 +7,9 @@ import Table from "../components/Table";
 import MainContent from "../components/MainContent";
 import PatientControl from "../components/PatientControl";
 import { fetchPatients } from "../features/appointments/fetchPatients";
+import AppointmentControl from '../components/AppointmentControl';
+import TablePagination from '../components/TablePagination';
+
 const Patients = ()=>{
     const [patients, setPatients] = useState([]);
     const loadPatients = async()=>{
@@ -23,12 +26,9 @@ const Patients = ()=>{
             <Header/>
             <Sidebar/>
             <MainContent>
-                <PatientControl
-                setSearch = {setPatients}
-                reset = {loadPatients}
-                data = {patients}
-                />
+                <AppointmentControl/>
                 <Table title="Patients" data={patients} role="patient"/>
+                <TablePagination/>
             </MainContent>
         </>
     )

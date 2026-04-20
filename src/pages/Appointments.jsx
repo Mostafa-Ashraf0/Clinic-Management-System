@@ -6,6 +6,8 @@ import Header from "../components/Header";
 import MainContent from "../components/MainContent";
 import AppointmentControl from "../components/AppointmentControl";
 import AppointmentsTable from "../components/AppointmentsTable";
+import TablePagination from "../components/TablePagination";
+
 const Appointments = ()=>{
     const dispatch = useDispatch();
         useEffect(()=>{
@@ -18,6 +20,7 @@ const Appointments = ()=>{
             <MainContent>
                 <AppointmentControl/>
                 <AppointmentsTable/>
+                <TablePagination/>
             </MainContent>
         </>
     )
