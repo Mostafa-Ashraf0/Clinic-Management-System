@@ -1,12 +1,24 @@
 import '../assets/Sidebar.css';
 import logo from '../assets/medical-logo-design.jpeg';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { icons } from '../assets/icons';
+import {setDropdown} from "../features/dashboard/headerSlice";
+import UserDropdown from './UserDropdown';
 const Sidebar = ()=>{
     const { page } = useSelector((state)=>state.sidebar);
+    const dispatch = useDispatch();
+    const { dropdownViewd } = useSelector((state)=>state.header);
+    const handleClick = ()=>{
+        if(!dropdownViewd){
+            dispatch(setDropdown(true));
+        }else{
+            dispatch(setDropdown(false));
+        }
+    }
     return(
         <div className="sidebar h-100 d-flex flex-column align-items-center">
+            <div className='w-100'>
             <div className="title w-100 d-flex align-items-center">
                 <div className="left d-flex align-items-center">
                     <img src={logo} alt="logo" />
@@ -71,6 +83,14 @@ const Sidebar = ()=>{
                     </Link>
                 </li>
             </ul>
+            </div>
+            <div className="userBar" onClick={handleClick}>
+                <img className='userImg' src={icons.header.admin} alt="u-icon" />
+                <span>Admin</span>
+                <img className="dropdownIcon" src={icons.header.dropdown} alt="user" />
+                {dropdownViewd && <UserDropdown/>}
+            </div>
+            
         </div>
     )
 };
