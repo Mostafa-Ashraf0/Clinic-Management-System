@@ -1,10 +1,10 @@
 import style from '../assets/table.module.css';
 import { useEffect, useState } from "react";
 import { fetchAppointments } from "../features/appointments/fetchAppointments";
-
+import { useSelector } from 'react-redux';
 const AppointmentsTable = ()=>{
     const [Appoint, setAppoint] = useState([]);
-
+    const clinicId = useSelector((state) => state.auth.clinic_id);
 
     const statusColor = {
         scheduled: { bg: "#e0e0e0", color: "#333" },
@@ -14,11 +14,15 @@ const AppointmentsTable = ()=>{
     //fetch appointments
     useEffect(()=>{
         const loadAppointments = async()=>{
-            const data = await fetchAppointments();
+            const data = await fetchAppointments(clinicId);
             setAppoint(data);
         }
         loadAppointments();
-    },[])
+    },[clinicId])
+
+    useEffect(()=>{
+        if(Appoint) console.log(Appoint);
+    },[Appoint])
     return(
         <div className={style.table}>
             <div className={`${style["t-body"]}`}>
@@ -38,10 +42,10 @@ const AppointmentsTable = ()=>{
                     {Appoint?.map((A,index)=>(
                         <tr key={A.id}>
                             <td>{index +1}</td>
-                            <td>{A.patient.name} <br/> code</td>
+                            <td>{A.patient?.name} <br/> code</td>
                             <td>{A.appointment_date}</td>
                             <td>{A.appointment_time}</td>
-                            <td>{A.clinic.name}</td>
+                            <td>{A.clinic?.name}</td>
                             
                             <td>
                                 <span

@@ -2,7 +2,7 @@ import supabase from "../../utils/supabase";
 import { toast } from "react-toastify";
 
 
-const fetchAppointments = async()=>{
+const fetchAppointments = async(clinicId)=>{
     try{
         const { data, error } = await supabase
         .from('appointment')
@@ -14,7 +14,7 @@ const fetchAppointments = async()=>{
             clinic(name),
             type,
             status
-        `)
+        `).eq('clinic_id',clinicId)
 
         if (error) throw error;
         return data;

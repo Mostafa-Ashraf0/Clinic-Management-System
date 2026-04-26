@@ -14,6 +14,7 @@ import { fetchAppointments } from "../features/appointments/fetchAppointments";
 import { fetchDoctors } from '../features/appointments/fetchDoctors';
 import { fetchPatients } from '../features/appointments/fetchPatients';
 import { fetchReciptionists } from '../features/receptionist/fetchReciptionist';
+import { useSelector } from "react-redux";
 const Dashboard = ()=>{
     const [cardData, setCardData] = useState({
         doctor: '',
@@ -21,10 +22,13 @@ const Dashboard = ()=>{
         recip: '',
         appoint: ''
     });
+    const clinicId = useSelector((state) => state.auth.clinic_id);
     const dispatch = useDispatch();
     useEffect(()=>{
+        if(!clinicId) return;
         const loadAppointments = async()=>{
-            const data = await fetchAppointments();
+            console.log(`clinicId is: ${clinicId}`)
+            const data = await fetchAppointments(clinicId);
             setCardData(prev=>({...prev,appoint: data.length}));
         }
         const loadPatients = async()=>{
@@ -44,17 +48,17 @@ const Dashboard = ()=>{
         loadRecip();
         loadDoctors();
         dispatch(addLight("dashboard"));
-    },[])
+    },[clinicId,dispatch])
 
     return(
         <>
             <Sidebar/>
             <MainContent>
                 <div className="info-card-list">
-                    <InfoCard name = "Doctor" icon = {icons.doctor.light} data={cardData.doctor}/>
-                    <InfoCard name = "Receptionist" icon = {icons.nurse.light} data={cardData.recip}/>
-                    <InfoCard name = "Patients" icon = {icons.patients.light} data={cardData.patient}/>
-                    <InfoCard name = "Appointments" icon = {icons.appointments.light} data={cardData.appoint}/>
+                    <InfoCard name = "Doctor" icon = {icons.doctor.light} data={cardData?.doctor}/>
+                    <InfoCard name = "Receptionist" icon = {icons.nurse.light} data={cardData?.recip}/>
+                    <InfoCard name = "Patients" icon = {icons.patients.light} data={cardData?.patient}/>
+                    <InfoCard name = "Appointments" icon = {icons.appointments.light} data={cardData?.appoint}/>
                 </div>
                 <div className="table-list">
                     

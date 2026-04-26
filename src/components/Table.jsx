@@ -60,7 +60,7 @@ const Table = ({data,role})=>{
                                 </td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
-                                <td>{d.doctor_extra.specialization.name}</td>
+                                <td>{d.doctor_extra?.specialization.name}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
                                     <span>.</span><span>.</span><span>.</span>
                                     <ActionsList actionsList={openRow === d.id}/>

@@ -22,6 +22,7 @@ const Dashboard = ()=>{
 
 
     const fetchTime = async()=>{
+        console.log(`clinicId is: ${clinicId}`)
         const data = await getWorkingTime(clinicId);
         if(data){
             dispatch(setSlots(data));
