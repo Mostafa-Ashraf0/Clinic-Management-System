@@ -7,6 +7,7 @@ import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayA
 import { icons } from '../../assets/icons';
 import AddAppointmentView from './AddAppointmentView';
 import { setLiveFormVisible } from '../../features/liveAppointment/fullViewSlice';
+import { setLiveAppoSlot } from '../../features/appointments/appointmentSlice';
 import supabase from '../../utils/supabase';
 import TimeSlot from './TimeSlot';
 
@@ -75,6 +76,7 @@ const Dashboard = ()=>{
 
     const handleAddBtn = ()=>{
         dispatch(setLiveFormVisible(true));
+        dispatch(setLiveAppoSlot(null));
     }
 
 
@@ -88,23 +90,6 @@ const Dashboard = ()=>{
             </button>
         </div>
         <div className={style.slotsContainer}>
-            {/*<div className={style.slotHead}>
-                <div className={style.main}>
-                    <div className={style.timeContainer}>
-                        <span className={style.time}>Time</span>
-                    </div>
-
-                    <div className={style.info}>
-                        <span className={style.patient}>Patient Name</span>
-                    </div>
-                </div>
-
-                <div className={style.tags}>
-                    <span className={style.type}>Session type</span>
-                    <span className={style.status}>Status</span>
-                    <span className={style.action}>Actions</span>
-                </div>
-            </div>*/}
             {timeSlots.map((time, index) => (
                 <TimeSlot key={index} time={time} data={data}/>
             ))}

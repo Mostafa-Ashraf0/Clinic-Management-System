@@ -16,13 +16,17 @@ const AppointmentForm = ({date}) => {
       const initialDate = date || today;
       const types = ["consultation","follow_up","emergency","checkup"];
       const dispatch = useDispatch();
+      
+      //time slot variables
       const timeSlots = useSelector((state)=>state.appointment.timeSlots);
       const activeSlots = useSelector((state)=>state.appointment.activeSlots);
+      const liveSlot = useSelector((state)=>state.appointment.liveAppoinSlot);
+
       const [formData, setFormData] = useState({
         doctor: '',
         patient: '',
         date: initialDate,
-        time: '',
+        time: liveSlot || '',
         clinic_id: clinicId,
         type:''
       });
@@ -63,14 +67,14 @@ const AppointmentForm = ({date}) => {
         doctor: '',
         patient: '',
         date: initialDate,
-        time: '',
+        time: liveSlot || '',
         clinic_id: clinicId,
         type:''
       });
       dispatch(setSelectedPatient([]));
       setSubmited(false);
     }
-  }, [submited,initialDate,clinicId,dispatch]);
+  }, [submited,initialDate,clinicId,dispatch,liveSlot]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,7 +97,7 @@ const AppointmentForm = ({date}) => {
         doctor: '',
         patient: '',
         date: initialDate,
-        time: '',
+        time: liveSlot || '',
         clinic_id: clinicId,
         type:''
       });
@@ -183,15 +187,24 @@ const AppointmentForm = ({date}) => {
           >
             <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
               <Form.Label>Time*</Form.Label>
-              <Form.Select
-                type="time"
-                name="time"
-                value={formData.time}
-                onChange={handleChange}
-                required
-              >
-                <option>select time</option>
-                {activeSlots?.map((s,index)=><option key={index}>{s}</option>)}
+                <Form.Select
+                  name="time"
+                  value={formData.time}
+                  onChange={handleChange}
+                  required
+                  disabled={!!liveSlot}
+                >
+                {!liveSlot && <option>select time</option>}
+
+                {liveSlot ? (
+                  <option value={liveSlot}>{liveSlot}</option>
+                  ) : (
+                    activeSlots?.map((s, index) => (
+                      <option key={index} value={s}>
+                        {s}
+                      </option>
+                    ))
+                  )}
               </Form.Select>
             </Form.Group>
 

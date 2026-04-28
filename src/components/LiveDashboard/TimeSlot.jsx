@@ -19,7 +19,7 @@ const TimeSlot = ({time, data})=>{
                 <AppointmentBox key={f.id} data={f} />
             ))
             ) : (
-            <SlotAddBox />
+            <SlotAddBox currentSlot = {time}/>
             )}
         </div>
     );
