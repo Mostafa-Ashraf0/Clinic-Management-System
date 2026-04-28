@@ -5,7 +5,7 @@ import { setFinalPatient, setPhone } from '../features/appointments/patientSearc
 
 const SearchResults = ({setFormData})=>{
     const dispatch = useDispatch();
-    const {selectedPatient} = useSelector((state)=> state.patientSearch)
+    const {selectedPatient,phone} = useSelector((state)=> state.patientSearch)
     const { dropdownViewd } = useSelector((state)=>state.appointment);
     const handleClick = (p)=>{
         dispatch(setFinalPatient({
@@ -20,11 +20,18 @@ const SearchResults = ({setFormData})=>{
         }));
         dispatch(setDropdown(false));
     }
+
     return(
         <div className="search-drop-down" style={dropdownViewd?{display:"flex"}:{display:"none"}}>
-            {selectedPatient.map(p=>(
-                <span key={p.id} onClick={()=>handleClick(p)}>{p.phone}</span>
-            ))}
+            {selectedPatient?.length > 0 ? (
+                selectedPatient.map((p) => (
+                    <span key={p.id} onClick={() => handleClick(p)}>
+                    {p.phone}
+                    </span>
+                ))
+                ) : (
+                phone.length>=11 && <span>no result</span>
+            )}
         </div>
     )
 };

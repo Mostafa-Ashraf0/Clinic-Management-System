@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { setActionsList } from '../../features/appointments/appointmentSlice';
 import { useSelector,useDispatch } from 'react-redux';
 import ActionsList from './ActionsList';
+import { useEffect } from 'react';
 
 const AppointmentBox = ({data})=>{
     const dispatch = useDispatch();
@@ -33,6 +34,11 @@ const AppointmentBox = ({data})=>{
             }));
         }
     }
+
+    useEffect(()=>{
+        if(!data) return
+        console.log("data is:", data);;
+    },[data])
 
     return(
         <div key={data.id} className={style.appoint}>

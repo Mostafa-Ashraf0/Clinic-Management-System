@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import Table from "../components/Table";
 import MainContent from "../components/MainContent";
 import PatientControl from "../components/PatientControl";
-import { fetchPatients } from "../features/appointments/fetchPatients";
+import { fetchPatients } from "../features/patient/fetchPatients";
 import AppointmentControl from '../components/AppointmentControl';
 import TablePagination from '../components/TablePagination';
 

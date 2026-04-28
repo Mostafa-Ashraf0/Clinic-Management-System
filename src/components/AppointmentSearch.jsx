@@ -1,5 +1,5 @@
 import { fetchPatients } from '../features/appointments/fetchPatients';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import SearchResults from './SearchResults';
 import { useSelector,useDispatch } from 'react-redux';
@@ -10,29 +10,39 @@ import { setSelectedPatient, setPhone } from '../features/appointments/patientSe
 const AppointmentSearch = ({setFormData})=>{
     const dispatch = useDispatch();
     const { dropdownViewd } = useSelector((state)=>state.appointment);
-    const [patients, setPatients] = useState([]);
-    const {phone, selectedPatient,finalPatient} = useSelector((state)=>state.patientSearch);
+    //const [patients, setPatients] = useState([]);
+    const {phone,finalPatient} = useSelector((state)=>state.patientSearch);
+
 
     const handleChange = (e)=>{
-        const value = e.target.value.trim();
-        {(value.length === 0)?dispatch(setDropdown(false)):dispatch(setDropdown(true))}
+        const value = e.target.value;
         dispatch(setPhone(value));
-        const foundPatient = patients.filter((p) => p.phone.startsWith(value));
-        if (foundPatient.length>0) {
-        dispatch(setSelectedPatient(foundPatient));
+
+        if (value.length >= 4) {
+            dispatch(setDropdown(true));
         } else {
-        console.log("not found")
+            dispatch(setDropdown(false));
+            dispatch(setSelectedPatient([]));
         }
     }
 
 
     useEffect(() => {
-        const loadPatients = async () => {
-            const data = await fetchPatients();
-            setPatients(data);
-        };
-        loadPatients();
-        }, []);
+        if (phone.length < 4) return;
+
+        const timeout = setTimeout(async () => {
+            let limit = 10;
+            if (phone.length >= 6) limit = 50;
+            if (phone.length === 11) limit = 1;
+
+            const data = await fetchPatients(limit, phone);
+            dispatch(setSelectedPatient(data));
+        }, 400);
+
+        return () => clearTimeout(timeout);
+    }, [phone,dispatch]);
+
+
     return(
         <div className="d-flex flex-column align-items-start w-50 position-relative"> 
             {/* Patient (Search by phone) */}
@@ -72,7 +82,7 @@ const AppointmentSearch = ({setFormData})=>{
                     </Form.Group>
                 </Form>
 
-                {selectedPatient.length>0 && dropdownViewd?<SearchResults
+                {dropdownViewd?<SearchResults
                  setFormData={setFormData}
                  />:""}
         </div>
