@@ -15,6 +15,7 @@ const AddAppointment = async (formData, setSubmited) => {
           appointment_time: formData.time,
           clinic_id: formData.clinic_id,
           type: formData.type,
+          date: formData.date
         }
       ]);
 

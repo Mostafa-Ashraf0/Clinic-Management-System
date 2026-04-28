@@ -4,6 +4,7 @@ const initialState = {
     dropdownViewd: false,
     patientId: null,
     timeSlots: [],
+    activeSlots:[],
     actionsList: {view:false, id:null}
 };
 
@@ -21,6 +22,9 @@ const appointmentSlice = createSlice({
         setSlots(state, action){
             state.timeSlots = action.payload;
         },
+        setActiveSlots(state, action){
+            state.activeSlots = action.payload;
+        },
         setActionsList(state,action){
             state.actionsList = action.payload;
         }
@@ -28,4 +32,4 @@ const appointmentSlice = createSlice({
 })
 
 export default appointmentSlice.reducer;
-export const {setDropdown, setPatientId, setSlots, setActionsList} = appointmentSlice.actions;
+export const {setDropdown, setPatientId, setSlots, setActionsList, setActiveSlots} = appointmentSlice.actions;

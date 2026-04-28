@@ -2,13 +2,13 @@ import { Card, Form, Button } from 'react-bootstrap';
 import { AddAppointment } from '../features/appointments/appointments';
 import { useEffect, useState } from 'react';
 import { fetchDoctors } from '../features/appointments/fetchDoctors';
-import { getClinic } from '../features/getClinic';
 import AppointmentSearch from './AppointmentSearch';
 import { useSelector, useDispatch } from 'react-redux';
 import { getWorkingTime } from '../features/liveDashboard/getWorkingTime';
-import { setSlots } from '../features/appointments/appointmentSlice';
+import { setSlots,setActiveSlots } from '../features/appointments/appointmentSlice';
 import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
 import { setFinalPatient,setPhone,setSelectedPatient } from '../features/appointments/patientSearchSlice';
+import { availableTimeSlots } from '../features/appointments/availableTimeSlots';
 
 const AppointmentForm = ({date}) => {
       const clinicId = useSelector((state) => state.auth.clinic_id);
@@ -17,31 +17,45 @@ const AppointmentForm = ({date}) => {
       const types = ["consultation","follow_up","emergency","checkup"];
       const dispatch = useDispatch();
       const timeSlots = useSelector((state)=>state.appointment.timeSlots);
+      const activeSlots = useSelector((state)=>state.appointment.activeSlots);
+      const [formData, setFormData] = useState({
+        doctor: '',
+        patient: '',
+        date: initialDate,
+        time: '',
+        clinic_id: clinicId,
+        type:''
+      });
       const fetchTime = async()=>{
           const data = await getWorkingTime(clinicId);
           if(data){
               dispatch(setSlots(data));
-              console.log(data);
           }
       }
+
+      
   
       useEffect(() => {
         if(!clinicId) return;
           fetchTime();
       }, [clinicId]); 
 
+      useEffect(()=>{
+        if (!formData.date || timeSlots.length === 0) return;
+        const availableTime = async()=>{
+        const slots = await availableTimeSlots(formData.date, timeSlots);
+        if(slots){
+           dispatch(setActiveSlots(slots));
+        }
+      }
+        availableTime();
+      },[formData.date, timeSlots, dispatch])
+
+
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
-  const [clinic, setClinic] = useState([]);
 
-  const [formData, setFormData] = useState({
-    doctor: '',
-    patient: '',
-    date: initialDate,
-    time: '',
-    clinic_id: '',
-    type:''
-  });
+  
 
   useEffect(() => {
     if (submited) {
@@ -50,13 +64,13 @@ const AppointmentForm = ({date}) => {
         patient: '',
         date: initialDate,
         time: '',
-        clinic_id:'',
+        clinic_id: clinicId,
         type:''
       });
       dispatch(setSelectedPatient([]));
       setSubmited(false);
     }
-  }, [submited,initialDate]);
+  }, [submited,initialDate,clinicId,dispatch]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -80,7 +94,7 @@ const AppointmentForm = ({date}) => {
         patient: '',
         date: initialDate,
         time: '',
-        clinic_id:'',
+        clinic_id: clinicId,
         type:''
       });
       dispatch(setLiveFormVisible(false));
@@ -90,14 +104,12 @@ const AppointmentForm = ({date}) => {
 
   // Fetch doctors and clinics
   useEffect(() => {
-    const loadDoctors_clinics = async () => {
-      const doctorsData = await fetchDoctors();
+    const loadDoctors = async () => {
+      const doctorsData = await fetchDoctors(clinicId);
       setDoctors(doctorsData);
-      const clinicData = await getClinic();
-      setClinic(clinicData);
     };
-    loadDoctors_clinics();
-  }, []);
+    loadDoctors();
+  }, [clinicId]);
 
   
 
@@ -143,23 +155,8 @@ const AppointmentForm = ({date}) => {
                 ))}
               </Form.Select>
             </Form.Group>
-            {/* Clinic */}
-            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
-              <Form.Label>Clinic*</Form.Label>
-              <Form.Select
-                value={formData.clinic_id}
-                name="clinic_id"
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select clinic</option>
-                {clinic.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
+
+
             <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
               <Form.Label>Type*</Form.Label>
               <Form.Select
@@ -194,7 +191,7 @@ const AppointmentForm = ({date}) => {
                 required
               >
                 <option>select time</option>
-                {timeSlots?.map((s,index)=><option key={index}>{s}</option>)}
+                {activeSlots?.map((s,index)=><option key={index}>{s}</option>)}
               </Form.Select>
             </Form.Group>
 
