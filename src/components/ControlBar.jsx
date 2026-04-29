@@ -1,10 +1,19 @@
 import { icons } from "../assets/icons";
 import { useNavigate } from "react-router-dom";
-import style from '../assets/appointmentControl.module.css'
-const AppointmentControl = ()=>{
+import style from '../assets/appointmentControl.module.css';
+import { useLocation } from "react-router-dom";
+
+const ControlBar = ()=>{
+    const location = useLocation();
     const navigate = useNavigate();
+
+
     const handleClick = ()=>{
-        navigate('/appointments/addAppointment');
+        if(location.pathname === "/doctors") navigate('/doctors/addDoctor');
+        else if(location.pathname === "/receptionists") navigate('/receptionists/addreceptionists');
+        else if(location.pathname === "/patients") navigate('/patients/addpatient');
+        else if(location.pathname === "/appointments") navigate('/appointments/addAppointment');
+        
     }
     return(
         <div className={style.control}>
@@ -32,4 +41,4 @@ const AppointmentControl = ()=>{
 }
 
 
-export default AppointmentControl;
+export default ControlBar;

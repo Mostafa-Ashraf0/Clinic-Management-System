@@ -21,7 +21,7 @@ const ScheduleOpsTable = ({data})=>{
                             {data && data.map(t=>(
                                 <tr key={t.id}>
                                     <td className={style.name}>{t.medical_operations.name}</td>
-                                    <td>{t.doctor_extra.profile.name}</td>
+                                    <td>{t.doctor_extra?.profile?.name}</td>
                                     <td>{t.patient.name}</td>
                                     <td>{t.clinic.name}</td>
                                     <td>{t.date}</td>

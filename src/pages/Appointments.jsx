@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import MainContent from "../components/MainContent";
-import AppointmentControl from "../components/AppointmentControl";
+import ControlBar from "../components/ControlBar";
 import AppointmentsTable from "../components/AppointmentsTable";
 import TablePagination from "../components/TablePagination";
 
@@ -17,7 +17,7 @@ const Appointments = ()=>{
         <>
             <Sidebar/>
             <MainContent>
-                <AppointmentControl/>
+                <ControlBar/>
                 <AppointmentsTable/>
                 <TablePagination/>
             </MainContent>

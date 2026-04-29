@@ -7,16 +7,28 @@ import { setDropdown } from '../features/appointments/appointmentSlice';
 import { icons } from "../assets/icons";
 import { setSelectedPatient, setPhone } from '../features/appointments/patientSearchSlice';
 
-const AppointmentSearch = ({setFormData})=>{
+const AppointmentSearch = ({setFormData,setError,error})=>{
     const dispatch = useDispatch();
     const { dropdownViewd } = useSelector((state)=>state.appointment);
-    //const [patients, setPatients] = useState([]);
     const {phone,finalPatient} = useSelector((state)=>state.patientSearch);
-
+    
+    useEffect(()=>{
+        dispatch(setPhone(""));
+        dispatch(setDropdown(false));
+    },[dispatch])
 
     const handleChange = (e)=>{
         const value = e.target.value;
         dispatch(setPhone(value));
+
+        if (value.length>1 && !/^01\d{0,9}$/.test(value)) {
+            setError("number may not start with 01 or contain chars");
+        }else if(value.length === 0){
+            setError("empty number");
+        }
+         else {
+            setError("");
+        }
 
         if (value.length >= 4) {
             dispatch(setDropdown(true));
@@ -56,13 +68,23 @@ const AppointmentSearch = ({setFormData})=>{
                                 <Form.Control
                                 type="text"
                                 name="patient"
+                                minLength={11}
+                                maxLength={11}
                                 placeholder="Enter patient phone"
                                 value={phone}
                                 onChange={handleChange}
                                 autoComplete="off"
+                                required
                                 />
                                 <img src={icons.control.searchIcon} alt="search" style={{marginLeft:"-30px"}}/>
                             </Form.Group>
+                            <span style={{
+                                fontSize:"10px",
+                                minHeight: "20px",
+                                display: "block",
+                                color:"red",
+                                zIndex:"4000"
+                                }}>{error}</span>
                         </Form.Group>
                         <Form.Group className={`d-flex flex-column align-items-start w-50`} style={{ height: '64px'}}>
                             <Form.Label>Name</Form.Label>

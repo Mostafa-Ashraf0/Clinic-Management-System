@@ -7,7 +7,7 @@ import Header from "../components/Header";
 import MainContent from "../components/MainContent";
 import DoctorsControl from "../components/DoctorsControl";
 import { fetchDoctors } from "../features/appointments/fetchDoctors";
-import AppointmentControl from '../components/AppointmentControl';
+import ControlBar from '../components/ControlBar';
 import TablePagination from '../components/TablePagination';
 import { useSelector } from "react-redux";
 
@@ -27,7 +27,7 @@ const Doctors = ()=>{
         <>
             <Sidebar/>
             <MainContent>
-                <AppointmentControl/>
+                <ControlBar/>
                 <Table title="Doctors on duty" data={doctors} role="doctor"/>
                 <TablePagination/>
             </MainContent>

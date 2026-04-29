@@ -7,7 +7,7 @@ import Table from "../components/Table";
 import MainContent from "../components/MainContent";
 import PatientControl from "../components/PatientControl";
 import { fetchPatients } from "../features/patient/fetchPatients";
-import AppointmentControl from '../components/AppointmentControl';
+import ControlBar from '../components/ControlBar';
 import TablePagination from '../components/TablePagination';
 
 const Patients = ()=>{
@@ -25,7 +25,7 @@ const Patients = ()=>{
         <>
             <Sidebar/>
             <MainContent>
-                <AppointmentControl/>
+                <ControlBar/>
                 <Table title="Patients" data={patients} role="patient"/>
                 <TablePagination/>
             </MainContent>

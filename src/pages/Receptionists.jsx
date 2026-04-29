@@ -7,7 +7,7 @@ import Table from "../components/Table";
 import MainContent from "../components/MainContent";
 import ReciptionistControl from "../components/ReciptionistControl";
 import { fetchReciptionists } from "../features/receptionist/fetchReciptionist";
-import AppointmentControl from '../components/AppointmentControl';
+import ControlBar from '../components/ControlBar';
 import TablePagination from '../components/TablePagination';
 
 const Receptionists = ()=>{
@@ -25,7 +25,7 @@ const Receptionists = ()=>{
         <>
             <Sidebar/>
             <MainContent>
-                <AppointmentControl/>
+                <ControlBar/>
                 <Table title="Receptionists on duty" data={recipt} role="receptionist"/>
                 <TablePagination/>
             </MainContent>

@@ -9,6 +9,7 @@ import { setSlots,setActiveSlots } from '../features/appointments/appointmentSli
 import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
 import { setFinalPatient,setPhone,setSelectedPatient } from '../features/appointments/patientSearchSlice';
 import { availableTimeSlots } from '../features/appointments/availableTimeSlots';
+import { toast } from "react-toastify";
 
 const AppointmentForm = ({date}) => {
       const clinicId = useSelector((state) => state.auth.clinic_id);
@@ -21,7 +22,8 @@ const AppointmentForm = ({date}) => {
       const timeSlots = useSelector((state)=>state.appointment.timeSlots);
       const activeSlots = useSelector((state)=>state.appointment.activeSlots);
       const liveSlot = useSelector((state)=>state.appointment.liveAppoinSlot);
-
+      
+      const [error, setError] = useState("");
       const [formData, setFormData] = useState({
         doctor: '',
         patient: '',
@@ -86,6 +88,10 @@ const AppointmentForm = ({date}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(error){
+      toast.error(error);
+      return;
+    };
     AddAppointment(formData, setSubmited);
     dispatch(setPhone(""));
     dispatch(setFinalPatient({
@@ -131,6 +137,8 @@ const AppointmentForm = ({date}) => {
           <AppointmentSearch 
             setFormData={setFormData} 
             formData={formData} 
+            setError={setError}
+            error={error}
           />
         </div>
         <Form

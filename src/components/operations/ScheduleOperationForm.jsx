@@ -1,7 +1,7 @@
 import { Card, Form, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { fetchDoctors } from '../../features/appointments/fetchDoctors';
-import { getClinic } from '../../features/getClinic';
+//import { getClinic } from '../../features/getClinic';
 import AppointmentSearch from '../AppointmentSearch';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOpsByClinicId } from '../../features/operations/getOperationByClinicId';
@@ -12,6 +12,7 @@ import { setIsScheduleVisible } from '../../features/operations/operationsFormSl
 
 
 const ScheduleOperationForm = ({onTestAdded,date}) => {
+        const clinicId = useSelector((state) => state.auth.clinic_id);
         const today = new Date().toISOString().split("T")[0];
         const initialDate = date||today;
         const dispatch = useDispatch();
@@ -19,13 +20,13 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
 
   const [submited, setSubmited] = useState(false);
   const [doctors, setDoctors] = useState([]);
-  const [clinic, setClinic] = useState([]);
+  //const [clinic, setClinic] = useState([]);
   const [operation, setOperation] = useState([]);
   const [formData, setFormData] = useState({
     doctor: '',
     patient: '',
     schedule_at: today,
-    clinic_id: '',
+    clinic_id: clinicId,
     operation_id:'',
     date: initialDate
   });
@@ -36,14 +37,14 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
         doctor: '',
         patient: '',
         schedule_at: today,
-        clinic_id: '',
+        clinic_id: clinicId,
         operation_id:'',
         date: initialDate
       });
       dispatch(setSelectedPatient([]));
       setSubmited(false);
     }
-  }, [submited,initialDate]);
+  }, [submited,initialDate,clinicId,today,dispatch]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,7 +67,7 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
         doctor: '',
         patient: '',
         schedule_at: today,
-        clinic_id: '',
+        clinic_id: clinicId,
         operation_id:'',
         date: initialDate
       });
@@ -78,24 +79,25 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
 
   // Fetch doctors and clinics
   useEffect(() => {
+    if(!clinicId) return;
     const loadDoctors_clinics = async () => {
-      const doctorsData = await fetchDoctors();
+      const doctorsData = await fetchDoctors(clinicId);
       setDoctors(doctorsData);
-      const clinicData = await getClinic();
-      setClinic(clinicData);
+      //const clinicData = await getClinic();
+      //setClinic(clinicData);
     };
     loadDoctors_clinics();
-  }, []);
+  }, [clinicId]);
 
   //fetch Operations by clinicId
   useEffect(()=>{
-    if (!formData.clinic_id) return;
+    if (!clinicId) return;
     const loadOps = async()=>{
-        const opsData = await fetchOpsByClinicId(formData.clinic_id);
+        const opsData = await fetchOpsByClinicId(clinicId);
         setOperation(opsData);
     }
     loadOps();
-  },[formData.clinic_id])
+  },[clinicId])
   
 
   return (
@@ -141,7 +143,7 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
                 ))}
               </Form.Select>
             </Form.Group>
-            {/* Clinic */}
+            {/* Clinic 
             <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
               <Form.Label>Clinic*</Form.Label>
               <Form.Select
@@ -158,6 +160,7 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
                 ))}
               </Form.Select>
             </Form.Group>
+            */}
           </Form.Group>
 
 
