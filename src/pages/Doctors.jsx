@@ -9,18 +9,20 @@ import DoctorsControl from "../components/DoctorsControl";
 import { fetchDoctors } from "../features/appointments/fetchDoctors";
 import AppointmentControl from '../components/AppointmentControl';
 import TablePagination from '../components/TablePagination';
+import { useSelector } from "react-redux";
 
 const Doctors = ()=>{
+    const clinicId = useSelector((state) => state.auth.clinic_id);
     const [doctors, setDoctors] = useState([]);
     const dispatch = useDispatch();
         useEffect(()=>{
             dispatch(addLight("doctors"));
         const loadDoctors = async()=>{
-            const data = await fetchDoctors();
+            const data = await fetchDoctors(clinicId);
             setDoctors(data);
         }
         loadDoctors();
-        },[])
+        },[clinicId,dispatch])
     return(
         <>
             <Sidebar/>

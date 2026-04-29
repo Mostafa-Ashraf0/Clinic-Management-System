@@ -1,4 +1,4 @@
-import { fetchPatients } from '../features/appointments/fetchPatients';
+import { fetchPatientsSearch } from '../features/appointments/fetchPatientsSearch';
 import { useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import SearchResults from './SearchResults';
@@ -35,7 +35,7 @@ const AppointmentSearch = ({setFormData})=>{
             if (phone.length >= 6) limit = 50;
             if (phone.length === 11) limit = 1;
 
-            const data = await fetchPatients(limit, phone);
+            const data = await fetchPatientsSearch(limit, phone);
             dispatch(setSelectedPatient(data));
         }, 400);
 

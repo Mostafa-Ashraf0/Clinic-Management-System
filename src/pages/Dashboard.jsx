@@ -36,7 +36,7 @@ const Dashboard = ()=>{
             setCardData(prev=>({...prev,patient: data.length}));
         }
         const loadDoctors = async()=>{
-            const data = await fetchDoctors();
+            const data = await fetchDoctors(clinicId);
             setCardData(prev=>({...prev,doctor: data.length}));
         }
         const loadRecip = async()=>{
