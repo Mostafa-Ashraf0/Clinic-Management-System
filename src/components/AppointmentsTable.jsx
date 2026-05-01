@@ -1,10 +1,15 @@
 import style from '../assets/table.module.css';
 import { useEffect, useState } from "react";
 import { fetchAppointments } from "../features/appointments/fetchAppointments";
-import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';import { useDispatch } from 'react-redux';
+import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
+import { getDataToEdit } from '../features/appointments/getDataToEdit';
+import { setEditAppointData, setIsEdit } from '../features/appointments/appointmentSlice';
+
 const AppointmentsTable = ()=>{
     const [Appoint, setAppoint] = useState([]);
     const clinicId = useSelector((state) => state.auth.clinic_id);
+    const dispatch = useDispatch();
 
     const statusColor = {
         scheduled: { bg: "#e0e0e0", color: "#333" },
@@ -23,6 +28,19 @@ const AppointmentsTable = ()=>{
     useEffect(()=>{
         if(Appoint) console.log(Appoint);
     },[Appoint])
+
+    //handle edit click
+    const handleEdit = async(id)=>{
+        dispatch(setLiveFormVisible(true));
+        const data = await getDataToEdit(id);
+        if(data){
+            setEditAppointData(data);
+            setIsEdit(true);
+        }
+    }
+
+
+
     return(
         <div className={style.table}>
             <div className={`${style["t-body"]}`}>
@@ -36,6 +54,7 @@ const AppointmentsTable = ()=>{
                         <th>Clinic</th>
                         <th>Status</th>
                         <th>Type</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -60,7 +79,13 @@ const AppointmentsTable = ()=>{
                                 </span>
                             </td>
                             <td>{A.type}</td>
-                            <td className="dots"><span>.</span><span>.</span><span>.</span></td>
+                            <td 
+                                className="dots" 
+                                style={{cursor:"pointer"}}
+                                onClick={()=>handleEdit(A.id)}
+                            >
+                                <span>.</span><span>.</span><span>.</span>
+                            </td>
                         </tr>
                         
                     ))}
