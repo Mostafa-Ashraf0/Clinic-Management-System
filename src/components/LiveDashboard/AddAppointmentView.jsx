@@ -4,17 +4,31 @@ import { useDispatch } from 'react-redux';
 import { setLiveFormVisible } from '../../features/liveAppointment/fullViewSlice';
 import { icons } from '../../assets/icons';
 import { useEffect } from 'react';
+import { setIsEdit } from '../../features/appointments/appointmentSlice';
+import { setPhone, setFinalPatient } from '../../features/appointments/patientSearchSlice';
 
 const AddAppointmentView = ()=>{
     const today = new Date().toISOString().split("T")[0];
     const dispatch = useDispatch();
     const closeIcon = icons.public.close;
+
     const handleClose = ()=>{
         dispatch(setLiveFormVisible(false));
+        dispatch(setIsEdit(false));
+        dispatch(setPhone(''));
+        dispatch(setFinalPatient({
+            name:'',
+            age:'',
+            email:''
+        }))
     }
+
+
     useEffect(()=>{
         console.log(today);
     },[])
+
+
     return(
         <div className={style.main}>
             

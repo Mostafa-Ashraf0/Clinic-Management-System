@@ -18,8 +18,9 @@ const Doctors = ()=>{
         useEffect(()=>{
             dispatch(addLight("doctors"));
         const loadDoctors = async()=>{
+            if(!clinicId) return;
             const data = await fetchDoctors(clinicId);
-            setDoctors(data);
+            if(data) setDoctors(data);
         }
         loadDoctors();
         },[clinicId,dispatch])

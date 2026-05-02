@@ -17,6 +17,12 @@ const AppointmentForm = ({date}) => {
       const initialDate = date || today;
       const types = ["consultation","follow_up","emergency","checkup"];
       const dispatch = useDispatch();
+
+      //edit variables
+      const isEdit = useSelector((state)=>state.appointment.isEdit);
+      const editData = useSelector((state)=>state.appointment.editAppointmentData);
+      const cleanTime = editData?.appointment_time.split(':').slice(0, 2).join(':');
+
       
       //time slot variables
       const timeSlots = useSelector((state)=>state.appointment.timeSlots);
@@ -24,6 +30,8 @@ const AppointmentForm = ({date}) => {
       const liveSlot = useSelector((state)=>state.appointment.liveAppoinSlot);
       
       const [error, setError] = useState("");
+
+      //initial formData
       const [formData, setFormData] = useState({
         doctor: '',
         patient: '',
@@ -32,6 +40,36 @@ const AppointmentForm = ({date}) => {
         clinic_id: clinicId,
         type:''
       });
+
+      useEffect(() => {
+      if (!isEdit) {
+        setFormData({
+          doctor: '',
+          patient: '',
+          date: initialDate,
+          time: liveSlot || '',
+          clinic_id: clinicId,
+          type: ''
+        });
+      }
+    }, [isEdit, initialDate, clinicId, liveSlot]);
+
+
+      //Edit state formData
+      useEffect(() => {
+        if (isEdit && editData) {
+          setFormData({
+            doctor: editData.doctor?.id || '',
+            patient: editData.patient?.id || '',
+            date: editData.appointment_date,
+            time: cleanTime,
+            clinic_id: clinicId,
+            type: editData.type
+          });
+        }
+    }, [isEdit, editData, cleanTime,clinicId]);
+
+
       const fetchTime = async()=>{
           const data = await getWorkingTime(clinicId);
           if(data){
@@ -159,7 +197,6 @@ const AppointmentForm = ({date}) => {
                 onChange={handleChange}
                 required
               >
-                <option value="">Select doctor</option>
                 {doctors.map((d) => (
                   <option key={d.id} value={d.id}>
                     {d.name}
@@ -177,8 +214,14 @@ const AppointmentForm = ({date}) => {
                 onChange={handleChange}
                 required
               >
-                <option value="">Select type</option>
-                {types.map((t,index) => (
+                {!isEdit && <option value="">Select type</option>}
+                {isEdit && editData ? (
+                <option value={editData.type}>{editData.type}</option>
+                ) : (
+                  <option value="">Select type</option>
+                )}
+
+                {types.map((t, index) => (
                   <option key={index} value={t}>
                     {t}
                   </option>
@@ -202,17 +245,35 @@ const AppointmentForm = ({date}) => {
                   required
                   disabled={!!liveSlot}
                 >
-                {!liveSlot && <option>select time</option>}
+                {(!liveSlot && !isEdit) && (
+                  <option value="">select time</option>
+                )}
 
                 {liveSlot ? (
-                  <option value={liveSlot}>{liveSlot}</option>
-                  ) : (
-                    activeSlots?.map((s, index) => (
-                      <option key={index} value={s}>
-                        {s}
-                      </option>
-                    ))
-                  )}
+                <option value={liveSlot}>{liveSlot}</option>
+                 ) : isEdit && editData ? (
+                <>
+                  <option value={cleanTime} style={{backgroundColor:"green"}}>
+                    {cleanTime}
+                  </option>
+
+                  {activeSlots?.map((s, index) => (
+                    <option key={index} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </>
+                ) : (
+                <>
+                  <option value="">select time</option>
+
+                  {activeSlots?.map((s, index) => (
+                    <option key={index} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </>
+              )}
               </Form.Select>
             </Form.Group>
 

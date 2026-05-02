@@ -50,7 +50,7 @@ const Table = ({data,role})=>{
                 </thead>
                 <tbody>
                     {role==="doctor" && data &&(
-                        data.map(d=>(
+                        data?.map(d=>(
                             <tr key={d.id}>
                                 <td className={tableStyle.name}>
                                     <span onClick={()=>handleProfileOpen(d.id)}>
@@ -69,7 +69,7 @@ const Table = ({data,role})=>{
                         ))
                     )}
                     {role==="receptionist" && data &&(
-                        data.map(d=>(
+                        data?.map(d=>(
                             <tr key={d.id}>
                                 <td className={tableStyle.name}>
                                     <span onClick={()=>handleProfileOpen(d.id)}>
@@ -88,7 +88,7 @@ const Table = ({data,role})=>{
                         ))
                     )}
                     {role==="patient" && data &&(
-                        data.map(d=>(
+                        data?.map(d=>(
                             <tr key={d.id}>
                                 <td>
                                     <span 

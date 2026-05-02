@@ -19,6 +19,7 @@ const AppointmentsTable = ()=>{
     //fetch appointments
     useEffect(()=>{
         const loadAppointments = async()=>{
+            if(!clinicId) return;
             const data = await fetchAppointments(clinicId);
             setAppoint(data);
         }
@@ -34,8 +35,9 @@ const AppointmentsTable = ()=>{
         dispatch(setLiveFormVisible(true));
         const data = await getDataToEdit(id);
         if(data){
-            setEditAppointData(data);
-            setIsEdit(true);
+            dispatch(setEditAppointData(data));
+            dispatch(setIsEdit(true));
+            console.log(data);
         }
     }
 

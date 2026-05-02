@@ -5,12 +5,23 @@ import SearchResults from './SearchResults';
 import { useSelector,useDispatch } from 'react-redux';
 import { setDropdown } from '../features/appointments/appointmentSlice';
 import { icons } from "../assets/icons";
-import { setSelectedPatient, setPhone } from '../features/appointments/patientSearchSlice';
+import { setSelectedPatient, setPhone, setFinalPatient } from '../features/appointments/patientSearchSlice';
 
 const AppointmentSearch = ({setFormData,setError,error})=>{
     const dispatch = useDispatch();
     const { dropdownViewd } = useSelector((state)=>state.appointment);
     const {phone,finalPatient} = useSelector((state)=>state.patientSearch);
+
+    //edit case
+    const isEdit = useSelector((state)=>state.appointment.isEdit);
+    const editData = useSelector((state)=>state.appointment.editAppointmentData);
+    
+    useEffect(() => {
+        if (isEdit && editData) {
+            dispatch(setPhone(editData.patient.phone));
+            dispatch(setFinalPatient(editData.patient));
+        }
+    }, [isEdit, editData, dispatch]);
     
     useEffect(()=>{
         dispatch(setPhone(""));
