@@ -43,7 +43,7 @@ const PatientForm = ()=>{
                         displayClinic();
                     },[])
     return(
-        <Card>
+        <Card style={{border:'none'}}>
             <Card.Body className='d-flex flex-column align-items-center' style={{height:"450px",padding:"30px"}}>
                 <Form onSubmit={handleSubmit} className='d-flex flex-column align-items-start' style={{gap:"20px",width:"560px",color:"#384152"}}>
                     <h4 className='m-0 p-0'>Add Patient</h4>

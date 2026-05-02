@@ -41,3 +41,8 @@ tbody tr .dots span{
     margin: 0;
     cursor: pointer;
 }
+
+
+.t-dots{
+    cursor: pointer;
+}

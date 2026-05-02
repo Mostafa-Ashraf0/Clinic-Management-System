@@ -1,13 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import tableStyle from '../assets/table.module.css';
 import ActionsList from './ActionsList';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch,useSelector } from 'react-redux';
+import EditFormView from './EditFormView';
+import { setEditData } from '../features/doctors/doctorsSlice';
+
 const Table = ({data,role})=>{
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [openRow, setOpenRow] = useState(null);
-    const handleClick = (id)=>{
-        setOpenRow(openRow === id ? null : id);
+    const doctorEdit = useSelector((state)=>state.doctor.isEdit);
+
+    const handleClick = (data)=>{
+        setOpenRow(openRow === data.id ? null : data.id);
+        dispatch(setEditData(data));
     }
+
+    useEffect(() => {
+    console.log("doctorEdit:", doctorEdit);
+    }, [doctorEdit]);
 
     const handleProfileOpen = (id)=>{
         if(role === "patient"){
@@ -15,6 +27,7 @@ const Table = ({data,role})=>{
         }
     }
     return(
+        <>
         <div className={`${tableStyle.table}`}>
             <div className={`${tableStyle["t-body"]}`}>
                 <table>
@@ -61,7 +74,7 @@ const Table = ({data,role})=>{
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
                                 <td>{d.doctor_extra?.specialization.name}</td>
-                                <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
+                                <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d)}>
                                     <span>.</span><span>.</span><span>.</span>
                                     <ActionsList actionsList={openRow === d.id}/>
                                 </td>
@@ -113,6 +126,8 @@ const Table = ({data,role})=>{
             </table>
             </div>
         </div>
+        {doctorEdit && <EditFormView/>}
+        </>
     )
 }
 

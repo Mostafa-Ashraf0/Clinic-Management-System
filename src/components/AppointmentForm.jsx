@@ -174,7 +174,7 @@ const AppointmentForm = ({date}) => {
   
 
   return (
-    <Card>
+    <Card style={{border:"none"}}>
       <Card.Body
         className="d-flex flex-column align-items-center"
         style={{ height: '600px', padding: '30px' }}

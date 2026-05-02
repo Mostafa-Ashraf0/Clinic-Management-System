@@ -11,6 +11,7 @@ import filesFormSlice from '../features/emr/filesFormSlice';
 import fullViewSlice from '../features/liveAppointment/fullViewSlice';
 import operationsFormSlice from '../features/operations/operationsFormSlice';
 import patientSearchSlice from '../features/appointments/patientSearchSlice';
+import doctorSlice from '../features/doctors/doctorsSlice';
 //import all slices
 
 export const store = configureStore({
@@ -26,6 +27,7 @@ export const store = configureStore({
         filesForm: filesFormSlice,
         fullView: fullViewSlice,
         operationsForm: operationsFormSlice,
-        patientSearch: patientSearchSlice
+        patientSearch: patientSearchSlice,
+        doctor: doctorSlice
     }
 });
