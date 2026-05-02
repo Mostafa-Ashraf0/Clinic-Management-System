@@ -5,13 +5,17 @@ import DoctorForm from './DoctorForm';
 import ReciptionistForm from './ReciptionistForm';
 import PatientForm from './PatientForm';
 import { setIsEdit } from '../features/doctors/doctorsSlice';
+import { setIsEditRecip } from '../features/receptionist/reciptionistSlice';
 
 const EditFormView = ()=>{
     const dispatch = useDispatch();
     const closeIcon = icons.public.close;
     const doctorEdit = useSelector((state)=>state.doctor.isEdit);
+    const recipEdit = useSelector((state)=>state.recip.isEditRecip);
+
     const handleClose = ()=>{
         dispatch(setIsEdit(false));
+        dispatch(setIsEditRecip(false));
     }
 
     return(
@@ -23,6 +27,9 @@ const EditFormView = ()=>{
                 </span>
                 {doctorEdit &&
                 <DoctorForm/>
+                }
+                {recipEdit &&
+                <ReciptionistForm/>
                 }
             </div>
         </div>

@@ -53,7 +53,6 @@ const AppointmentsTable = ()=>{
                         <th>Patient name</th>
                         <th>Date</th>
                         <th>Time</th>
-                        <th>Clinic</th>
                         <th>Status</th>
                         <th>Type</th>
                         <th>Action</th>
@@ -63,11 +62,11 @@ const AppointmentsTable = ()=>{
                     {Appoint?.map((A,index)=>(
                         <tr key={A.id}>
                             <td>{index +1}</td>
-                            <td>{A.patient?.name} <br/> code</td>
+                            <td>{A.patient?.name} <br/>
+                                <span style={{fontSize:"14px",color:"rgba(84, 82, 82, 0.55)"}}>Code: {A.patient?.id}</span>
+                            </td>
                             <td>{A.appointment_date}</td>
-                            <td>{A.appointment_time}</td>
-                            <td>{A.clinic?.name}</td>
-                            
+                            <td>{A.appointment_time}</td>                            
                             <td>
                                 <span
                                 style={{backgroundColor:statusColor[A.status]?.bg, color:statusColor[A.status]?.color,

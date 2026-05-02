@@ -8,7 +8,7 @@ const fetchAppointments = async(clinicId)=>{
         .from('appointment')
         .select(`
             id,
-            patient(name),
+            patient(name,id),
             appointment_time,
             appointment_date,
             clinic(name),

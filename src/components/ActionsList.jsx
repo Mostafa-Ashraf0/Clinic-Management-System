@@ -1,15 +1,20 @@
 import '../assets/actionsList.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsEdit } from '../features/doctors/doctorsSlice';
+import { setIsEditRecip } from '../features/receptionist/reciptionistSlice';
 import { useEffect } from 'react';
 
-const ActionsList = ({actionsList})=>{
+const ActionsList = ({actionsList, role})=>{
     const dispatch = useDispatch();
     const doctorData = useSelector((state)=>state.doctor.editData);
 
     //handle edit click
     const handleEdit = async()=>{
-        dispatch(setIsEdit(true));
+        if(role === "doctor"){
+            dispatch(setIsEdit(true));
+        }else if(role === "receptionist"){
+            dispatch(setIsEditRecip(true));
+        }
     }
 
     useEffect(()=>{

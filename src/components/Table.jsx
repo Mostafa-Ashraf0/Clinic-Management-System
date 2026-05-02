@@ -5,16 +5,28 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import EditFormView from './EditFormView';
 import { setEditData } from '../features/doctors/doctorsSlice';
+import { setEditDataRecip } from '../features/receptionist/reciptionistSlice';
 
 const Table = ({data,role})=>{
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [openRow, setOpenRow] = useState(null);
     const doctorEdit = useSelector((state)=>state.doctor.isEdit);
+    const recipEdit = useSelector((state)=>state.recip.isEditRecip);
 
-    const handleClick = (data)=>{
+    const handleDoctorClick = (data)=>{
         setOpenRow(openRow === data.id ? null : data.id);
         dispatch(setEditData(data));
+    }
+
+    const handleRecipClick = (data)=>{
+        setOpenRow(openRow === data.id ? null : data.id);
+        dispatch(setEditDataRecip(data));
+    }
+
+    const handlePatientClick = (data)=>{
+        setOpenRow(openRow === data.id ? null : data.id);
+        //dispatch(setEditDataRecip(data));
     }
 
     useEffect(() => {
@@ -68,15 +80,14 @@ const Table = ({data,role})=>{
                                 <td className={tableStyle.name}>
                                     <span onClick={()=>handleProfileOpen(d.id)}>
                                         {d.name}<br/>
-                                        code
                                     </span>
                                 </td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
                                 <td>{d.doctor_extra?.specialization.name}</td>
-                                <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d)}>
+                                <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleDoctorClick(d)}>
                                     <span>.</span><span>.</span><span>.</span>
-                                    <ActionsList actionsList={openRow === d.id}/>
+                                    <ActionsList actionsList={openRow === d.id} role={role}/>
                                 </td>
                             </tr>
                         ))
@@ -87,15 +98,14 @@ const Table = ({data,role})=>{
                                 <td className={tableStyle.name}>
                                     <span onClick={()=>handleProfileOpen(d.id)}>
                                         {d.name}<br/>
-                                        code
                                     </span>
                                 </td>
                                 <td>null</td>
                                 <td>{d.phone}</td>
                                 <td>{d.email}</td>
-                                <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
+                                <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleRecipClick(d)}>
                                     <span>.</span><span>.</span><span>.</span>
-                                    <ActionsList actionsList={openRow === d.id}/>
+                                    <ActionsList actionsList={openRow === d.id} role={role}/>
                                     </td>
                             </tr>
                         ))
@@ -108,16 +118,16 @@ const Table = ({data,role})=>{
                                     onClick={()=>handleProfileOpen(d.id)}
                                     className={tableStyle.name}>
                                         {d.name}<br/>
-                                        code
+                                        <span style={{fontSize:"14px",color:"rgba(84, 82, 82, 0.55)"}}>Code: {d.id}</span>
                                     </span>
                                 </td>
                                 <td>{d.phone}</td>
                                 <td>null</td>
                                 <td>null</td>
                                 <td>{d.email || "null"}</td>
-                                <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleClick(d.id)}>
+                                <td className={`${tableStyle["t-dots"]}`} onClick={()=>handlePatientClick(d)}>
                                     <span>.</span><span>.</span><span>.</span>
-                                    <ActionsList actionsList={openRow === d.id}/>
+                                    <ActionsList actionsList={openRow === d.id} role={role}/>
                                     </td>
                             </tr>
                         ))
@@ -126,7 +136,7 @@ const Table = ({data,role})=>{
             </table>
             </div>
         </div>
-        {doctorEdit && <EditFormView/>}
+        {(doctorEdit || recipEdit) && <EditFormView/>}
         </>
     )
 }

@@ -1,25 +1,31 @@
 import {Card, Form, Button, FormGroup} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { AddRecip } from '../features/receptionist/addReceptionist';
-import { getClinic } from '../features/getClinic';
+import { useSelector } from 'react-redux';
+
+
 const ReciptionistForm = ()=>{
-        const [clinic, setClinic] = useState([]);
+        const clinicId = useSelector((state) => state.auth.clinic_id);
         const [submited, setSubmited] = useState(false);
+
+
         const [formData, setFormData] = useState({
             firstName: "",
             lastName: "",
-            clinic_id: "",
+            clinic_id: clinicId,
             email: "",
             phone: "",
             sex: "",
             loginEmail: "",
             password: ""
         })
+
+
         useEffect(()=>{
             setFormData({
                 firstName: "",
                 lastName: "",
-                clinic_id: "",
+                clinic_id: clinicId,
                 email: "",
                 phone: "",
                 sex: "",
@@ -27,7 +33,9 @@ const ReciptionistForm = ()=>{
                 password: ""
             });
             setSubmited(false);
-        },[submited])
+        },[submited, clinicId])
+
+
         const handleChange = (e)=>{
             const { name, value } = e.target;
             setFormData((prev)=>({
@@ -35,17 +43,15 @@ const ReciptionistForm = ()=>{
                 [name]: value.trim()
             }));
         };
+
+
         const handleSubmit = (e)=>{
+            if(!clinicId) return;
             e.preventDefault();
             AddRecip(formData,setSubmited);
         }
-        useEffect(()=>{
-            const displayClinic = async()=>{
-                const clinicData = await getClinic();
-                setClinic(clinicData);
-            };
-            displayClinic();
-        },[])
+
+
     return(
         <Card style={{border:"none"}}>
             <Card.Body className='d-flex flex-column align-items-center' style={{height:"520px",padding:"30px"}}>
@@ -86,14 +92,6 @@ const ReciptionistForm = ()=>{
                                 <option value="">Select Sex</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
-                            </Form.Select>
-                        </Form.Group>
-                        {/*Gender */}
-                        <Form.Group className='d-flex flex-column align-items-start w-100' style={{height:"64px"}}>
-                            <Form.Label>Clinic*</Form.Label>
-                            <Form.Select aria-label="Default select example" name='clinic_id' value={formData.clinic_id} onChange={handleChange} required>
-                                <option value="">Select Clinic</option>
-                                {clinic.map(c=><option value={c.id} key={c.id}>{c.name}</option>)}
                             </Form.Select>
                         </Form.Group>
     
