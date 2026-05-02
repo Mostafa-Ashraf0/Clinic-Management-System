@@ -37,7 +37,7 @@ const AppointmentsTable = ()=>{
         if(data){
             dispatch(setEditAppointData(data));
             dispatch(setIsEdit(true));
-            console.log(data);
+            console.log("look data", data)
         }
     }
 

@@ -1,5 +1,6 @@
 import { Card, Form, Button } from 'react-bootstrap';
 import { AddAppointment } from '../features/appointments/appointments';
+import { editAppointment } from '../features/appointments/editAppointment';
 import { useEffect, useState } from 'react';
 import { fetchDoctors } from '../features/appointments/fetchDoctors';
 import AppointmentSearch from './AppointmentSearch';
@@ -28,7 +29,9 @@ const AppointmentForm = ({date}) => {
       const timeSlots = useSelector((state)=>state.appointment.timeSlots);
       const activeSlots = useSelector((state)=>state.appointment.activeSlots);
       const liveSlot = useSelector((state)=>state.appointment.liveAppoinSlot);
-      
+
+
+
       const [error, setError] = useState("");
 
       //initial formData
@@ -61,7 +64,7 @@ const AppointmentForm = ({date}) => {
           setFormData({
             doctor: editData.doctor?.id || '',
             patient: editData.patient?.id || '',
-            date: editData.appointment_date,
+            date: editData.date,
             time: cleanTime,
             clinic_id: clinicId,
             type: editData.type
@@ -116,6 +119,8 @@ const AppointmentForm = ({date}) => {
     }
   }, [submited,initialDate,clinicId,dispatch,liveSlot]);
 
+
+  //Input Change Logic
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -124,13 +129,18 @@ const AppointmentForm = ({date}) => {
     }));
   };
 
+  //Submition Logic
   const handleSubmit = (e) => {
     e.preventDefault();
     if(error){
       toast.error(error);
       return;
     };
-    AddAppointment(formData, setSubmited);
+    if(isEdit && editData){
+      editAppointment(formData, setSubmited, editData.id)
+    }else{
+      AddAppointment(formData, setSubmited);
+    }
     dispatch(setPhone(""));
     dispatch(setFinalPatient({
       name:'',
@@ -152,9 +162,11 @@ const AppointmentForm = ({date}) => {
 
   // Fetch doctors and clinics
   useEffect(() => {
+    if(!clinicId) return;
     const loadDoctors = async () => {
       const doctorsData = await fetchDoctors(clinicId);
       setDoctors(doctorsData);
+      console.log("ade al data y 3m", doctorsData)
     };
     loadDoctors();
   }, [clinicId]);
@@ -197,11 +209,28 @@ const AppointmentForm = ({date}) => {
                 onChange={handleChange}
                 required
               >
-                {doctors.map((d) => (
-                  <option key={d.id} value={d.id}>
-                    {d.name}
-                  </option>
-                ))}
+                {isEdit && editData ? (
+                <option value={editData.doctor.id}>{editData.doctor.name}</option>
+                ) : (
+                  <option value="">Select type</option>
+                )}
+
+                {
+                doctors &&
+                (isEdit
+                  ? doctors
+                      .filter((d) => d.id !== editData?.doctor?.id)
+                      .map((d) => (
+                        <option key={d.id} value={d.id}>
+                          {d.name}
+                        </option>
+                      ))
+                  : doctors.map((d) => (
+                      <option key={d.id} value={d.id}>
+                        {d.name}
+                      </option>
+                    )))
+              }
               </Form.Select>
             </Form.Group>
 
@@ -214,18 +243,27 @@ const AppointmentForm = ({date}) => {
                 onChange={handleChange}
                 required
               >
-                {!isEdit && <option value="">Select type</option>}
                 {isEdit && editData ? (
                 <option value={editData.type}>{editData.type}</option>
                 ) : (
                   <option value="">Select type</option>
                 )}
 
-                {types.map((t, index) => (
-                  <option key={index} value={t}>
-                    {t}
-                  </option>
-                ))}
+
+                {types &&
+                (isEdit
+                  ? types
+                      .filter((t) => t !== editData?.type)
+                      .map((t, index) => (
+                        <option key={index} value={t}>
+                          {t}
+                        </option>
+                      ))
+                  : types.map((t, index) => (
+                      <option key={index} value={t}>
+                        {t}
+                      </option>
+                    )))}
               </Form.Select>
             </Form.Group>
           </Form.Group>
@@ -243,7 +281,7 @@ const AppointmentForm = ({date}) => {
                   value={formData.time}
                   onChange={handleChange}
                   required
-                  disabled={!!liveSlot}
+                  disabled={!!liveSlot && !isEdit}
                 >
                 {(!liveSlot && !isEdit) && (
                   <option value="">select time</option>
@@ -280,12 +318,12 @@ const AppointmentForm = ({date}) => {
             <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
               <Form.Label>Date*</Form.Label>
                 <Form.Control
-                  type={date?"text":"date"}
+                  type={date && !isEdit?"text":"date"}
                   name="date"
                   value={formData.date}
                   onChange={handleChange}
                   required
-                  disabled={!!date}
+                  disabled={!!date && !isEdit}
                 />
             </Form.Group>
           </Form.Group>

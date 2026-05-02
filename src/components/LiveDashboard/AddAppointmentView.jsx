@@ -6,6 +6,7 @@ import { icons } from '../../assets/icons';
 import { useEffect } from 'react';
 import { setIsEdit } from '../../features/appointments/appointmentSlice';
 import { setPhone, setFinalPatient } from '../../features/appointments/patientSearchSlice';
+import { setLiveAppoSlot } from '../../features/appointments/appointmentSlice';
 
 const AddAppointmentView = ()=>{
     const today = new Date().toISOString().split("T")[0];
@@ -13,6 +14,7 @@ const AddAppointmentView = ()=>{
     const closeIcon = icons.public.close;
 
     const handleClose = ()=>{
+        dispatch(setLiveAppoSlot(null));
         dispatch(setLiveFormVisible(false));
         dispatch(setIsEdit(false));
         dispatch(setPhone(''));
