@@ -7,8 +7,10 @@ import { setIsVisible } from '../../features/medicalTests/medicalTestFormSlice';
 import MedicalTestTable from './MedicalTestTable';
 import { useState, useEffect } from 'react';
 import { fetchMedicalTest } from '../../features/medicalTests/fetchMedicalTests';
+import { setEditData } from '../../features/medicalTests/medicalTestFormSlice';
 
 const MedicalTestsView = ()=>{
+    const dispatch = useDispatch();
     const [tests, setTests] = useState([]);
     const [selectedTest, setSelectedTest] = useState(null);
     const getMedicalTests = async()=>{
@@ -20,10 +22,16 @@ const MedicalTestsView = ()=>{
     useEffect(()=>{
         getMedicalTests();
     },[])
-    const dispatch = useDispatch();
         const handleClick = ()=>{
             dispatch(setIsVisible(true));
         }
+
+
+    //Test form edit data
+    useEffect(()=>{
+        dispatch(setEditData(tests));
+    },[tests,dispatch])
+
     return(
         <div className={style.main}>
             <div className={style.head}>

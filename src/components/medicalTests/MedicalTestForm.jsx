@@ -7,10 +7,12 @@ import { getCategories } from '../../features/medicalTests/getCategories';
 import { addNewTestParams } from '../../features/medicalTests/addNewTest_params';
 import { useSelector,useDispatch } from 'react-redux';
 import { setIsVisible } from '../../features/medicalTests/medicalTestFormSlice';
+import { setIsEditTest } from '../../features/medicalTests/medicalTestFormSlice';
 
 const MedicalTestForm = ({onTestAdded})=>{
     const dispatch = useDispatch();
-    const { isVisible } = useSelector((state)=>state.medicalTestForm)
+    const { isVisible } = useSelector((state)=>state.medicalTestForm);
+    const { isEditTest } =  useSelector((state)=>state.medicalTestForm);
     const [clinic, setClinic] = useState([]);
     const [categories, setCategories] = useState([]);
     const [formData, setFormData] = useState({
@@ -52,6 +54,7 @@ const MedicalTestForm = ({onTestAdded})=>{
             }
         }
     const handleCancel = ()=>{
+        dispatch(setIsEditTest(false));
         dispatch(setIsVisible(false));
         setFormData({
         test_name: '',
@@ -108,7 +111,7 @@ const MedicalTestForm = ({onTestAdded})=>{
         displayCategories();
     },[formData.clinic_id])
     return(
-        <div className={style.container} style={isVisible?{display:'flex'}:{display:'none'}}>
+        <div className={style.container} style={(isVisible || isEditTest)?{display:'flex'}:{display:'none'}}>
         <Card className={style.card} style={{border:'none',display:'flex'}}>
             <Card.Body className={style.cardBody}>
                 <div className={style.head}>

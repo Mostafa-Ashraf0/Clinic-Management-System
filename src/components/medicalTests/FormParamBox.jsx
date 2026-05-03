@@ -55,8 +55,8 @@ const FormParamBox = ({paramData, setParam, removeParam, clinicId})=>{
             >
               <option value="">Select Type</option>
               <option value="Numeric">Numeric</option>
-              <option value="Text">Text</option>
-              <option value="Boolean">Boolean</option>
+              {/*<option value="Text">Text</option>
+              <option value="Boolean">Boolean</option>*/}
             </Form.Select>
           </Form.Group>
           <Form.Group  className={style.max}>

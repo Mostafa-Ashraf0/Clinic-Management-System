@@ -6,7 +6,6 @@
 
 .t-body{
     width: 100%;
-    overflow-y: auto;  
 }
 
 table{
@@ -14,6 +13,7 @@ table{
     border: solid 1px #D2D5DB;
     border-collapse:unset;
     background-color: white;
+    overflow: none;
 }
 
 
@@ -44,5 +44,6 @@ tbody tr .dots span{
 
 
 .t-dots{
+    position: relative;
     cursor: pointer;
 }

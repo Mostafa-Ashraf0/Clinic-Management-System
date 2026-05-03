@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    isVisible: false
+    isVisible: false,
+    isEditTest: false, 
+    editData: null
 };
 
 
@@ -11,9 +13,15 @@ const medicalTestForm = createSlice({
     reducers:{
         setIsVisible(state,action){
             state.isVisible = action.payload;
+        },
+        setIsEditTest(state, action){
+            state.isEditTest = action.payload;
+        },
+        setEditData(state, action){
+            state.editData = action.payload;
         }
     }
 })
 
 export default medicalTestForm.reducer;
-export const {setIsVisible} = medicalTestForm.actions;
+export const {setIsVisible, setIsEditTest, setEditData} = medicalTestForm.actions;

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setIsEdit } from '../features/doctors/doctorsSlice';
 import { setIsEditRecip } from '../features/receptionist/reciptionistSlice';
 import { setIsEditPatient } from '../features/patient/patientSlice';
-
+import { setIsEditTest } from '../features/medicalTests/medicalTestFormSlice';
 
 const ActionsList = ({actionsList, role})=>{
     const dispatch = useDispatch();
@@ -16,6 +16,8 @@ const ActionsList = ({actionsList, role})=>{
             dispatch(setIsEditRecip(true));
         }else if(role === "patient"){
             dispatch(setIsEditPatient(true));
+        }else if(role === "test"){
+            dispatch(setIsEditTest(true));
         }
     }
 
