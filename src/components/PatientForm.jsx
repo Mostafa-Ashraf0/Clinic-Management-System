@@ -1,29 +1,59 @@
 import {Card, Form, Button, FormGroup} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { AddPatient } from '../features/patient/patinet';
-import { getClinic } from '../features/getClinic';
+import { useDispatch, useSelector } from 'react-redux';
+import { editPatient } from '../features/patient/editPatient';
+import { setIsEditPatient } from '../features/patient/patientSlice';
+
 const PatientForm = ()=>{
-            const [clinic, setClinic] = useState([]);
+            const clinicId = useSelector((state) => state.auth.clinic_id);
             const [submited, setSubmited] = useState(false);
+            const dispatch = useDispatch();
+            
+
+            //edit variables
+            const editData = useSelector((state)=>state.patient.editDataPatient);
+            const isEdit = useSelector((state)=>state.patient.isEditPatient);
+
             const [formData, setFormData] = useState({
                 firstName: "",
                 lastName: "",
                 email: "",
                 phone: "",
                 sex: "",
-                clinic_id: ""
+                clinic_id: clinicId
             })
+
+
+            //Edit state formData
+            useEffect(() => {
+            if (isEdit && editData) {
+                const [editfirstName, editlastName] = editData.name.split(" ");
+                setFormData({
+                    firstName: editfirstName,
+                    lastName: editlastName,
+                    email: editData.email,
+                    phone: editData.phone,
+                    sex: editData.gender,
+                });
+            }
+            }, [isEdit, editData]);
+
+
             useEffect(()=>{
+                if(!isEdit)
                 setFormData({
                     firstName: "",
                     lastName: "",
                     email: "",
                     phone: "",
                     sex: "",
-                    clinic_id: ""
+                    clinic_id: clinicId
                 });
                 setSubmited(false);
-            },[submited])
+            },[submited, clinicId, isEdit])
+
+
             const handleChange = (e)=>{
                 const { name, value } = e.target;
                 setFormData((prev)=>({
@@ -31,17 +61,19 @@ const PatientForm = ()=>{
                     [name]: value.trim()
                 }));
             };
+
+
             const handleSubmit = (e)=>{
+                if(!clinicId) return;
                 e.preventDefault();
-                AddPatient(formData,setSubmited);
+                if(isEdit && editData){
+                    editPatient(formData, setSubmited, editData.id);
+                    dispatch(setIsEditPatient(false));
+                }else{
+                    AddPatient(formData,setSubmited);
+                }
             }
-            useEffect(()=>{
-                        const displayClinic = async()=>{
-                            const clinicData = await getClinic();
-                            setClinic(clinicData);
-                        };
-                        displayClinic();
-                    },[])
+
     return(
         <Card style={{border:'none'}}>
             <Card.Body className='d-flex flex-column align-items-center' style={{height:"450px",padding:"30px"}}>
@@ -84,15 +116,6 @@ const PatientForm = ()=>{
                                 <option value="Female">Female</option>
                             </Form.Select>
                         </Form.Group>
-                        {/*Clinic */}
-                        <Form.Group className='d-flex flex-column align-items-start w-100' style={{height:"64px"}}>
-                            <Form.Label>Clinic*</Form.Label>
-                            <Form.Select aria-label="Default select example" name='clinic_id' value={formData.clinic_id} onChange={handleChange} required>
-                                <option value="">Select Clinic</option>
-                                {clinic.map(c=><option value={c.id} key={c.id}>{c.name}</option>)}
-                            </Form.Select>
-                        </Form.Group>
-    
                     </Form.Group>
                     <Button type='submit' className="d-flex align-items-center justify-content-center" style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}>Save</Button>
                 </Form>

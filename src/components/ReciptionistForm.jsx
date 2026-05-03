@@ -1,13 +1,19 @@
 import {Card, Form, Button, FormGroup} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { AddRecip } from '../features/receptionist/addReceptionist';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { setIsEditRecip } from '../features/receptionist/reciptionistSlice';
+import { editRecip } from '../features/receptionist/editReceptionist';
 
 
 const ReciptionistForm = ()=>{
+        const dispatch = useDispatch();
         const clinicId = useSelector((state) => state.auth.clinic_id);
         const [submited, setSubmited] = useState(false);
 
+        //edit variables
+        const editData = useSelector((state)=>state.recip.editDataRecip);
+        const isEdit = useSelector((state)=>state.recip.isEditRecip);
 
         const [formData, setFormData] = useState({
             firstName: "",
@@ -21,7 +27,25 @@ const ReciptionistForm = ()=>{
         })
 
 
+        //Edit state formData
+        useEffect(() => {
+        if (isEdit && editData) {
+            console.log(editData)
+            const [editfirstName, editlastName] = editData.name.split(" ");
+            setFormData({
+                firstName: editfirstName,
+                lastName: editlastName,
+                email: editData.email,
+                phone: editData.phone,
+                sex: editData.sex,
+            });
+        }
+        }, [isEdit, editData]);
+        
+
+        //Add state formData
         useEffect(()=>{
+            if(!isEdit)
             setFormData({
                 firstName: "",
                 lastName: "",
@@ -33,7 +57,7 @@ const ReciptionistForm = ()=>{
                 password: ""
             });
             setSubmited(false);
-        },[submited, clinicId])
+        },[submited, clinicId, isEdit])
 
 
         const handleChange = (e)=>{
@@ -48,7 +72,12 @@ const ReciptionistForm = ()=>{
         const handleSubmit = (e)=>{
             if(!clinicId) return;
             e.preventDefault();
-            AddRecip(formData,setSubmited);
+            if(isEdit && editData){
+                editRecip(formData, setSubmited, editData.id)
+                dispatch(setIsEditRecip(false));
+            }else{
+                AddRecip(formData,setSubmited);
+            }
         }
 
 
@@ -96,8 +125,8 @@ const ReciptionistForm = ()=>{
                         </Form.Group>
     
                     </Form.Group>
-                        {/*Credentials */}
-                    <Form.Group className='d-flex align-items-center justify-content-center' style={{width:"560px", gap:"10px"}}>
+                    {/*Credentials */}
+                    {!isEdit && <Form.Group className='d-flex align-items-center justify-content-center' style={{width:"560px", gap:"10px"}}>
                         {/*Login Email */}
                         <Form.Group className='d-flex flex-column align-items-start w-50' style={{height:"64px"}}>
                             <Form.Label>Login Email*</Form.Label>
@@ -108,9 +137,7 @@ const ReciptionistForm = ()=>{
                             <Form.Label>Password*</Form.Label>
                             <Form.Control type='password' name='password' value={formData.password} onChange={handleChange} required/>
                         </Form.Group>
-
-                    </Form.Group>
-
+                    </Form.Group>}
                     <Button type='submit' className="d-flex align-items-center justify-content-center" style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}>Save</Button>
                 </Form>
             </Card.Body>

@@ -6,8 +6,8 @@ const initialState = {
 };
 
 
-const RecipSlice = createSlice({
-    name: "Recip",
+const recipSlice = createSlice({
+    name: "recip",
     initialState,
     reducers:{
         setIsEditRecip(state,action){
@@ -19,9 +19,9 @@ const RecipSlice = createSlice({
     }
 })
 
-export default RecipSlice.reducer;
+export default recipSlice.reducer;
 export const {
     setEditDataRecip, 
     setIsEditRecip
 }
- = RecipSlice.actions;
+ = recipSlice.actions;

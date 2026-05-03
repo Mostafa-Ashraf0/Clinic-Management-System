@@ -12,7 +12,8 @@ import fullViewSlice from '../features/liveAppointment/fullViewSlice';
 import operationsFormSlice from '../features/operations/operationsFormSlice';
 import patientSearchSlice from '../features/appointments/patientSearchSlice';
 import doctorSlice from '../features/doctors/doctorsSlice';
-import RecipSlice from '../features/receptionist/reciptionistSlice';
+import recipSlice from '../features/receptionist/reciptionistSlice';
+import patientSlice from '../features/patient/patientSlice';
 //import all slices
 
 export const store = configureStore({
@@ -30,6 +31,7 @@ export const store = configureStore({
         operationsForm: operationsFormSlice,
         patientSearch: patientSearchSlice,
         doctor: doctorSlice,
-        recip: RecipSlice
+        recip: recipSlice,
+        patient: patientSlice
     }
 });

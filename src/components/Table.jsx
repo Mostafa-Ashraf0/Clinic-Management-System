@@ -6,6 +6,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import EditFormView from './EditFormView';
 import { setEditData } from '../features/doctors/doctorsSlice';
 import { setEditDataRecip } from '../features/receptionist/reciptionistSlice';
+import { setEditDataPatient } from '../features/patient/patientSlice';
 
 const Table = ({data,role})=>{
     const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Table = ({data,role})=>{
     const [openRow, setOpenRow] = useState(null);
     const doctorEdit = useSelector((state)=>state.doctor.isEdit);
     const recipEdit = useSelector((state)=>state.recip.isEditRecip);
+    const patientEdit = useSelector((state)=>state.patient.isEditPatient);
 
     const handleDoctorClick = (data)=>{
         setOpenRow(openRow === data.id ? null : data.id);
@@ -26,7 +28,8 @@ const Table = ({data,role})=>{
 
     const handlePatientClick = (data)=>{
         setOpenRow(openRow === data.id ? null : data.id);
-        //dispatch(setEditDataRecip(data));
+        dispatch(setEditDataPatient(data));
+        console.log(data)
     }
 
     useEffect(() => {
@@ -100,8 +103,8 @@ const Table = ({data,role})=>{
                                         {d.name}<br/>
                                     </span>
                                 </td>
-                                <td>null</td>
                                 <td>{d.phone}</td>
+                                <td>null</td>
                                 <td>{d.email}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handleRecipClick(d)}>
                                     <span>.</span><span>.</span><span>.</span>
@@ -136,7 +139,7 @@ const Table = ({data,role})=>{
             </table>
             </div>
         </div>
-        {(doctorEdit || recipEdit) && <EditFormView/>}
+        {(doctorEdit || patientEdit || recipEdit) && <EditFormView/>}
         </>
     )
 }
