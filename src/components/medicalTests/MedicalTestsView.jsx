@@ -13,12 +13,16 @@ const MedicalTestsView = ()=>{
     const dispatch = useDispatch();
     const [tests, setTests] = useState([]);
     const [selectedTest, setSelectedTest] = useState(null);
+
+    //fetch all tests
     const getMedicalTests = async()=>{
             const data = await fetchMedicalTest();
             if(data){
                 setTests(data);
             }
         };
+
+        
     useEffect(()=>{
         getMedicalTests();
     },[])
@@ -29,8 +33,8 @@ const MedicalTestsView = ()=>{
 
     //Test form edit data
     useEffect(()=>{
-        dispatch(setEditData(tests));
-    },[tests,dispatch])
+        dispatch(setEditData(selectedTest));
+    },[tests,dispatch,selectedTest])
 
     return(
         <div className={style.main}>

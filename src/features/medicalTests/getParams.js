@@ -5,7 +5,7 @@ const getParams = async(id)=>{
     .select(`
         id,
         name,
-        unit:medical_units(name),
+        unit:medical_units(id, name),
         type,
         min_value,
         max_value

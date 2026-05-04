@@ -7,7 +7,7 @@ const fetchMedicalTest = async()=>{
             id,
             name,
             clinic(name),
-            category:medical_test_category(name),
+            category:medical_test_category(id,name),
             medical_test_params(count)
             `);
         if(error) throw error;
