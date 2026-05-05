@@ -6,7 +6,8 @@ const initialState = {
     isEditOps:false,
     isEditSchedule: false,
     editDataOps: null,
-    editDataSchedule: null
+    editDataSchedule: null,
+    tableVisible:false
 };
 
 
@@ -31,6 +32,9 @@ const operationsForm = createSlice({
         },
         setEditDataSchedule(state, action){
             state.editDataSchedule = action.payload;
+        },
+        setTableVisible(state,action){
+            state.tableVisible = action.payload;
         }
     }
 })
@@ -43,6 +47,7 @@ export const {
     setIsEditOps,
     setIsEditSchedule,
     setEditDataOps,
-    setEditDataSchedule
+    setEditDataSchedule,
+    setTableVisible
 
     } = operationsForm.actions;

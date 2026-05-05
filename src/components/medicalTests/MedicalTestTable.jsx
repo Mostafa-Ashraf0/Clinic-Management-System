@@ -36,7 +36,6 @@ const MedicalTestTable = ({data, setTest})=>{
                                 <th>Test</th>
                                 <th>Category</th>
                                 <th>Parameters</th>
-                                <th>Clinic</th>
                                 <th>action</th>
                             </tr>
                         </thead>
@@ -46,7 +45,6 @@ const MedicalTestTable = ({data, setTest})=>{
                                     <td onClick={()=>handleClick(t)} className={style.name}>{t.name}</td>
                                     <td>{t.category?.name}</td>
                                     <td>{t.medical_test_params[0].count}</td>
-                                    <td>{t.clinic?.name}</td>
                                     <td onClick={()=>handleActionsClick(t)} style={{cursor:'pointer',position:"relative"}}>
                                         action
                                         <ActionsList actionsList={openRow === t.id} role={"test"}/>

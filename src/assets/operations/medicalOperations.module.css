@@ -26,7 +26,8 @@
     font-size: 20px;
 }
 
-.head .add{
+.main .add,
+.main .create{
     border: none;
     background-color: #2F9CCA;
     color: white;
@@ -37,5 +38,60 @@
     justify-content: center;
     gap: 10px;
     font-size: 17px;
+}
+
+.main .opsBtns{
+    margin-top: 20px;
+    margin-right: 20px;
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.opsBtns .eye img{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.main .create{
+    font-size: 14px;
+    background-color: rgb(74, 144, 226);
+}
+
+
+.main .opsTableContainer{
+    padding: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0a3d628e;
+    z-index: 1000;
+}
+
+
+
+.opsTableContainer .inner{
+    display: flex;
+    width: 100%;
+    position: relative;
+    padding: 30px;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.inner img{
+    width: 30px;
+    height: 30px;
+    right: 0;
+    top: 0;
+    cursor: pointer;
 }
 

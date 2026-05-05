@@ -16,7 +16,7 @@ const OperationsTable = ({data})=>{
 
 
     return(
-        <div className={`${style.table} d-flex flex-column`}>
+        <div className={`${style.table} d-flex flex-column`} style={{width:"80%"}}>
                     <div className={`${style.head}`}>Medical Operations</div>
                     <div className={`${style["t-body"]}`}>
                         <table>
@@ -24,7 +24,6 @@ const OperationsTable = ({data})=>{
                             <tr>
                                 <th>Operation</th>
                                 <th>Category</th>
-                                <th>Clinic</th>
                                 <th>action</th>
                             </tr>
                         </thead>
@@ -33,8 +32,7 @@ const OperationsTable = ({data})=>{
                                 <tr key={t.id}>
                                     <td className={style.name}>{t.name}</td>
                                     <td>{t.operations_category?.name}</td>
-                                    <td>{t.clinic?.name}</td>
-                                    <td onClick={()=>handleActionClick(t)} style={{cursor:'pointer'}}>
+                                    <td onClick={()=>handleActionClick(t)} style={{cursor:'pointer',position:"relative"}}>
                                         action
                                         <ActionsList actionsList={openRow === t.id} role={"ops"}/>
                                     </td>

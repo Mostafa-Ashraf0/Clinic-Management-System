@@ -1,7 +1,7 @@
 import style from '../../assets/operations/medicalOperations.module.css';
 import { icons } from '../../assets/icons';
 import { useDispatch,useSelector } from 'react-redux';
-import { setIsVisible, setIsScheduleVisible } from '../../features/operations/operationsFormSlice';
+import { setIsVisible, setIsScheduleVisible, setTableVisible } from '../../features/operations/operationsFormSlice';
 import AddOperationsForm from './AddOperationFrom';
 import { fetchOperations } from '../../features/operations/getOperations';
 import { useState, useEffect } from 'react';
@@ -10,13 +10,13 @@ import ScheduleOperationForm from './ScheduleOperationForm';
 import { fetchScheduleOps } from '../../features/operations/getScheduleOps';
 import ScheduleOpsTable from './ScheduleOpsTable';
 
-
 const OperationsView = ()=>{
     const [operations, setOperations] = useState([]);
     const [scheduleOps, setScheduleOps] = useState([]);
     const dispatch = useDispatch();
     const { isVisible } = useSelector((state)=>state.operationsForm);
     const { isEditOps } = useSelector((state)=>state.operationsForm);
+    const { tableVisible } = useSelector((state)=>state.operationsForm);
     const getOperations = async()=>{
         const data = await fetchOperations();
         
@@ -44,23 +44,42 @@ const OperationsView = ()=>{
     const handleScheduleClick = ()=>{
         dispatch(setIsScheduleVisible(true));
     }
+
+    const handleShowOps = ()=>{
+        dispatch(setTableVisible(true));
+    }
+
+    const handleClose = ()=>{
+        dispatch(setTableVisible(false));
+    }
+
     return(
         <div className={style.main}>
             <div className={style.head}>
                 <span className={style.title}>Medical Operations</span>
                 <button className={style.add}>
                     <img src={icons.control.add} alt="add" />
-                    <span className={style.text} onClick={handleClick}>Create New Operation</span>
-                </button>
-                <button className={style.add}>
-                    <img src={icons.control.add} alt="add" />
                     <span className={style.text} onClick={handleScheduleClick}>Schedule Operation</span>
                 </button>
             </div>
-            <OperationsTable data={operations}/>
+            {tableVisible && <div className={style.opsTableContainer}>
+                <div className={style.inner}>
+                    <img src={icons.public.close} alt="close" onClick={handleClose}/>
+                    <OperationsTable data={operations}/>
+                </div>
+            </div>}
             {(isVisible || isEditOps) && <AddOperationsForm onTestAdded = {getOperations}/>}
             <ScheduleOperationForm onTestAdded = {getScheduleOps}/>
             <ScheduleOpsTable data={scheduleOps}/>
+            <div className={style.opsBtns}>
+                <button className={style.create}>
+                    <img src={icons.control.add} alt="add" />
+                    <span className={style.text} onClick={handleClick}>Create New Operation</span>
+                </button>
+                <span className={style.eye} onClick={handleShowOps}>
+                    <img src={icons.operations.eye} alt="View Operations" />
+                </span>
+            </div>
         </div>
     )
 };

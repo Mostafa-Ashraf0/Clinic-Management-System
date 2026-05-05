@@ -26,6 +26,7 @@ import opsLight from './medical-operation-light.svg';
 import opsDark from './medical-operation-dark.svg';
 import setLight from './settings-light.svg';
 import setDark from './settings-dark.svg';
+import eyeIcon from './eye-svgrepo-com-blue.svg';
 
 export const icons = {
     public: {
@@ -65,7 +66,8 @@ export const icons = {
     },
     operations:{
         light: opsLight,
-        dark: opsDark
+        dark: opsDark,
+        eye: eyeIcon
     },
     settings:{
         light: setLight,
