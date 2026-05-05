@@ -1,6 +1,6 @@
 import style from '../../assets/operations/medicalOperations.module.css';
 import { icons } from '../../assets/icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { setIsVisible, setIsScheduleVisible } from '../../features/operations/operationsFormSlice';
 import AddOperationsForm from './AddOperationFrom';
 import { fetchOperations } from '../../features/operations/getOperations';
@@ -15,15 +15,14 @@ const OperationsView = ()=>{
     const [operations, setOperations] = useState([]);
     const [scheduleOps, setScheduleOps] = useState([]);
     const dispatch = useDispatch();
-
-
+    const { isVisible } = useSelector((state)=>state.operationsForm);
+    const { isEditOps } = useSelector((state)=>state.operationsForm);
     const getOperations = async()=>{
-    const data = await fetchOperations();
-    
-    if(data){
-        setOperations(data);
-    }
-    
+        const data = await fetchOperations();
+        
+        if(data){
+            setOperations(data);
+        }
     };
 
     const getScheduleOps = async()=>{
@@ -59,7 +58,7 @@ const OperationsView = ()=>{
                 </button>
             </div>
             <OperationsTable data={operations}/>
-            <AddOperationsForm onTestAdded = {getOperations}/>
+            {(isVisible || isEditOps) && <AddOperationsForm onTestAdded = {getOperations}/>}
             <ScheduleOperationForm onTestAdded = {getScheduleOps}/>
             <ScheduleOpsTable data={scheduleOps}/>
         </div>

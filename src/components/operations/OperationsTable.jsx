@@ -1,7 +1,20 @@
 import style from '../../assets/medicalTest/medicalTestTable.module.css';
+import ActionsList from '../ActionsList';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setEditDataOps } from '../../features/operations/operationsFormSlice';
 
 const OperationsTable = ({data})=>{
-    
+    const dispatch = useDispatch();
+    const [openRow, setOpenRow] = useState(null);
+
+    const handleActionClick = (rowData)=>{
+        console.log(rowData)
+        dispatch(setEditDataOps(rowData));
+        setOpenRow(openRow === rowData.id ? null : rowData.id);
+    };
+
+
     return(
         <div className={`${style.table} d-flex flex-column`}>
                     <div className={`${style.head}`}>Medical Operations</div>
@@ -21,7 +34,10 @@ const OperationsTable = ({data})=>{
                                     <td className={style.name}>{t.name}</td>
                                     <td>{t.operations_category?.name}</td>
                                     <td>{t.clinic?.name}</td>
-                                    <td>action</td>
+                                    <td onClick={()=>handleActionClick(t)} style={{cursor:'pointer'}}>
+                                        action
+                                        <ActionsList actionsList={openRow === t.id} role={"ops"}/>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

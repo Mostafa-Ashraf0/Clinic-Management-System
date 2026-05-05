@@ -6,8 +6,8 @@ const fetchOperations = async()=>{
         const {data, error} = await supabase.from('medical_operations').select(`
             id,
             name,
-            clinic(name),
-            operations_category(name)
+            clinic(name,id),
+            operations_category(id,name)
             `);
         if(error) throw error;
         return data;
