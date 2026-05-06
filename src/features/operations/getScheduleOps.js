@@ -6,11 +6,12 @@ const fetchScheduleOps = async()=>{
         const {data, error} = await supabase.from('operations_schedule').select(`
             id,
             doctor_extra(
-                profile(name)
+                profile(id,name)
             ),
-            patient(name),
+            patient(*),
             clinic(name),
             medical_operations(
+                id,
                 name,
                 operations_category(name)
             ),

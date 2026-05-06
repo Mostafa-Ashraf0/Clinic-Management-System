@@ -13,9 +13,14 @@ const AppointmentSearch = ({setFormData,setError,error})=>{
     const {phone,finalPatient} = useSelector((state)=>state.patientSearch);
 
     //edit case
-    const isEdit = useSelector((state)=>state.appointment.isEdit);
-    const editData = useSelector((state)=>state.appointment.editAppointmentData);
-    
+    const isEditAppointment = useSelector(state => state.appointment.isEdit);
+    const isEditOperation = useSelector(state => state.operationsForm.isEditSchedule);
+    const editAppointmentData = useSelector(state => state.appointment.editAppointmentData);
+    const editOperationData = useSelector(state => state.operationsForm.editDataSchedule);
+
+    const isEdit = isEditAppointment || isEditOperation;
+    const editData = editAppointmentData || editOperationData;
+
     useEffect(() => {
         if (isEdit && editData) {
             dispatch(setPhone(editData.patient.phone));
@@ -24,9 +29,11 @@ const AppointmentSearch = ({setFormData,setError,error})=>{
     }, [isEdit, editData, dispatch]);
     
     useEffect(()=>{
-        dispatch(setPhone(""));
-        dispatch(setDropdown(false));
-    },[dispatch])
+        if (!isEditAppointment && !isEditOperation) {
+            dispatch(setPhone(""));
+            dispatch(setDropdown(false));
+        }
+    },[isEditAppointment, isEditOperation, dispatch]);
 
     const handleChange = (e)=>{
         const value = e.target.value;
@@ -67,12 +74,12 @@ const AppointmentSearch = ({setFormData,setError,error})=>{
 
 
     return(
-        <div className="d-flex flex-column align-items-start w-50 position-relative"> 
+        <div className="d-flex flex-column align-items-start position-relative w-100"> 
             {/* Patient (Search by phone) */}
-                <Form className="d-flex flex-column align-items-start"
-                        style={{ width: '560px', color: '#384152' }}>
-                    <Form.Group className="d-flex align-items-center"
-                                style={{ width: '560px', gap: '10px',marginBottom:"20px" }}>
+                <Form className="d-flex flex-column align-items-start w-100"
+                        style={{ color: '#384152' }}>
+                    <Form.Group className="d-flex align-items-center w-100"
+                                style={{gap: '10px',marginBottom:"20px" }}>
                         <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
                             <Form.Label>Patient (by phone)*</Form.Label>
                             <Form.Group className='d-flex align-items-center w-100'>
@@ -102,8 +109,8 @@ const AppointmentSearch = ({setFormData,setError,error})=>{
                             <Form.Control type='text' value={finalPatient.name || ''} readOnly/>
                         </Form.Group>
                     </Form.Group>
-                    <Form.Group className="d-flex align-items-center"
-                                style={{ width: '560px', gap: '10px',marginBottom:"20px" }}>
+                    <Form.Group className="d-flex align-items-center w-100"
+                                style={{gap: '10px',marginBottom:"20px" }}>
                         <Form.Group className={`d-flex flex-column align-items-start w-50`} style={{ height: '64px' }}>
                             <Form.Label>Age</Form.Label>
                             <Form.Control type='text' value={finalPatient.age || ''} readOnly/>

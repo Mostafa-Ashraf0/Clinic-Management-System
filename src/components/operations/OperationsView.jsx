@@ -16,6 +16,8 @@ const OperationsView = ()=>{
     const dispatch = useDispatch();
     const { isVisible } = useSelector((state)=>state.operationsForm);
     const { isEditOps } = useSelector((state)=>state.operationsForm);
+    const { isEditSchedule } = useSelector((state)=>state.operationsForm);
+    const { isScheduleVisible } = useSelector((state)=>state.operationsForm);
     const { tableVisible } = useSelector((state)=>state.operationsForm);
     const getOperations = async()=>{
         const data = await fetchOperations();
@@ -68,9 +70,15 @@ const OperationsView = ()=>{
                     <OperationsTable data={operations}/>
                 </div>
             </div>}
+
+            {/* operations form visibility */}
             {(isVisible || isEditOps) && <AddOperationsForm onTestAdded = {getOperations}/>}
-            <ScheduleOperationForm onTestAdded = {getScheduleOps}/>
+
+            {/* OpsSchedule form visibility */}
+            {(isScheduleVisible || isEditSchedule) && <ScheduleOperationForm onTestAdded = {getScheduleOps}/>}
+
             <ScheduleOpsTable data={scheduleOps}/>
+            
             <div className={style.opsBtns}>
                 <button className={style.create}>
                     <img src={icons.control.add} alt="add" />

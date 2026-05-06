@@ -1,111 +1,152 @@
 import { Card, Form, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { fetchDoctors } from '../../features/appointments/fetchDoctors';
-//import { getClinic } from '../../features/getClinic';
 import AppointmentSearch from '../AppointmentSearch';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchOpsByClinicId } from '../../features/operations/getOperationByClinicId';
 import { setFinalPatient,setPhone,setSelectedPatient } from '../../features/appointments/patientSearchSlice';
 import { scheduleOperation } from '../../features/operations/scheduleOperation';
 import style from '../../assets/operations/scheduleForm.module.css';
-import { setIsScheduleVisible } from '../../features/operations/operationsFormSlice';
-
+import { setIsScheduleVisible, setIsEditSchedule } from '../../features/operations/operationsFormSlice';
 
 const ScheduleOperationForm = ({onTestAdded,date}) => {
-        const clinicId = useSelector((state) => state.auth.clinic_id);
-        const today = new Date().toISOString().split("T")[0];
-        const initialDate = date||today;
-        const dispatch = useDispatch();
-        const { isScheduleVisible } = useSelector((state)=>state.operationsForm);
+    const clinicId = useSelector((state) => state.auth.clinic_id);
+    const today = new Date().toISOString().split("T")[0];
+    const initialDate = date||today;
+    const dispatch = useDispatch();
+    const [error, setError] = useState(null);
+    const [submited, setSubmited] = useState(false);
+    const [doctors, setDoctors] = useState([]);
+    const [operation, setOperation] = useState([]);
+    const [formData, setFormData] = useState({
+      doctor: '',
+      patient: '',
+      schedule_at: today,
+      clinic_id: clinicId,
+      operation_id:'',
+      date: initialDate
+    });
 
-  const [submited, setSubmited] = useState(false);
-  const [doctors, setDoctors] = useState([]);
-  //const [clinic, setClinic] = useState([]);
-  const [operation, setOperation] = useState([]);
-  const [formData, setFormData] = useState({
-    doctor: '',
-    patient: '',
-    schedule_at: today,
-    clinic_id: clinicId,
-    operation_id:'',
-    date: initialDate
-  });
+    //edit variables
+    const isEdit = useSelector((state)=>state.operationsForm.isEditSchedule);
+    const editData = useSelector((state)=>state.operationsForm.editDataSchedule);
 
-  useEffect(() => {
-    if (submited) {
-      setFormData({
-        doctor: '',
-        patient: '',
-        schedule_at: today,
-        clinic_id: clinicId,
-        operation_id:'',
-        date: initialDate
-      });
-      dispatch(setSelectedPatient([]));
-      setSubmited(false);
-    }
-  }, [submited,initialDate,clinicId,today,dispatch]);
+    //edit state
+    useEffect(()=>{
+        console.log(editData)
+        if(isEdit && editData){
+            setFormData({
+              id: editData.id,
+              doctor: editData.doctor_extra.id,
+              patient: editData.patient.id,
+              operation_id: editData.medical_operations.id,
+              date: editData.date
+            })
+        }
+    },[isEdit, editData])
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value.trim(),
-    }));
-  };
 
-  const handleSubmit = async(e) => {
-    e.preventDefault();
-    await scheduleOperation(formData, setSubmited);
-    dispatch(setPhone(""));
-    dispatch(setFinalPatient({
-      name:'',
-      age:'',
-      email:''
-    }));
-    setFormData({
-        doctor: '',
-        patient: '',
-        schedule_at: today,
-        clinic_id: clinicId,
-        operation_id:'',
-        date: initialDate
-      });
-      dispatch(setIsScheduleVisible(false));
-      await onTestAdded();
-  };
+    useEffect(() => {
+      if (submited) {
+        setFormData({
+          doctor: '',
+          patient: '',
+          schedule_at: today,
+          clinic_id: clinicId,
+          operation_id:'',
+          date: initialDate
+        });
+        dispatch(setSelectedPatient([]));
+        setSubmited(false);
+      }
+    }, [submited,initialDate,clinicId,today,dispatch]);
 
-  
-
-  // Fetch doctors and clinics
-  useEffect(() => {
-    if(!clinicId) return;
-    const loadDoctors_clinics = async () => {
-      const doctorsData = await fetchDoctors(clinicId);
-      setDoctors(doctorsData);
-      //const clinicData = await getClinic();
-      //setClinic(clinicData);
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value.trim(),
+      }));
     };
-    loadDoctors_clinics();
-  }, [clinicId]);
 
-  //fetch Operations by clinicId
-  useEffect(()=>{
-    if (!clinicId) return;
-    const loadOps = async()=>{
-        const opsData = await fetchOpsByClinicId(clinicId);
-        setOperation(opsData);
+    const handleSubmit = async(e) => {
+      e.preventDefault();
+      let success = false;
+      if(isEdit && editData){
+          //success = await editOperation(formData, editData.id)
+      }else{
+          success = await scheduleOperation(formData, setSubmited)
+      }
+      if(success){
+      dispatch(setPhone(""));
+      dispatch(setFinalPatient({
+        name:'',
+        age:'',
+        email:''
+      }));
+      setFormData({
+          doctor: '',
+          patient: '',
+          schedule_at: today,
+          clinic_id: clinicId,
+          operation_id:'',
+          date: initialDate
+        });
+        dispatch(setIsScheduleVisible(false));
+        await onTestAdded();
+    };
+  }
+
+
+
+    //cancel
+    const handleCancel = () => {
+      dispatch(setIsScheduleVisible(false));
+      dispatch(setIsEditSchedule(false));
+      dispatch(setPhone(""));
+      dispatch(setFinalPatient({
+        name:'',
+        age:'',
+        email:''
+      }));
+      setFormData({
+          doctor: '',
+          patient: '',
+          schedule_at: today,
+          clinic_id: clinicId,
+          operation_id:'',
+          date: initialDate
+      });
     }
-    loadOps();
-  },[clinicId])
+
+    
+
+    // Fetch doctors and clinics
+    useEffect(() => {
+      if(!clinicId) return;
+      const loadDoctors_clinics = async () => {
+        const doctorsData = await fetchDoctors(clinicId);
+        setDoctors(doctorsData);
+      };
+      loadDoctors_clinics();
+    }, [clinicId]);
+
+    useEffect(()=>{
+      if (!clinicId) return;
+      const loadOps = async()=>{
+          const opsData = await fetchOpsByClinicId(clinicId);
+          setOperation(opsData);
+      }
+      loadOps();
+    },[clinicId])
   
 
   return (
-    <div className={style.container} style={isScheduleVisible?{display:'flex'}:{display:'none'}}>
+    <div className={style.container}>
     <Card className={style.card} style={{border:'none',display:'flex'}}>
       <Card.Body
         className="d-flex flex-column align-items-center"
-        style={{ height: '600px', padding: '30px' }}
+        style={{padding: '30px' }}
       >
         <div 
         className="d-flex flex-column align-items-start"
@@ -113,8 +154,9 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
         >
           <h4 className="m-0 p-0">Schedule Operation</h4>
           <AppointmentSearch 
-            setFormData={setFormData} 
-            formData={formData} 
+            setFormData={setFormData}
+            error={error}
+            setError={setError}
           />
         </div>
         <Form
@@ -143,24 +185,6 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
                 ))}
               </Form.Select>
             </Form.Group>
-            {/* Clinic 
-            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
-              <Form.Label>Clinic*</Form.Label>
-              <Form.Select
-                value={formData.clinic_id}
-                name="clinic_id"
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select clinic</option>
-                {clinic.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-            */}
           </Form.Group>
 
 
@@ -198,18 +222,10 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
             </Form.Group>
           </Form.Group>
 
-          <Button
-            type="submit"
-            className="d-flex align-items-center justify-content-center"
-            style={{
-              width: '97px',
-              height: '45px',
-              backgroundColor: '#2F9CCA',
-              border: 'none',
-            }}
-          >
-            Save
-          </Button>
+          <div className={style.submitBox}>
+              <Button onClick={handleCancel} className={style.cancel}>Cancel</Button>
+              <Button type='submit'>{"Create"}</Button>
+          </div>
         </Form>
       </Card.Body>
     </Card>

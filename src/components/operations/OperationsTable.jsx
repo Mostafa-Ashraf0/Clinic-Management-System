@@ -9,7 +9,6 @@ const OperationsTable = ({data})=>{
     const [openRow, setOpenRow] = useState(null);
 
     const handleActionClick = (rowData)=>{
-        console.log(rowData)
         dispatch(setEditDataOps(rowData));
         setOpenRow(openRow === rowData.id ? null : rowData.id);
     };

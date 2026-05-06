@@ -75,11 +75,11 @@ const PatientForm = ()=>{
             }
 
     return(
-        <Card style={{border:'none'}}>
+        <Card style={{border:'none',width:"100%"}}>
             <Card.Body className='d-flex flex-column align-items-center' style={{height:"450px",padding:"30px"}}>
-                <Form onSubmit={handleSubmit} className='d-flex flex-column align-items-start' style={{gap:"20px",width:"560px",color:"#384152"}}>
+                <Form onSubmit={handleSubmit} className='d-flex flex-column align-items-start w-100' style={{gap:"20px",color:"#384152"}}>
                     <h4 className='m-0 p-0'>Add Patient</h4>
-                    <Form.Group className='d-flex align-items-center justify-content-center' style={{width:"560px", gap:"10px"}}>
+                    <Form.Group className='d-flex align-items-center justify-content-center w-100' style={{gap:"10px"}}>
                         {/*First Name */}
                         <Form.Group className='d-flex flex-column align-items-start w-50' style={{height:"64px"}}>
                             <Form.Label>First Name*</Form.Label>
@@ -93,7 +93,7 @@ const PatientForm = ()=>{
                         </Form.Group>
                     </Form.Group>
 
-                    <Form.Group className='d-flex align-items-center justify-content-center' style={{width:"560px", gap:"10px"}}>
+                    <Form.Group className='d-flex align-items-center justify-content-center w-100' style={{gap:"10px"}}>
                         {/*Email */}
                         <Form.Group className='d-flex flex-column align-items-start w-50' style={{height:"64px"}}>
                             <Form.Label>Email</Form.Label>
@@ -106,7 +106,7 @@ const PatientForm = ()=>{
                         </Form.Group>
 
                     </Form.Group>
-                    <Form.Group className='d-flex align-items-center justify-content-center' style={{width:"560px", gap:"10px"}}>
+                    <Form.Group className='d-flex align-items-center justify-content-center w-100' style={{gap:"10px"}}>
                         {/*Gender */}
                         <Form.Group className='d-flex flex-column align-items-start w-100' style={{height:"64px"}}>
                             <Form.Label>Sex*</Form.Label>

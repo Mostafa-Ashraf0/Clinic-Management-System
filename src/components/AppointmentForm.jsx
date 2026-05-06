@@ -73,6 +73,7 @@ const AppointmentForm = ({date}) => {
     }, [isEdit, editData, cleanTime,clinicId]);
 
 
+
       const fetchTime = async()=>{
           const data = await getWorkingTime(clinicId);
           if(data){
@@ -177,11 +178,10 @@ const AppointmentForm = ({date}) => {
     <Card style={{border:"none"}}>
       <Card.Body
         className="d-flex flex-column align-items-center"
-        style={{ height: '600px', padding: '30px' }}
       >
         <div 
         className="d-flex flex-column align-items-start"
-        style={{ gap: '20px', width: '560px', color: '#384152',marginBottom:"20px"}}
+        style={{ gap: '20px', width:"100%",color: '#384152',marginBottom:"20px"}}
         >
           <h4 className="m-0 p-0">Create Appointment</h4>
           <AppointmentSearch 
@@ -194,11 +194,11 @@ const AppointmentForm = ({date}) => {
         <Form
           onSubmit={handleSubmit}
           className="d-flex flex-column align-items-start"
-          style={{ gap: '20px', width: '560px', color: '#384152' }}
+          style={{ gap: '20px',width:"100%",color: '#384152' }}
         >
           <Form.Group
             className="d-flex align-items-center justify-content-center"
-            style={{ width: '560px', gap: '10px',marginBottom:"20px" }}
+            style={{gap: '10px',marginBottom:"20px",width:"100%" }}
           >
             {/* Doctor */}
             <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
@@ -272,7 +272,7 @@ const AppointmentForm = ({date}) => {
           {/* Date & Time */}
           <Form.Group
             className="d-flex align-items-center justify-content-center"
-            style={{ width: '560px', gap: '10px' }}
+            style={{gap: '10px',width:"100%" }}
           >
             <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
               <Form.Label>Time*</Form.Label>
