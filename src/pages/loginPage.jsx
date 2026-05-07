@@ -1,5 +1,5 @@
 import LoginForm from "../components/LoginForm";
-import doctorImg from '../assets/doctorLoginImage.jpg';
+import doctorImg from '../assets/doctorLoginImage.jpeg';
 import '../assets/loginPage.css';
 const LoginPage = ()=>{
     
