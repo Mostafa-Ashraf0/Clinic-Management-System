@@ -5,3 +5,58 @@
     width: 100%;
     height: 100vh;
 }
+
+.login-page .left{
+    width:50%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    border: none;
+}
+
+.login-page .left img{
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+}
+
+.left .desc{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(74, 144, 226);
+}
+
+.desc .card{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 500px;
+    background-color: rgb(26, 114, 213);
+    color: white;
+    padding: 20px;
+    border: none;
+    border-left: solid 3px white;
+    border-radius: 0;
+}
+
+.desc .card .normal{
+    font-size: 18px;
+}
+
+.desc .card .large{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.card .system{
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.card p{
+    text-align: start;
+}

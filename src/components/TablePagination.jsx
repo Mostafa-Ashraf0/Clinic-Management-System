@@ -15,19 +15,41 @@ const TablePagination = ({limit, countData})=>{
     const handleClick = (page)=>{
         dispatch(setCurrentTablePage(page));
     }
+
+    const increment = ()=>{
+        if(currentPage < totalPages){
+            dispatch(setCurrentTablePage(currentPage + 1));
+        }
+        
+    }
+
+    const decrement = ()=>{
+        if(currentPage > 1){
+            dispatch(setCurrentTablePage(currentPage - 1));
+        }
+        
+    }
     return(
         <div className={style.main}>
             <div className={style.left}>
                 <span>{text}</span>
             </div>
             <div className={style.right}>
-                <span>
+                <span onClick={decrement}>
                     <img src={left} alt='prev'/>
                 </span>
                 {Array.from({ length: totalPages }).map((_, i) => (
-                    <span key={i} onClick={()=>handleClick(i+1)}>{i + 1}</span>
+                    <span 
+                    key={i} 
+                    onClick={()=>handleClick(i+1)}
+                    style={
+                        currentPage === i + 1
+                        ? { backgroundColor: "rgb(74, 144, 226)", color:"white" }
+                        : {}
+                    }   
+                    >{i + 1}</span>
                 ))}
-                <span>
+                <span onClick={increment}>
                     <img src={right} alt='next'/>
                 </span>
             </div>
