@@ -8,7 +8,10 @@ const initialState = {
     actionsList: {view:false, id:null},
     liveAppoinSlot: null,
     editAppointmentData:null,
-    isEdit:false
+    isEdit:false,
+    paginatedData: null,
+    paginatedLimit: null,
+    currentTablePage: 1
 };
 
 
@@ -39,6 +42,15 @@ const appointmentSlice = createSlice({
         },
         setIsEdit(state, action){
             state.isEdit = action.payload;
+        },
+        setPaginatedData(state, action){
+            state.paginatedData = action.payload;
+        },
+        setPaginatedLimit(state,action){
+            state.paginatedLimit = action.payload;
+        },
+        setCurrentTablePage(state, action){
+            state.currentTablePage = action.payload;
         }
     }
 })
@@ -52,6 +64,9 @@ export const {
     setActiveSlots,
     setLiveAppoSlot,
     setEditAppointData,
-    setIsEdit
+    setIsEdit,
+    setPaginatedLimit, 
+    setPaginatedData,
+    setCurrentTablePage
 }
  = appointmentSlice.actions;

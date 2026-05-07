@@ -1,22 +1,32 @@
 import style from '../assets/tablePagination.module.css';
 import left from '../../public/left-arrow-next-svgrepo-com.svg';
 import right from '../../public/right-arrow-next-svgrepo-com.svg';
+import { setCurrentTablePage } from '../features/appointments/appointmentSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
-const TablePagination = ()=>{
+const TablePagination = ({limit, countData})=>{
+    const dispatch = useDispatch();
+    const currentPage = useSelector((state)=>state.appointment.currentTablePage)
+    const start = (currentPage - 1) * limit + 1;
+    const end = Math.min(limit * currentPage, countData);
+    const totalPages = Math.ceil(countData / limit);
+    const text = `Showing ${start}-${end} of ${countData} entries`;
+
+    const handleClick = (page)=>{
+        dispatch(setCurrentTablePage(page));
+    }
     return(
         <div className={style.main}>
             <div className={style.left}>
-                <span>showing 1-20 of 134 entries</span>
+                <span>{text}</span>
             </div>
             <div className={style.right}>
                 <span>
                     <img src={left} alt='prev'/>
                 </span>
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>5</span>
+                {Array.from({ length: totalPages }).map((_, i) => (
+                    <span key={i} onClick={()=>handleClick(i+1)}>{i + 1}</span>
+                ))}
                 <span>
                     <img src={right} alt='next'/>
                 </span>

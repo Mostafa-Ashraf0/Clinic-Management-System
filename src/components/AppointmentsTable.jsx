@@ -1,15 +1,15 @@
 import style from '../assets/table.module.css';
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { fetchAppointments } from "../features/appointments/fetchAppointments";
 import { useSelector } from 'react-redux';import { useDispatch } from 'react-redux';
 import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
 import { getDataToEdit } from '../features/appointments/getDataToEdit';
 import { setEditAppointData, setIsEdit } from '../features/appointments/appointmentSlice';
-
+import { setPaginatedData } from '../features/appointments/appointmentSlice';
 const AppointmentsTable = ()=>{
-    const [Appoint, setAppoint] = useState([]);
     const clinicId = useSelector((state) => state.auth.clinic_id);
     const dispatch = useDispatch();
+    
 
     const statusColor = {
         scheduled: { bg: "#e0e0e0", color: "#333" },
@@ -17,18 +17,23 @@ const AppointmentsTable = ()=>{
         cancelled: { bg: "#f8d7da", color: "#721c24" } 
     };
     //fetch appointments
-    useEffect(()=>{
-        const loadAppointments = async()=>{
-            if(!clinicId) return;
-            const data = await fetchAppointments(clinicId);
-            setAppoint(data);
-        }
-        loadAppointments();
-    },[clinicId])
+    const limit = useSelector((state)=>state.appointment.paginatedLimit);
+    const currentPage = useSelector((state)=>state.appointment.currentTablePage);
+    const AppointmentData = useSelector((state)=>state.appointment.paginatedData);
 
     useEffect(()=>{
-        if(Appoint) console.log(Appoint);
-    },[Appoint])
+        if(!currentPage && limit) return;
+        const loadAppointments = async()=>{
+            if(!clinicId) return;
+            const data = await fetchAppointments(clinicId, limit, currentPage);
+            dispatch(setPaginatedData(data));
+        }
+        loadAppointments();
+    },[clinicId, currentPage, limit, dispatch])
+
+    useEffect(()=>{
+        if(AppointmentData) console.log(AppointmentData);
+    },[AppointmentData])
 
     //handle edit click
     const handleEdit = async(id)=>{
@@ -59,7 +64,7 @@ const AppointmentsTable = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    {Appoint?.map((A,index)=>(
+                    {AppointmentData?.map((A,index)=>(
                         <tr key={A.id}>
                             <td>{index +1}</td>
                             <td>{A.patient?.name} <br/>
