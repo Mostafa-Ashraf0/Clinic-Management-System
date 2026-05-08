@@ -23,7 +23,7 @@ const Receptionists = ()=>{
     const paginatedData = useSelector((state)=>state.recip.paginatedData);
 
     useEffect(()=>{
-        dispatch(addLight("patients"));
+        dispatch(addLight("receptionists"));
         dispatch(setPaginatedLimit(10));
         dispatch(setCurrentTablePage(1));
     },[dispatch])
