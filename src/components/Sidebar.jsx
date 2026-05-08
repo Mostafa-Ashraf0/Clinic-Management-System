@@ -84,11 +84,13 @@ const Sidebar = ()=>{
                 </li>
             </ul>
             </div>
-            <div className="userBar" onClick={handleClick}>
-                <img className='userImg' src={icons.header.admin} alt="u-icon" />
-                <span>Admin</span>
-                <img className="dropdownIcon" src={icons.header.dropdown} alt="user" />
-                {dropdownViewd && <UserDropdown/>}
+            <div className="userBar" >
+                <div className='inner' onClick={handleClick}>
+                    <img className='userImg' src={icons.public.user} alt="u-icon" />
+                    <span>Admin</span>
+                    <img className="dropdownIcon" src={icons.header.dropdown} alt="user" />
+                    {dropdownViewd && <UserDropdown/>}
+                </div>
             </div>
             
         </div>

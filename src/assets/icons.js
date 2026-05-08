@@ -28,12 +28,14 @@ import setLight from './settings-light.svg';
 import setDark from './settings-dark.svg';
 import eyeIcon from './eye-svgrepo-com-blue.svg';
 import loadingClock from '../../public/liveDashboard-loading.svg';
+import user from './user-svgrepo-com.svg';
 
 export const icons = {
     public: {
         edit: editLogo,
         close: closeIcon,
-        generalLoading: loadingClock
+        generalLoading: loadingClock,
+        user: user
     },
     live: {
         light: live,
