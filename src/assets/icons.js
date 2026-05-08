@@ -27,17 +27,19 @@ import opsDark from './medical-operation-dark.svg';
 import setLight from './settings-light.svg';
 import setDark from './settings-dark.svg';
 import eyeIcon from './eye-svgrepo-com-blue.svg';
+import loadingClock from '../../public/liveDashboard-loading.svg';
 
 export const icons = {
     public: {
         edit: editLogo,
-        close: closeIcon
+        close: closeIcon,
+        generalLoading: loadingClock
     },
     live: {
         light: live,
         dark: liveDark,
         view: viewIcon,
-        add: addAppoint
+        add: addAppoint,
     },
     dashboard: {
         light: dashIcon,

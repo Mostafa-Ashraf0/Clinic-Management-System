@@ -9,14 +9,16 @@ import AppointmentsTable from "../components/AppointmentsTable";
 import TablePagination from "../components/TablePagination";
 import AddAppointmentView from "../components/LiveDashboard/AddAppointmentView";
 import { getAppointmentCount } from "../features/appointments/getAppointmentsCount";
-import { setPaginatedLimit } from "../features/appointments/appointmentSlice";
-import { setCurrentTablePage } from "../features/appointments/appointmentSlice";
+import Loading from "../components/Loading";
+import { setPaginatedLimit, setCurrentTablePage } from "../features/appointments/appointmentSlice";
 
 const Appointments = ()=>{
     const [totalData, setTotalData] = useState(null);
     const clinicId = useSelector((state) => state.auth.clinic_id);
+    const loading = useSelector((state)=>state.appointment.generalLoading);
     const limit = useSelector((state)=>state.appointment.paginatedLimit);
     const liveFormVisible = useSelector((state)=>state.fullView.liveFormVisible);
+
     const dispatch = useDispatch();
         useEffect(()=>{
             dispatch(addLight("appointments"));
@@ -48,6 +50,7 @@ const Appointments = ()=>{
                 />
             </MainContent>
             {liveFormVisible && <AddAppointmentView/>}
+            {loading && <Loading/>}
         </div>
     )
 }

@@ -10,12 +10,19 @@ import { fetchPatients } from "../features/patient/fetchPatients";
 import { getPatientCount } from "../features/patient/getPatientCount";
 import ControlBar from '../components/ControlBar';
 import TablePagination from '../components/TablePagination';
-import { setPaginatedData, setPaginatedLimit, setCurrentTablePage } from "../features/patient/patientSlice";
+import Loading from "../components/Loading";
+import { 
+    setPaginatedData,
+    setPaginatedLimit,
+    setCurrentTablePage,
+    setLoading
+} from "../features/patient/patientSlice";
 
 const Patients = ()=>{
     const dispatch = useDispatch();
     const clinicId = useSelector((state) => state.auth.clinic_id);
     const [TotalDoctors, setTotalDoctors] = useState(0);
+    const loading = useSelector((state)=>state.patient.loading);
 
     //Table variables
     const limit = useSelector((state)=>state.patient.paginatedLimit);
@@ -32,8 +39,12 @@ const Patients = ()=>{
         if (!clinicId || !limit || !currentPage) return;
         const loadAppointments = async()=>{
             if(!clinicId) return;
+            dispatch(setLoading(true));
             const data = await fetchPatients(clinicId, limit, currentPage);
-            dispatch(setPaginatedData(data));
+            if(data){
+                dispatch(setPaginatedData(data));
+                dispatch(setLoading(false));
+            }
         }
         loadAppointments();
     },[clinicId, currentPage, limit, dispatch])
@@ -62,6 +73,7 @@ const Patients = ()=>{
                 table = {'patient'}
                 />
             </MainContent>
+            {loading && <Loading/>}
         </>
     )
 }

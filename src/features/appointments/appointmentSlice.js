@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     dropdownViewd: false,
+    generalLoading: false,
     patientId: null,
     timeSlots: [],
     activeSlots:[],
@@ -51,6 +52,9 @@ const appointmentSlice = createSlice({
         },
         setCurrentTablePage(state, action){
             state.currentTablePage = action.payload;
+        },
+        setGeneralLoading(state, action){
+            state.generalLoading = action.payload;
         }
     }
 })
@@ -58,6 +62,7 @@ const appointmentSlice = createSlice({
 export default appointmentSlice.reducer;
 export const {
     setDropdown,
+    setGeneralLoading,
     setPatientId,
     setSlots,
     setActionsList,

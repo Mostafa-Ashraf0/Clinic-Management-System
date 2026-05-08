@@ -10,14 +10,21 @@ import ControlBar from '../components/ControlBar';
 import TablePagination from '../components/TablePagination';
 import { fetchDoctorsData } from "../features/doctors/fetchDoctors";
 import { getDoctorCount } from "../features/doctors/getDoctorsCount";
+import Loading from "../components/Loading";
 import { useSelector } from "react-redux";
-import { setPaginatedData, setPaginatedLimit, setCurrentTablePage } from "../features/doctors/doctorsSlice";
+import { 
+    setPaginatedData,
+    setPaginatedLimit,
+    setCurrentTablePage,
+    setLoading
+} from "../features/doctors/doctorsSlice";
 
 
 const Doctors = ()=>{
     const dispatch = useDispatch();
     const clinicId = useSelector((state) => state.auth.clinic_id);
     const [TotalDoctors, setTotalDoctors] = useState(0);
+    const loading = useSelector((state)=>state.doctor.loading);
 
     //Table variables
     const limit = useSelector((state)=>state.doctor.paginatedLimit);
@@ -32,12 +39,16 @@ const Doctors = ()=>{
 
     useEffect(()=>{
         if (!clinicId || !limit || !currentPage) return;
-        const loadAppointments = async()=>{
+        const loadingDoctors = async()=>{
             if(!clinicId) return;
+            dispatch(setLoading(true));
             const data = await fetchDoctorsData(clinicId, limit, currentPage);
-            dispatch(setPaginatedData(data));
+            if(data){
+                dispatch(setPaginatedData(data));
+                dispatch(setLoading(false));
+            }
         }
-        loadAppointments();
+        loadingDoctors();
     },[clinicId, currentPage, limit, dispatch])
 
 
@@ -66,6 +77,7 @@ const Doctors = ()=>{
                 table = {'doctor'}
                 />
             </MainContent>
+            {loading && <Loading/>}
         </>
     )
 }

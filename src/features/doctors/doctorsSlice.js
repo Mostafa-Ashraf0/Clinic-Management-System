@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isEdit: false,
+    loading: false,
     editData: null,
     paginatedData: null,
     paginatedLimit: null,
@@ -27,6 +28,9 @@ const doctorSlice = createSlice({
         },
         setCurrentTablePage(state, action){
             state.currentTablePage = action.payload;
+        },
+        setLoading(state, action){
+            state.loading = action.payload;
         }
     }
 })
@@ -37,6 +41,7 @@ export const {
     setIsEdit,
     setPaginatedData,
     setPaginatedLimit,
-    setCurrentTablePage
+    setCurrentTablePage,
+    setLoading
 }
  = doctorSlice.actions;

@@ -4,7 +4,7 @@ import { fetchAppointments } from "../features/appointments/fetchAppointments";
 import { useSelector } from 'react-redux';import { useDispatch } from 'react-redux';
 import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
 import { getDataToEdit } from '../features/appointments/getDataToEdit';
-import { setEditAppointData, setIsEdit } from '../features/appointments/appointmentSlice';
+import { setEditAppointData, setIsEdit, setGeneralLoading } from '../features/appointments/appointmentSlice';
 import { setPaginatedData } from '../features/appointments/appointmentSlice';
 const AppointmentsTable = ()=>{
     const clinicId = useSelector((state) => state.auth.clinic_id);
@@ -25,8 +25,12 @@ const AppointmentsTable = ()=>{
         if (!clinicId || !limit || !currentPage) return;
         const loadAppointments = async()=>{
             if(!clinicId) return;
+            dispatch(setGeneralLoading(true));
             const data = await fetchAppointments(clinicId, limit, currentPage);
-            dispatch(setPaginatedData(data));
+            if(data){
+                dispatch(setPaginatedData(data));
+                dispatch(setGeneralLoading(false));
+            }
         }
         loadAppointments();
     },[clinicId, currentPage, limit, dispatch])

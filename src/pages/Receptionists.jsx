@@ -8,14 +8,21 @@ import MainContent from "../components/MainContent";
 import ReciptionistControl from "../components/ReciptionistControl";
 import ControlBar from '../components/ControlBar';
 import TablePagination from '../components/TablePagination';
-import { setPaginatedData, setPaginatedLimit, setCurrentTablePage } from "../features/receptionist/reciptionistSlice";
 import { fetchReceptionist } from "../features/receptionist/fetchReciptionist";
 import { getRecepCount } from "../features/receptionist/getRecepCount";
+import Loading from "../components/Loading";
+import { 
+    setPaginatedData,
+    setPaginatedLimit,
+    setCurrentTablePage,
+    setLoading
+} from "../features/receptionist/reciptionistSlice";
 
 const Receptionists = ()=>{
     const dispatch = useDispatch();
     const clinicId = useSelector((state) => state.auth.clinic_id);
     const [totalRecip, setTotalRecep] = useState(0);
+    const loading = useSelector((state)=>state.recip.loading);
 
     //Table variables
     const limit = useSelector((state)=>state.recip.paginatedLimit);
@@ -32,8 +39,12 @@ const Receptionists = ()=>{
         if (!clinicId || !limit || !currentPage) return;
         const loadAppointments = async()=>{
             if(!clinicId) return;
+            dispatch(setLoading(true));
             const data = await fetchReceptionist(clinicId, limit, currentPage);
-            dispatch(setPaginatedData(data));
+            if(data){
+                dispatch(setPaginatedData(data));
+                dispatch(setLoading(false));
+            }
         }
         loadAppointments();
     },[clinicId, currentPage, limit, dispatch])
@@ -62,6 +73,7 @@ const Receptionists = ()=>{
                 table = {'receptionist'}
                 />
             </MainContent>
+            {loading && <Loading/>}
         </>
     )
 }

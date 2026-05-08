@@ -7,20 +7,23 @@ import { setIsVisible } from '../../features/medicalTests/medicalTestFormSlice';
 import MedicalTestTable from './MedicalTestTable';
 import { useState, useEffect } from 'react';
 import { fetchMedicalTest } from '../../features/medicalTests/fetchMedicalTests';
-import { setEditData } from '../../features/medicalTests/medicalTestFormSlice';
+import { setEditData, setGeneralLoading } from '../../features/medicalTests/medicalTestFormSlice';
 
 const MedicalTestsView = ()=>{
     const dispatch = useDispatch();
     const [tests, setTests] = useState([]);
     const [selectedTest, setSelectedTest] = useState(null);
 
+
     //fetch all tests
     const getMedicalTests = async()=>{
-            const data = await fetchMedicalTest();
-            if(data){
-                setTests(data);
-            }
-        };
+        dispatch(setGeneralLoading(true));
+        const data = await fetchMedicalTest();
+        if(data){
+            dispatch(setGeneralLoading(false));
+            setTests(data);
+        }
+    };
 
         
     useEffect(()=>{

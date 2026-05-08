@@ -1,7 +1,6 @@
 import style from '../../assets/operations/medicalOperations.module.css';
 import { icons } from '../../assets/icons';
 import { useDispatch,useSelector } from 'react-redux';
-import { setIsVisible, setIsScheduleVisible, setTableVisible } from '../../features/operations/operationsFormSlice';
 import AddOperationsForm from './AddOperationFrom';
 import { fetchOperations } from '../../features/operations/getOperations';
 import { useState, useEffect } from 'react';
@@ -9,6 +8,13 @@ import OperationsTable from './OperationsTable';
 import ScheduleOperationForm from './ScheduleOperationForm';
 import { fetchScheduleOps } from '../../features/operations/getScheduleOps';
 import ScheduleOpsTable from './ScheduleOpsTable';
+import { 
+    setIsVisible,
+    setIsScheduleVisible, 
+    setTableVisible, 
+    setGeneralLoading 
+} from '../../features/operations/operationsFormSlice';
+
 
 const OperationsView = ()=>{
     const [operations, setOperations] = useState([]);
@@ -19,18 +25,22 @@ const OperationsView = ()=>{
     const { isEditSchedule } = useSelector((state)=>state.operationsForm);
     const { isScheduleVisible } = useSelector((state)=>state.operationsForm);
     const { tableVisible } = useSelector((state)=>state.operationsForm);
+
+
     const getOperations = async()=>{
+        dispatch(setGeneralLoading(true));
         const data = await fetchOperations();
-        
         if(data){
+            dispatch(setGeneralLoading(false));
             setOperations(data);
         }
     };
 
     const getScheduleOps = async()=>{
+        dispatch(setGeneralLoading(true));
         const ScheduleData = await fetchScheduleOps();
         if(ScheduleData){
-            console.log(ScheduleData)
+            dispatch(setGeneralLoading(false));
             setScheduleOps(ScheduleData);
         }
     }

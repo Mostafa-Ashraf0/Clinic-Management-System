@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     isVisible: false,
     isEditTest: false, 
-    editData: null
+    editData: null,
+    generalLoading: false
 };
 
 
@@ -19,9 +20,17 @@ const medicalTestForm = createSlice({
         },
         setEditData(state, action){
             state.editData = action.payload;
+        },
+        setGeneralLoading(state, action){
+            state.generalLoading = action.payload;
         }
     }
 })
 
 export default medicalTestForm.reducer;
-export const {setIsVisible, setIsEditTest, setEditData} = medicalTestForm.actions;
+export const {
+    setIsVisible,
+    setIsEditTest,
+    setEditData,
+    setGeneralLoading
+} = medicalTestForm.actions;

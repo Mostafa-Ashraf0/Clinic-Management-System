@@ -7,7 +7,7 @@ import { fetchTodayAppointments } from '../../features/liveDashboard/fetchTodayA
 import { icons } from '../../assets/icons';
 import AddAppointmentView from './AddAppointmentView';
 import { setLiveFormVisible } from '../../features/liveAppointment/fullViewSlice';
-import { setLiveAppoSlot } from '../../features/appointments/appointmentSlice';
+import { setLiveAppoSlot, setGeneralLoading } from '../../features/appointments/appointmentSlice';
 import supabase from '../../utils/supabase';
 import TimeSlot from './TimeSlot';
 
@@ -23,9 +23,11 @@ const Dashboard = ()=>{
 
 
     const fetchTime = async()=>{
+        dispatch(setGeneralLoading(true));
         console.log(`clinicId is: ${clinicId}`)
         const data = await getWorkingTime(clinicId);
         if(data){
+            dispatch(setGeneralLoading(false));
             dispatch(setSlots(data));
             console.log(data);
         }
