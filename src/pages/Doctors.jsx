@@ -11,9 +11,8 @@ import TablePagination from '../components/TablePagination';
 import { fetchDoctorsData } from "../features/doctors/fetchDoctors";
 import { getDoctorCount } from "../features/doctors/getDoctorsCount";
 import { useSelector } from "react-redux";
-import { setPaginatedData } from "../features/doctors/doctorsSlice";
-import { setPaginatedLimit } from "../features/doctors/doctorsSlice";
-import { setCurrentTablePage } from "../features/doctors/doctorsSlice";
+import { setPaginatedData, setPaginatedLimit, setCurrentTablePage } from "../features/doctors/doctorsSlice";
+
 
 const Doctors = ()=>{
     const dispatch = useDispatch();

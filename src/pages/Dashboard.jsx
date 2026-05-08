@@ -13,8 +13,8 @@ import { icons } from "../assets/icons";
 import { fetchAppointments } from "../features/appointments/fetchAppointments";
 import { fetchDoctors } from '../features/appointments/fetchDoctors';
 import { fetchPatients } from '../features/appointments/fetchPatients';
-import { fetchReciptionists } from '../features/receptionist/fetchReciptionist';
 import { useSelector } from "react-redux";
+
 const Dashboard = ()=>{
     const [cardData, setCardData] = useState({
         doctor: '',
@@ -39,13 +39,12 @@ const Dashboard = ()=>{
             const data = await fetchDoctors(clinicId);
             setCardData(prev=>({...prev,doctor: data.length}));
         }
-        const loadRecip = async()=>{
-            const data = await fetchReciptionists();
+        /*const loadRecip = async()=>{
+            const data = await fetchReceptionist();
             setCardData(prev=>({...prev,recip: data.length}));
-        }
+        }*/
         loadAppointments();
         loadPatients();
-        loadRecip();
         loadDoctors();
         dispatch(addLight("dashboard"));
     },[clinicId,dispatch])

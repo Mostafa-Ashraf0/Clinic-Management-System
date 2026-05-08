@@ -8,11 +8,17 @@ const TablePagination = ({limit, countData, table})=>{
     const dispatch = useDispatch();
     const AppoCurrentPage = useSelector((state)=>state.appointment.currentTablePage);
     const DoctorCurrentPage = useSelector((state)=>state.doctor.currentTablePage);
+    const PatientCurrentPage = useSelector((state)=>state.patient.currentTablePage);
+    const RecepCurrentPage = useSelector((state)=>state.recip.currentTablePage);
     let currentPage;
     if(table === 'appointment'){
         currentPage = AppoCurrentPage;
     }else if(table === 'doctor'){
         currentPage = DoctorCurrentPage;
+    }else if(table === 'patient'){
+        currentPage = PatientCurrentPage;
+    }else if(table === 'receptionist'){
+        currentPage = RecepCurrentPage;
     }
 
     const start = (currentPage - 1) * limit + 1;

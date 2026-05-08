@@ -54,7 +54,6 @@ const AppointmentsTable = ()=>{
             <table className='app-t-body'>
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Patient name</th>
                         <th>Date</th>
                         <th>Time</th>
@@ -64,9 +63,8 @@ const AppointmentsTable = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    {AppointmentData?.map((A,index)=>(
+                    {AppointmentData?.map((A)=>(
                         <tr key={A.id}>
-                            <td>{index +1}</td>
                             <td>{A.patient?.name} <br/>
                                 <span style={{fontSize:"14px",color:"rgba(84, 82, 82, 0.55)"}}>Code: {A.patient?.id}</span>
                             </td>

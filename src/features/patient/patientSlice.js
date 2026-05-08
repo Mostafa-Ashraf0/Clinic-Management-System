@@ -2,7 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isEditPatient: false,
-    editDataPatient: null
+    editDataPatient: null,
+    paginatedData: null,
+    paginatedLimit: null,
+    currentTablePage: 1
 };
 
 
@@ -15,6 +18,15 @@ const patientSlice = createSlice({
         },
         setEditDataPatient(state, action){
             state.editDataPatient = action.payload;
+        },
+        setPaginatedData(state, action){
+            state.paginatedData = action.payload;
+        },
+        setPaginatedLimit(state,action){
+            state.paginatedLimit = action.payload;
+        },
+        setCurrentTablePage(state, action){
+            state.currentTablePage = action.payload;
         }
     }
 })
@@ -22,6 +34,9 @@ const patientSlice = createSlice({
 export default patientSlice.reducer;
 export const {
     setIsEditPatient, 
-    setEditDataPatient
+    setEditDataPatient,
+    setPaginatedData,
+    setPaginatedLimit,
+    setCurrentTablePage
 }
  = patientSlice.actions;

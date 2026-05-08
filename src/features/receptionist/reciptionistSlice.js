@@ -2,7 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isEditRecip: false,
-    editDataRecip: null
+    editDataRecip: null,
+    paginatedData: null,
+    paginatedLimit: null,
+    currentTablePage: 1
 };
 
 
@@ -15,6 +18,15 @@ const recipSlice = createSlice({
         },
         setEditDataRecip(state, action){
             state.editDataRecip = action.payload;
+        },
+        setPaginatedData(state, action){
+            state.paginatedData = action.payload;
+        },
+        setPaginatedLimit(state,action){
+            state.paginatedLimit = action.payload;
+        },
+        setCurrentTablePage(state, action){
+            state.currentTablePage = action.payload;
         }
     }
 })
@@ -22,6 +34,9 @@ const recipSlice = createSlice({
 export default recipSlice.reducer;
 export const {
     setEditDataRecip, 
-    setIsEditRecip
+    setIsEditRecip,
+    setPaginatedData,
+    setPaginatedLimit,
+    setCurrentTablePage
 }
  = recipSlice.actions;
