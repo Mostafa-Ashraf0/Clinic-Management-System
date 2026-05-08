@@ -22,7 +22,7 @@ const AppointmentsTable = ()=>{
     const AppointmentData = useSelector((state)=>state.appointment.paginatedData);
 
     useEffect(()=>{
-        if(!currentPage && limit) return;
+        if (!clinicId || !limit || !currentPage) return;
         const loadAppointments = async()=>{
             if(!clinicId) return;
             const data = await fetchAppointments(clinicId, limit, currentPage);

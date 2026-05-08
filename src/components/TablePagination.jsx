@@ -4,9 +4,17 @@ import right from '../../public/right-arrow-next-svgrepo-com.svg';
 import { setCurrentTablePage } from '../features/appointments/appointmentSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-const TablePagination = ({limit, countData})=>{
+const TablePagination = ({limit, countData, table})=>{
     const dispatch = useDispatch();
-    const currentPage = useSelector((state)=>state.appointment.currentTablePage)
+    const AppoCurrentPage = useSelector((state)=>state.appointment.currentTablePage);
+    const DoctorCurrentPage = useSelector((state)=>state.doctor.currentTablePage);
+    let currentPage;
+    if(table === 'appointment'){
+        currentPage = AppoCurrentPage;
+    }else if(table === 'doctor'){
+        currentPage = DoctorCurrentPage;
+    }
+
     const start = (currentPage - 1) * limit + 1;
     const end = Math.min(limit * currentPage, countData);
     const totalPages = Math.ceil(countData / limit);
@@ -29,6 +37,7 @@ const TablePagination = ({limit, countData})=>{
         }
         
     }
+
     return(
         <div className={style.main}>
             <div className={style.left}>

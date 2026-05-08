@@ -10,6 +10,7 @@ import TablePagination from "../components/TablePagination";
 import AddAppointmentView from "../components/LiveDashboard/AddAppointmentView";
 import { getAppointmentCount } from "../features/appointments/getAppointmentsCount";
 import { setPaginatedLimit } from "../features/appointments/appointmentSlice";
+import { setCurrentTablePage } from "../features/appointments/appointmentSlice";
 
 const Appointments = ()=>{
     const [totalData, setTotalData] = useState(null);
@@ -20,6 +21,7 @@ const Appointments = ()=>{
         useEffect(()=>{
             dispatch(addLight("appointments"));
             dispatch(setPaginatedLimit(10));
+            dispatch(setCurrentTablePage(1));
         },[dispatch])
 
         useEffect(()=>{
@@ -42,6 +44,7 @@ const Appointments = ()=>{
                 <TablePagination
                 limit = {limit}
                 countData = {totalData}
+                table = {'appointment'}
                 />
             </MainContent>
             {liveFormVisible && <AddAppointmentView/>}
