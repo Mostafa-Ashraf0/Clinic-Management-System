@@ -16,7 +16,7 @@
 
 .login-page .left img{
     width: 100%;
-    height: 50%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -59,4 +59,16 @@
 
 .card p{
     text-align: start;
+}
+
+
+@media (max-width: 992px) {
+    .login-page{
+        flex-direction: column;
+    }
+
+    .login-page .left{
+        display: none;
+    }
+
 }

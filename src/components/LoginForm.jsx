@@ -51,8 +51,8 @@ const LoginForm = ()=>{
      //rule of all variables used in useeffect must be written in dependancies
     
     return(
-        <Card className={`${style.main} w-50 h-100 p-0`}>
-            <Card.Body className='d-flex flex-column align-items-start justify-content-center w-100' style={{padding:'150px'}}>
+        <Card className={`${style.main} p-0`}  style={{border:'none'}}>
+            <Card.Body className={`${style.body} d-flex flex-column align-items-start justify-content-center w-100`}>
                 <Card.Title className='fs-3 mb-1'>Log In</Card.Title>
                 <p>Enter your credentials to login to your account</p>
                 <Form onSubmit={handleSubmit} className='w-100'>
