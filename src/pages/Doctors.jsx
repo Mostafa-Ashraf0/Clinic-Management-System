@@ -11,7 +11,9 @@ import TablePagination from '../components/TablePagination';
 import { fetchDoctorsData } from "../features/doctors/fetchDoctors";
 import { getDoctorCount } from "../features/doctors/getDoctorsCount";
 import Loading from "../components/Loading";
+import Overlay from "../components/Overlay";
 import { useSelector } from "react-redux";
+import { setMobileVisible } from "../features/dashboard/sidebarSlice";
 import { 
     setPaginatedData,
     setPaginatedLimit,
@@ -22,6 +24,7 @@ import {
 
 const Doctors = ()=>{
     const dispatch = useDispatch();
+    const { mobileVisible } = useSelector((state)=>state.sidebar);
     const clinicId = useSelector((state) => state.auth.clinic_id);
     const [TotalDoctors, setTotalDoctors] = useState(0);
     const loading = useSelector((state)=>state.doctor.loading);
@@ -33,6 +36,7 @@ const Doctors = ()=>{
 
     useEffect(()=>{
         dispatch(addLight("doctors"));
+        dispatch(setMobileVisible(false));
         dispatch(setPaginatedLimit(10));
         dispatch(setCurrentTablePage(1));
     },[dispatch])
@@ -67,6 +71,7 @@ const Doctors = ()=>{
 
     return(
         <>
+            <Header/>
             <Sidebar/>
             <MainContent>
                 <ControlBar/>
@@ -78,6 +83,7 @@ const Doctors = ()=>{
                 />
             </MainContent>
             {loading && <Loading/>}
+            {mobileVisible && <Overlay/>}
         </>
     )
 }

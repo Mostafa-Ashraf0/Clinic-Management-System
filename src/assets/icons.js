@@ -29,6 +29,7 @@ import setDark from './settings-dark.svg';
 import eyeIcon from './eye-svgrepo-com-blue.svg';
 import loadingClock from '../../public/liveDashboard-loading.svg';
 import user from './user-svgrepo-com.svg';
+import burger from './burger-menu-svgrepo-com.svg';
 
 export const icons = {
     public: {
@@ -79,6 +80,7 @@ export const icons = {
     },
     header:{
         dropdown: selectDropDown,
+        sidebar: burger,
         admin: '',
     },
     control:{

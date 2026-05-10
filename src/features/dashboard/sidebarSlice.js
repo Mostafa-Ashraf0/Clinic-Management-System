@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     page: null,
+    mobileVisible: false
 };
 
 
@@ -11,9 +12,12 @@ const sidebarSlice = createSlice({
     reducers:{
         addLight(state, action){
             state.page = action.payload;
+        },
+        setMobileVisible(state, action){
+            state.mobileVisible = action.payload;
         }
     }
 })
 
 export default sidebarSlice.reducer;
-export const {addLight} = sidebarSlice.actions;
+export const {addLight, setMobileVisible} = sidebarSlice.actions;

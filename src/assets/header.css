@@ -1,30 +1,17 @@
 header{
     position: fixed;
-    width: calc(100% - 274px);
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 70px;
     padding: 14px 30px 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    gap: 30px;
-    border-bottom: solid 1px #D2D5DB;
-    top: 0;
-    left: 274px;
-    z-index: 1000;
-    background-color: white;
-}
-
-.drop-down{
-    width: 300px;
-    height: 100%;
-    padding: 11.5px 15px;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: space-between;
-    border: solid 1px #D2D5DB;
-    border-radius: 5px;
-    color: #66748C;
-    background-color: #F2F5F9;
+    gap: 30px;
+    border-bottom: solid 1px #D2D5DB;
+    z-index: 20000;
+    background-color: white;
 }
 
 .user{
@@ -43,4 +30,17 @@ header{
     width: 30px;
     height: 30px;
     border-radius: 50px;
+}
+
+header .sideBar-icon{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+
+@media (max-width: 992px) {
+    header{
+        display: flex;
+    }
 }

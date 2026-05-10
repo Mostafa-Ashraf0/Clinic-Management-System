@@ -14,6 +14,8 @@ import { fetchAppointments } from "../features/appointments/fetchAppointments";
 import { fetchDoctors } from '../features/appointments/fetchDoctors';
 import { fetchPatients } from '../features/appointments/fetchPatients';
 import { useSelector } from "react-redux";
+import { setMobileVisible } from "../features/dashboard/sidebarSlice";
+import Overlay from "../components/Overlay";
 
 const Dashboard = ()=>{
     const [cardData, setCardData] = useState({
@@ -22,6 +24,7 @@ const Dashboard = ()=>{
         recip: '',
         appoint: ''
     });
+    const { mobileVisible } = useSelector((state)=>state.sidebar);
     const clinicId = useSelector((state) => state.auth.clinic_id);
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -47,10 +50,14 @@ const Dashboard = ()=>{
         loadPatients();
         loadDoctors();
         dispatch(addLight("dashboard"));
+        dispatch(setMobileVisible(false));
     },[clinicId,dispatch])
+
+
 
     return(
         <>
+            <Header/>
             <Sidebar/>
             <MainContent>
                 <div className="info-card-list">
@@ -67,6 +74,7 @@ const Dashboard = ()=>{
                     <AppointmentsTable/>
                 </div>
             </MainContent>
+            {mobileVisible && <Overlay/>}
         </>
     )
 }

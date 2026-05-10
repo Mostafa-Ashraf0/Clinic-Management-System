@@ -7,6 +7,7 @@ import {setDropdown} from "../features/dashboard/headerSlice";
 import UserDropdown from './UserDropdown';
 const Sidebar = ()=>{
     const { page } = useSelector((state)=>state.sidebar);
+    const { mobileVisible } = useSelector((state)=>state.sidebar);
     const dispatch = useDispatch();
     const { dropdownViewd } = useSelector((state)=>state.header);
     const handleClick = ()=>{
@@ -17,7 +18,7 @@ const Sidebar = ()=>{
         }
     }
     return(
-        <div className="sidebar h-100 d-flex flex-column align-items-center">
+        <div className="sidebar h-100" style={mobileVisible? {display:'flex'}:{}}>
             <div className='w-100'>
             <div className="title w-100 d-flex align-items-center">
                 <div className="left d-flex align-items-center">

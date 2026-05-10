@@ -10,10 +10,13 @@ import TablePagination from "../components/TablePagination";
 import AddAppointmentView from "../components/LiveDashboard/AddAppointmentView";
 import { getAppointmentCount } from "../features/appointments/getAppointmentsCount";
 import Loading from "../components/Loading";
+import Overlay from "../components/Overlay";
 import { setPaginatedLimit, setCurrentTablePage } from "../features/appointments/appointmentSlice";
+import { setMobileVisible } from "../features/dashboard/sidebarSlice";
 
 const Appointments = ()=>{
     const [totalData, setTotalData] = useState(null);
+    const { mobileVisible } = useSelector((state)=>state.sidebar);
     const clinicId = useSelector((state) => state.auth.clinic_id);
     const loading = useSelector((state)=>state.appointment.generalLoading);
     const limit = useSelector((state)=>state.appointment.paginatedLimit);
@@ -22,6 +25,7 @@ const Appointments = ()=>{
     const dispatch = useDispatch();
         useEffect(()=>{
             dispatch(addLight("appointments"));
+            dispatch(setMobileVisible(false));
             dispatch(setPaginatedLimit(10));
             dispatch(setCurrentTablePage(1));
         },[dispatch])
@@ -39,6 +43,7 @@ const Appointments = ()=>{
 
     return(
         <div>
+            <Header/>
             <Sidebar/>
             <MainContent>
                 <ControlBar/>
@@ -51,6 +56,7 @@ const Appointments = ()=>{
             </MainContent>
             {liveFormVisible && <AddAppointmentView/>}
             {loading && <Loading/>}
+            {mobileVisible && <Overlay/>}
         </div>
     )
 }

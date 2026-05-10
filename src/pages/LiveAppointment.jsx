@@ -14,12 +14,13 @@ import { fetchAppointmentById } from "../features/appointments/fetchAppointmentB
 import AllTestsView from "../components/LiveAppointment/AllTestsView";
 import AllFilesView from "../components/LiveAppointment/AllFilesView";
 import { useSelector } from "react-redux";
+import Overlay from "../components/Overlay";
 
 const LiveAppointment = ()=>{
     const {testsVisible, filesVisible} = useSelector((state)=>state.fullView);
     const {appointmentId} = useParams();
     const dispatch = useDispatch();
-
+    const { mobileVisible } = useSelector((state)=>state.sidebar);
 
     useEffect(()=>{
         const getAppointment = async()=>{
@@ -36,6 +37,7 @@ const LiveAppointment = ()=>{
 
     return(
         <>
+            <Header/>
             <Sidebar/>
             <MainContent>
                 <h1>Live Appointment</h1>
@@ -51,6 +53,7 @@ const LiveAppointment = ()=>{
                 {testsVisible && <AllTestsView/>}
                 {filesVisible && <AllFilesView/>}
             </MainContent>
+            {mobileVisible && <Overlay/>}
         </>
     )
 }
