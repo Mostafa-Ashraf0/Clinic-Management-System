@@ -11,6 +11,15 @@
     z-index: 1001;
 }
 
+.sidebar .closeSidebar{
+    position: absolute;
+    bottom: 150px;
+    right: -10px;
+    width: 30px;
+    height: 30px;
+    display: none;
+}
+
 .sidebar .title{
     height: 70px;
     padding: 20px 10px 20px;
@@ -125,5 +134,8 @@ span{
 @media (max-width: 992px) {
     .sidebar{
         display: none;
+    }
+    .sidebar .closeSidebar{
+        display: block;
     }
 }

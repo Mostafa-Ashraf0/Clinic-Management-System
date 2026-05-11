@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { icons } from '../assets/icons';
 import {setDropdown} from "../features/dashboard/headerSlice";
 import UserDropdown from './UserDropdown';
+import { setMobileVisible } from '../features/dashboard/sidebarSlice';
+
 const Sidebar = ()=>{
     const { page } = useSelector((state)=>state.sidebar);
     const { mobileVisible } = useSelector((state)=>state.sidebar);
@@ -17,8 +19,14 @@ const Sidebar = ()=>{
             dispatch(setDropdown(false));
         }
     }
+
+    const handleClose = ()=>{
+        dispatch(setMobileVisible(!mobileVisible));
+    }
+
     return(
         <div className="sidebar h-100" style={mobileVisible? {display:'flex'}:{}}>
+            <img className='closeSidebar' src={icons.sidebar.close} alt='close' onClick={handleClose}/>
             <div className='w-100'>
             <div className="title w-100 d-flex align-items-center">
                 <div className="left d-flex align-items-center">

@@ -31,6 +31,7 @@ import loadingClock from '../../public/liveDashboard-loading.svg';
 import user from './user-svgrepo-com.svg';
 import burger from './burger-menu-svgrepo-com.svg';
 import filter from './filter-edit-svgrepo-com.svg';
+import CloseSidebar from './closeSidebar.svg';
 
 export const icons = {
     public: {
@@ -83,6 +84,9 @@ export const icons = {
         dropdown: selectDropDown,
         sidebar: burger,
         admin: '',
+    },
+    sidebar:{
+        close: CloseSidebar
     },
     control:{
         searchIcon: Search,

@@ -1,7 +1,10 @@
 import style from '../assets/tablePagination.module.css';
 import left from '../../public/left-arrow-next-svgrepo-com.svg';
 import right from '../../public/right-arrow-next-svgrepo-com.svg';
-import { setCurrentTablePage } from '../features/appointments/appointmentSlice';
+import { setCurrentTablePage as setAppointmentPage } from '../features/appointments/appointmentSlice';
+import { setCurrentTablePage as  setDoctorPage} from '../features/doctors/doctorsSlice';
+import { setCurrentTablePage as  setPatientPage} from '../features/patient/patientSlice';
+import { setCurrentTablePage as  setRecepPage} from '../features/receptionist/reciptionistSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const TablePagination = ({limit, countData, table})=>{
@@ -21,25 +24,37 @@ const TablePagination = ({limit, countData, table})=>{
         currentPage = RecepCurrentPage;
     }
 
+    const setPage = (page) => {
+    if (table === 'appointment') {
+        dispatch(setAppointmentPage(page));
+    } else if (table === 'doctor') {
+        dispatch(setDoctorPage(page));
+    } else if (table === 'patient') {
+        dispatch(setPatientPage(page));
+    } else if (table === 'receptionist') {
+        dispatch(setRecepPage(page));
+    }
+};
+
     const start = (currentPage - 1) * limit + 1;
     const end = Math.min(limit * currentPage, countData);
     const totalPages = Math.ceil(countData / limit);
     const text = `Showing ${start}-${end} of ${countData} entries`;
 
     const handleClick = (page)=>{
-        dispatch(setCurrentTablePage(page));
+        setPage(page);
     }
 
     const increment = ()=>{
         if(currentPage < totalPages){
-            dispatch(setCurrentTablePage(currentPage + 1));
+            setPage(currentPage + 1)
         }
         
     }
 
     const decrement = ()=>{
         if(currentPage > 1){
-            dispatch(setCurrentTablePage(currentPage - 1));
+            setPage(currentPage - 1)
         }
         
     }
