@@ -23,8 +23,7 @@ const ControlBar = ()=>{
                     <div className={style.filter}>
                         <label htmlFor="filter">Filter</label>
                         <div className={style.roleDropDown}>
-                            <span>Status</span>
-                            <img className={style.roleDropdownIcon} src={icons.header.dropdown} alt="icon" />
+                            <img className={style.roleDropdownIcon} src={icons.control.filter} alt="icon" />
                         </div>
                     </div>
                 </div>

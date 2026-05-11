@@ -63,14 +63,17 @@
 
 .roleDropDown,
 .speciality-drop-down{
-    width: 145px;
-    padding: 3px 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border: solid 1px #D2D5DB;
     border-radius: 5px;
     color: #66748C;
+}
+
+.roleDropDown .roleDropdownIcon{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .right .addAppointment{
@@ -84,4 +87,23 @@
     justify-content: center;
     gap: 10px;
     cursor: pointer;
+}
+
+
+
+@media (max-width: 576px) {
+    .right .search{
+        width: 120px;
+        font-size: 0.8em;
+    }
+
+
+    .left .filter{
+        font-size: 0.8em;
+}
+
+    .right .addAppointment{
+        font-size: 0.8em;
+    }
+
 }

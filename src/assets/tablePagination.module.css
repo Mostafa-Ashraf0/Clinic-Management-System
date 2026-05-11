@@ -39,3 +39,21 @@
     width: 14px;
     height: 14px;
 }
+
+
+@media (max-width: 576px) {
+    .main{
+        font-size: 0.8em;
+    }
+
+    .right span{
+        width: 25px;
+        height: 25px;
+        font-size: 0.8em;
+    }
+
+    .right span img{
+        width: 12px;
+        height: 12px;
+    }
+}

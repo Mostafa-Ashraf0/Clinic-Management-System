@@ -1,5 +1,5 @@
 .info-card{
-    width: 25%;
+    width: calc(25% - 15px);
     height: 110px !important;
     padding: 15px 20px;
     background-color: white;
@@ -29,4 +29,19 @@
     align-items: center;
     justify-content: center;
 }
+
+
+@media (max-width: 992px) {
+  .info-card{
+    width: calc(50% - 10px);
+  }
+}
+
+
+@media (max-width: 576px) {
+    .info-card{
+    width: calc(100%);
+  }
+}
+
 

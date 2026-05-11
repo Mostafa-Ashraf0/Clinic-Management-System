@@ -2,9 +2,22 @@
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .table-list{
     display: flex;
     gap: 20px;
 }
+
+
+
+@media (max-width: 992px) {
+  
+}
+
+
+@media (max-width: 576px) {
+ 
+}
+

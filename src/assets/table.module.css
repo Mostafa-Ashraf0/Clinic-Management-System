@@ -6,6 +6,8 @@
 
 .t-body{
     width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 table{
@@ -34,6 +36,7 @@ tr td{
 }
 
 
+
 tbody tr .dots span{
     font-size: 18px;
     font-weight: bold;
@@ -46,4 +49,32 @@ tbody tr .dots span{
 .t-dots{
     position: relative;
     cursor: pointer;
+}
+
+
+
+@media (max-width: 992px) {
+  th,td{
+    padding: 5px 10px;
+}
+
+tr th{
+    font-size: 0.9em;
+}
+
+tr td{
+    font-size: 0.9em;
+}
+
+}
+
+
+@media (max-width: 576px) {
+  tr th{
+    font-size: 0.8em;
+}
+
+tr td{
+    font-size: 0.8em;
+}
 }

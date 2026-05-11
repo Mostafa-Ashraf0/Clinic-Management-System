@@ -30,6 +30,7 @@ import eyeIcon from './eye-svgrepo-com-blue.svg';
 import loadingClock from '../../public/liveDashboard-loading.svg';
 import user from './user-svgrepo-com.svg';
 import burger from './burger-menu-svgrepo-com.svg';
+import filter from './filter-edit-svgrepo-com.svg';
 
 export const icons = {
     public: {
@@ -85,7 +86,8 @@ export const icons = {
     },
     control:{
         searchIcon: Search,
-        add: addIcon
+        add: addIcon,
+        filter: filter
     },
     tags:{
         tagIcon: tagIcon,
