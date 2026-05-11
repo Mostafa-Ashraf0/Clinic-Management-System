@@ -10,6 +10,7 @@ import { setSlots,setActiveSlots } from '../features/appointments/appointmentSli
 import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
 import { setFinalPatient,setPhone,setSelectedPatient } from '../features/appointments/patientSearchSlice';
 import { availableTimeSlots } from '../features/appointments/availableTimeSlots';
+import style from '../assets/appointmentForm.module.css';
 import { toast } from "react-toastify";
 
 const AppointmentForm = ({date}) => {
@@ -175,12 +176,12 @@ const AppointmentForm = ({date}) => {
   
 
   return (
-    <Card style={{border:"none"}}>
+    <Card className={`${style.card} d-flex flex-column align-items-start`}>
       <Card.Body
         className="d-flex flex-column align-items-center"
       >
         <div 
-        className="d-flex flex-column align-items-start"
+        className={`${style.head} d-flex flex-column align-items-start`}
         style={{ gap: '20px', width:"100%",color: '#384152',marginBottom:"20px"}}
         >
           <h4 className="m-0 p-0">Create Appointment</h4>
@@ -197,7 +198,7 @@ const AppointmentForm = ({date}) => {
           style={{ gap: '20px',width:"100%",color: '#384152' }}
         >
           <Form.Group
-            className="d-flex align-items-center justify-content-center"
+            className={`${style.mainGroup} d-flex align-items-center justify-content-center`}
             style={{gap: '10px',marginBottom:"20px",width:"100%" }}
           >
             {/* Doctor */}
@@ -271,10 +272,10 @@ const AppointmentForm = ({date}) => {
 
           {/* Date & Time */}
           <Form.Group
-            className="d-flex align-items-center justify-content-center"
+            className={`${style.mainGroup} d-flex align-items-center justify-content-center`}
             style={{gap: '10px',width:"100%" }}
           >
-            <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
+            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
               <Form.Label>Time*</Form.Label>
                 <Form.Select
                   name="time"
@@ -315,7 +316,7 @@ const AppointmentForm = ({date}) => {
               </Form.Select>
             </Form.Group>
 
-            <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
+            <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
               <Form.Label>Date*</Form.Label>
                 <Form.Control
                   type={date && !isEdit?"text":"date"}

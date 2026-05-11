@@ -12,6 +12,16 @@
     z-index: 1000;
 }
 
+.container .card{
+    border: none;
+    display: flex;
+    width: 560px;
+}
+
+.card .cardBody{
+    padding: 30px;
+}
+
 .submitBox{
     width: 100%;
     display: flex;
@@ -22,4 +32,24 @@
 .submitBox .cancel{
     background-color: rgb(150, 54, 54);
     border: none;
+}
+
+.container .card .head{
+    width: 100%;
+    gap: 20px;
+    margin-bottom: 20px;
+    color: #384152;
+}
+
+
+
+
+@media (max-width: 576px) {
+    .container{
+        padding: 5px;
+    }
+
+    .card .cardBody{
+        padding: 20px;
+    }
 }

@@ -6,6 +6,7 @@ import { useSelector,useDispatch } from 'react-redux';
 import { setDropdown } from '../features/appointments/appointmentSlice';
 import { icons } from "../assets/icons";
 import { setSelectedPatient, setPhone, setFinalPatient } from '../features/appointments/patientSearchSlice';
+import style from '../assets/appointmentSearch.module.css';
 
 const AppointmentSearch = ({setFormData,setError,error})=>{
     const dispatch = useDispatch();
@@ -74,13 +75,13 @@ const AppointmentSearch = ({setFormData,setError,error})=>{
 
 
     return(
-        <div className="d-flex flex-column align-items-start position-relative w-100"> 
+        <div className={`${style.main} d-flex flex-column align-items-start position-relative w-100`}> 
             {/* Patient (Search by phone) */}
                 <Form className="d-flex flex-column align-items-start w-100"
                         style={{ color: '#384152' }}>
-                    <Form.Group className="d-flex align-items-center w-100"
+                    <Form.Group className={`${style.mainGroup} d-flex align-items-center w-100`}
                                 style={{gap: '10px',marginBottom:"20px" }}>
-                        <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
+                        <Form.Group className={`d-flex flex-column align-items-start w-100`} style={{ height: '64px' }}>
                             <Form.Label>Patient (by phone)*</Form.Label>
                             <Form.Group className='d-flex align-items-center w-100'>
                                 <Form.Control
@@ -88,7 +89,7 @@ const AppointmentSearch = ({setFormData,setError,error})=>{
                                 name="patient"
                                 minLength={11}
                                 maxLength={11}
-                                placeholder="Enter patient phone"
+                                placeholder="patient phone"
                                 value={phone}
                                 onChange={handleChange}
                                 autoComplete="off"
@@ -104,18 +105,18 @@ const AppointmentSearch = ({setFormData,setError,error})=>{
                                 zIndex:"4000"
                                 }}>{error}</span>
                         </Form.Group>
-                        <Form.Group className={`d-flex flex-column align-items-start w-50`} style={{ height: '64px'}}>
+                        <Form.Group className={`d-flex flex-column align-items-start w-100`} style={{ height: '64px'}}>
                             <Form.Label>Name</Form.Label>
                             <Form.Control type='text' value={finalPatient.name || ''} readOnly/>
                         </Form.Group>
                     </Form.Group>
-                    <Form.Group className="d-flex align-items-center w-100"
+                    <Form.Group className={`${style.mainGroup} d-flex align-items-center w-100`}
                                 style={{gap: '10px',marginBottom:"20px" }}>
-                        <Form.Group className={`d-flex flex-column align-items-start w-50`} style={{ height: '64px' }}>
+                        <Form.Group className={`d-flex flex-column align-items-start w-100`} style={{ height: '64px' }}>
                             <Form.Label>Age</Form.Label>
                             <Form.Control type='text' value={finalPatient.age || ''} readOnly/>
                         </Form.Group>
-                        <Form.Group className={`d-flex flex-column align-items-start w-50`} style={{ height: '64px' }}>
+                        <Form.Group className={`d-flex flex-column align-items-start w-100`} style={{ height: '64px' }}>
                             <Form.Label>Email</Form.Label>
                             <Form.Control type='text' value={finalPatient.email || ''} readOnly/>
                         </Form.Group>

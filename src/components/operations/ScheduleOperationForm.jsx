@@ -143,14 +143,12 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
 
   return (
     <div className={style.container}>
-    <Card className={style.card} style={{border:'none',display:'flex'}}>
+    <Card className={style.card}>
       <Card.Body
-        className="d-flex flex-column align-items-center"
-        style={{padding: '30px' }}
+        className={`${style.cardBody} d-flex flex-column align-items-center`}
       >
         <div 
-        className="d-flex flex-column align-items-start"
-        style={{ gap: '20px', width: '560px', color: '#384152',marginBottom:"20px"}}
+        className={`${style.head} d-flex flex-column align-items-start`}
         >
           <h4 className="m-0 p-0">Schedule Operation</h4>
           <AppointmentSearch 
@@ -161,12 +159,10 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
         </div>
         <Form
           onSubmit={handleSubmit}
-          className="d-flex flex-column align-items-start"
-          style={{ gap: '20px', width: '560px', color: '#384152' }}
+          className="d-flex flex-column align-items-start w-100 gap-4"
         >
           <Form.Group
-            className="d-flex align-items-center justify-content-center"
-            style={{ width: '560px', gap: '10px',marginBottom:"20px" }}
+            className="d-flex align-items-center justify-content-center w-100"
           >
             {/* Doctor */}
             <Form.Group className="d-flex flex-column align-items-start w-100" style={{ height: '64px' }}>
@@ -190,8 +186,7 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
 
           {/* Date & Time */}
           <Form.Group
-            className="d-flex align-items-center justify-content-center"
-            style={{ width: '560px', gap: '10px' }}
+            className="d-flex align-items-center justify-content-center w-100 gap-2"
           >
             <Form.Group className="d-flex flex-column align-items-start w-50" style={{ height: '64px' }}>
               <Form.Label>Date*</Form.Label>

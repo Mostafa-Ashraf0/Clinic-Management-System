@@ -1,0 +1,24 @@
+.card{
+    border: none !important;
+}
+
+
+
+@media (max-width: 992px) {
+    .card{
+        font-size: 0.9em;
+    }
+
+    .head h4{
+        font-size: 1.4em;
+    }
+
+    .card .mainGroup{
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 576px) {
+    
+}

@@ -45,3 +45,14 @@
 .btns .cancel:hover{
     background-color: rgba(150, 54, 54, 0.596);
 }
+
+
+@media (max-width: 576px) {
+    .container{
+        padding: 5px;
+    }
+
+    .container .cardBody{
+        width: 100%;
+    }
+}

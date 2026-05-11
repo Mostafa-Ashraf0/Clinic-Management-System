@@ -225,3 +225,50 @@
 .date input{
     width: 200px;
 }
+
+
+@media (max-width: 576px) {
+    .container{
+        padding: 5px;
+    }
+
+    .card .head h1{
+      font-size: 1em;
+    }
+
+    .card .testDetails h2{
+      font-size: 1em;
+    }
+
+    .card .cardBody{
+
+        padding: 20px;
+        width: 100%;
+    }
+
+    .testInfo {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testName,
+    .testCategory {
+      width: 100%;
+    }
+
+    .testInfo .testName .label,
+    .testInfo .testCategory .label {
+      font-size: 0.9em;
+    }
+    .moreDetails h2 {
+      font-size: 1em;
+    }
+
+
+  .date label,
+  .note label{
+      font-size: 0.9em;
+  }
+
+
+}

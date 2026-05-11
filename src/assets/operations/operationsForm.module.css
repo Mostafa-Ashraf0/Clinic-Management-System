@@ -86,3 +86,19 @@
     background-color: rgb(150, 54, 54);
     border: none;
 }
+
+
+@media (max-width: 576px) {
+    .container{
+        padding: 5px;
+    }
+
+    .card{
+        width: 100%;
+    }
+
+    .card .cardBody{
+        width: 100%;
+        padding: 20px;
+    }
+}
