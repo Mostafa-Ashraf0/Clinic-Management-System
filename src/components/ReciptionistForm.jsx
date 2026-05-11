@@ -98,7 +98,7 @@ const ReciptionistForm = ()=>{
         <Card style={{border:"none", width:"100%"}}>
             <Card.Body className='d-flex flex-column align-items-center w-100' style={{padding:"30px"}}>
                 <Form onSubmit={handleSubmit} className='d-flex flex-column align-items-start w-100' style={{gap:"20px",color:"#384152"}}>
-                    <h4 className='m-0 p-0'>Add Receptionist</h4>
+                    <h4 className='m-0 p-0'>{isEdit?"Edit Receptionist":"Add Receptionist"}</h4>
                     <Form.Group className='d-flex align-items-center justify-content-center w-100' style={{gap:"10px"}}>
                         {/*First Name */}
                         <Form.Group className='d-flex flex-column align-items-start w-50' style={{height:"64px"}}>
@@ -151,7 +151,12 @@ const ReciptionistForm = ()=>{
                             <Form.Control type='password' name='password' value={formData.password} onChange={handleChange} required/>
                         </Form.Group>
                     </Form.Group>}
-                    <Button type='submit' className="d-flex align-items-center justify-content-center" style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}>Save</Button>
+                    <Button 
+                    type='submit' 
+                    className="d-flex align-items-center justify-content-center" 
+                    style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}>
+                        {isEdit?"Save":"Create"}
+                    </Button>
                 </Form>
             </Card.Body>
         </Card>

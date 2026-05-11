@@ -16,6 +16,7 @@ const Table = ({data,role})=>{
     const recipEdit = useSelector((state)=>state.recip.isEditRecip);
     const patientEdit = useSelector((state)=>state.patient.isEditPatient);
 
+    
     const handleDoctorClick = (data)=>{
         setOpenRow(openRow === data.id ? null : data.id);
         dispatch(setEditData(data));
@@ -29,7 +30,6 @@ const Table = ({data,role})=>{
     const handlePatientClick = (data)=>{
         setOpenRow(openRow === data.id ? null : data.id);
         dispatch(setEditDataPatient(data));
-        console.log(data)
     }
 
     useEffect(() => {
@@ -125,8 +125,8 @@ const Table = ({data,role})=>{
                                     </span>
                                 </td>
                                 <td>{d.phone}</td>
-                                <td>null</td>
-                                <td>null</td>
+                                <td>{new Date().getFullYear() - new Date(d.date_of_birth).getFullYear()}</td>
+                                <td>{d.visitsCount}</td>
                                 <td>{d.email || "null"}</td>
                                 <td className={`${tableStyle["t-dots"]}`} onClick={()=>handlePatientClick(d)}>
                                     <span>.</span><span>.</span><span>.</span>

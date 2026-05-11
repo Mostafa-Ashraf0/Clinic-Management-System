@@ -41,11 +41,11 @@ const EmrGeneralInfo = ()=>{
                                 </span>
                                 <span className={style.value}>
                                     <span className={style.label}>Age:</span>
-                                    {patientData.age}
+                                    {new Date().getFullYear() - new Date(patientData.date_of_birth).getFullYear()}
                                 </span>
                                 <span className={style.value}>
                                     <span className={style.label}>Sessions:</span>
-                                    {patientData.session}
+                                    {patientData.visitsCount}
                                 </span>
                                 
                             </div>

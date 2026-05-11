@@ -198,7 +198,7 @@ const AppointmentForm = ({date}) => {
         className={`${style.head} d-flex flex-column align-items-start`}
         style={{ gap: '20px', width:"100%",color: '#384152',marginBottom:"20px"}}
         >
-          <h4 className="m-0 p-0">Create Appointment</h4>
+          <h4 className="m-0 p-0">{isEdit?"Edit Appointment":"Create Appointment"}</h4>
           <AppointmentSearch 
             setFormData={setFormData} 
             formData={formData} 
@@ -353,7 +353,7 @@ const AppointmentForm = ({date}) => {
               border: 'none',
             }}
           >
-            Save
+            {isEdit?"Save":"Create"}
           </Button>
         </Form>
       </Card.Body>

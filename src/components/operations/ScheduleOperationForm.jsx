@@ -7,6 +7,7 @@ import { fetchOpsByClinicId } from '../../features/operations/getOperationByClin
 import { setFinalPatient,setPhone,setSelectedPatient } from '../../features/appointments/patientSearchSlice';
 import { scheduleOperation } from '../../features/operations/scheduleOperation';
 import style from '../../assets/operations/scheduleForm.module.css';
+import { editScheduledOps } from '../../features/operations/editScheduledOps';
 import { setIsScheduleVisible, setIsEditSchedule, setGeneralLoading } from '../../features/operations/operationsFormSlice';
 
 const ScheduleOperationForm = ({onTestAdded,date}) => {
@@ -74,7 +75,7 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
       let success = false;
       dispatch(setGeneralLoading(true));
       if(isEdit && editData){
-          //success = await editOperation(formData, editData.id)
+          success = await editScheduledOps(formData,setSubmited,editData.id)
       }else{
           success = await scheduleOperation(formData, setSubmited)
       }
@@ -152,7 +153,7 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
         <div 
         className={`${style.head} d-flex flex-column align-items-start`}
         >
-          <h4 className="m-0 p-0">Schedule Operation</h4>
+          <h4 className="m-0 p-0">{isEdit?"Edit Operation":"Schedule Operation"}</h4>
           <AppointmentSearch 
             setFormData={setFormData}
             error={error}
@@ -221,7 +222,7 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
 
           <div className={style.submitBox}>
               <Button onClick={handleCancel} className={style.cancel}>Cancel</Button>
-              <Button type='submit'>{"Create"}</Button>
+              <Button type='submit'>{isEdit?"Save":"Create"}</Button>
           </div>
         </Form>
       </Card.Body>

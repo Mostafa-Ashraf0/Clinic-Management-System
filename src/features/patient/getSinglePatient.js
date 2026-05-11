@@ -1,20 +1,32 @@
 import supabase from "../../utils/supabase";
 
-const getSinglePatient = async(id)=>{
-    try{
-        const {data , error} = await supabase.from('patient').select(
-            'name,phone,email,gender')
-            .eq('id',id).single()
-        if(error){
+const getSinglePatient = async (id) => {
+    try {
+        const { data, error } = await supabase
+            .from("patient")
+            .select(`
+                *,
+                appointment(id)
+            `)
+            .eq("id", id)
+            .single();
+
+        if (error) {
             console.log(error);
             return null;
         }
-        return data;
-        }
-    catch(error){
+
+        const { appointment, ...patientData } = data;
+
+        return {
+            ...patientData,
+            visitsCount: appointment?.length || 0
+        };
+
+    } catch (error) {
         console.log(error);
         return null;
     }
-    }
+};
 
-export {getSinglePatient};
+export { getSinglePatient };
