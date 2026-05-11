@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     testsVisible: false,
     filesVisible: false,
-    liveFormVisible:false
+    liveFormVisible:false,
+    latestAppointFullView: false
 };
 
 
@@ -19,9 +20,12 @@ const fullViewSlice = createSlice({
         },
         setLiveFormVisible(state,action){
             state.liveFormVisible = action.payload;
+        },
+        setLatestAppointFullView(state, action){
+            state.latestAppointFullView = action.payload;
         }
     }
 })
 
 export default fullViewSlice.reducer;
-export const {setTestVisible, setFilesVisible, setLiveFormVisible} = fullViewSlice.actions;
+export const {setTestVisible, setFilesVisible, setLiveFormVisible, setLatestAppointFullView} = fullViewSlice.actions;

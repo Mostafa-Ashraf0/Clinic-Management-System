@@ -55,7 +55,8 @@
     color: #1E7F4D;        
 }
 
-.last_appointment .complaint{
+.last_appointment .complaint,
+.last_appointment .notes{
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -64,7 +65,12 @@
     border-radius: 5px;
 }
 
-.complaint p{
+.last_appointment .complaint{
+    margin-bottom: 20px;
+}
+
+.complaint p,
+.notes p{
     margin: 0;
     text-align: start;
     font-size: 16px;
@@ -76,7 +82,8 @@
     border-radius: 8px; 
 }
 
-.complaint .title{
+.complaint .title,
+.notes .title{
     font-size: 16px;
     font-weight: 600;
     color: #1F2937;

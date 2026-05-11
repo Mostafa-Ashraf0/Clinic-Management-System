@@ -1,7 +1,7 @@
 import supabase from "../../utils/supabase";
 import { toast } from "react-toastify";
 
-const fetchLastAppointment = async (P_id, A_id) => {
+const fetchAllPastAppointments = async (P_id, A_id) => {
   try {
     let query = supabase
       .from("appointment")
@@ -13,22 +13,25 @@ const fetchLastAppointment = async (P_id, A_id) => {
         doctor_notes,
         date
       `)
-      .eq("patient_id", P_id);
-      
-    //not current appointment
+      .eq("patient_id", P_id)
+      .or("chief_complaint.not.is.null,doctor_notes.not.is.null");
+
+    // exclude current appointment
     if (A_id) {
       query = query.neq("id", A_id);
     }
 
     const { data, error } = await query
-      .order("created_at", { ascending: false })
-      .limit(1);
+      .order("created_at", { ascending: false });
 
     if (error) throw error;
+
     return data;
+
   } catch (error) {
     toast.error(error.message);
+    return [];
   }
 };
 
-export { fetchLastAppointment };
+export { fetchAllPastAppointments };

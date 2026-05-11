@@ -15,9 +15,11 @@ const fetchAppointments = async(clinicId, limit, currentPage)=>{
             appointment_date,
             clinic(name),
             type,
-            status
+            status,
+            date
         `)
         .eq('clinic_id',clinicId)
+        .order('created_at', { ascending: false })
         .limit(limit)
         .range(start, end);
 

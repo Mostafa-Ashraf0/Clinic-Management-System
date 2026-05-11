@@ -13,12 +13,13 @@ import InputDetails from "../components/LiveAppointment/InputDetails";
 import { fetchAppointmentById } from "../features/appointments/fetchAppointmentById";
 import AllTestsView from "../components/LiveAppointment/AllTestsView";
 import AllFilesView from "../components/LiveAppointment/AllFilesView";
+import LastAppointmentsFullView from "../components/LiveAppointment/LastAppointmentsFullView";
 import { useSelector } from "react-redux";
 import Overlay from "../components/Overlay";
 import style from '../assets/liveAppointment/liveAppointment.module.css';
 
 const LiveAppointment = ()=>{
-    const {testsVisible, filesVisible} = useSelector((state)=>state.fullView);
+    const {testsVisible, filesVisible, latestAppointFullView} = useSelector((state)=>state.fullView);
     const {appointmentId} = useParams();
     const dispatch = useDispatch();
     const { mobileVisible } = useSelector((state)=>state.sidebar);
@@ -37,11 +38,12 @@ const LiveAppointment = ()=>{
 
 
     return(
-        <>
+        <div className={style.main}>
             <Header/>
             <Sidebar/>
             <MainContent>
-                <h1>Live Appointment</h1>
+                {latestAppointFullView && <LastAppointmentsFullView/>}
+                <h1>Live Appointment Details</h1>
                 <EMRGeneral/>
                 <div className={style.testFile}>
                     <TestSection/>
@@ -55,7 +57,8 @@ const LiveAppointment = ()=>{
                 {filesVisible && <AllFilesView/>}
             </MainContent>
             {mobileVisible && <Overlay/>}
-        </>
+            {}
+        </div>
     )
 }
 

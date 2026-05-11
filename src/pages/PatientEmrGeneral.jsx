@@ -7,9 +7,11 @@ import MainContent from "../components/MainContent";
 import EMRGeneral from "../components/EMRGeneral";
 import EMRNavigationBar from "../components/EMRNavigationBar";
 import Overlay from "../components/Overlay";
+import LastAppointmentsFullView from "../components/LiveAppointment/LastAppointmentsFullView";
 
 const PatientEmrGeneral = ()=>{
     const dispatch = useDispatch();
+    const {latestAppointFullView} = useSelector((state)=>state.fullView);
     const { mobileVisible } = useSelector((state)=>state.sidebar);
         useEffect(()=>{
             dispatch(addLight("patients"));
@@ -19,6 +21,7 @@ const PatientEmrGeneral = ()=>{
             <Header/>
             <Sidebar/>
             <MainContent>
+                {latestAppointFullView && <LastAppointmentsFullView/>}
                 <EMRNavigationBar/>
                 <EMRGeneral/>
             </MainContent>

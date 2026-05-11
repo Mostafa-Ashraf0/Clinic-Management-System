@@ -1,7 +1,7 @@
 import style from '../assets/EMR.module.css';
 import { icons } from '../assets/icons';
 import EmrGeneralInfo from './EmrGeneralInfo';
-import LastAppointmentDetails from './LastAppointmentDetails';
+import LastAppointmentDetails from './LiveAppointment/LastAppointmentDetails';
 import TagsForm from './TagsForm';
 import { setIsVisible } from '../features/emr/tagsFormSlice';
 import { getTags } from '../features/emr/getTags';

@@ -72,7 +72,7 @@ const AppointmentsTable = ()=>{
                             <td>{A.patient?.name} <br/>
                                 <span style={{color:"rgba(84, 82, 82, 0.55)"}}>Code: {A.patient?.id}</span>
                             </td>
-                            <td>{A.appointment_date}</td>
+                            <td>{A.date}</td>
                             <td>{A.appointment_time}</td>                            
                             <td>
                                 <span
