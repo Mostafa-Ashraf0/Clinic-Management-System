@@ -95,3 +95,36 @@
     cursor: pointer;
 }
 
+
+@media (max-width: 992px) {
+    .head .title{
+        font-size: 1.2em;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .main .head{
+        padding: 20px;
+    }
+
+    .head .title{
+        font-size: 1em;
+    }
+
+    .head .add,
+    .main .create{
+        padding: 4px 8px;
+        font-size: 0.7em;
+    }
+
+    .head .add img{
+        width: 12px;
+        height: 12px;
+    }
+
+    .opsBtns .eye img{
+        width: 20px;
+        height: 20px;
+    }
+}

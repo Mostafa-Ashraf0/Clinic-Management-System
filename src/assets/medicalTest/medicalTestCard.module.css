@@ -99,3 +99,35 @@
 .list .max{
     background-color: red;
 }
+
+
+@media (max-width: 992px) {
+    .main{
+        font-size: 1em;
+    }
+    .section .list{
+        font-size: 1.1em;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .main{
+        font-size: 0.8em;
+    }
+
+    .section .list{
+        font-size: 0.9em;
+    }
+
+    .list .type{
+    height: 20px;
+}
+
+.list .min,
+.list .max{
+    width: 20px;
+    height: 20px;
+}
+}
+

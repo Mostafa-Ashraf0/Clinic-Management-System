@@ -39,3 +39,30 @@
     font-size: 17px;
 }
 
+@media (max-width: 992px) {
+    .head .title{
+        font-size: 1.2em;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .main .head{
+        padding: 20px;
+    }
+
+    .head .title{
+        font-size: 1.1em;
+    }
+
+    .head .add{
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+
+    .head .add img{
+        width: 12px;
+        height: 12px;
+    }
+}
+
