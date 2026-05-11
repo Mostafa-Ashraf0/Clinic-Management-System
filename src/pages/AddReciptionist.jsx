@@ -6,8 +6,11 @@ import Header from "../components/Header";
 import MainContent from "../components/MainContent";
 import ReciptionistForm from "../components/ReciptionistForm";
 import Overlay from "../components/Overlay";
+import Loading from "../components/Loading";
+
 const AddReciptionist = ()=>{
     const dispatch = useDispatch();
+    const loading = useSelector((state)=>state.recip.loading);
     const { mobileVisible } = useSelector((state)=>state.sidebar);
         useEffect(()=>{
             dispatch(addLight("receptionists"));
@@ -20,6 +23,7 @@ const AddReciptionist = ()=>{
                 <ReciptionistForm/>
             </MainContent>
             {mobileVisible && <Overlay/>}
+            {loading && <Loading/>}
         </>
     )
 }

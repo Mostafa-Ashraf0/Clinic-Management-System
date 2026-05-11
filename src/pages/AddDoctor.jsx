@@ -6,8 +6,11 @@ import Header from "../components/Header";
 import MainContent from "../components/MainContent";
 import DoctorForm from "../components/DoctorForm";
 import Overlay from "../components/Overlay";
+import Loading from "../components/Loading";
+
 const AddDoctor = ()=>{
     const dispatch = useDispatch();
+    const loading = useSelector((state)=>state.doctor.loading);
     const { mobileVisible } = useSelector((state)=>state.sidebar);
         useEffect(()=>{
             dispatch(addLight("doctors"));
@@ -20,6 +23,7 @@ const AddDoctor = ()=>{
                 <DoctorForm/>
             </MainContent>
             {mobileVisible && <Overlay/>}
+            {loading && <Loading/>}
         </>
     )
 }

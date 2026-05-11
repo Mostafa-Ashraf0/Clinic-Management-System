@@ -7,7 +7,7 @@ import { addNewTestParams } from '../../features/medicalTests/addNewTest_params'
 import { updateNewTestParams } from '../../features/medicalTests/update_test_params';
 import { useSelector,useDispatch } from 'react-redux';
 import { setIsVisible } from '../../features/medicalTests/medicalTestFormSlice';
-import { setIsEditTest } from '../../features/medicalTests/medicalTestFormSlice';
+import { setIsEditTest, setGeneralLoading } from '../../features/medicalTests/medicalTestFormSlice';
 
 const MedicalTestForm = ({onTestAdded})=>{
     const clinicId = useSelector((state) => state.auth.clinic_id);
@@ -60,6 +60,7 @@ const MedicalTestForm = ({onTestAdded})=>{
     const handleSubmit = async(e)=>{
         if(!clinicId) return;
         e.preventDefault();
+        dispatch(setGeneralLoading(true));
         let success = false;
         if(isEditTest && editData){
             success = await updateNewTestParams(formData);
@@ -70,6 +71,7 @@ const MedicalTestForm = ({onTestAdded})=>{
         if(success){
             dispatch(setIsEditTest(false));
             dispatch(setIsVisible(false));  
+            dispatch(setGeneralLoading(false));
             setFormData({
                 test_id: null,
                 test_name: '',

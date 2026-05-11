@@ -7,7 +7,7 @@ import { fetchOpsByClinicId } from '../../features/operations/getOperationByClin
 import { setFinalPatient,setPhone,setSelectedPatient } from '../../features/appointments/patientSearchSlice';
 import { scheduleOperation } from '../../features/operations/scheduleOperation';
 import style from '../../assets/operations/scheduleForm.module.css';
-import { setIsScheduleVisible, setIsEditSchedule } from '../../features/operations/operationsFormSlice';
+import { setIsScheduleVisible, setIsEditSchedule, setGeneralLoading } from '../../features/operations/operationsFormSlice';
 
 const ScheduleOperationForm = ({onTestAdded,date}) => {
     const clinicId = useSelector((state) => state.auth.clinic_id);
@@ -72,6 +72,7 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
     const handleSubmit = async(e) => {
       e.preventDefault();
       let success = false;
+      dispatch(setGeneralLoading(true));
       if(isEdit && editData){
           //success = await editOperation(formData, editData.id)
       }else{
@@ -79,6 +80,7 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
       }
       if(success){
       dispatch(setPhone(""));
+      dispatch(setGeneralLoading(false));
       dispatch(setFinalPatient({
         name:'',
         age:'',

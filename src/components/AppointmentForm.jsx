@@ -6,7 +6,7 @@ import { fetchDoctors } from '../features/appointments/fetchDoctors';
 import AppointmentSearch from './AppointmentSearch';
 import { useSelector, useDispatch } from 'react-redux';
 import { getWorkingTime } from '../features/liveDashboard/getWorkingTime';
-import { setSlots,setActiveSlots } from '../features/appointments/appointmentSlice';
+import { setSlots,setActiveSlots, setGeneralLoading } from '../features/appointments/appointmentSlice';
 import { setLiveFormVisible } from '../features/liveAppointment/fullViewSlice';
 import { setFinalPatient,setPhone,setSelectedPatient } from '../features/appointments/patientSearchSlice';
 import { availableTimeSlots } from '../features/appointments/availableTimeSlots';
@@ -132,34 +132,48 @@ const AppointmentForm = ({date}) => {
   };
 
   //Submition Logic
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if(error){
+
+    if (error) {
       toast.error(error);
       return;
-    };
-    if(isEdit && editData){
-      editAppointment(formData, setSubmited, editData.id)
-    }else{
-      AddAppointment(formData, setSubmited);
     }
-    dispatch(setPhone(""));
-    dispatch(setFinalPatient({
-      name:'',
-      age:'',
-      email:''
-    }));
-    setFormData({
+
+    dispatch(setGeneralLoading(true));
+
+    try {
+      if (isEdit && editData) {
+        await editAppointment(formData, setSubmited, editData.id);
+      } else {
+        await AddAppointment(formData, setSubmited);
+      }
+
+      dispatch(setPhone(""));
+      dispatch(setFinalPatient({
+        name: '',
+        age: '',
+        email: ''
+      }));
+
+      setFormData({
         doctor: '',
         patient: '',
         date: initialDate,
         time: liveSlot || '',
         clinic_id: clinicId,
-        type:''
+        type: ''
       });
-      dispatch(setLiveFormVisible(false));
-  };
 
+      dispatch(setLiveFormVisible(false));
+
+    } catch (err) {
+      toast.error("Something went wrong");
+      console.error(err);
+    } finally {
+      dispatch(setGeneralLoading(false));
+    }
+  };
   
 
   // Fetch doctors and clinics

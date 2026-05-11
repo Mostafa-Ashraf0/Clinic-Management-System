@@ -6,7 +6,7 @@ import { setIsVisible } from '../../features/operations/operationsFormSlice';
 import {addNewOperation} from '../../features/operations/addNewOperation';
 import { editOperation } from '../../features/operations/editOperation';
 import { getOpsCategories } from '../../features/operations/getOpsCategory';
-import { setIsEditOps } from '../../features/operations/operationsFormSlice';
+import { setIsEditOps, setGeneralLoading } from '../../features/operations/operationsFormSlice';
 
 const AddOperationsForm = ({onTestAdded})=>{
     const clinicId = useSelector((state) => state.auth.clinic_id);
@@ -35,6 +35,7 @@ const AddOperationsForm = ({onTestAdded})=>{
     const handleSubmit = async(e)=>{
         if(!clinicId) return;
         e.preventDefault();
+        dispatch(setGeneralLoading(true));
         let success = false;
         if(isEdit && editData){
             success = await editOperation(formData, editData.id)
@@ -44,6 +45,7 @@ const AddOperationsForm = ({onTestAdded})=>{
         if(success){
             dispatch(setIsEditOps(false));
             dispatch(setIsVisible(false));
+            dispatch(setGeneralLoading(false));
             setFormData({
                 name: '',
                 clinic_id: clinicId,

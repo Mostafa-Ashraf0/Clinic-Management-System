@@ -4,6 +4,7 @@ import { AddPatient } from '../features/patient/patinet';
 import { useDispatch, useSelector } from 'react-redux';
 import { editPatient } from '../features/patient/editPatient';
 import { setIsEditPatient } from '../features/patient/patientSlice';
+import { setLoading } from '../features/patient/patientSlice';
 
 const PatientForm = ()=>{
             const clinicId = useSelector((state) => state.auth.clinic_id);
@@ -63,16 +64,29 @@ const PatientForm = ()=>{
             };
 
 
-            const handleSubmit = (e)=>{
-                if(!clinicId) return;
+            const handleSubmit = async (e) => {
                 e.preventDefault();
-                if(isEdit && editData){
-                    editPatient(formData, setSubmited, editData.id);
-                    dispatch(setIsEditPatient(false));
-                }else{
-                    AddPatient(formData,setSubmited);
+
+                if (!clinicId) return;
+
+                try {
+                    dispatch(setLoading(true));
+
+                    if (isEdit && editData) {
+                        await editPatient(formData, setSubmited, editData.id);
+                        dispatch(setIsEditPatient(false));
+                    } else {
+                        await AddPatient(formData, setSubmited);
+                    }
+
+                } catch (error) {
+                    console.error(error);
+                    alert("Something went wrong");
+
+                } finally {
+                    dispatch(setLoading(false));
                 }
-            }
+            };
 
     return(
         <Card style={{border:'none',width:"100%"}}>

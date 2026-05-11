@@ -2,7 +2,7 @@ import {Card, Form, Button, FormGroup} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import { AddRecip } from '../features/receptionist/addReceptionist';
 import { useSelector, useDispatch } from 'react-redux';
-import { setIsEditRecip } from '../features/receptionist/reciptionistSlice';
+import { setIsEditRecip, setLoading } from '../features/receptionist/reciptionistSlice';
 import { editRecip } from '../features/receptionist/editReceptionist';
 
 
@@ -69,16 +69,29 @@ const ReciptionistForm = ()=>{
         };
 
 
-        const handleSubmit = (e)=>{
-            if(!clinicId) return;
+        const handleSubmit = async (e) => {
             e.preventDefault();
-            if(isEdit && editData){
-                editRecip(formData, setSubmited, editData.id)
-                dispatch(setIsEditRecip(false));
-            }else{
-                AddRecip(formData,setSubmited);
+
+            if (!clinicId) return;
+
+            try {
+                dispatch(setLoading(true));
+
+                if (isEdit && editData) {
+                    await editRecip(formData, setSubmited, editData.id);
+                    dispatch(setIsEditRecip(false));
+                } else {
+                    await AddRecip(formData, setSubmited);
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert("Something went wrong");
+
+            } finally {
+                dispatch(setLoading(false));
             }
-        }
+        };
 
 
     return(

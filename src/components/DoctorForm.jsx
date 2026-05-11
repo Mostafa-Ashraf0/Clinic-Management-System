@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { getSepcialization } from '../features/doctors/getSpecialization';
 import { useSelector, useDispatch } from 'react-redux';
 import { editDoctor } from '../features/doctors/editDoctor';
-import { setIsEdit } from '../features/doctors/doctorsSlice';
+import { setIsEdit, setLoading } from '../features/doctors/doctorsSlice';
 
 const DoctorForm = ()=>{
     const clinicId = useSelector((state) => state.auth.clinic_id);
@@ -71,16 +71,29 @@ const DoctorForm = ()=>{
         console.log(formData)
     };
 
-    const handleSubmit = (e)=>{
-        if(!clinicId) return;
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if(isEdit && editData){
-            editDoctor(formData, setSubmited, editData.id);
-            dispatch(setIsEdit(false));
-        }else{
-            AddDoctor(formData,setSubmited);
+
+        if (!clinicId) return;
+
+        try {
+            dispatch(setLoading(true));
+
+            if (isEdit && editData) {
+                await editDoctor(formData, setSubmited, editData.id);
+                dispatch(setIsEdit(false));
+            } else {
+                await AddDoctor(formData, setSubmited);
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("Something went wrong");
+
+        } finally {
+            dispatch(setLoading(false));
         }
-    }
+    };
     useEffect(()=>{
         if(!clinicId) return;
         const displaySpec = async()=>{
