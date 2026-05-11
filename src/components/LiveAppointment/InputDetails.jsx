@@ -3,6 +3,7 @@ import { updateInput } from '../../features/liveDashboard/updateInput';
 import { getInput } from '../../features/liveDashboard/getInput';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import style from '../../assets/liveAppointment/inputDetails.module.css';
 
 const InputDetails = ({ inputType }) => {
     const { appointmentId } = useParams();
@@ -31,7 +32,7 @@ const InputDetails = ({ inputType }) => {
     };
 
     return (
-        <Card style={{ marginBottom: '30px',width:'50%' }}>
+        <Card className={style.main}>
             <Card.Body className="d-flex flex-column align-items-center">
                 <Form className='w-100 d-flex flex-column gap-2' onSubmit={handleSubmit}>
                     <Form.Group

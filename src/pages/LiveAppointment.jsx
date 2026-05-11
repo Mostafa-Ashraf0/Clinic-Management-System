@@ -15,6 +15,7 @@ import AllTestsView from "../components/LiveAppointment/AllTestsView";
 import AllFilesView from "../components/LiveAppointment/AllFilesView";
 import { useSelector } from "react-redux";
 import Overlay from "../components/Overlay";
+import style from '../assets/liveAppointment/liveAppointment.module.css';
 
 const LiveAppointment = ()=>{
     const {testsVisible, filesVisible} = useSelector((state)=>state.fullView);
@@ -42,11 +43,11 @@ const LiveAppointment = ()=>{
             <MainContent>
                 <h1>Live Appointment</h1>
                 <EMRGeneral/>
-                <div style={{display:'flex', gap:'10px', marginBottom:'30px'}}>
+                <div className={style.testFile}>
                     <TestSection/>
                     <FilesSection/>
                 </div>
-                <div style={{display:'flex', width:'100%', gap:'10px'}}>
+                <div className={style.input}>
                     <InputDetails inputType={"chief_complaint"}/>
                     <InputDetails inputType={"doctor_notes"}/>
                 </div>

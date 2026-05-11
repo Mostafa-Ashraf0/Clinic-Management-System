@@ -80,3 +80,30 @@
 .addBtn:hover{
     background-color: #1f6191;
 }
+
+
+
+@media (max-width: 992px) {
+    
+}
+
+
+@media (max-width: 720px) {
+    .emr .info{
+        flex-direction: column;
+        height: auto;
+    }
+
+    .tags{
+        width: 100%;
+    }
+
+    .tags .head .addBtn{
+        font-size: 0.8em;
+    }
+
+    .tags_box .tag{
+        font-size: 0.8em;
+    }
+}
+

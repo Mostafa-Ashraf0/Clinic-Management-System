@@ -81,3 +81,44 @@
     font-weight: 600;
     color: #1F2937;
 }
+
+
+@media (max-width: 992px) {
+    .info{
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .info .value{
+        font-size: 1em;
+    }
+
+    .complaint span{
+        font-size: 1em;
+    }
+
+    .complaint p{
+        font-size: 1em;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .info{
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .info .value{
+        font-size: 0.8em;
+    }
+
+    .complaint span{
+        font-size: 0.8em;
+    }
+
+    .complaint p{
+        font-size: 0.8em;
+    }
+}
+

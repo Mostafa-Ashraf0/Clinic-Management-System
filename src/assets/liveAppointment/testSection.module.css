@@ -114,3 +114,19 @@
 .main ul li{
     text-align: start;
 }
+
+
+@media (max-width: 992px) {
+    .main{
+        width: 100%;
+    }
+    .main .container{
+        height: auto;
+    }
+}
+
+
+@media (max-width: 576px) {
+    
+}
+

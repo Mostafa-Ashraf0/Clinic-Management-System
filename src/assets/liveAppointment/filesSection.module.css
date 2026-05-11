@@ -73,7 +73,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    height: 400px;
+    height: auto;
     overflow-y: auto;
     padding: 10px 20px;
 }
@@ -87,4 +87,17 @@
 .cardsBox::-webkit-scrollbar-thumb {
   background-color: #797c80;
   border-radius: 3px;
+}
+
+
+@media (max-width: 992px) {
+    .main{
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 576px) {
+    
 }

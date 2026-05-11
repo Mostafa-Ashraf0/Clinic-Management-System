@@ -50,3 +50,21 @@
     color: rgb(102, 116, 140);
     margin-right: 5px;
 }
+
+@media (max-width: 720px) {
+    .general_info{
+        width: 100%;
+    }
+
+    .general_info .name{
+        font-size: 1.1em;
+    }
+
+
+
+    .general_info .sex_age .value,
+    .general_info .contact .value{
+        font-size: 0.8em;
+    }
+}
+

@@ -1,0 +1,28 @@
+.testFile{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.input{
+    display: flex;
+    width: 100%;
+    gap: 10px;
+}
+
+
+@media (max-width: 992px) {
+    .testFile{
+        flex-wrap: wrap;
+    }
+    .input{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+
+@media (max-width: 576px) {
+    
+}
+
