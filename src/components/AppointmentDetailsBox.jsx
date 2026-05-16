@@ -20,11 +20,11 @@ const AppointmentDetailsBox = ({data})=>{
             </div>
             <div className={style.complaint}>
                     <span className={style.title}>Chief Complaint</span>
-                    <p>{data.chief_complaint}</p>
+                    <p>{data.chief_complaint?.length >0 ?data.chief_complaint:"no complaint"}</p>
             </div>
             <div className={style.notes}>
                     <span className={style.title}>Doctor Notes</span>
-                    <p>{data.doctor_notes}</p>
+                    <p>{data.doctor_notes?.length >0 ?data.doctor_notes:"no notes"}</p>
             </div>
         </div>
     )

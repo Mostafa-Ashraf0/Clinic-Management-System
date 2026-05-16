@@ -14,7 +14,7 @@ const fetchAllPastAppointments = async (P_id, A_id) => {
         date
       `)
       .eq("patient_id", P_id)
-      .or("chief_complaint.not.is.null,doctor_notes.not.is.null");
+      //.or("chief_complaint.not.is.null,doctor_notes.not.is.null");
 
     // exclude current appointment
     if (A_id) {
