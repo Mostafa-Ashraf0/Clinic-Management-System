@@ -19,6 +19,7 @@ const AppointmentForm = ({date}) => {
       const initialDate = date || today;
       const types = ["consultation","follow_up","emergency","checkup"];
       const dispatch = useDispatch();
+      const loading = useSelector((state)=> state.appointment.generalLoading);
 
       //edit variables
       const isEdit = useSelector((state)=>state.appointment.isEdit);
@@ -352,8 +353,11 @@ const AppointmentForm = ({date}) => {
               backgroundColor: '#2F9CCA',
               border: 'none',
             }}
+            disabled={loading?true:false}
           >
-            {isEdit?"Save":"Create"}
+            {isEdit?
+            (loading?"Saving...":"Save")
+            :(loading?"Creating...":"Create")}
           </Button>
         </Form>
       </Card.Body>
