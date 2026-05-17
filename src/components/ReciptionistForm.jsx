@@ -10,6 +10,7 @@ const ReciptionistForm = ()=>{
         const dispatch = useDispatch();
         const clinicId = useSelector((state) => state.auth.clinic_id);
         const [submited, setSubmited] = useState(false);
+        const loading = useSelector((state)=> state.recip.loading)
 
         //edit variables
         const editData = useSelector((state)=>state.recip.editDataRecip);
@@ -154,8 +155,13 @@ const ReciptionistForm = ()=>{
                     <Button 
                     type='submit' 
                     className="d-flex align-items-center justify-content-center" 
-                    style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}>
-                        {isEdit?"Save":"Create"}
+                    style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}
+                    disabled={loading?true:false}
+                    >
+                        {isEdit
+                        ?(loading?"Saving":"Save")
+                        :(loading?"Creating":"Create")
+                        }
                     </Button>
                 </Form>
             </Card.Body>

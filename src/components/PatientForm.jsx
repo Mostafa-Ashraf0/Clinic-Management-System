@@ -10,7 +10,7 @@ const PatientForm = ()=>{
             const clinicId = useSelector((state) => state.auth.clinic_id);
             const [submited, setSubmited] = useState(false);
             const dispatch = useDispatch();
-            
+            const loading = useSelector((state)=> state.patient.loading);
 
             //edit variables
             const editData = useSelector((state)=>state.patient.editDataPatient);
@@ -134,8 +134,13 @@ const PatientForm = ()=>{
                     <Button 
                     type='submit' 
                     className="d-flex align-items-center justify-content-center" 
-                    style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}>
-                        {isEdit?"Save":"Create"}
+                    style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}
+                    disabled={loading?true:false}
+                    >
+                        {isEdit
+                        ?(loading?"Saving":"Save")
+                        :(loading?"Creating":"Create")
+                        }
                     </Button>
                 </Form>
             </Card.Body>

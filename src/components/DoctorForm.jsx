@@ -11,6 +11,7 @@ const DoctorForm = ()=>{
     const [spec, setSpec] = useState([]);
     const [submited, setSubmited] = useState(false);
     const dispatch = useDispatch();
+    const loading = useSelector((state)=> state.doctor.loading);
 
     //edit variables
     const editData = useSelector((state)=>state.doctor.editData);
@@ -177,8 +178,13 @@ const DoctorForm = ()=>{
                     <Button 
                     type='submit' 
                     className="d-flex align-items-center justify-content-center" 
-                    style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}>
-                        {isEdit?"Save":"Create"}
+                    style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}
+                    disabled={loading?true:false}
+                    >
+                        {isEdit
+                        ?(loading?"Saving":"Save")
+                        :(loading?"Creating":"Create")
+                        }
                     </Button>
                 </Form>
             </Card.Body>
