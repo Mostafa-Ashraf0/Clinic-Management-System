@@ -10,12 +10,13 @@ import '../assets/dashboard.css';
 import { useDispatch } from "react-redux";
 import { addLight } from "../features/dashboard/sidebarSlice";
 import { icons } from "../assets/icons";
-import { fetchAppointments } from "../features/appointments/fetchAppointments";
-import { fetchDoctors } from '../features/appointments/fetchDoctors';
-import { fetchPatients } from '../features/appointments/fetchPatients';
+import { getRecepCount } from "../features/receptionist/getRecepCount";
 import { useSelector } from "react-redux";
 import { setMobileVisible } from "../features/dashboard/sidebarSlice";
 import Overlay from "../components/Overlay";
+import {getAppointmentCount} from "../features/appointments/getAppointmentsCount";
+import { getDoctorCount } from  "../features/doctors/getDoctorsCount";
+import { getPatientCount } from "../features/patient/getPatientCount";
 
 const Dashboard = ()=>{
     const [cardData, setCardData] = useState({
@@ -31,24 +32,25 @@ const Dashboard = ()=>{
         if(!clinicId) return;
         const loadAppointments = async()=>{
             console.log(`clinicId is: ${clinicId}`)
-            const data = await fetchAppointments(clinicId);
-            setCardData(prev=>({...prev,appoint: data.length}));
+            const data = await getAppointmentCount(clinicId);
+            setCardData(prev=>({...prev,appoint: data}));
         }
         const loadPatients = async()=>{
-            const data = await fetchPatients();
-            setCardData(prev=>({...prev,patient: data.length}));
+            const data = await getPatientCount(clinicId);
+            setCardData(prev=>({...prev,patient: data}));
         }
         const loadDoctors = async()=>{
-            const data = await fetchDoctors(clinicId);
-            setCardData(prev=>({...prev,doctor: data.length}));
+            const data = await getDoctorCount(clinicId);
+            setCardData(prev=>({...prev,doctor: data}));
         }
-        /*const loadRecip = async()=>{
-            const data = await fetchReceptionist();
-            setCardData(prev=>({...prev,recip: data.length}));
-        }*/
+        const loadRecip = async()=>{
+            const data = await getRecepCount(clinicId);
+            setCardData(prev=>({...prev,recip: data}));
+        }
         loadAppointments();
         loadPatients();
         loadDoctors();
+        loadRecip();
         dispatch(addLight("dashboard"));
         dispatch(setMobileVisible(false));
     },[clinicId,dispatch])
@@ -69,9 +71,6 @@ const Dashboard = ()=>{
                 <div className="table-list">
                     
                     
-                </div>
-                <div className="appoint-table">
-                    <AppointmentsTable/>
                 </div>
             </MainContent>
             {mobileVisible && <Overlay/>}
