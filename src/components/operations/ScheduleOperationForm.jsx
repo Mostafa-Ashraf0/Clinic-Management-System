@@ -15,6 +15,10 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
     const today = new Date().toISOString().split("T")[0];
     const initialDate = date||today;
     const dispatch = useDispatch();
+    const loading = useSelector((state)=> state.operationsForm.generalLoading);
+
+
+
     const [error, setError] = useState(null);
     const [submited, setSubmited] = useState(false);
     const [doctors, setDoctors] = useState([]);
@@ -222,7 +226,16 @@ const ScheduleOperationForm = ({onTestAdded,date}) => {
 
           <div className={style.submitBox}>
               <Button onClick={handleCancel} className={style.cancel}>Cancel</Button>
-              <Button type='submit'>{isEdit?"Save":"Create"}</Button>
+              <Button 
+                type='submit'
+                disabled={loading}
+              >
+                {
+                isEdit?
+                (loading?"Saving":"Save")
+                :(loading?"Creating":"Create")
+                }
+              </Button>
           </div>
         </Form>
       </Card.Body>

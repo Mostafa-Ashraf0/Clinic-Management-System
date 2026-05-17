@@ -353,7 +353,7 @@ const AppointmentForm = ({date}) => {
               backgroundColor: '#2F9CCA',
               border: 'none',
             }}
-            disabled={loading?true:false}
+            disabled={loading}
           >
             {isEdit?
             (loading?"Saving...":"Save")

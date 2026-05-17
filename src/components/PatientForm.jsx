@@ -135,7 +135,7 @@ const PatientForm = ()=>{
                     type='submit' 
                     className="d-flex align-items-center justify-content-center" 
                     style={{width:"97px",height:"45px",backgroundColor:"#2F9CCA",border:"none"}}
-                    disabled={loading?true:false}
+                    disabled={loading}
                     >
                         {isEdit
                         ?(loading?"Saving":"Save")
