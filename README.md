@@ -44,12 +44,13 @@ A full-stack **clinic management web app** built with **React.js** and **Supabas
 ## 🖼️ Preview
 
 <div align="center">
-  <img src="/src//assets//images//WhatsApp Image 2025-10-16 at 12.19.09 PM (1).jpeg" width="30%" alt="Screenshot 1" />
-  <img src="/src//assets//images/WhatsApp Image 2025-10-16 at 12.19.09 PM (2).jpeg" width="30%" alt="Screenshot 2" />
-  <img src="/src//assets//images/WhatsApp Image 2025-10-16 at 12.19.09 PM.jpeg" width="30%" alt="Screenshot 3" />
+  <img src="/src//assets//images//liveAppoint.jpg" width="30%" alt="Screenshot 1" />
+  <img src="/src//assets//images/EMR.jpg" width="30%" alt="Screenshot 2" />
+  <img src="/src//assets//images/appoint.jpg" width="30%" alt="Screenshot 3" />
   <br/><br/>
-  <img src="/src//assets//images/WhatsApp Image 2025-10-16 at 12.19.10 PM (1).jpeg" width="30%" alt="Screenshot 4" />
-  <img src="/src//assets//images/WhatsApp Image 2025-10-16 at 12.19.10 PM.jpeg" width="30%" alt="Screenshot 5" />
+  <img src="/src//assets//images/liveDash.jpg" width="30%" alt="Screenshot 4" />
+  <img src="/src//assets//images/medicalTest.png" width="30%" alt="Screenshot 5" />
+  <img src="/src//assets//images/record.png" width="30%" alt="Screenshot 5" />
   
 </div>
 
