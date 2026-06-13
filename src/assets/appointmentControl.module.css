@@ -30,29 +30,6 @@
     gap: 20px;
 }
 
-.right .search{
-    width: 259px;
-    display: flex;
-    align-items: center;
-    border-radius: 6px;
-    border: solid 1px #D2D5DB;
-    padding: 3px 10px;
-}
-
-.search input{
-    padding: 0;
-    width: 100%;
-    border: none;
-}
-
-.search input:focus{
-    outline: none;
-}
-
-.search img{
-    width: 15px;
-    height: 15px;
-}
 
 .left .filter{
     display:  flex;
@@ -92,11 +69,6 @@
 
 
 @media (max-width: 576px) {
-    .right .search{
-        width: 120px;
-        font-size: 0.8em;
-    }
-
 
     .left .filter{
         font-size: 0.8em;

@@ -2,6 +2,7 @@ import { icons } from "../assets/icons";
 import { useNavigate } from "react-router-dom";
 import style from '../assets/appointmentControl.module.css';
 import { useLocation } from "react-router-dom";
+import SearchBox from "./general/tables/SearchBox";
 
 const ControlBar = ()=>{
     const location = useLocation();
@@ -28,10 +29,7 @@ const ControlBar = ()=>{
                     </div>
                 </div>
                 <div className={style.right}>
-                    <div className={style.search}>
-                        <input type="text" placeholder="search"/>
-                        <img src={icons.control.searchIcon} alt="search" />
-                    </div>
+                    <SearchBox/>
                 <span className={style.addAppointment} onClick={handleClick}><img src={icons.control.add} alt="add" /><span>Create</span></span> 
                 </div>
             </div>
