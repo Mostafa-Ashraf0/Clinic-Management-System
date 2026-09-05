@@ -1,5 +1,5 @@
-import LoginPage from './pages/loginPage';
 import { Route, Routes } from 'react-router-dom';
+import LoginPage from '../pages/loginPage';
 
 const PublicRoutes = ()=>{
     return(
