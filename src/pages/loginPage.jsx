@@ -4,7 +4,7 @@ import '../assets/loginPage.css';
 const LoginPage = ()=>{
     
     return(
-        <div className="login-page">
+        <div className="login-page" data-testid="login-page">
             <div className="left">
                 <img src={doctorImg} alt=""/>
                 <div className="desc">
